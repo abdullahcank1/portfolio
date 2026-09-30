@@ -9,6 +9,9 @@
 <meta name="description"
 content="Abdullah Cankı — Visual Communication Design Portfolio">
 
+<!-- AC FAVICON -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='50' fill='%23080808'/%3E%3Ctext x='50' y='58' text-anchor='middle' font-family='Arial,sans-serif' font-size='31' font-weight='900' letter-spacing='-4' fill='%23f2f1ec'%3EAC%3C/text%3E%3Ccircle cx='82' cy='18' r='5' fill='%23d9ff35'/%3E%3C/svg%3E">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
@@ -58,11 +61,6 @@ button{
     color:inherit;
     cursor:pointer;
 }
-
-
-/* =========================================================
-   VARIABLES
-========================================================= */
 
 :root{
     --black:#080808;
@@ -171,7 +169,7 @@ button{
 
 
 /* =========================================================
-   NAVBAR
+   NAV
 ========================================================= */
 
 .nav{
@@ -188,25 +186,77 @@ button{
     mix-blend-mode:difference;
 }
 
-.logo{
-    font-size:25px;
+
+/* AC BRAND MARK */
+
+.logo-mark{
+    width:50px;
+    height:50px;
+    border:1px solid rgba(255,255,255,.65);
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    position:relative;
+    color:#fff;
+    font-size:15px;
     font-weight:900;
-    letter-spacing:-.09em;
+    letter-spacing:-.14em;
+    transition:
+        background .35s ease,
+        color .35s ease,
+        border-color .35s ease,
+        transform .35s ease;
 }
 
-.logo span{
-    color:var(--green);
+.logo-mark span:first-child{
+    transform:translateX(2px);
 }
+
+.logo-mark span:last-child{
+    transform:translateX(-1px);
+}
+
+.logo-mark::after{
+    content:"";
+    position:absolute;
+    width:6px;
+    height:6px;
+    border-radius:50%;
+    right:4px;
+    top:4px;
+    background:var(--green);
+    box-shadow:0 0 14px var(--green);
+}
+
+.logo-mark:hover{
+    background:var(--green);
+    color:#080808;
+    border-color:var(--green);
+    transform:rotate(-12deg) scale(1.1);
+}
+
+.logo-mark:hover::after{
+    background:#080808;
+    box-shadow:none;
+}
+
 
 .nav-links{
     display:flex;
-    gap:35px;
+    gap:28px;
+    align-items:center;
 }
 
 .nav-links a{
     font-family:"DM Mono",monospace;
-    font-size:10px;
+    font-size:9px;
     text-transform:uppercase;
+    transition:.3s;
+}
+
+.nav-links a:hover{
+    color:var(--green);
 }
 
 .nav-right{
@@ -292,6 +342,10 @@ button{
     line-height:.76;
     letter-spacing:-.1em;
     font-weight:800;
+}
+
+.hero-title span{
+    display:block;
 }
 
 .hero-title .outline{
@@ -491,8 +545,6 @@ section{
    PROJECT VISUALS
 ========================================================= */
 
-/* NOIR */
-
 .noir{
     background:
         radial-gradient(circle at 30% 30%,#d9ff35 0 8%,transparent 9%),
@@ -522,8 +574,6 @@ section{
 }
 
 
-/* FRAGMENT */
-
 .fragment{
     background:#e9e7df;
     overflow:hidden;
@@ -549,8 +599,6 @@ section{
     color:#ff4038;
 }
 
-
-/* DIGITAL VOID */
 
 .digital{
     background:
@@ -581,8 +629,6 @@ section{
 }
 
 
-/* MOVING TYPE */
-
 .moving{
     background:#f0efe9;
 }
@@ -609,8 +655,6 @@ section{
 }
 
 
-/* OBJECT */
-
 .object{
     background:
         radial-gradient(circle at 50% 45%,#00eaff,transparent 15%),
@@ -623,13 +667,11 @@ section{
     width:180px;
     height:180px;
     border-radius:45% 55% 60% 40%;
-    background:
-        linear-gradient(135deg,#00eaff,#2530ff);
+    background:linear-gradient(135deg,#00eaff,#2530ff);
     top:50%;
     left:50%;
     transform:translate(-50%,-50%) rotate(25deg);
-    box-shadow:
-        0 30px 100px rgba(0,229,255,.3);
+    box-shadow:0 30px 100px rgba(0,229,255,.3);
     animation:objectFloat 4s ease-in-out infinite;
 }
 
@@ -642,8 +684,6 @@ section{
     }
 }
 
-
-/* AFTERIMAGE */
 
 .afterimage{
     background:
@@ -887,6 +927,11 @@ section{
 .contact-bottom p{
     font:10px "DM Mono",monospace;
     color:#aaa;
+    transition:.3s;
+}
+
+.contact-bottom a:hover{
+    color:var(--green);
 }
 
 
@@ -989,7 +1034,19 @@ section{
    MOBILE
 ========================================================= */
 
-@media(max-width:900px){
+@media(max-width:1000px){
+
+    .nav-links{
+        gap:15px;
+    }
+
+    .nav-links a{
+        font-size:8px;
+    }
+
+}
+
+@media(max-width:800px){
 
     .nav-links,
     .nav-right{
@@ -1055,14 +1112,22 @@ section{
 
 @media(max-width:600px){
 
+    .hero{
+        min-height:650px;
+    }
+
     .hero-content{
-        padding-top:130px;
+        padding-top:125px;
     }
 
     .hero-bottom{
         flex-direction:column;
         align-items:flex-start;
         gap:35px;
+    }
+
+    .hero-description{
+        max-width:300px;
     }
 
     .scroll{
@@ -1112,6 +1177,7 @@ section{
 
 <div class="noise"></div>
 
+
 <!-- LOADER -->
 
 <div class="loader" id="loader">
@@ -1138,13 +1204,22 @@ section{
 </div>
 
 
-<!-- NAV -->
+<!-- ======================================================
+     NAVIGATION
+====================================================== -->
 
 <header class="nav">
 
-    <a href="#top" class="logo hoverable">
-        AC<span>.</span>
+    <!-- AC LOGO -->
+
+    <a href="#top"
+       class="logo-mark hoverable"
+       aria-label="Abdullah Cankı">
+
+        <span>A</span><span>C</span>
+
     </a>
+
 
     <nav class="nav-links">
 
@@ -1164,7 +1239,19 @@ section{
             Contact
         </a>
 
+        <!-- LINKEDIN -->
+
+        <a href="https://tr.linkedin.com/in/abdullah-cank%C4%B1-6952b2324"
+           target="_blank"
+           rel="noopener noreferrer"
+           class="hoverable">
+
+            LinkedIn ↗
+
+        </a>
+
     </nav>
+
 
     <div class="nav-right">
 
@@ -1173,6 +1260,7 @@ section{
         AVAILABLE FOR WORK
 
     </div>
+
 
     <button class="menu hoverable" id="menu">
 
@@ -1184,7 +1272,9 @@ section{
 </header>
 
 
-<!-- HERO -->
+<!-- ======================================================
+     HERO
+====================================================== -->
 
 <section class="hero" id="top">
 
@@ -1192,11 +1282,13 @@ section{
 
     <div class="hero-grid"></div>
 
+
     <div class="hero-content">
 
         <div class="eyebrow">
             VISUAL COMMUNICATION DESIGN / 2026
         </div>
+
 
         <h1 class="hero-title">
 
@@ -1206,16 +1298,21 @@ section{
 
         </h1>
 
+
         <div class="hero-bottom">
 
             <p class="hero-description">
+
                 Görsel iletişim, dijital deneyim,
                 tipografi, hareket ve yaratıcı
                 teknoloji arasında çalışan
                 bir tasarım öğrencisi.
+
             </p>
 
-            <a href="#work" class="hero-button hoverable">
+
+            <a href="#work"
+               class="hero-button hoverable">
 
                 EXPLORE SELECTED WORK
 
@@ -1229,26 +1326,36 @@ section{
 
     </div>
 
+
     <div class="scroll">
+
         SCROLL
+
         <div class="scroll-line"></div>
+
     </div>
 
+
     <div class="coordinates">
+
         41°17' N<br>
         36°20' E
+
     </div>
 
 </section>
 
 
-<!-- INTRO -->
+<!-- ======================================================
+     INTRO
+====================================================== -->
 
 <section class="intro">
 
     <div class="section-label">
         01 / INTRO
     </div>
+
 
     <div class="intro-content">
 
@@ -1259,6 +1366,7 @@ section{
             değildir.
 
         </h2>
+
 
         <p class="intro-text reveal">
 
@@ -1279,7 +1387,9 @@ section{
 </section>
 
 
-<!-- WORK -->
+<!-- ======================================================
+     WORK
+====================================================== -->
 
 <section id="work">
 
@@ -1290,7 +1400,10 @@ section{
         </div>
 
         <div class="section-label">
-            <span id="count">06</span> PROJECTS
+
+            <span id="count">06</span>
+            PROJECTS
+
         </div>
 
     </div>
@@ -1300,37 +1413,57 @@ section{
 
     <div class="filters">
 
-        <button class="filter active" data-filter="all">
+        <button class="filter active"
+                data-filter="all">
+
             ALL
+
         </button>
 
-        <button class="filter" data-filter="branding">
+        <button class="filter"
+                data-filter="branding">
+
             BRANDING
+
         </button>
 
-        <button class="filter" data-filter="poster">
+        <button class="filter"
+                data-filter="poster">
+
             POSTER
+
         </button>
 
-        <button class="filter" data-filter="digital">
+        <button class="filter"
+                data-filter="digital">
+
             DIGITAL
+
         </button>
 
-        <button class="filter" data-filter="motion">
+        <button class="filter"
+                data-filter="motion">
+
             MOTION
+
         </button>
 
-        <button class="filter" data-filter="3d">
+        <button class="filter"
+                data-filter="3d">
+
             3D
+
         </button>
 
     </div>
 
 
+    <!-- PROJECTS -->
+
     <div class="projects">
 
 
-        <!-- 01 -->
+        <!-- PROJECT 01 -->
 
         <article class="project large"
                  data-category="branding"
@@ -1341,6 +1474,7 @@ section{
                 <div class="visual noir"></div>
 
             </div>
+
 
             <div class="project-info">
 
@@ -1365,7 +1499,7 @@ section{
         </article>
 
 
-        <!-- 02 -->
+        <!-- PROJECT 02 -->
 
         <article class="project"
                  data-category="poster"
@@ -1376,6 +1510,7 @@ section{
                 <div class="visual fragment"></div>
 
             </div>
+
 
             <div class="project-info">
 
@@ -1400,7 +1535,7 @@ section{
         </article>
 
 
-        <!-- 03 -->
+        <!-- PROJECT 03 -->
 
         <article class="project"
                  data-category="digital"
@@ -1411,6 +1546,7 @@ section{
                 <div class="visual digital"></div>
 
             </div>
+
 
             <div class="project-info">
 
@@ -1435,7 +1571,7 @@ section{
         </article>
 
 
-        <!-- 04 -->
+        <!-- PROJECT 04 -->
 
         <article class="project large"
                  data-category="motion"
@@ -1446,6 +1582,7 @@ section{
                 <div class="visual moving"></div>
 
             </div>
+
 
             <div class="project-info">
 
@@ -1470,7 +1607,7 @@ section{
         </article>
 
 
-        <!-- 05 -->
+        <!-- PROJECT 05 -->
 
         <article class="project"
                  data-category="3d"
@@ -1481,6 +1618,7 @@ section{
                 <div class="visual object"></div>
 
             </div>
+
 
             <div class="project-info">
 
@@ -1505,7 +1643,7 @@ section{
         </article>
 
 
-        <!-- 06 -->
+        <!-- PROJECT 06 -->
 
         <article class="project"
                  data-category="poster"
@@ -1516,6 +1654,7 @@ section{
                 <div class="visual afterimage"></div>
 
             </div>
+
 
             <div class="project-info">
 
@@ -1544,7 +1683,9 @@ section{
 </section>
 
 
-<!-- MARQUEE -->
+<!-- ======================================================
+     MARQUEE
+====================================================== -->
 
 <div class="marquee-wrapper">
 
@@ -1563,13 +1704,16 @@ section{
 </div>
 
 
-<!-- ABOUT -->
+<!-- ======================================================
+     ABOUT
+====================================================== -->
 
 <section id="about">
 
     <div class="section-label">
         03 / ABOUT
     </div>
+
 
     <div class="about-grid">
 
@@ -1578,6 +1722,7 @@ section{
             <div class="portrait"></div>
 
         </div>
+
 
         <div>
 
@@ -1590,6 +1735,7 @@ section{
                 dönüştürüyorum.
 
             </h2>
+
 
             <p class="about-copy reveal">
 
@@ -1651,13 +1797,16 @@ section{
 </section>
 
 
-<!-- PROCESS -->
+<!-- ======================================================
+     PROCESS
+====================================================== -->
 
 <section id="process">
 
     <div class="section-label">
         04 / PROCESS
     </div>
+
 
     <div class="process-list">
 
@@ -1674,6 +1823,7 @@ section{
 
         </div>
 
+
         <div class="process-item reveal">
 
             <span>02</span>
@@ -1687,6 +1837,7 @@ section{
 
         </div>
 
+
         <div class="process-item reveal">
 
             <span>03</span>
@@ -1699,6 +1850,7 @@ section{
             </p>
 
         </div>
+
 
         <div class="process-item reveal">
 
@@ -1718,7 +1870,9 @@ section{
 </section>
 
 
-<!-- CONTACT -->
+<!-- ======================================================
+     CONTACT
+====================================================== -->
 
 <section class="contact" id="contact">
 
@@ -1726,13 +1880,15 @@ section{
         05 / CONTACT
     </div>
 
+
     <div class="contact-main">
 
         <div class="contact-label">
             HAVE A PROJECT IN MIND?
         </div>
 
-        <a href="mailto:hello@abdullahcanki.com"
+
+        <a href="mailto:abdullah198579@outlook.com"
            class="contact-email hoverable">
 
             LET'S TALK<span>.</span>
@@ -1741,38 +1897,69 @@ section{
 
     </div>
 
+
     <div class="contact-bottom">
 
-        <div>
 
-            <label>SOCIAL</label>
+   <!-- SOCIAL -->
 
-            <a href="#" class="hoverable">
-                INSTAGRAM ↗
-            </a>
+<div>
 
-            <a href="#" class="hoverable">
-                BEHANCE ↗
-            </a>
+    <label>SOCIAL</label>
 
-        </div>
+    <a href="https://www.linkedin.com/in/abdullah-cank%C4%B1-6952b2324"
+       target="_blank"
+       rel="noopener noreferrer"
+       class="hoverable">
 
-        <div>
+        LINKEDIN ↗
 
-            <label>EMAIL</label>
+    </a>
 
-            <a href="mailto:hello@abdullahcanki.com">
-                hello@abdullahcanki.com
-            </a>
+    <a href="https://www.instagram.com/abdullahcank1/"
+       target="_blank"
+       rel="noopener noreferrer"
+       class="hoverable">
 
-        </div>
+        INSTAGRAM @ABDULLAHCANK1 ↗
+
+    </a>
+
+    <a href="#"
+       class="hoverable">
+
+        BEHANCE ↗
+
+    </a>
+
+</div>
+
+
+<!-- EMAIL -->
+
+<div>
+
+    <label>EMAIL</label>
+
+    <a href="mailto:abdullah198579@outlook.com"
+       class="hoverable">
+
+        abdullah198579@outlook.com
+
+    </a>
+
+</div>
+
+
+
+        <!-- LOCATION -->
 
         <div>
 
             <label>LOCATION</label>
 
             <p>
-                SAMSUN / TURKEY
+                VAN / TURKEY
             </p>
 
         </div>
@@ -1782,29 +1969,42 @@ section{
 </section>
 
 
-<!-- PROJECT MODAL -->
+<!-- ======================================================
+     PROJECT MODAL
+====================================================== -->
 
 <div class="modal" id="modal">
 
-    <button class="modal-close hoverable" id="modalClose">
+    <button class="modal-close hoverable"
+            id="modalClose">
+
         CLOSE ×
+
     </button>
+
 
     <div class="modal-inner">
 
-        <div class="modal-small" id="modalNumber">
+        <div class="modal-small"
+             id="modalNumber">
+
             01
+
         </div>
+
 
         <h2 id="modalTitle">
             NØIR / VISUAL IDENTITY
         </h2>
 
-        <div class="modal-visual" id="modalVisual">
 
+        <div class="modal-visual"
+             id="modalVisual">
         </div>
 
+
         <div class="modal-details">
+
 
             <div>
 
@@ -1816,22 +2016,28 @@ section{
 
             </div>
 
+
             <div>
 
                 <label>YEAR</label>
 
-                <p>2026</p>
+                <p>
+                    2026
+                </p>
 
             </div>
+
 
             <div class="modal-description">
 
                 <label>ABOUT PROJECT</label>
 
                 <p id="modalDescription">
+
                     Deneysel bir marka kimliği
                     üzerine geliştirilen görsel
                     sistem.
+
                 </p>
 
             </div>
@@ -1843,7 +2049,9 @@ section{
 </div>
 
 
-<!-- THREE.JS -->
+<!-- ======================================================
+     THREE.JS
+====================================================== -->
 
 <script type="module">
 
@@ -1851,15 +2059,13 @@ import * as THREE from
 "https://cdn.jsdelivr.net/npm/three@0.186.0/build/three.module.js";
 
 
-/* =========================================================
-   SCENE
-========================================================= */
-
 const container =
 document.getElementById("canvas");
 
+
 const scene =
 new THREE.Scene();
+
 
 const camera =
 new THREE.PerspectiveCamera(
@@ -1870,35 +2076,40 @@ new THREE.PerspectiveCamera(
     100
 );
 
+
 camera.position.z=7;
 
 
 const renderer =
 new THREE.WebGLRenderer({
+
     antialias:true,
     alpha:true
+
 });
+
 
 renderer.setPixelRatio(
     Math.min(window.devicePixelRatio,2)
 );
+
 
 renderer.setSize(
     container.clientWidth,
     container.clientHeight
 );
 
+
 renderer.outputColorSpace =
 THREE.SRGBColorSpace;
+
 
 container.appendChild(
     renderer.domElement
 );
 
 
-/* =========================================================
-   LIGHTS
-========================================================= */
+/* LIGHTS */
 
 scene.add(
     new THREE.AmbientLight(
@@ -1907,6 +2118,7 @@ scene.add(
     )
 );
 
+
 const greenLight =
 new THREE.PointLight(
     0xd9ff35,
@@ -1914,13 +2126,16 @@ new THREE.PointLight(
     20
 );
 
+
 greenLight.position.set(
     3,
     2,
     4
 );
 
+
 scene.add(greenLight);
+
 
 const blueLight =
 new THREE.PointLight(
@@ -1929,21 +2144,22 @@ new THREE.PointLight(
     15
 );
 
+
 blueLight.position.set(
     -4,
     -2,
     2
 );
 
+
 scene.add(blueLight);
 
 
-/* =========================================================
-   MAIN OBJECT
-========================================================= */
+/* MAIN OBJECT */
 
 const group =
 new THREE.Group();
+
 
 scene.add(group);
 
@@ -1957,6 +2173,7 @@ new THREE.TorusKnotGeometry(
     2,
     3
 );
+
 
 const material =
 new THREE.MeshPhysicalMaterial({
@@ -1973,18 +2190,18 @@ new THREE.MeshPhysicalMaterial({
 
 });
 
+
 const object =
 new THREE.Mesh(
     geometry,
     material
 );
 
+
 group.add(object);
 
 
-/* =========================================================
-   WIREFRAME
-========================================================= */
+/* WIREFRAME */
 
 const wire =
 new THREE.Mesh(
@@ -2008,17 +2225,17 @@ new THREE.Mesh(
 
 );
 
+
 group.add(wire);
 
 
-/* =========================================================
-   PARTICLES
-========================================================= */
+/* PARTICLES */
 
 const count=1000;
 
 const positions =
 new Float32Array(count*3);
+
 
 for(let i=0;i<count;i++){
 
@@ -2033,15 +2250,18 @@ for(let i=0;i<count;i++){
         2*Math.random()-1
     );
 
+
     positions[i*3] =
     radius*
     Math.sin(phi)*
     Math.cos(theta);
 
+
     positions[i*3+1] =
     radius*
     Math.sin(phi)*
     Math.sin(theta);
+
 
     positions[i*3+2] =
     radius*
@@ -2049,8 +2269,10 @@ for(let i=0;i<count;i++){
 
 }
 
+
 const particleGeometry =
 new THREE.BufferGeometry();
+
 
 particleGeometry.setAttribute(
     "position",
@@ -2059,6 +2281,7 @@ particleGeometry.setAttribute(
         3
     )
 );
+
 
 const particleMaterial =
 new THREE.PointsMaterial({
@@ -2073,44 +2296,44 @@ new THREE.PointsMaterial({
 
 });
 
+
 const particles =
 new THREE.Points(
     particleGeometry,
     particleMaterial
 );
 
+
 scene.add(particles);
 
 
-/* =========================================================
-   MOUSE
-========================================================= */
+/* MOUSE */
 
 let mouseX=0;
 let mouseY=0;
+
 
 window.addEventListener(
     "mousemove",
     e=>{
 
         mouseX =
-        (e.clientX /
-        window.innerWidth-.5);
+        e.clientX /
+        window.innerWidth-.5;
 
         mouseY =
-        (e.clientY /
-        window.innerHeight-.5);
+        e.clientY /
+        window.innerHeight-.5;
 
     }
 );
 
 
-/* =========================================================
-   ANIMATION
-========================================================= */
+/* ANIMATION */
 
 const clock =
 new THREE.Clock();
+
 
 function animate(){
 
@@ -2118,11 +2341,15 @@ function animate(){
         animate
     );
 
+
     const t =
     clock.getElapsedTime();
 
+
     object.rotation.x += .002;
+
     object.rotation.y += .004;
+
 
     wire.rotation.x =
     t*.05;
@@ -2130,8 +2357,10 @@ function animate(){
     wire.rotation.y =
     t*.07;
 
+
     particles.rotation.y =
     t*.012;
+
 
     group.rotation.y +=
     (
@@ -2139,17 +2368,21 @@ function animate(){
         group.rotation.y
     )*.025;
 
+
     group.rotation.x +=
     (
         mouseY*.25 -
         group.rotation.x
     )*.025;
 
+
     greenLight.position.x =
     Math.sin(t*.7)*4;
 
+
     greenLight.position.y =
     Math.cos(t*.5)*2;
+
 
     renderer.render(
         scene,
@@ -2158,12 +2391,11 @@ function animate(){
 
 }
 
+
 animate();
 
 
-/* =========================================================
-   RESIZE
-========================================================= */
+/* RESIZE */
 
 window.addEventListener(
     "resize",
@@ -2173,7 +2405,9 @@ window.addEventListener(
         container.clientWidth /
         container.clientHeight;
 
+
         camera.updateProjectionMatrix();
+
 
         renderer.setSize(
             container.clientWidth,
@@ -2188,20 +2422,24 @@ window.addEventListener(
 
 <script>
 
-/* =========================================================
+/* ======================================================
    LOADER
-========================================================= */
+====================================================== */
 
 let loading=0;
+
 
 const loader=
 document.getElementById("loader");
 
+
 const percent=
 document.getElementById("percent");
 
+
 const progress=
 document.getElementById("progress");
+
 
 const loadTimer=
 setInterval(()=>{
@@ -2209,39 +2447,48 @@ setInterval(()=>{
     loading +=
     Math.random()*13;
 
+
     if(loading>=100){
 
         loading=100;
 
         clearInterval(loadTimer);
 
+
         setTimeout(()=>{
+
             loader.classList.add("done");
+
         },500);
 
     }
 
+
     percent.textContent=
     Math.floor(loading);
+
 
     progress.style.width=
     loading+"%";
 
+
 },100);
 
 
-/* =========================================================
+/* ======================================================
    CURSOR
-========================================================= */
+====================================================== */
 
 const cursor=
 document.getElementById("cursor");
+
 
 let mx=0;
 let my=0;
 
 let cx=0;
 let cy=0;
+
 
 window.addEventListener(
     "mousemove",
@@ -2253,10 +2500,15 @@ window.addEventListener(
     }
 );
 
+
 function cursorLoop(){
 
-    cx += (mx-cx)*.18;
-    cy += (my-cy)*.18;
+    cx +=
+    (mx-cx)*.18;
+
+    cy +=
+    (my-cy)*.18;
+
 
     cursor.style.left=
     cx+"px";
@@ -2264,11 +2516,13 @@ function cursorLoop(){
     cursor.style.top=
     cy+"px";
 
+
     requestAnimationFrame(
         cursorLoop
     );
 
 }
+
 
 cursorLoop();
 
@@ -2282,26 +2536,36 @@ document
     el.addEventListener(
         "mouseenter",
         ()=>{
-            cursor.classList.add("hover");
+
+            cursor.classList.add(
+                "hover"
+            );
+
         }
     );
+
 
     el.addEventListener(
         "mouseleave",
         ()=>{
-            cursor.classList.remove("hover");
+
+            cursor.classList.remove(
+                "hover"
+            );
+
         }
     );
 
 });
 
 
-/* =========================================================
+/* ======================================================
    REVEAL
-========================================================= */
+====================================================== */
 
 const observer=
 new IntersectionObserver(
+
     entries=>{
 
         entries.forEach(entry=>{
@@ -2317,36 +2581,44 @@ new IntersectionObserver(
         });
 
     },
+
     {
         threshold:.1
     }
+
 );
+
 
 document
 .querySelectorAll(".reveal")
 .forEach(el=>{
+
     observer.observe(el);
+
 });
 
 
-/* =========================================================
+/* ======================================================
    FILTERS
-========================================================= */
+====================================================== */
 
 const filters=
 document.querySelectorAll(
     ".filter"
 );
 
+
 const projectElements=
 document.querySelectorAll(
     ".project"
 );
 
+
 const count=
 document.getElementById(
     "count"
 );
+
 
 filters.forEach(filter=>{
 
@@ -2355,19 +2627,25 @@ filters.forEach(filter=>{
         ()=>{
 
             filters.forEach(f=>{
+
                 f.classList.remove(
                     "active"
                 );
+
             });
+
 
             filter.classList.add(
                 "active"
             );
 
+
             const category=
             filter.dataset.filter;
 
+
             let visible=0;
+
 
             projectElements
             .forEach(project=>{
@@ -2377,14 +2655,19 @@ filters.forEach(filter=>{
                 project.dataset.category===
                 category;
 
+
                 project.style.display=
                 show ? "" : "none";
 
+
                 if(show){
+
                     visible++;
+
                 }
 
             });
+
 
             count.textContent=
             String(visible)
@@ -2396,90 +2679,137 @@ filters.forEach(filter=>{
 });
 
 
-/* =========================================================
+/* ======================================================
    PROJECT DATA
-========================================================= */
+====================================================== */
 
 const projects=[
 
     {
+
         number:"01",
+
         title:"NØIR / VISUAL IDENTITY",
+
         category:"BRANDING",
+
         className:"noir",
+
         description:
         "Gece kültürü ve çağdaş moda estetiğinden yola çıkan deneysel bir marka kimliği. Tipografi, sembol sistemi, posterler ve dijital uygulamalar tasarlandı."
+
     },
 
+
     {
+
         number:"02",
+
         title:"FRAGMENT",
+
         category:"POSTER",
+
         className:"fragment",
+
         description:
         "Parçalanma ve yeniden oluşturma fikrini merkezine alan deneysel poster serisi. Tipografik deformasyon ve güçlü kontrastlar kullanıldı."
+
     },
 
+
     {
+
         number:"03",
+
         title:"DIGITAL VOID",
+
         category:"DIGITAL",
+
         className:"digital",
+
         description:
         "Dijital boşluk kavramını araştıran interaktif bir deneyim. Neon renkler, ışık ve 3D formlar üzerinden dijital bir atmosfer oluşturuldu."
+
     },
 
+
     {
+
         number:"04",
+
         title:"MOVING TYPE",
+
         category:"MOTION",
+
         className:"moving",
+
         description:
         "Tipografinin statik bir yüzeyden hareketli bir forma dönüşmesini araştıran motion design projesi."
+
     },
 
+
     {
+
         number:"05",
+
         title:"OBJECT 05",
+
         category:"3D / ART DIRECTION",
+
         className:"object",
+
         description:
         "Soyut geometrik formlar, ışık, materyal ve kamera kompozisyonları kullanılarak oluşturulan 3D görsel araştırma."
+
     },
 
+
     {
+
         number:"06",
+
         title:"AFTERIMAGE",
+
         category:"POSTER",
+
         className:"afterimage",
+
         description:
         "Görüntünün gözde bıraktığı izi araştıran deneysel görsel kimlik. Renk geçişleri, hareket ve tipografik katmanlar kullanıldı."
+
     }
 
 ];
 
 
-/* =========================================================
+/* ======================================================
    MODAL
-========================================================= */
+====================================================== */
 
 const modal=
 document.getElementById("modal");
 
+
 const modalClose=
 document.getElementById("modalClose");
+
 
 const modalNumber=
 document.getElementById("modalNumber");
 
+
 const modalTitle=
 document.getElementById("modalTitle");
+
 
 const modalCategory=
 document.getElementById("modalCategory");
 
+
 const modalDescription=
 document.getElementById("modalDescription");
+
 
 const modalVisual=
 document.getElementById("modalVisual");
@@ -2490,39 +2820,47 @@ function openProject(index){
     const p=
     projects[index];
 
+
     modalNumber.textContent=
     p.number;
+
 
     modalTitle.textContent=
     p.title;
 
+
     modalCategory.textContent=
     p.category;
+
 
     modalDescription.textContent=
     p.description;
 
+
     modalVisual.innerHTML="";
+
 
     const visual=
     document.createElement("div");
 
+
     visual.className=
     "visual "+p.className;
+
 
     modalVisual.appendChild(
         visual
     );
 
+
     modal.classList.add(
         "active"
     );
 
+
     document.body.classList.add(
         "locked"
     );
-
-    window.scrollTo(0,0);
 
 }
 
@@ -2551,53 +2889,57 @@ function closeModal(){
         "active"
     );
 
+
     document.body.classList.remove(
         "locked"
     );
 
 }
 
+
 modalClose.addEventListener(
     "click",
     closeModal
 );
+
 
 document.addEventListener(
     "keydown",
     e=>{
 
         if(e.key==="Escape"){
+
             closeModal();
+
         }
 
     }
 );
 
 
-/* =========================================================
+/* ======================================================
    MOBILE MENU
-========================================================= */
+====================================================== */
 
 const menu=
-document.getElementById(
-    "menu"
-);
+document.getElementById("menu");
+
 
 menu.addEventListener(
     "click",
     ()=>{
 
         alert(
-            "Mobil menüyü bir sonraki sürümde fullscreen navigation olarak açacağız."
+            "Menü: Work • About • Process • Contact • LinkedIn"
         );
 
     }
 );
 
 
-/* =========================================================
-   PARALLAX
-========================================================= */
+/* ======================================================
+   HERO PARALLAX
+====================================================== */
 
 window.addEventListener(
     "scroll",
@@ -2608,6 +2950,7 @@ window.addEventListener(
             ".hero-grid"
         );
 
+
         if(grid){
 
             grid.style.transform=
@@ -2616,9 +2959,11 @@ window.addEventListener(
         }
 
     },
+
     {
         passive:true
     }
+
 );
 
 </script>
