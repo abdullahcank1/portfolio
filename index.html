@@ -1,1569 +1,2293 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Abdullah Cankı — Visual Communication Designer</title>
-
-    <!-- AC FAVICON -->
-    <link
-        rel="icon"
-        type="image/svg+xml"
-        href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%23101010'/%3E%3Ctext x='50' y='63' text-anchor='middle' font-family='Arial' font-weight='900' font-size='42' fill='%23f3efe4'%3EAC%3C/text%3E%3C/svg%3E"
-    >
-
-    <meta
-        name="description"
-        content="Abdullah Cankı — Görsel İletişim Tasarımı öğrencisi. Arhavi, Artvin."
-    >
-
-    <meta name="theme-color" content="#f3efe4">
-
-    <style>
-
-        /* =========================
-           RESET
-        ========================= */
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            --cream: #f3efe4;
-            --paper: #e9e4d8;
-            --black: #101010;
-            --blue: #3157ff;
-            --red: #ff4b3e;
-            --gray: #77746c;
-            --line: rgba(16,16,16,.18);
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            background: var(--cream);
-            color: var(--black);
-            font-family: Arial, Helvetica, sans-serif;
-            overflow-x: hidden;
-        }
-
-        body,
-        a,
-        button {
-            cursor: crosshair;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        a {
-            color: inherit;
-            text-decoration: none;
-        }
+<title>AC — Abdullah Cankı / Visual Communication Design</title>
 
-        ::selection {
-            background: var(--blue);
-            color: white;
-        }
+<link rel="icon" type="image/svg+xml"
+href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='25' fill='%23181714'/%3E%3Ctext x='50' y='62' text-anchor='middle' font-family='Arial' font-weight='900' font-size='38' fill='%23ded4c0'%3EAC%3C/text%3E%3C/svg%3E">
 
+<meta name="theme-color" content="#ded4c0">
 
-        /* =========================
-           NAVIGATION
-        ========================= */
+<style>
 
-        nav {
-            position: fixed;
-            z-index: 999;
+/* =====================================================
+   ABDULLAH CANKI
+   EXPERIMENTAL PORTFOLIO
+===================================================== */
 
-            top: 0;
-            left: 0;
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Inter:wght@400;500;600;700;800;900&display=swap');
 
-            width: 100%;
-            height: 72px;
 
-            padding: 0 32px;
+/* ---------- ROOT ---------- */
 
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
+:root {
+    --bg: #ded4c0;
+    --bg-soft: #d5cbb6;
+    --paper: #e7decc;
 
-            background: rgba(243,239,228,.82);
+    --ink: #181714;
+    --muted: #6f695d;
 
-            backdrop-filter: blur(18px);
-            -webkit-backdrop-filter: blur(18px);
+    --blue: #314bd6;
+    --red: #c84c3d;
 
-            border-bottom: 1px solid var(--line);
-        }
+    --line: rgba(24,23,20,.18);
 
-        .logo {
-            display: flex;
-            align-items: center;
-            justify-content: center;
+    --serif: Georgia, "Times New Roman", serif;
+    --sans: Inter, Arial, sans-serif;
+    --mono: "DM Mono", monospace;
+}
 
-            width: 40px;
-            height: 40px;
 
-            border: 2px solid var(--black);
-            border-radius: 50%;
+/* ---------- RESET ---------- */
 
-            font-size: 13px;
-            font-weight: 900;
-            letter-spacing: -2px;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-            transition:
-                background .3s ease,
-                color .3s ease,
-                transform .3s ease;
-        }
+html {
+    scroll-behavior: smooth;
+}
 
-        .logo span {
-            color: var(--blue);
-        }
+body {
+    background: var(--bg);
+    color: var(--ink);
 
-        .logo:hover {
-            background: var(--black);
-            color: var(--cream);
-            transform: rotate(-12deg);
-        }
+    font-family: var(--sans);
 
-        .nav-links {
-            display: flex;
-            gap: 28px;
+    overflow-x: hidden;
+}
 
-            font-family: monospace;
-            font-size: 10px;
-            font-weight: 700;
-        }
+body.loading {
+    overflow: hidden;
+}
 
-        .nav-links a {
-            transition: color .2s ease;
-        }
+a {
+    color: inherit;
+    text-decoration: none;
+}
 
-        .nav-links a:hover {
-            color: var(--blue);
-        }
+button {
+    font: inherit;
+}
 
+::selection {
+    background: var(--ink);
+    color: var(--bg);
+}
 
-        /* =========================
-           HERO
-        ========================= */
 
-        .hero {
-            position: relative;
+/* =====================================================
+   LOADER
+===================================================== */
 
-            min-height: 100vh;
+.loader {
+    position: fixed;
 
-            padding: 120px 32px 35px;
+    inset: 0;
 
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
+    z-index: 9999;
 
-            border-bottom: 1px solid var(--line);
+    background: var(--ink);
 
-            overflow: hidden;
-        }
+    color: var(--bg);
 
-        .hero-top {
-            display: flex;
-            justify-content: space-between;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-            font-family: monospace;
-            font-size: 9px;
+    transition:
+        opacity .8s ease,
+        visibility .8s ease;
+}
 
-            color: var(--gray);
-        }
+.loader.hide {
+    opacity: 0;
+    visibility: hidden;
+}
 
-        .hero-title {
-            position: relative;
-            z-index: 2;
+.loader-inner {
+    width: min(90%, 500px);
+}
 
-            margin-top: 70px;
+.loader-top {
+    display: flex;
+    justify-content: space-between;
 
-            font-size: clamp(70px, 13vw, 190px);
+    margin-bottom: 20px;
 
-            font-weight: 900;
-            line-height: .76;
+    font-family: var(--mono);
+    font-size: 9px;
 
-            letter-spacing: -11px;
+    color: #aaa49a;
+}
 
-            text-transform: uppercase;
-        }
+.loader-line {
+    height: 1px;
 
-        .hero-title .blue {
-            color: var(--blue);
-        }
+    background: #44413a;
 
-        .hero-title .outline {
-            color: transparent;
+    overflow: hidden;
+}
 
-            -webkit-text-stroke: 2px var(--black);
-        }
+.loader-progress {
+    width: 0%;
+    height: 100%;
 
-        .hero-title .red {
-            color: var(--red);
-        }
+    background: var(--bg);
 
-        .hero-bottom {
-            position: relative;
-            z-index: 4;
+    animation: load 1.8s ease forwards;
+}
 
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
+@keyframes load {
+    to {
+        width: 100%;
+    }
+}
 
-            margin-top: 80px;
-        }
 
-        .hero-description {
-            max-width: 370px;
+/* =====================================================
+   CUSTOM CURSOR
+===================================================== */
 
-            font-size: 13px;
-            line-height: 1.7;
+.cursor {
+    position: fixed;
 
-            color: var(--gray);
-        }
+    z-index: 9998;
 
-        .scroll {
-            font-family: monospace;
-            font-size: 9px;
+    width: 10px;
+    height: 10px;
 
-            animation: blink 1.5s infinite;
-        }
+    border-radius: 50%;
 
-        @keyframes blink {
-            0%,100% {
-                opacity: 1;
-            }
+    background: var(--ink);
 
-            50% {
-                opacity: .3;
-            }
-        }
+    pointer-events: none;
 
+    transform: translate(-50%, -50%);
 
-        /* =========================
-           3D CUBE
-        ========================= */
+    transition:
+        width .25s ease,
+        height .25s ease,
+        background .25s ease;
+}
 
-        .scene {
-            position: absolute;
+.cursor-ring {
+    position: fixed;
 
-            z-index: 1;
+    z-index: 9997;
 
-            width: 350px;
-            height: 350px;
+    width: 38px;
+    height: 38px;
 
-            right: 8%;
-            top: 38%;
+    border: 1px solid var(--ink);
 
-            perspective: 900px;
+    border-radius: 50%;
 
-            pointer-events: none;
-        }
+    pointer-events: none;
 
-        .cube {
-            position: absolute;
+    transform: translate(-50%, -50%);
 
-            width: 170px;
-            height: 170px;
+    opacity: .35;
 
-            left: 90px;
-            top: 90px;
+    transition:
+        width .3s ease,
+        height .3s ease,
+        opacity .3s ease;
+}
 
-            transform-style: preserve-3d;
+.cursor.active {
+    width: 55px;
+    height: 55px;
 
-            animation: cubeRotate 12s linear infinite;
-        }
+    background: var(--blue);
 
-        .face {
-            position: absolute;
+    mix-blend-mode: multiply;
+}
 
-            width: 170px;
-            height: 170px;
+.cursor-ring.active {
+    width: 70px;
+    height: 70px;
 
-            border: 2px solid var(--black);
+    opacity: 0;
+}
 
-            background: rgba(49,87,255,.12);
 
-            box-shadow:
-                inset 0 0 40px rgba(49,87,255,.12);
-        }
+/* =====================================================
+   NAVIGATION
+===================================================== */
 
-        .front {
-            transform: translateZ(85px);
-        }
+.nav {
+    position: fixed;
 
-        .back {
-            transform: rotateY(180deg) translateZ(85px);
-        }
+    z-index: 500;
 
-        .right {
-            transform: rotateY(90deg) translateZ(85px);
-        }
+    top: 0;
+    left: 0;
 
-        .left {
-            transform: rotateY(-90deg) translateZ(85px);
-        }
+    width: 100%;
 
-        .top {
-            transform: rotateX(90deg) translateZ(85px);
-        }
+    padding: 18px 25px;
 
-        .bottom {
-            transform: rotateX(-90deg) translateZ(85px);
-        }
+    display: grid;
 
-        @keyframes cubeRotate {
+    grid-template-columns: 1fr auto 1fr;
 
-            0% {
-                transform:
-                    rotateX(-20deg)
-                    rotateY(0deg)
-                    rotateZ(0deg);
-            }
+    align-items: center;
 
-            50% {
-                transform:
-                    rotateX(25deg)
-                    rotateY(180deg)
-                    rotateZ(10deg);
-            }
+    border-bottom: 1px solid var(--line);
 
-            100% {
-                transform:
-                    rotateX(-20deg)
-                    rotateY(360deg)
-                    rotateZ(0deg);
-            }
-        }
+    background: rgba(222,212,192,.75);
 
+    backdrop-filter: blur(16px);
+}
 
-        /* =========================
-           GENERAL SECTIONS
-        ========================= */
+.logo {
+    width: 38px;
+    height: 38px;
 
-        section {
-            padding: 140px 32px;
-        }
+    border: 1px solid var(--ink);
 
-        .label {
-            font-family: monospace;
-            font-size: 9px;
-            color: var(--gray);
-        }
+    border-radius: 50%;
 
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-        /* =========================
-           STATEMENT
-        ========================= */
+    font-weight: 900;
+    font-size: 12px;
 
-        .statement {
-            min-height: 80vh;
+    letter-spacing: -2px;
 
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
+    transition:
+        background .3s ease,
+        color .3s ease,
+        transform .3s ease;
+}
 
-        .statement h2 {
-            max-width: 1150px;
+.logo:hover {
+    background: var(--ink);
+    color: var(--bg);
 
-            margin-top: 80px;
+    transform: rotate(12deg);
+}
 
-            font-size: clamp(48px, 7.5vw, 115px);
+.nav-center {
+    font-family: var(--mono);
 
-            line-height: .86;
-            letter-spacing: -6px;
-        }
+    font-size: 9px;
 
-        .statement h2 span {
-            color: var(--blue);
-        }
+    letter-spacing: .05em;
 
+    text-transform: uppercase;
+}
 
-        /* =========================
-           WORK
-        ========================= */
+.nav-right {
+    justify-self: end;
 
-        .work-header {
-            display: flex;
-            justify-content: space-between;
+    display: flex;
+    gap: 22px;
 
-            margin-bottom: 75px;
-        }
+    font-family: var(--mono);
 
-        .projects {
-            display: grid;
+    font-size: 9px;
+}
 
-            grid-template-columns: repeat(2, 1fr);
+.nav-right a {
+    position: relative;
+}
 
-            gap: 80px 26px;
-        }
+.nav-right a::after {
+    content: "";
 
-        .project {
-            transition: transform .4s ease;
-        }
+    position: absolute;
 
-        .project:hover {
-            transform: translateY(-8px);
-        }
+    left: 0;
+    bottom: -5px;
 
-        .project:nth-child(2) {
-            margin-top: 130px;
-        }
+    width: 0;
+    height: 1px;
 
-        .project:nth-child(4) {
-            margin-top: 110px;
-        }
+    background: var(--ink);
 
-        .visual {
-            position: relative;
+    transition: width .3s ease;
+}
 
-            aspect-ratio: 1 / .78;
+.nav-right a:hover::after {
+    width: 100%;
+}
 
-            overflow: hidden;
 
-            transition:
-                transform .5s ease,
-                filter .5s ease;
-        }
+/* =====================================================
+   HERO
+===================================================== */
 
-        .project:hover .visual {
-            transform: scale(.985);
-            filter: contrast(1.08);
-        }
+.hero {
+    min-height: 100vh;
 
-        .visual > span {
-            position: absolute;
+    position: relative;
 
-            z-index: 3;
+    padding: 145px 25px 35px;
 
-            top: 20px;
-            left: 20px;
+    border-bottom: 1px solid var(--line);
 
-            font-family: monospace;
-            font-size: 9px;
-        }
+    overflow: hidden;
+}
 
+.hero-meta {
+    display: flex;
 
-        /* PROJECT 01 */
+    justify-content: space-between;
 
-        .v1 {
-            background: #111;
-            color: var(--cream);
-        }
+    font-family: var(--mono);
 
-        .v1 strong {
-            position: absolute;
+    font-size: 9px;
 
-            left: 5%;
-            top: 32%;
+    color: var(--muted);
 
-            font-size: clamp(70px, 11vw, 170px);
+    text-transform: uppercase;
+}
 
-            letter-spacing: -13px;
+.hero-main {
+    min-height: 72vh;
 
-            font-weight: 900;
-        }
+    display: flex;
 
-        .v1 i {
-            position: absolute;
+    flex-direction: column;
 
-            width: 130px;
-            height: 130px;
+    justify-content: center;
 
-            right: 8%;
-            bottom: 10%;
+    position: relative;
+}
 
-            background: var(--red);
+.hero-title {
+    position: relative;
 
-            border-radius: 50%;
+    z-index: 5;
 
-            box-shadow: 0 0 70px rgba(255,75,62,.35);
-        }
+    font-size: clamp(70px, 13.8vw, 205px);
 
+    line-height: .73;
 
-        /* PROJECT 02 */
+    letter-spacing: -.085em;
 
-        .v2 {
-            background: var(--blue);
-            color: white;
-        }
+    font-weight: 900;
 
-        .v2 strong {
-            position: absolute;
+    text-transform: uppercase;
+}
 
-            left: 50%;
-            top: 50%;
+.hero-title .line {
+    display: block;
+}
 
-            transform:
-                translate(-50%, -50%)
-                rotate(90deg);
+.hero-title .line:nth-child(2) {
+    padding-left: 8vw;
 
-            font-size: 125px;
+    color: var(--blue);
+}
 
-            letter-spacing: -12px;
-        }
+.hero-title .line:nth-child(3) {
+    padding-left: 16vw;
 
+    color: transparent;
 
-        /* PROJECT 03 */
+    -webkit-text-stroke: 1.5px var(--ink);
+}
 
-        .v3 {
-            background: #151515;
-        }
+.hero-title .line:nth-child(4) {
+    padding-left: 25vw;
 
-        .v3 i {
-            position: absolute;
+    color: var(--red);
+}
 
-            width: 55%;
-            aspect-ratio: 1;
+.hero-sub {
+    position: absolute;
 
-            left: 22%;
-            top: 22%;
+    z-index: 8;
 
-            border-radius: 50%;
+    left: 3vw;
 
-            border: 1px solid var(--blue);
+    bottom: 2vh;
 
-            box-shadow:
-                0 0 80px var(--blue),
-                inset 0 0 60px var(--blue);
+    max-width: 300px;
 
-            animation: pulse 3s ease-in-out infinite;
-        }
+    font-family: var(--mono);
 
-        @keyframes pulse {
+    font-size: 9px;
 
-            0%,100% {
-                transform: scale(.9);
-                opacity: .65;
-            }
+    line-height: 1.7;
 
-            50% {
-                transform: scale(1.05);
-                opacity: 1;
-            }
-        }
+    color: var(--muted);
+}
 
 
-        /* PROJECT 04 */
+/* =====================================================
+   3D OBJECT
+===================================================== */
 
-        .v4 {
-            background: #d6d2c8;
-        }
+.orbit {
+    position: absolute;
 
-        .v4 strong {
-            position: absolute;
+    z-index: 2;
 
-            left: -10%;
-            top: 35%;
+    width: min(38vw, 500px);
+    height: min(38vw, 500px);
 
-            font-size: 100px;
+    right: 6vw;
+    top: 17vh;
 
-            color: var(--red);
+    perspective: 1000px;
 
-            text-shadow:
-                25px 0 var(--blue),
-                50px 0 var(--black);
+    pointer-events: none;
+}
 
-            letter-spacing: -7px;
-        }
+.orbit-ring {
+    position: absolute;
 
+    inset: 0;
 
-        /* PROJECT 05 */
+    border: 1px solid rgba(24,23,20,.25);
 
-        .v5 {
-            background:
-                linear-gradient(
-                    135deg,
-                    #111 50%,
-                    #d8d4ca 50%
-                );
-        }
+    border-radius: 50%;
 
-        .v5 i {
-            position: absolute;
+    transform: rotateX(65deg) rotateZ(20deg);
 
-            width: 35%;
-            aspect-ratio: 1;
+    animation: orbitSpin 18s linear infinite;
+}
 
-            left: 32%;
-            top: 30%;
+.orbit-ring:nth-child(2) {
+    inset: 12%;
 
-            border-radius: 50%;
+    transform: rotateY(65deg) rotateZ(-20deg);
 
-            background:
-                radial-gradient(
-                    circle at 30% 25%,
-                    white,
-                    #888 20%,
-                    #111 70%
-                );
+    animation-duration: 14s;
 
-            box-shadow:
-                25px 30px 50px rgba(0,0,0,.4);
-        }
+    animation-direction: reverse;
+}
 
+.orbit-ring:nth-child(3) {
+    inset: 25%;
 
-        /* PROJECT 06 */
+    transform: rotateX(65deg) rotateY(30deg);
 
-        .v6 {
-            background: #e4e0d6;
-        }
+    animation-duration: 10s;
+}
 
-        .v6 strong {
-            position: absolute;
+@keyframes orbitSpin {
+    to {
+        transform:
+            rotateX(65deg)
+            rotateZ(380deg);
+    }
+}
 
-            left: 10%;
-            top: 35%;
+.core {
+    position: absolute;
 
-            font-size: 90px;
+    width: 38%;
+    aspect-ratio: 1;
 
-            letter-spacing: -8px;
+    left: 31%;
+    top: 31%;
 
-            color: transparent;
+    transform-style: preserve-3d;
 
-            -webkit-text-stroke: 2px #111;
-        }
+    animation: coreRotate 9s ease-in-out infinite alternate;
+}
 
+.core-face {
+    position: absolute;
 
-        /* PROJECT INFO */
+    inset: 0;
 
-        .project-info {
-            display: flex;
-            justify-content: space-between;
+    border: 1px solid var(--ink);
 
-            padding-top: 14px;
-            margin-top: 14px;
+    background:
+        linear-gradient(
+            135deg,
+            rgba(49,75,214,.85),
+            rgba(49,75,214,.15)
+        );
 
-            border-top: 1px solid var(--black);
-        }
+    backdrop-filter: blur(4px);
+}
 
-        .project-info h3 {
-            font-size: 14px;
-        }
+.core-face:nth-child(1) {
+    transform: translateZ(55px);
+}
 
-        .project-info p {
-            margin-top: 6px;
+.core-face:nth-child(2) {
+    transform: rotateY(90deg) translateZ(55px);
+}
 
-            font-family: monospace;
-            font-size: 8px;
+.core-face:nth-child(3) {
+    transform: rotateX(90deg) translateZ(55px);
+}
 
-            color: var(--gray);
-        }
+@keyframes coreRotate {
+    0% {
+        transform:
+            rotateX(-18deg)
+            rotateY(20deg)
+            rotateZ(-8deg);
+    }
 
-        .project-info > span {
-            font-family: monospace;
-            font-size: 8px;
-        }
+    100% {
+        transform:
+            rotateX(35deg)
+            rotateY(210deg)
+            rotateZ(18deg);
+    }
+}
 
 
-        /* =========================
-           ABOUT
-        ========================= */
+/* =====================================================
+   MARQUEE
+===================================================== */
 
-        .about {
-            background: var(--black);
-            color: var(--cream);
-        }
+.marquee {
+    overflow: hidden;
 
-        .about h2 {
-            max-width: 1100px;
+    padding: 17px 0;
 
-            margin-top: 80px;
+    border-bottom: 1px solid var(--line);
 
-            font-size: clamp(50px, 8vw, 120px);
+    white-space: nowrap;
+}
 
-            line-height: .84;
-            letter-spacing: -6px;
-        }
+.marquee-track {
+    display: inline-flex;
 
-        .about h2 span {
-            color: var(--red);
-        }
+    gap: 35px;
 
-        .about-content {
-            max-width: 650px;
+    animation: marquee 22s linear infinite;
+}
 
-            margin-top: 85px;
+.marquee span {
+    font-family: var(--mono);
 
-            font-size: 15px;
-            line-height: 1.8;
+    font-size: 9px;
 
-            color: #aaa;
-        }
+    color: var(--muted);
+}
 
+.marquee strong {
+    color: var(--blue);
 
-        /* =========================
-           SKILLS
-        ========================= */
+    font-weight: 500;
+}
 
-        .skills {
-            margin-top: 90px;
-        }
+@keyframes marquee {
+    to {
+        transform: translateX(-50%);
+    }
+}
 
-        .skill {
-            display: grid;
 
-            grid-template-columns: 50px 1fr 70px;
+/* =====================================================
+   INTRO
+===================================================== */
 
-            padding: 19px 0;
+.intro {
+    padding: 170px 25px;
 
-            border-top: 1px solid #333;
+    display: grid;
 
-            font-family: monospace;
-            font-size: 9px;
-        }
+    grid-template-columns: 25% 1fr;
 
-        .skill:last-child {
-            border-bottom: 1px solid #333;
-        }
+    border-bottom: 1px solid var(--line);
+}
 
-        .skill strong {
-            font-weight: 400;
-        }
+.section-number {
+    font-family: var(--mono);
 
+    font-size: 9px;
 
-        /* =========================
-           CONTACT
-        ========================= */
+    color: var(--muted);
+}
 
-        .contact {
-            min-height: 90vh;
+.intro-content {
+    max-width: 1000px;
+}
 
-            display: flex;
-            flex-direction: column;
-        }
+.intro-title {
+    font-size: clamp(42px, 6.4vw, 95px);
 
-        .contact h2 {
-            margin-top: 100px;
+    line-height: .9;
 
-            max-width: 1200px;
+    letter-spacing: -.055em;
 
-            font-size: clamp(60px, 11vw, 175px);
+    font-weight: 600;
+}
 
-            line-height: .76;
-            letter-spacing: -10px;
-        }
+.intro-title em {
+    font-family: var(--serif);
 
-        .contact h2 span {
-            color: var(--blue);
-        }
+    font-weight: 400;
 
-        .email {
-            width: max-content;
+    color: var(--blue);
+}
 
-            margin-top: 75px;
+.intro-small {
+    max-width: 430px;
 
-            font-size: clamp(22px, 4vw, 55px);
+    margin-top: 70px;
 
-            border-bottom: 2px solid var(--black);
+    font-family: var(--mono);
 
-            transition:
-                color .25s ease,
-                border-color .25s ease;
-        }
+    font-size: 10px;
 
-        .email:hover {
-            color: var(--blue);
-            border-color: var(--blue);
-        }
+    line-height: 1.9;
 
-        .socials {
-            display: flex;
-            gap: 30px;
+    color: var(--muted);
+}
 
-            margin-top: 35px;
 
-            font-family: monospace;
-            font-size: 9px;
-        }
+/* =====================================================
+   WORK
+===================================================== */
 
-        .socials a {
-            transition: color .2s ease;
-        }
+.work {
+    padding: 150px 25px;
 
-        .socials a:hover {
-            color: var(--blue);
-        }
+    border-bottom: 1px solid var(--line);
+}
 
+.work-head {
+    display: flex;
 
-        /* =========================
-           FOOTER
-        ========================= */
+    justify-content: space-between;
 
-        footer {
-            margin-top: auto;
+    align-items: end;
 
-            padding-top: 20px;
+    margin-bottom: 90px;
+}
 
-            display: flex;
-            justify-content: space-between;
+.work-head h2 {
+    font-size: clamp(55px, 9vw, 130px);
 
-            border-top: 1px solid var(--line);
+    line-height: .75;
 
-            font-family: monospace;
-            font-size: 8px;
+    letter-spacing: -.08em;
+}
 
-            color: var(--gray);
-        }
+.work-head h2 span {
+    color: var(--blue);
+}
 
+.work-count {
+    font-family: var(--mono);
 
-        /* =========================
-           RESPONSIVE
-        ========================= */
+    font-size: 9px;
 
-        @media (max-width: 850px) {
+    color: var(--muted);
+}
 
-            nav {
-                padding: 0 18px;
-            }
 
-            .nav-links {
-                gap: 13px;
-                font-size: 8px;
-            }
+/* PROJECT GRID */
 
-            .hero {
-                padding-left: 20px;
-                padding-right: 20px;
-            }
+.projects {
+    display: grid;
 
-            .hero-title {
-                font-size: 19vw;
-                letter-spacing: -5px;
-            }
+    grid-template-columns: repeat(12, 1fr);
 
-            .scene {
-                right: -100px;
-                top: 42%;
+    gap: 90px 22px;
+}
 
-                opacity: .4;
+.project {
+    position: relative;
 
-                transform: scale(.8);
-            }
+    cursor: pointer;
+}
 
-            .hero-bottom {
-                flex-direction: column;
-                align-items: flex-start;
+.project:nth-child(1) {
+    grid-column: 1 / 8;
+}
 
-                gap: 25px;
-            }
+.project:nth-child(2) {
+    grid-column: 9 / 13;
 
-            section {
-                padding: 95px 20px;
-            }
+    margin-top: 180px;
+}
 
-            .statement h2,
-            .about h2,
-            .contact h2 {
-                letter-spacing: -3px;
-            }
+.project:nth-child(3) {
+    grid-column: 2 / 7;
+}
 
-            .projects {
-                display: block;
-            }
+.project:nth-child(4) {
+    grid-column: 8 / 13;
 
-            .project,
-            .project:nth-child(2),
-            .project:nth-child(4) {
-                margin: 0 0 75px;
-            }
+    margin-top: 130px;
+}
 
-            .v1 strong {
-                font-size: 23vw;
-            }
+.project:nth-child(5) {
+    grid-column: 1 / 6;
 
-            .v2 strong {
-                font-size: 20vw;
-            }
+    margin-top: 80px;
+}
 
-            .v4 strong {
-                font-size: 19vw;
-            }
+.project:nth-child(6) {
+    grid-column: 7 / 13;
 
-            .v6 strong {
-                font-size: 18vw;
-            }
+    margin-top: 250px;
+}
 
-            .email {
-                font-size: 22px;
-            }
 
-            footer {
-                flex-direction: column;
-                gap: 10px;
-            }
-        }
+/* PROJECT VISUAL */
 
-    </style>
+.project-visual {
+    position: relative;
+
+    overflow: hidden;
+
+    aspect-ratio: 1 / .9;
+
+    background: var(--paper);
+
+    transition:
+        transform .7s cubic-bezier(.2,.8,.2,1);
+}
+
+.project:hover .project-visual {
+    transform: scale(.975);
+}
+
+.project-index {
+    position: absolute;
+
+    top: 18px;
+    left: 18px;
+
+    z-index: 5;
+
+    font-family: var(--mono);
+
+    font-size: 9px;
+}
+
+
+/* PROJECT 01 */
+
+.project-01 {
+    background: #161512;
+    color: var(--bg);
+}
+
+.p01-type {
+    position: absolute;
+
+    left: 5%;
+    bottom: 4%;
+
+    font-size: clamp(70px, 10vw, 150px);
+
+    font-weight: 900;
+
+    letter-spacing: -.09em;
+}
+
+.p01-circle {
+    position: absolute;
+
+    width: 26%;
+    aspect-ratio: 1;
+
+    right: 8%;
+    top: 12%;
+
+    border-radius: 50%;
+
+    background: var(--red);
+
+    box-shadow:
+        0 0 80px rgba(200,76,61,.25);
+}
+
+
+/* PROJECT 02 */
+
+.project-02 {
+    background: var(--blue);
+    color: white;
+}
+
+.p02-word {
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    transform:
+        translate(-50%, -50%)
+        rotate(-90deg);
+
+    font-size: clamp(70px, 9vw, 125px);
+
+    font-weight: 900;
+
+    letter-spacing: -.08em;
+}
+
+
+/* PROJECT 03 */
+
+.project-03 {
+    background: #c9bda6;
+}
+
+.p03-grid {
+    position: absolute;
+
+    inset: 12%;
+
+    background:
+        linear-gradient(
+            rgba(24,23,20,.13) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(24,23,20,.13) 1px,
+            transparent 1px
+        );
+
+    background-size: 25px 25px;
+
+    transform: perspective(500px) rotateX(45deg) rotateZ(-12deg);
+
+    box-shadow: 30px 30px 70px rgba(24,23,20,.15);
+}
+
+
+/* PROJECT 04 */
+
+.project-04 {
+    background: #e6dfd1;
+}
+
+.p04-text {
+    position: absolute;
+
+    left: 4%;
+    top: 35%;
+
+    font-family: var(--serif);
+
+    font-size: clamp(70px, 10vw, 145px);
+
+    font-style: italic;
+
+    color: var(--red);
+
+    white-space: nowrap;
+}
+
+.p04-line {
+    position: absolute;
+
+    width: 80%;
+    height: 1px;
+
+    left: 10%;
+    top: 50%;
+
+    background: var(--ink);
+
+    transform: rotate(-12deg);
+}
+
+
+/* PROJECT 05 */
+
+.project-05 {
+    background: #171613;
+}
+
+.p05-ball {
+    position: absolute;
+
+    width: 43%;
+    aspect-ratio: 1;
+
+    left: 28%;
+    top: 25%;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle at 32% 25%,
+            #eee 0%,
+            #aaa 8%,
+            #333 38%,
+            #111 72%
+        );
+
+    box-shadow:
+        30px 40px 80px rgba(0,0,0,.7);
+
+    animation: floating 4s ease-in-out infinite;
+}
+
+@keyframes floating {
+    0%,100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-18px);
+    }
+}
+
+
+/* PROJECT 06 */
+
+.project-06 {
+    background: var(--red);
+    color: var(--ink);
+}
+
+.p06-text {
+    position: absolute;
+
+    left: 7%;
+    top: 38%;
+
+    font-size: clamp(60px, 9vw, 125px);
+
+    font-weight: 900;
+
+    letter-spacing: -.1em;
+
+    color: transparent;
+
+    -webkit-text-stroke: 2px var(--ink);
+}
+
+
+/* PROJECT META */
+
+.project-meta {
+    padding-top: 14px;
+
+    margin-top: 14px;
+
+    border-top: 1px solid var(--ink);
+
+    display: flex;
+
+    justify-content: space-between;
+
+    font-family: var(--mono);
+
+    font-size: 9px;
+}
+
+.project-meta small {
+    display: block;
+
+    margin-top: 7px;
+
+    color: var(--muted);
+
+    font-size: 8px;
+}
+
+
+/* =====================================================
+   ABOUT
+===================================================== */
+
+.about {
+    padding: 160px 25px;
+
+    background: var(--ink);
+
+    color: var(--bg);
+}
+
+.about-layout {
+    display: grid;
+
+    grid-template-columns: 25% 1fr;
+}
+
+.about-number {
+    font-family: var(--mono);
+
+    font-size: 9px;
+
+    color: #77736a;
+}
+
+.about h2 {
+    max-width: 1050px;
+
+    font-size: clamp(48px, 7vw, 105px);
+
+    line-height: .88;
+
+    letter-spacing: -.06em;
+}
+
+.about h2 span {
+    color: var(--red);
+}
+
+.about-copy {
+    max-width: 570px;
+
+    margin-top: 85px;
+
+    font-family: var(--mono);
+
+    font-size: 10px;
+
+    line-height: 2;
+
+    color: #918c82;
+}
+
+.skills {
+    margin-top: 100px;
+}
+
+.skill {
+    display: grid;
+
+    grid-template-columns: 50px 1fr 80px;
+
+    padding: 17px 0;
+
+    border-top: 1px solid #37352f;
+
+    font-family: var(--mono);
+
+    font-size: 9px;
+}
+
+.skill:last-child {
+    border-bottom: 1px solid #37352f;
+}
+
+.skill span:last-child {
+    text-align: right;
+
+    color: #77736a;
+}
+
+
+/* =====================================================
+   CONTACT
+===================================================== */
+
+.contact {
+    min-height: 95vh;
+
+    padding: 150px 25px 30px;
+
+    display: flex;
+
+    flex-direction: column;
+}
+
+.contact-layout {
+    margin-top: 100px;
+}
+
+.contact-title {
+    max-width: 1200px;
+
+    font-size: clamp(65px, 12vw, 175px);
+
+    line-height: .72;
+
+    letter-spacing: -.09em;
+
+    font-weight: 900;
+}
+
+.contact-title .outline {
+    color: transparent;
+
+    -webkit-text-stroke: 1.5px var(--ink);
+}
+
+.contact-title .blue {
+    color: var(--blue);
+}
+
+.contact-bottom {
+    margin-top: 90px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: end;
+}
+
+.email {
+    font-size: clamp(20px, 3vw, 42px);
+
+    letter-spacing: -.04em;
+
+    border-bottom: 1px solid var(--ink);
+
+    transition:
+        color .3s ease,
+        border-color .3s ease;
+}
+
+.email:hover {
+    color: var(--blue);
+
+    border-color: var(--blue);
+}
+
+.socials {
+    display: flex;
+
+    gap: 25px;
+
+    font-family: var(--mono);
+
+    font-size: 9px;
+}
+
+.socials a {
+    transition: color .25s ease;
+}
+
+.socials a:hover {
+    color: var(--blue);
+}
+
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+.footer {
+    margin-top: auto;
+
+    padding-top: 18px;
+
+    border-top: 1px solid var(--line);
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr 1fr;
+
+    font-family: var(--mono);
+
+    font-size: 8px;
+
+    color: var(--muted);
+}
+
+.footer span:nth-child(2) {
+    text-align: center;
+}
+
+.footer span:last-child {
+    text-align: right;
+}
+
+
+/* =====================================================
+   REVEAL
+===================================================== */
+
+.reveal {
+    opacity: 0;
+
+    transform: translateY(45px);
+
+    transition:
+        opacity 1s ease,
+        transform 1s cubic-bezier(.2,.8,.2,1);
+}
+
+.reveal.visible {
+    opacity: 1;
+
+    transform: translateY(0);
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 800px) {
+
+    .cursor,
+    .cursor-ring {
+        display: none;
+    }
+
+    .nav {
+        padding: 14px 17px;
+
+        grid-template-columns: auto 1fr auto;
+    }
+
+    .nav-center {
+        justify-self: center;
+    }
+
+    .nav-right {
+        gap: 12px;
+    }
+
+    .nav-right a:nth-child(2) {
+        display: none;
+    }
+
+    .hero {
+        padding: 115px 18px 25px;
+    }
+
+    .hero-meta {
+        font-size: 7px;
+    }
+
+    .hero-meta span:last-child {
+        text-align: right;
+    }
+
+    .hero-main {
+        min-height: 75vh;
+    }
+
+    .hero-title {
+        font-size: 20vw;
+
+        letter-spacing: -.08em;
+    }
+
+    .hero-title .line:nth-child(2) {
+        padding-left: 4vw;
+    }
+
+    .hero-title .line:nth-child(3) {
+        padding-left: 8vw;
+    }
+
+    .hero-title .line:nth-child(4) {
+        padding-left: 12vw;
+    }
+
+    .orbit {
+        width: 80vw;
+        height: 80vw;
+
+        right: -25vw;
+        top: 32%;
+    }
+
+    .hero-sub {
+        left: 0;
+        bottom: -30px;
+
+        max-width: 240px;
+    }
+
+    .intro,
+    .about-layout {
+        display: block;
+    }
+
+    .section-number,
+    .about-number {
+        margin-bottom: 60px;
+    }
+
+    .intro,
+    .work,
+    .about {
+        padding: 100px 18px;
+    }
+
+    .intro-title {
+        font-size: 12vw;
+    }
+
+    .intro-small {
+        margin-top: 50px;
+    }
+
+    .work {
+        padding-top: 100px;
+    }
+
+    .work-head {
+        margin-bottom: 60px;
+    }
+
+    .work-head h2 {
+        font-size: 20vw;
+    }
+
+    .projects {
+        display: block;
+    }
+
+    .project,
+    .project:nth-child(n) {
+        margin: 0 0 75px;
+    }
+
+    .project-visual {
+        aspect-ratio: 1 / .85;
+    }
+
+    .about h2 {
+        font-size: 12vw;
+    }
+
+    .contact {
+        padding: 100px 18px 25px;
+    }
+
+    .contact-layout {
+        margin-top: 70px;
+    }
+
+    .contact-title {
+        font-size: 19vw;
+    }
+
+    .contact-bottom {
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 35px;
+
+        margin-top: 65px;
+    }
+
+    .email {
+        font-size: 6vw;
+    }
+
+    .footer {
+        grid-template-columns: 1fr;
+
+        gap: 8px;
+    }
+
+    .footer span,
+    .footer span:nth-child(2),
+    .footer span:last-child {
+        text-align: left;
+    }
+}
+
+</style>
 </head>
 
 
-<body>
+<body class="loading">
 
 
-    <!-- =========================
-         NAVIGATION
-    ========================= -->
+<!-- =====================================================
+     LOADER
+===================================================== -->
 
-    <nav>
+<div class="loader" id="loader">
 
-        <a href="#home" class="logo">
-            A<span>C</span>
-        </a>
+    <div class="loader-inner">
 
-        <div class="nav-links">
+        <div class="loader-top">
+            <span>AC / PORTFOLIO</span>
+            <span id="loadNumber">000</span>
+        </div>
 
-            <a href="#work">WORK</a>
+        <div class="loader-line">
+            <div class="loader-progress"></div>
+        </div>
 
-            <a href="#about">ABOUT</a>
+    </div>
 
-            <a href="#contact">CONTACT</a>
+</div>
+
+
+<!-- =====================================================
+     CURSOR
+===================================================== -->
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+
+<!-- =====================================================
+     NAV
+===================================================== -->
+
+<nav class="nav">
+
+    <a href="#home" class="logo magnetic">
+        A<span>C</span>
+    </a>
+
+    <div class="nav-center">
+        ABDULLAH CANKI / VISUAL COMMUNICATION DESIGN
+    </div>
+
+    <div class="nav-right">
+
+        <a href="#work">WORK</a>
+
+        <a href="#about">ABOUT</a>
+
+        <a href="#contact">CONTACT</a>
+
+    </div>
+
+</nav>
+
+
+<!-- =====================================================
+     HERO
+===================================================== -->
+
+<header class="hero" id="home">
+
+    <div class="hero-meta">
+
+        <span>
+            01 — 04 / PORTFOLIO
+        </span>
+
+        <span>
+            ARHAVİ / ARTVİN / TR
+        </span>
+
+    </div>
+
+
+    <div class="hero-main">
+
+        <div class="hero-title reveal">
+
+            <span class="line">
+                ABDULLAH
+            </span>
+
+            <span class="line">
+                CANKI
+            </span>
+
+            <span class="line">
+                VISUAL
+            </span>
+
+            <span class="line">
+                DESIGN
+            </span>
 
         </div>
 
-    </nav>
+
+        <!-- 3D -->
+
+        <div class="orbit">
+
+            <div class="orbit-ring"></div>
+
+            <div class="orbit-ring"></div>
+
+            <div class="orbit-ring"></div>
+
+            <div class="core">
+
+                <div class="core-face"></div>
+                <div class="core-face"></div>
+                <div class="core-face"></div>
+
+            </div>
+
+        </div>
 
 
-    <!-- =========================
-         HERO
-    ========================= -->
+        <p class="hero-sub reveal">
 
-    <header class="hero" id="home">
+            Görsel iletişim tasarımı öğrencisi.
+            Fikirleri tipografi, görüntü,
+            hareket ve deneyim üzerinden
+            görünür hale getiriyorum.
 
-        <div class="hero-top">
+        </p>
 
-            <span>
-                PORTFOLIO / 2026
-            </span>
+    </div>
 
-            <span>
-                ARHAVİ / ARTVİN / TÜRKİYE
-            </span>
+</header>
 
+
+<!-- =====================================================
+     MARQUEE
+===================================================== -->
+
+<div class="marquee">
+
+    <div class="marquee-track">
+
+        <span>VISUAL COMMUNICATION</span>
+        <strong>✦</strong>
+
+        <span>TYPOGRAPHY</span>
+        <strong>✦</strong>
+
+        <span>ART DIRECTION</span>
+        <strong>✦</strong>
+
+        <span>3D</span>
+        <strong>✦</strong>
+
+        <span>MOTION</span>
+        <strong>✦</strong>
+
+        <span>IDENTITY</span>
+        <strong>✦</strong>
+
+        <span>VISUAL COMMUNICATION</span>
+        <strong>✦</strong>
+
+        <span>TYPOGRAPHY</span>
+        <strong>✦</strong>
+
+        <span>ART DIRECTION</span>
+        <strong>✦</strong>
+
+        <span>3D</span>
+        <strong>✦</strong>
+
+        <span>MOTION</span>
+        <strong>✦</strong>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     INTRO
+===================================================== -->
+
+<section class="intro">
+
+    <div class="section-number">
+        01 / APPROACH
+    </div>
+
+
+    <div class="intro-content">
+
+        <h2 class="intro-title reveal">
+
+            Tasarım benim için
+            sadece güzel görünen
+            bir şey değil.
+
+            <em>
+                Bir fikrin görsel
+                olarak konuşmaya
+                başlaması.
+            </em>
+
+        </h2>
+
+
+        <p class="intro-small reveal">
+
+            BRANDING / TYPOGRAPHY / DIGITAL
+            DESIGN / MOTION / 3D / ART DIRECTION
+
+            <br><br>
+
+            Her projeyi farklı bir görsel sistem
+            olarak ele alıyorum. Amacım hazır
+            çözümleri tekrar etmek yerine
+            karakteri olan işler üretmek.
+
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     WORK
+===================================================== -->
+
+<section class="work" id="work">
+
+    <div class="work-head">
+
+        <h2>
+            SELECTED<br>
+            <span>WORK.</span>
+        </h2>
+
+        <div class="work-count">
+            06 PROJECTS / 2026
+        </div>
+
+    </div>
+
+
+    <div class="projects">
+
+
+        <!-- 01 -->
+
+        <article class="project reveal">
+
+            <div class="project-visual project-01">
+
+                <span class="project-index">
+                    01 / 06
+                </span>
+
+                <div class="p01-circle"></div>
+
+                <div class="p01-type">
+                    NØIR
+                </div>
+
+            </div>
+
+            <div class="project-meta">
+
+                <div>
+                    NØIR
+                    <small>
+                        BRAND IDENTITY / ART DIRECTION
+                    </small>
+                </div>
+
+                <span>2026</span>
+
+            </div>
+
+        </article>
+
+
+        <!-- 02 -->
+
+        <article class="project reveal">
+
+            <div class="project-visual project-02">
+
+                <span class="project-index">
+                    02 / 06
+                </span>
+
+                <div class="p02-word">
+                    TYPE
+                </div>
+
+            </div>
+
+            <div class="project-meta">
+
+                <div>
+                    TYPE / 01
+                    <small>
+                        EXPERIMENTAL TYPOGRAPHY
+                    </small>
+                </div>
+
+                <span>2026</span>
+
+            </div>
+
+        </article>
+
+
+        <!-- 03 -->
+
+        <article class="project reveal">
+
+            <div class="project-visual project-03">
+
+                <span class="project-index">
+                    03 / 06
+                </span>
+
+                <div class="p03-grid"></div>
+
+            </div>
+
+            <div class="project-meta">
+
+                <div>
+                    GRID / VOID
+                    <small>
+                        DIGITAL EXPERIMENT
+                    </small>
+                </div>
+
+                <span>2026</span>
+
+            </div>
+
+        </article>
+
+
+        <!-- 04 -->
+
+        <article class="project reveal">
+
+            <div class="project-visual project-04">
+
+                <span class="project-index">
+                    04 / 06
+                </span>
+
+                <div class="p04-text">
+                    MOTION
+                </div>
+
+                <div class="p04-line"></div>
+
+            </div>
+
+            <div class="project-meta">
+
+                <div>
+                    MOTION TYPE
+                    <small>
+                        KINETIC TYPOGRAPHY
+                    </small>
+                </div>
+
+                <span>2026</span>
+
+            </div>
+
+        </article>
+
+
+        <!-- 05 -->
+
+        <article class="project reveal">
+
+            <div class="project-visual project-05">
+
+                <span class="project-index">
+                    05 / 06
+                </span>
+
+                <div class="p05-ball"></div>
+
+            </div>
+
+            <div class="project-meta">
+
+                <div>
+                    OBJECT / 03
+                    <small>
+                        3D / ART DIRECTION
+                    </small>
+                </div>
+
+                <span>2026</span>
+
+            </div>
+
+        </article>
+
+
+        <!-- 06 -->
+
+        <article class="project reveal">
+
+            <div class="project-visual project-06">
+
+                <span class="project-index">
+                    06 / 06
+                </span>
+
+                <div class="p06-text">
+                    AFTER
+                </div>
+
+            </div>
+
+            <div class="project-meta">
+
+                <div>
+                    AFTERIMAGE
+                    <small>
+                        EXPERIMENTAL POSTER
+                    </small>
+                </div>
+
+                <span>2026</span>
+
+            </div>
+
+        </article>
+
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     ABOUT
+===================================================== -->
+
+<section class="about" id="about">
+
+    <div class="about-layout">
+
+        <div class="about-number">
+            02 / ABOUT
         </div>
 
 
         <div>
 
-            <div class="hero-title">
+            <h2 class="reveal">
 
-                <div>
-                    ABDULLAH
-                </div>
+                VISUALS ARE NOT
+                DECORATION.
 
-                <div class="blue">
-                    CANKI
-                </div>
+                <span>
+                    THEY ARE LANGUAGE.
+                </span>
 
-                <div class="outline">
-                    VISUAL
-                </div>
-
-                <div class="red">
-                    DESIGN.
-                </div>
-
-            </div>
+            </h2>
 
 
-            <!-- 3D OBJECT -->
+            <p class="about-copy reveal">
 
-            <div class="scene">
+                Ben Abdullah Cankı.
 
-                <div class="cube">
-
-                    <div class="face front"></div>
-
-                    <div class="face back"></div>
-
-                    <div class="face right"></div>
-
-                    <div class="face left"></div>
-
-                    <div class="face top"></div>
-
-                    <div class="face bottom"></div>
-
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <div class="hero-bottom">
-
-            <p class="hero-description">
-
-                Merhaba, ben Abdullah Cankı.
+                <br><br>
 
                 Görsel İletişim Tasarımı öğrencisiyim.
+                Tasarımın; fikir, kültür, teknoloji
+                ve insan arasında bir bağlantı
+                kurduğuna inanıyorum.
 
-                Branding, tipografi, dijital tasarım,
-                motion ve 3D ile ilgileniyorum.
+                <br><br>
+
+                Tipografi, kimlik tasarımı, poster,
+                dijital deneyim, motion ve 3D
+                alanlarında üretimler yapıyorum.
 
             </p>
 
 
-            <div class="scroll">
+            <div class="skills reveal">
 
-                SCROLL TO EXPLORE ↓
+                <div class="skill">
+                    <span>01</span>
+                    <span>BRAND IDENTITY</span>
+                    <span>90%</span>
+                </div>
+
+                <div class="skill">
+                    <span>02</span>
+                    <span>TYPOGRAPHY</span>
+                    <span>92%</span>
+                </div>
+
+                <div class="skill">
+                    <span>03</span>
+                    <span>ART DIRECTION</span>
+                    <span>87%</span>
+                </div>
+
+                <div class="skill">
+                    <span>04</span>
+                    <span>DIGITAL DESIGN</span>
+                    <span>85%</span>
+                </div>
+
+                <div class="skill">
+                    <span>05</span>
+                    <span>MOTION</span>
+                    <span>80%</span>
+                </div>
+
+                <div class="skill">
+                    <span>06</span>
+                    <span>3D / CREATIVE CODE</span>
+                    <span>78%</span>
+                </div>
 
             </div>
 
         </div>
 
-    </header>
+    </div>
 
+</section>
 
-    <!-- =========================
-         STATEMENT
-    ========================= -->
 
-    <section class="statement">
+<!-- =====================================================
+     CONTACT
+===================================================== -->
 
-        <div class="label">
-            001 / STATEMENT
-        </div>
+<section class="contact" id="contact">
 
+    <div class="section-number">
+        03 / CONTACT
+    </div>
 
-        <h2>
 
-            I DON'T JUST MAKE THINGS
+    <div class="contact-layout">
 
-            <span>LOOK GOOD.</span>
-
-            I MAKE IDEAS
-
-            <span>VISIBLE.</span>
-
-        </h2>
-
-    </section>
-
-
-    <!-- =========================
-         WORK
-    ========================= -->
-
-    <section id="work">
-
-        <div class="work-header">
-
-            <div class="label">
-                002 / SELECTED WORK
-            </div>
-
-            <div class="label">
-                06 PROJECTS
-            </div>
-
-        </div>
-
-
-        <div class="projects">
-
-
-            <!-- PROJECT 01 -->
-
-            <article class="project">
-
-                <div class="visual v1">
-
-                    <span>
-                        01
-                    </span>
-
-                    <strong>
-                        NØIR
-                    </strong>
-
-                    <i></i>
-
-                </div>
-
-
-                <div class="project-info">
-
-                    <div>
-
-                        <h3>
-                            NØIR
-                        </h3>
-
-                        <p>
-                            BRAND IDENTITY / ART DIRECTION
-                        </p>
-
-                    </div>
-
-                    <span>
-                        2026
-                    </span>
-
-                </div>
-
-            </article>
-
-
-            <!-- PROJECT 02 -->
-
-            <article class="project">
-
-                <div class="visual v2">
-
-                    <span>
-                        02
-                    </span>
-
-                    <strong>
-                        TYPE
-                    </strong>
-
-                </div>
-
-
-                <div class="project-info">
-
-                    <div>
-
-                        <h3>
-                            TYPE / 01
-                        </h3>
-
-                        <p>
-                            EXPERIMENTAL TYPOGRAPHY
-                        </p>
-
-                    </div>
-
-                    <span>
-                        2026
-                    </span>
-
-                </div>
-
-            </article>
-
-
-            <!-- PROJECT 03 -->
-
-            <article class="project">
-
-                <div class="visual v3">
-
-                    <span>
-                        03
-                    </span>
-
-                    <i></i>
-
-                </div>
-
-
-                <div class="project-info">
-
-                    <div>
-
-                        <h3>
-                            DIGITAL VOID
-                        </h3>
-
-                        <p>
-                            INTERACTIVE DESIGN
-                        </p>
-
-                    </div>
-
-                    <span>
-                        2026
-                    </span>
-
-                </div>
-
-            </article>
-
-
-            <!-- PROJECT 04 -->
-
-            <article class="project">
-
-                <div class="visual v4">
-
-                    <span>
-                        04
-                    </span>
-
-                    <strong>
-                        MOTION
-                    </strong>
-
-                </div>
-
-
-                <div class="project-info">
-
-                    <div>
-
-                        <h3>
-                            MOTION TYPE
-                        </h3>
-
-                        <p>
-                            KINETIC TYPOGRAPHY
-                        </p>
-
-                    </div>
-
-                    <span>
-                        2026
-                    </span>
-
-                </div>
-
-            </article>
-
-
-            <!-- PROJECT 05 -->
-
-            <article class="project">
-
-                <div class="visual v5">
-
-                    <span>
-                        05
-                    </span>
-
-                    <i></i>
-
-                </div>
-
-
-                <div class="project-info">
-
-                    <div>
-
-                        <h3>
-                            OBJECT / 03
-                        </h3>
-
-                        <p>
-                            3D / ART DIRECTION
-                        </p>
-
-                    </div>
-
-                    <span>
-                        2026
-                    </span>
-
-                </div>
-
-            </article>
-
-
-            <!-- PROJECT 06 -->
-
-            <article class="project">
-
-                <div class="visual v6">
-
-                    <span>
-                        06
-                    </span>
-
-                    <strong>
-                        AFTER
-                    </strong>
-
-                </div>
-
-
-                <div class="project-info">
-
-                    <div>
-
-                        <h3>
-                            AFTERIMAGE
-                        </h3>
-
-                        <p>
-                            EXPERIMENTAL POSTER
-                        </p>
-
-                    </div>
-
-                    <span>
-                        2026
-                    </span>
-
-                </div>
-
-            </article>
-
-
-        </div>
-
-    </section>
-
-
-    <!-- =========================
-         ABOUT
-    ========================= -->
-
-    <section class="about" id="about">
-
-        <div class="label">
-            003 / ABOUT
-        </div>
-
-
-        <h2>
-
-            DESIGN IS A WAY
-
-            OF MAKING
-
-            <span>
-                THOUGHT VISIBLE.
-            </span>
-
-        </h2>
-
-
-        <div class="about-content">
-
-            <p>
-
-                Merhaba, ben Abdullah Cankı.
-
-                Görsel İletişim Tasarımı öğrencisiyim.
-
-            </p>
-
-
-            <br>
-
-
-            <p>
-
-                Tasarım benim için yalnızca estetik
-                bir sonuç değil; fikir, iletişim ve
-                deneyimin bir araya geldiği bir sistem.
-
-            </p>
-
-
-            <br>
-
-
-            <p>
-
-                Branding, typography, poster,
-                digital design, motion ve 3D
-                alanlarında kendimi geliştiriyorum.
-
-            </p>
-
-        </div>
-
-
-        <div class="skills">
-
-
-            <div class="skill">
-
-                <span>
-                    01
-                </span>
-
-                <strong>
-                    BRAND IDENTITY
-                </strong>
-
-                <span>
-                    90%
-                </span>
-
-            </div>
-
-
-            <div class="skill">
-
-                <span>
-                    02
-                </span>
-
-                <strong>
-                    TYPOGRAPHY
-                </strong>
-
-                <span>
-                    92%
-                </span>
-
-            </div>
-
-
-            <div class="skill">
-
-                <span>
-                    03
-                </span>
-
-                <strong>
-                    ART DIRECTION
-                </strong>
-
-                <span>
-                    87%
-                </span>
-
-            </div>
-
-
-            <div class="skill">
-
-                <span>
-                    04
-                </span>
-
-                <strong>
-                    DIGITAL DESIGN
-                </strong>
-
-                <span>
-                    85%
-                </span>
-
-            </div>
-
-
-            <div class="skill">
-
-                <span>
-                    05
-                </span>
-
-                <strong>
-                    MOTION
-                </strong>
-
-                <span>
-                    80%
-                </span>
-
-            </div>
-
-
-            <div class="skill">
-
-                <span>
-                    06
-                </span>
-
-                <strong>
-                    3D / CREATIVE CODE
-                </strong>
-
-                <span>
-                    78%
-                </span>
-
-            </div>
-
-
-        </div>
-
-    </section>
-
-
-    <!-- =========================
-         CONTACT
-    ========================= -->
-
-    <section class="contact" id="contact">
-
-        <div class="label">
-            004 / CONTACT
-        </div>
-
-
-        <h2>
+        <h2 class="contact-title reveal">
 
             LET'S MAKE
 
-            SOMETHING
+            <span class="outline">
+                SOMETHING
+            </span>
 
-            <span>
+            <span class="blue">
                 VISIBLE.
             </span>
 
         </h2>
 
 
-        <a
-            class="email"
-            href="mailto:abdullah198579@outlook.com"
-        >
-
-            abdullah198579@outlook.com ↗
-
-        </a>
-
-
-        <div class="socials">
-
+        <div class="contact-bottom">
 
             <a
-                href="https://www.instagram.com/abdullahcank1/"
-                target="_blank"
-                rel="noopener noreferrer"
+                class="email magnetic"
+                href="mailto:abdullah198579@outlook.com"
             >
-
-                INSTAGRAM ↗
-
+                abdullah198579@outlook.com ↗
             </a>
 
 
-            <a
-                href="https://tr.linkedin.com/in/abdullah-cank%C4%B1-6952b2324"
-                target="_blank"
-                rel="noopener noreferrer"
-            >
+            <div class="socials">
 
-                LINKEDIN ↗
+                <a
+                    href="https://www.instagram.com/abdullahcank1/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    INSTAGRAM ↗
+                </a>
 
-            </a>
+                <a
+                    href="https://tr.linkedin.com/in/abdullah-cank%C4%B1-6952b2324"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    LINKEDIN ↗
+                </a>
 
+            </div>
 
         </div>
 
+    </div>
 
-        <footer>
 
-            <span>
-                © 2026 ABDULLAH CANKI
-            </span>
+    <footer class="footer">
 
-            <span>
-                AC / VISUAL COMMUNICATION DESIGN
-            </span>
+        <span>
+            © 2026 ABDULLAH CANKI
+        </span>
 
-            <span>
-                ARHAVİ / ARTVİN / TÜRKİYE
-            </span>
+        <span>
+            AC / VISUAL COMMUNICATION DESIGN
+        </span>
 
-        </footer>
+        <span>
+            ARHAVİ / ARTVİN / TÜRKİYE
+        </span>
 
-    </section>
+    </footer>
 
+</section>
+
+
+<script>
+
+/* =====================================================
+   LOADER
+===================================================== */
+
+document.body.classList.add("loading");
+
+let number = 0;
+
+const numberEl = document.getElementById("loadNumber");
+
+const loaderInterval = setInterval(() => {
+
+    number += Math.floor(Math.random() * 8) + 3;
+
+    if (number >= 100) {
+
+        number = 100;
+
+        clearInterval(loaderInterval);
+
+        setTimeout(() => {
+
+            document
+                .getElementById("loader")
+                .classList.add("hide");
+
+            document.body.classList.remove("loading");
+
+        }, 350);
+    }
+
+    numberEl.textContent =
+        String(number).padStart(3, "0");
+
+}, 45);
+
+
+/* =====================================================
+   CURSOR
+===================================================== */
+
+const cursor =
+    document.getElementById("cursor");
+
+const cursorRing =
+    document.getElementById("cursorRing");
+
+let mouseX = 0;
+let mouseY = 0;
+
+let ringX = 0;
+let ringY = 0;
+
+document.addEventListener("mousemove", e => {
+
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+
+    cursor.style.left = mouseX + "px";
+    cursor.style.top = mouseY + "px";
+
+});
+
+function moveRing() {
+
+    ringX += (mouseX - ringX) * .14;
+    ringY += (mouseY - ringY) * .14;
+
+    cursorRing.style.left = ringX + "px";
+    cursorRing.style.top = ringY + "px";
+
+    requestAnimationFrame(moveRing);
+}
+
+moveRing();
+
+
+/* CURSOR HOVER */
+
+document.querySelectorAll("a, .project, .magnetic")
+.forEach(element => {
+
+    element.addEventListener("mouseenter", () => {
+
+        cursor.classList.add("active");
+        cursorRing.classList.add("active");
+
+    });
+
+    element.addEventListener("mouseleave", () => {
+
+        cursor.classList.remove("active");
+        cursorRing.classList.remove("active");
+
+    });
+
+});
+
+
+/* =====================================================
+   MAGNETIC ELEMENTS
+===================================================== */
+
+document.querySelectorAll(".magnetic")
+.forEach(element => {
+
+    element.addEventListener("mousemove", e => {
+
+        const rect =
+            element.getBoundingClientRect();
+
+        const x =
+            e.clientX - rect.left - rect.width / 2;
+
+        const y =
+            e.clientY - rect.top - rect.height / 2;
+
+        element.style.transform =
+            `translate(${x * .12}px, ${y * .12}px)`;
+
+    });
+
+    element.addEventListener("mouseleave", () => {
+
+        element.style.transform = "";
+
+    });
+
+});
+
+
+/* =====================================================
+   SCROLL REVEAL
+===================================================== */
+
+const observer =
+    new IntersectionObserver(
+        entries => {
+
+            entries.forEach(entry => {
+
+                if (entry.isIntersecting) {
+
+                    entry.target
+                        .classList
+                        .add("visible");
+
+                    observer.unobserve(
+                        entry.target
+                    );
+                }
+
+            });
+
+        },
+        {
+            threshold: .12
+        }
+    );
+
+
+document.querySelectorAll(".reveal")
+.forEach(element => {
+
+    observer.observe(element);
+
+});
+
+
+/* =====================================================
+   PROJECT PARALLAX
+===================================================== */
+
+document.querySelectorAll(".project")
+.forEach(project => {
+
+    project.addEventListener("mousemove", e => {
+
+        const rect =
+            project.getBoundingClientRect();
+
+        const x =
+            (e.clientX - rect.left) /
+            rect.width - .5;
+
+        const y =
+            (e.clientY - rect.top) /
+            rect.height - .5;
+
+        const visual =
+            project.querySelector(".project-visual");
+
+        visual.style.transform =
+            `perspective(900px)
+             rotateX(${y * -3}deg)
+             rotateY(${x * 3}deg)
+             scale(.985)`;
+
+    });
+
+    project.addEventListener("mouseleave", () => {
+
+        const visual =
+            project.querySelector(".project-visual");
+
+        visual.style.transform = "";
+
+    });
+
+});
+
+
+/* =====================================================
+   3D OBJECT MOUSE PARALLAX
+===================================================== */
+
+const orbit =
+    document.querySelector(".orbit");
+
+if (orbit) {
+
+    document.addEventListener("mousemove", e => {
+
+        if (window.innerWidth < 800) return;
+
+        const x =
+            (e.clientX / window.innerWidth - .5) * 20;
+
+        const y =
+            (e.clientY / window.innerHeight - .5) * 20;
+
+        orbit.style.transform =
+            `translate(${x}px, ${y}px)`;
+
+    });
+
+}
+
+
+/* =====================================================
+   ESCAPE HATCH
+===================================================== */
+
+window.addEventListener("load", () => {
+
+    setTimeout(() => {
+
+        document
+            .querySelectorAll(".reveal")
+            .forEach(element => {
+
+                if (
+                    element.getBoundingClientRect().top
+                    < window.innerHeight
+                ) {
+                    element.classList.add("visible");
+                }
+
+            });
+
+    }, 500);
+
+});
+
+</script>
 
 </body>
 </html>
