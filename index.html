@@ -6,10 +6,26 @@
 
     <title>Abdullah Cankı — Visual Communication Designer</title>
 
-    <meta name="description"
-          content="Abdullah Cankı — Görsel İletişim Tasarımı öğrencisi. Arhavi, Artvin.">
+    <!-- AC FAVICON -->
+    <link
+        rel="icon"
+        type="image/svg+xml"
+        href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%23101010'/%3E%3Ctext x='50' y='63' text-anchor='middle' font-family='Arial' font-weight='900' font-size='42' fill='%23f3efe4'%3EAC%3C/text%3E%3C/svg%3E"
+    >
+
+    <meta
+        name="description"
+        content="Abdullah Cankı — Görsel İletişim Tasarımı öğrencisi. Arhavi, Artvin."
+    >
+
+    <meta name="theme-color" content="#f3efe4">
 
     <style>
+
+        /* =========================
+           RESET
+        ========================= */
+
         * {
             margin: 0;
             padding: 0;
@@ -18,6 +34,7 @@
 
         :root {
             --cream: #f3efe4;
+            --paper: #e9e4d8;
             --black: #101010;
             --blue: #3157ff;
             --red: #ff4b3e;
@@ -36,6 +53,12 @@
             overflow-x: hidden;
         }
 
+        body,
+        a,
+        button {
+            cursor: crosshair;
+        }
+
         a {
             color: inherit;
             text-decoration: none;
@@ -46,63 +69,102 @@
             color: white;
         }
 
-        /* NAV */
+
+        /* =========================
+           NAVIGATION
+        ========================= */
 
         nav {
             position: fixed;
+            z-index: 999;
+
             top: 0;
             left: 0;
-            width: 100%;
-            height: 70px;
 
-            padding: 0 30px;
+            width: 100%;
+            height: 72px;
+
+            padding: 0 32px;
 
             display: flex;
             align-items: center;
             justify-content: space-between;
 
-            background: rgba(243,239,228,.86);
-            backdrop-filter: blur(15px);
+            background: rgba(243,239,228,.82);
+
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
 
             border-bottom: 1px solid var(--line);
-
-            z-index: 100;
         }
 
         .logo {
-            font-size: 22px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            width: 40px;
+            height: 40px;
+
+            border: 2px solid var(--black);
+            border-radius: 50%;
+
+            font-size: 13px;
             font-weight: 900;
-            letter-spacing: -3px;
+            letter-spacing: -2px;
+
+            transition:
+                background .3s ease,
+                color .3s ease,
+                transform .3s ease;
         }
 
         .logo span {
             color: var(--blue);
         }
 
+        .logo:hover {
+            background: var(--black);
+            color: var(--cream);
+            transform: rotate(-12deg);
+        }
+
         .nav-links {
             display: flex;
-            gap: 25px;
+            gap: 28px;
 
-            font-size: 11px;
+            font-family: monospace;
+            font-size: 10px;
             font-weight: 700;
+        }
+
+        .nav-links a {
+            transition: color .2s ease;
         }
 
         .nav-links a:hover {
             color: var(--blue);
         }
 
-        /* HERO */
+
+        /* =========================
+           HERO
+        ========================= */
 
         .hero {
+            position: relative;
+
             min-height: 100vh;
 
-            padding: 120px 30px 40px;
+            padding: 120px 32px 35px;
 
             display: flex;
             flex-direction: column;
             justify-content: space-between;
 
             border-bottom: 1px solid var(--line);
+
+            overflow: hidden;
         }
 
         .hero-top {
@@ -110,20 +172,25 @@
             justify-content: space-between;
 
             font-family: monospace;
-            font-size: 10px;
+            font-size: 9px;
 
             color: var(--gray);
         }
 
         .hero-title {
+            position: relative;
+            z-index: 2;
+
             margin-top: 70px;
 
             font-size: clamp(70px, 13vw, 190px);
 
             font-weight: 900;
-            line-height: .78;
+            line-height: .76;
 
-            letter-spacing: -10px;
+            letter-spacing: -11px;
+
+            text-transform: uppercase;
         }
 
         .hero-title .blue {
@@ -132,6 +199,7 @@
 
         .hero-title .outline {
             color: transparent;
+
             -webkit-text-stroke: 2px var(--black);
         }
 
@@ -140,17 +208,20 @@
         }
 
         .hero-bottom {
+            position: relative;
+            z-index: 4;
+
             display: flex;
             justify-content: space-between;
-            align-items: end;
+            align-items: flex-end;
 
-            margin-top: 70px;
+            margin-top: 80px;
         }
 
         .hero-description {
-            max-width: 360px;
+            max-width: 370px;
 
-            font-size: 14px;
+            font-size: 13px;
             line-height: 1.7;
 
             color: var(--gray);
@@ -158,120 +229,171 @@
 
         .scroll {
             font-family: monospace;
-            font-size: 11px;
+            font-size: 9px;
+
+            animation: blink 1.5s infinite;
         }
 
-        /* 3D OBJECT */
+        @keyframes blink {
+            0%,100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: .3;
+            }
+        }
+
+
+        /* =========================
+           3D CUBE
+        ========================= */
 
         .scene {
             position: absolute;
 
-            width: 300px;
-            height: 300px;
+            z-index: 1;
 
-            right: 10%;
+            width: 350px;
+            height: 350px;
+
+            right: 8%;
             top: 38%;
 
-            perspective: 800px;
+            perspective: 900px;
 
             pointer-events: none;
         }
 
         .cube {
-            width: 160px;
-            height: 160px;
-
             position: absolute;
 
-            left: 70px;
-            top: 70px;
+            width: 170px;
+            height: 170px;
+
+            left: 90px;
+            top: 90px;
 
             transform-style: preserve-3d;
 
-            animation: rotate 10s linear infinite;
+            animation: cubeRotate 12s linear infinite;
         }
 
         .face {
             position: absolute;
 
-            width: 160px;
-            height: 160px;
+            width: 170px;
+            height: 170px;
 
             border: 2px solid var(--black);
 
-            background: rgba(49,87,255,.75);
+            background: rgba(49,87,255,.12);
+
+            box-shadow:
+                inset 0 0 40px rgba(49,87,255,.12);
         }
 
         .front {
-            transform: translateZ(80px);
+            transform: translateZ(85px);
         }
 
         .back {
-            transform: rotateY(180deg) translateZ(80px);
+            transform: rotateY(180deg) translateZ(85px);
         }
 
         .right {
-            transform: rotateY(90deg) translateZ(80px);
+            transform: rotateY(90deg) translateZ(85px);
         }
 
         .left {
-            transform: rotateY(-90deg) translateZ(80px);
+            transform: rotateY(-90deg) translateZ(85px);
         }
 
         .top {
-            transform: rotateX(90deg) translateZ(80px);
+            transform: rotateX(90deg) translateZ(85px);
         }
 
         .bottom {
-            transform: rotateX(-90deg) translateZ(80px);
+            transform: rotateX(-90deg) translateZ(85px);
         }
 
-        @keyframes rotate {
-            from {
-                transform: rotateX(-18deg) rotateY(0deg);
+        @keyframes cubeRotate {
+
+            0% {
+                transform:
+                    rotateX(-20deg)
+                    rotateY(0deg)
+                    rotateZ(0deg);
             }
 
-            to {
-                transform: rotateX(342deg) rotateY(360deg);
+            50% {
+                transform:
+                    rotateX(25deg)
+                    rotateY(180deg)
+                    rotateZ(10deg);
+            }
+
+            100% {
+                transform:
+                    rotateX(-20deg)
+                    rotateY(360deg)
+                    rotateZ(0deg);
             }
         }
 
-        /* SECTION */
+
+        /* =========================
+           GENERAL SECTIONS
+        ========================= */
 
         section {
-            padding: 130px 30px;
+            padding: 140px 32px;
         }
 
         .label {
             font-family: monospace;
-            font-size: 10px;
+            font-size: 9px;
             color: var(--gray);
         }
 
-        /* STATEMENT */
+
+        /* =========================
+           STATEMENT
+        ========================= */
+
+        .statement {
+            min-height: 80vh;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
 
         .statement h2 {
-            max-width: 1100px;
+            max-width: 1150px;
 
             margin-top: 80px;
 
-            font-size: clamp(45px, 7vw, 105px);
+            font-size: clamp(48px, 7.5vw, 115px);
 
-            line-height: .9;
-            letter-spacing: -5px;
+            line-height: .86;
+            letter-spacing: -6px;
         }
 
         .statement h2 span {
             color: var(--blue);
         }
 
-        /* WORK */
+
+        /* =========================
+           WORK
+        ========================= */
 
         .work-header {
             display: flex;
             justify-content: space-between;
 
-            margin-bottom: 70px;
+            margin-bottom: 75px;
         }
 
         .projects {
@@ -279,11 +401,15 @@
 
             grid-template-columns: repeat(2, 1fr);
 
-            gap: 70px 25px;
+            gap: 80px 26px;
         }
 
         .project {
-            cursor: pointer;
+            transition: transform .4s ease;
+        }
+
+        .project:hover {
+            transform: translateY(-8px);
         }
 
         .project:nth-child(2) {
@@ -291,32 +417,40 @@
         }
 
         .project:nth-child(4) {
-            margin-top: 100px;
+            margin-top: 110px;
         }
 
         .visual {
-            aspect-ratio: 1 / .78;
-
             position: relative;
+
+            aspect-ratio: 1 / .78;
 
             overflow: hidden;
 
-            transition: transform .5s ease;
+            transition:
+                transform .5s ease,
+                filter .5s ease;
         }
 
         .project:hover .visual {
-            transform: scale(.98);
+            transform: scale(.985);
+            filter: contrast(1.08);
         }
 
-        .visual span {
+        .visual > span {
             position: absolute;
+
+            z-index: 3;
 
             top: 20px;
             left: 20px;
 
             font-family: monospace;
-            font-size: 10px;
+            font-size: 9px;
         }
+
+
+        /* PROJECT 01 */
 
         .v1 {
             background: #111;
@@ -327,18 +461,20 @@
             position: absolute;
 
             left: 5%;
-            top: 30%;
+            top: 32%;
 
-            font-size: clamp(70px, 12vw, 180px);
+            font-size: clamp(70px, 11vw, 170px);
 
-            letter-spacing: -12px;
+            letter-spacing: -13px;
+
+            font-weight: 900;
         }
 
         .v1 i {
             position: absolute;
 
-            width: 120px;
-            height: 120px;
+            width: 130px;
+            height: 130px;
 
             right: 8%;
             bottom: 10%;
@@ -346,7 +482,12 @@
             background: var(--red);
 
             border-radius: 50%;
+
+            box-shadow: 0 0 70px rgba(255,75,62,.35);
         }
+
+
+        /* PROJECT 02 */
 
         .v2 {
             background: var(--blue);
@@ -359,14 +500,20 @@
             left: 50%;
             top: 50%;
 
-            transform: translate(-50%, -50%) rotate(90deg);
+            transform:
+                translate(-50%, -50%)
+                rotate(90deg);
 
-            font-size: 130px;
+            font-size: 125px;
+
             letter-spacing: -12px;
         }
 
+
+        /* PROJECT 03 */
+
         .v3 {
-            background: #181818;
+            background: #151515;
         }
 
         .v3 i {
@@ -385,7 +532,25 @@
             box-shadow:
                 0 0 80px var(--blue),
                 inset 0 0 60px var(--blue);
+
+            animation: pulse 3s ease-in-out infinite;
         }
+
+        @keyframes pulse {
+
+            0%,100% {
+                transform: scale(.9);
+                opacity: .65;
+            }
+
+            50% {
+                transform: scale(1.05);
+                opacity: 1;
+            }
+        }
+
+
+        /* PROJECT 04 */
 
         .v4 {
             background: #d6d2c8;
@@ -399,17 +564,25 @@
 
             font-size: 100px;
 
-            font-weight: 900;
-
             color: var(--red);
 
             text-shadow:
                 25px 0 var(--blue),
                 50px 0 var(--black);
+
+            letter-spacing: -7px;
         }
 
+
+        /* PROJECT 05 */
+
         .v5 {
-            background: linear-gradient(135deg,#111 50%,#d8d4ca 50%);
+            background:
+                linear-gradient(
+                    135deg,
+                    #111 50%,
+                    #d8d4ca 50%
+                );
         }
 
         .v5 i {
@@ -431,8 +604,12 @@
                     #111 70%
                 );
 
-            box-shadow: 25px 30px 50px rgba(0,0,0,.4);
+            box-shadow:
+                25px 30px 50px rgba(0,0,0,.4);
         }
+
+
+        /* PROJECT 06 */
 
         .v6 {
             background: #e4e0d6;
@@ -453,35 +630,41 @@
             -webkit-text-stroke: 2px #111;
         }
 
+
+        /* PROJECT INFO */
+
         .project-info {
             display: flex;
             justify-content: space-between;
 
-            border-top: 1px solid var(--black);
-
             padding-top: 14px;
             margin-top: 14px;
+
+            border-top: 1px solid var(--black);
         }
 
         .project-info h3 {
-            font-size: 15px;
+            font-size: 14px;
         }
 
         .project-info p {
-            margin-top: 5px;
+            margin-top: 6px;
 
             font-family: monospace;
-            font-size: 9px;
+            font-size: 8px;
 
             color: var(--gray);
         }
 
-        .project-info span {
+        .project-info > span {
             font-family: monospace;
-            font-size: 9px;
+            font-size: 8px;
         }
 
-        /* ABOUT */
+
+        /* =========================
+           ABOUT
+        ========================= */
 
         .about {
             background: var(--black);
@@ -495,7 +678,7 @@
 
             font-size: clamp(50px, 8vw, 120px);
 
-            line-height: .85;
+            line-height: .84;
             letter-spacing: -6px;
         }
 
@@ -506,37 +689,48 @@
         .about-content {
             max-width: 650px;
 
-            margin-top: 80px;
+            margin-top: 85px;
 
-            font-size: 16px;
+            font-size: 15px;
             line-height: 1.8;
 
             color: #aaa;
         }
 
-        /* SKILLS */
+
+        /* =========================
+           SKILLS
+        ========================= */
 
         .skills {
-            margin-top: 80px;
+            margin-top: 90px;
         }
 
         .skill {
             display: grid;
+
             grid-template-columns: 50px 1fr 70px;
 
-            padding: 18px 0;
+            padding: 19px 0;
 
             border-top: 1px solid #333;
 
             font-family: monospace;
-            font-size: 10px;
+            font-size: 9px;
         }
 
         .skill:last-child {
             border-bottom: 1px solid #333;
         }
 
-        /* CONTACT */
+        .skill strong {
+            font-weight: 400;
+        }
+
+
+        /* =========================
+           CONTACT
+        ========================= */
 
         .contact {
             min-height: 90vh;
@@ -548,10 +742,12 @@
         .contact h2 {
             margin-top: 100px;
 
-            font-size: clamp(60px, 11vw, 170px);
+            max-width: 1200px;
 
-            line-height: .78;
-            letter-spacing: -9px;
+            font-size: clamp(60px, 11vw, 175px);
+
+            line-height: .76;
+            letter-spacing: -10px;
         }
 
         .contact h2 span {
@@ -561,54 +757,75 @@
         .email {
             width: max-content;
 
-            margin-top: 70px;
+            margin-top: 75px;
 
             font-size: clamp(22px, 4vw, 55px);
 
             border-bottom: 2px solid var(--black);
+
+            transition:
+                color .25s ease,
+                border-color .25s ease;
         }
 
         .email:hover {
             color: var(--blue);
+            border-color: var(--blue);
         }
 
         .socials {
             display: flex;
-            gap: 25px;
+            gap: 30px;
 
             margin-top: 35px;
 
             font-family: monospace;
-            font-size: 10px;
+            font-size: 9px;
         }
+
+        .socials a {
+            transition: color .2s ease;
+        }
+
+        .socials a:hover {
+            color: var(--blue);
+        }
+
+
+        /* =========================
+           FOOTER
+        ========================= */
 
         footer {
             margin-top: auto;
 
             padding-top: 20px;
 
-            border-top: 1px solid var(--line);
-
             display: flex;
             justify-content: space-between;
 
+            border-top: 1px solid var(--line);
+
             font-family: monospace;
-            font-size: 9px;
+            font-size: 8px;
 
             color: var(--gray);
         }
 
-        /* MOBILE */
 
-        @media (max-width: 800px) {
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media (max-width: 850px) {
 
             nav {
                 padding: 0 18px;
             }
 
             .nav-links {
-                gap: 12px;
-                font-size: 9px;
+                gap: 13px;
+                font-size: 8px;
             }
 
             .hero {
@@ -622,426 +839,731 @@
             }
 
             .scene {
-                opacity: .45;
+                right: -100px;
+                top: 42%;
 
-                right: -80px;
-                top: 40%;
+                opacity: .4;
+
+                transform: scale(.8);
             }
 
             .hero-bottom {
                 flex-direction: column;
-                align-items: start;
+                align-items: flex-start;
+
                 gap: 25px;
             }
 
             section {
-                padding: 90px 20px;
+                padding: 95px 20px;
+            }
+
+            .statement h2,
+            .about h2,
+            .contact h2 {
+                letter-spacing: -3px;
             }
 
             .projects {
                 display: block;
             }
 
-            .project {
-                margin: 0 0 70px !important;
+            .project,
+            .project:nth-child(2),
+            .project:nth-child(4) {
+                margin: 0 0 75px;
             }
 
-            .statement h2,
-            .about h2 {
-                letter-spacing: -3px;
+            .v1 strong {
+                font-size: 23vw;
+            }
+
+            .v2 strong {
+                font-size: 20vw;
+            }
+
+            .v4 strong {
+                font-size: 19vw;
+            }
+
+            .v6 strong {
+                font-size: 18vw;
+            }
+
+            .email {
+                font-size: 22px;
             }
 
             footer {
                 flex-direction: column;
                 gap: 10px;
             }
-
-            .email {
-                font-size: 23px;
-            }
         }
+
     </style>
 </head>
 
+
 <body>
 
-<nav>
-    <a href="#home" class="logo">A<span>C</span></a>
 
-    <div class="nav-links">
-        <a href="#work">WORK</a>
-        <a href="#about">ABOUT</a>
-        <a href="#contact">CONTACT</a>
-    </div>
-</nav>
+    <!-- =========================
+         NAVIGATION
+    ========================= -->
 
+    <nav>
 
-<!-- HERO -->
-
-<header class="hero" id="home">
-
-    <div class="hero-top">
-        <span>PORTFOLIO / 2026</span>
-        <span>ARHAVİ / ARTVİN / TÜRKİYE</span>
-    </div>
-
-    <div>
-
-        <div class="hero-title">
-            <div>ABDULLAH</div>
-            <div class="blue">CANKI</div>
-            <div class="outline">VISUAL</div>
-            <div class="red">DESIGN.</div>
-        </div>
-
-        <div class="scene">
-
-            <div class="cube">
-
-                <div class="face front"></div>
-                <div class="face back"></div>
-                <div class="face right"></div>
-                <div class="face left"></div>
-                <div class="face top"></div>
-                <div class="face bottom"></div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-    <div class="hero-bottom">
-
-        <p class="hero-description">
-            Merhaba, ben Abdullah Cankı.
-            Görsel İletişim Tasarımı öğrencisiyim.
-            Branding, tipografi, dijital tasarım,
-            motion ve 3D ile ilgileniyorum.
-        </p>
-
-        <div class="scroll">
-            SCROLL TO EXPLORE ↓
-        </div>
-
-    </div>
-
-</header>
-
-
-<!-- STATEMENT -->
-
-<section class="statement">
-
-    <div class="label">001 / STATEMENT</div>
-
-    <h2>
-        I DON'T JUST MAKE THINGS
-        <span>LOOK GOOD.</span>
-        I MAKE IDEAS
-        <span>VISIBLE.</span>
-    </h2>
-
-</section>
-
-
-<!-- WORK -->
-
-<section id="work">
-
-    <div class="work-header">
-
-        <div class="label">002 / SELECTED WORK</div>
-
-        <div class="label">06 PROJECTS</div>
-
-    </div>
-
-
-    <div class="projects">
-
-        <article class="project">
-
-            <div class="visual v1">
-
-                <span>01</span>
-
-                <strong>NØIR</strong>
-
-                <i></i>
-
-            </div>
-
-            <div class="project-info">
-
-                <div>
-                    <h3>NØIR</h3>
-                    <p>BRAND IDENTITY / ART DIRECTION</p>
-                </div>
-
-                <span>2026</span>
-
-            </div>
-
-        </article>
-
-
-        <article class="project">
-
-            <div class="visual v2">
-
-                <span>02</span>
-
-                <strong>TYPE</strong>
-
-            </div>
-
-            <div class="project-info">
-
-                <div>
-                    <h3>TYPE / 01</h3>
-                    <p>EXPERIMENTAL TYPOGRAPHY</p>
-                </div>
-
-                <span>2026</span>
-
-            </div>
-
-        </article>
-
-
-        <article class="project">
-
-            <div class="visual v3">
-
-                <span>03</span>
-
-                <i></i>
-
-            </div>
-
-            <div class="project-info">
-
-                <div>
-                    <h3>DIGITAL VOID</h3>
-                    <p>INTERACTIVE DESIGN</p>
-                </div>
-
-                <span>2026</span>
-
-            </div>
-
-        </article>
-
-
-        <article class="project">
-
-            <div class="visual v4">
-
-                <span>04</span>
-
-                <strong>MOTION</strong>
-
-            </div>
-
-            <div class="project-info">
-
-                <div>
-                    <h3>MOTION TYPE</h3>
-                    <p>KINETIC TYPOGRAPHY</p>
-                </div>
-
-                <span>2026</span>
-
-            </div>
-
-        </article>
-
-
-        <article class="project">
-
-            <div class="visual v5">
-
-                <span>05</span>
-
-                <i></i>
-
-            </div>
-
-            <div class="project-info">
-
-                <div>
-                    <h3>OBJECT / 03</h3>
-                    <p>3D / ART DIRECTION</p>
-                </div>
-
-                <span>2026</span>
-
-            </div>
-
-        </article>
-
-
-        <article class="project">
-
-            <div class="visual v6">
-
-                <span>06</span>
-
-                <strong>AFTER</strong>
-
-            </div>
-
-            <div class="project-info">
-
-                <div>
-                    <h3>AFTERIMAGE</h3>
-                    <p>EXPERIMENTAL POSTER</p>
-                </div>
-
-                <span>2026</span>
-
-            </div>
-
-        </article>
-
-    </div>
-
-</section>
-
-
-<!-- ABOUT -->
-
-<section class="about" id="about">
-
-    <div class="label">003 / ABOUT</div>
-
-    <h2>
-        DESIGN IS A WAY
-        OF MAKING
-        <span>THOUGHT VISIBLE.</span>
-    </h2>
-
-    <div class="about-content">
-
-        <p>
-            Merhaba, ben Abdullah Cankı.
-            Görsel İletişim Tasarımı öğrencisiyim.
-        </p>
-
-        <br>
-
-        <p>
-            Tasarım benim için yalnızca estetik
-            bir sonuç değil; fikir, iletişim ve
-            deneyimin bir araya geldiği bir sistem.
-        </p>
-
-        <br>
-
-        <p>
-            Branding, typography, poster,
-            digital design, motion ve 3D
-            alanlarında kendimi geliştiriyorum.
-        </p>
-
-    </div>
-
-
-    <div class="skills">
-
-        <div class="skill">
-            <span>01</span>
-            <strong>BRAND IDENTITY</strong>
-            <span>90%</span>
-        </div>
-
-        <div class="skill">
-            <span>02</span>
-            <strong>TYPOGRAPHY</strong>
-            <span>92%</span>
-        </div>
-
-        <div class="skill">
-            <span>03</span>
-            <strong>ART DIRECTION</strong>
-            <span>87%</span>
-        </div>
-
-        <div class="skill">
-            <span>04</span>
-            <strong>DIGITAL DESIGN</strong>
-            <span>85%</span>
-        </div>
-
-        <div class="skill">
-            <span>05</span>
-            <strong>MOTION</strong>
-            <span>80%</span>
-        </div>
-
-        <div class="skill">
-            <span>06</span>
-            <strong>3D / CREATIVE CODE</strong>
-            <span>78%</span>
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- CONTACT -->
-
-<section class="contact" id="contact">
-
-    <div class="label">004 / CONTACT</div>
-
-    <h2>
-        LET'S MAKE
-        SOMETHING
-        <span>VISIBLE.</span>
-    </h2>
-
-    <a
-        class="email"
-        href="mailto:abdullah198579@outlook.com"
-    >
-        abdullah198579@outlook.com ↗
-    </a>
-
-    <div class="socials">
-
-        <a
-            href="https://www.instagram.com/abdullahcank1/"
-            target="_blank"
-            rel="noopener"
-        >
-            INSTAGRAM ↗
+        <a href="#home" class="logo">
+            A<span>C</span>
         </a>
 
+        <div class="nav-links">
+
+            <a href="#work">WORK</a>
+
+            <a href="#about">ABOUT</a>
+
+            <a href="#contact">CONTACT</a>
+
+        </div>
+
+    </nav>
+
+
+    <!-- =========================
+         HERO
+    ========================= -->
+
+    <header class="hero" id="home">
+
+        <div class="hero-top">
+
+            <span>
+                PORTFOLIO / 2026
+            </span>
+
+            <span>
+                ARHAVİ / ARTVİN / TÜRKİYE
+            </span>
+
+        </div>
+
+
+        <div>
+
+            <div class="hero-title">
+
+                <div>
+                    ABDULLAH
+                </div>
+
+                <div class="blue">
+                    CANKI
+                </div>
+
+                <div class="outline">
+                    VISUAL
+                </div>
+
+                <div class="red">
+                    DESIGN.
+                </div>
+
+            </div>
+
+
+            <!-- 3D OBJECT -->
+
+            <div class="scene">
+
+                <div class="cube">
+
+                    <div class="face front"></div>
+
+                    <div class="face back"></div>
+
+                    <div class="face right"></div>
+
+                    <div class="face left"></div>
+
+                    <div class="face top"></div>
+
+                    <div class="face bottom"></div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="hero-bottom">
+
+            <p class="hero-description">
+
+                Merhaba, ben Abdullah Cankı.
+
+                Görsel İletişim Tasarımı öğrencisiyim.
+
+                Branding, tipografi, dijital tasarım,
+                motion ve 3D ile ilgileniyorum.
+
+            </p>
+
+
+            <div class="scroll">
+
+                SCROLL TO EXPLORE ↓
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- =========================
+         STATEMENT
+    ========================= -->
+
+    <section class="statement">
+
+        <div class="label">
+            001 / STATEMENT
+        </div>
+
+
+        <h2>
+
+            I DON'T JUST MAKE THINGS
+
+            <span>LOOK GOOD.</span>
+
+            I MAKE IDEAS
+
+            <span>VISIBLE.</span>
+
+        </h2>
+
+    </section>
+
+
+    <!-- =========================
+         WORK
+    ========================= -->
+
+    <section id="work">
+
+        <div class="work-header">
+
+            <div class="label">
+                002 / SELECTED WORK
+            </div>
+
+            <div class="label">
+                06 PROJECTS
+            </div>
+
+        </div>
+
+
+        <div class="projects">
+
+
+            <!-- PROJECT 01 -->
+
+            <article class="project">
+
+                <div class="visual v1">
+
+                    <span>
+                        01
+                    </span>
+
+                    <strong>
+                        NØIR
+                    </strong>
+
+                    <i></i>
+
+                </div>
+
+
+                <div class="project-info">
+
+                    <div>
+
+                        <h3>
+                            NØIR
+                        </h3>
+
+                        <p>
+                            BRAND IDENTITY / ART DIRECTION
+                        </p>
+
+                    </div>
+
+                    <span>
+                        2026
+                    </span>
+
+                </div>
+
+            </article>
+
+
+            <!-- PROJECT 02 -->
+
+            <article class="project">
+
+                <div class="visual v2">
+
+                    <span>
+                        02
+                    </span>
+
+                    <strong>
+                        TYPE
+                    </strong>
+
+                </div>
+
+
+                <div class="project-info">
+
+                    <div>
+
+                        <h3>
+                            TYPE / 01
+                        </h3>
+
+                        <p>
+                            EXPERIMENTAL TYPOGRAPHY
+                        </p>
+
+                    </div>
+
+                    <span>
+                        2026
+                    </span>
+
+                </div>
+
+            </article>
+
+
+            <!-- PROJECT 03 -->
+
+            <article class="project">
+
+                <div class="visual v3">
+
+                    <span>
+                        03
+                    </span>
+
+                    <i></i>
+
+                </div>
+
+
+                <div class="project-info">
+
+                    <div>
+
+                        <h3>
+                            DIGITAL VOID
+                        </h3>
+
+                        <p>
+                            INTERACTIVE DESIGN
+                        </p>
+
+                    </div>
+
+                    <span>
+                        2026
+                    </span>
+
+                </div>
+
+            </article>
+
+
+            <!-- PROJECT 04 -->
+
+            <article class="project">
+
+                <div class="visual v4">
+
+                    <span>
+                        04
+                    </span>
+
+                    <strong>
+                        MOTION
+                    </strong>
+
+                </div>
+
+
+                <div class="project-info">
+
+                    <div>
+
+                        <h3>
+                            MOTION TYPE
+                        </h3>
+
+                        <p>
+                            KINETIC TYPOGRAPHY
+                        </p>
+
+                    </div>
+
+                    <span>
+                        2026
+                    </span>
+
+                </div>
+
+            </article>
+
+
+            <!-- PROJECT 05 -->
+
+            <article class="project">
+
+                <div class="visual v5">
+
+                    <span>
+                        05
+                    </span>
+
+                    <i></i>
+
+                </div>
+
+
+                <div class="project-info">
+
+                    <div>
+
+                        <h3>
+                            OBJECT / 03
+                        </h3>
+
+                        <p>
+                            3D / ART DIRECTION
+                        </p>
+
+                    </div>
+
+                    <span>
+                        2026
+                    </span>
+
+                </div>
+
+            </article>
+
+
+            <!-- PROJECT 06 -->
+
+            <article class="project">
+
+                <div class="visual v6">
+
+                    <span>
+                        06
+                    </span>
+
+                    <strong>
+                        AFTER
+                    </strong>
+
+                </div>
+
+
+                <div class="project-info">
+
+                    <div>
+
+                        <h3>
+                            AFTERIMAGE
+                        </h3>
+
+                        <p>
+                            EXPERIMENTAL POSTER
+                        </p>
+
+                    </div>
+
+                    <span>
+                        2026
+                    </span>
+
+                </div>
+
+            </article>
+
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         ABOUT
+    ========================= -->
+
+    <section class="about" id="about">
+
+        <div class="label">
+            003 / ABOUT
+        </div>
+
+
+        <h2>
+
+            DESIGN IS A WAY
+
+            OF MAKING
+
+            <span>
+                THOUGHT VISIBLE.
+            </span>
+
+        </h2>
+
+
+        <div class="about-content">
+
+            <p>
+
+                Merhaba, ben Abdullah Cankı.
+
+                Görsel İletişim Tasarımı öğrencisiyim.
+
+            </p>
+
+
+            <br>
+
+
+            <p>
+
+                Tasarım benim için yalnızca estetik
+                bir sonuç değil; fikir, iletişim ve
+                deneyimin bir araya geldiği bir sistem.
+
+            </p>
+
+
+            <br>
+
+
+            <p>
+
+                Branding, typography, poster,
+                digital design, motion ve 3D
+                alanlarında kendimi geliştiriyorum.
+
+            </p>
+
+        </div>
+
+
+        <div class="skills">
+
+
+            <div class="skill">
+
+                <span>
+                    01
+                </span>
+
+                <strong>
+                    BRAND IDENTITY
+                </strong>
+
+                <span>
+                    90%
+                </span>
+
+            </div>
+
+
+            <div class="skill">
+
+                <span>
+                    02
+                </span>
+
+                <strong>
+                    TYPOGRAPHY
+                </strong>
+
+                <span>
+                    92%
+                </span>
+
+            </div>
+
+
+            <div class="skill">
+
+                <span>
+                    03
+                </span>
+
+                <strong>
+                    ART DIRECTION
+                </strong>
+
+                <span>
+                    87%
+                </span>
+
+            </div>
+
+
+            <div class="skill">
+
+                <span>
+                    04
+                </span>
+
+                <strong>
+                    DIGITAL DESIGN
+                </strong>
+
+                <span>
+                    85%
+                </span>
+
+            </div>
+
+
+            <div class="skill">
+
+                <span>
+                    05
+                </span>
+
+                <strong>
+                    MOTION
+                </strong>
+
+                <span>
+                    80%
+                </span>
+
+            </div>
+
+
+            <div class="skill">
+
+                <span>
+                    06
+                </span>
+
+                <strong>
+                    3D / CREATIVE CODE
+                </strong>
+
+                <span>
+                    78%
+                </span>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         CONTACT
+    ========================= -->
+
+    <section class="contact" id="contact">
+
+        <div class="label">
+            004 / CONTACT
+        </div>
+
+
+        <h2>
+
+            LET'S MAKE
+
+            SOMETHING
+
+            <span>
+                VISIBLE.
+            </span>
+
+        </h2>
+
+
         <a
-            href="https://tr.linkedin.com/in/abdullah-cank%C4%B1-6952b2324"
-            target="_blank"
-            rel="noopener"
+            class="email"
+            href="mailto:abdullah198579@outlook.com"
         >
-            LINKEDIN ↗
+
+            abdullah198579@outlook.com ↗
+
         </a>
 
-    </div>
+
+        <div class="socials">
 
 
-    <footer>
+            <a
+                href="https://www.instagram.com/abdullahcank1/"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
 
-        <span>© 2026 ABDULLAH CANKI</span>
+                INSTAGRAM ↗
 
-        <span>AC / VISUAL COMMUNICATION DESIGN</span>
+            </a>
 
-        <span>ARHAVİ / ARTVİN / TÜRKİYE</span>
 
-    </footer>
+            <a
+                href="https://tr.linkedin.com/in/abdullah-cank%C4%B1-6952b2324"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
 
-</section>
+                LINKEDIN ↗
+
+            </a>
+
+
+        </div>
+
+
+        <footer>
+
+            <span>
+                © 2026 ABDULLAH CANKI
+            </span>
+
+            <span>
+                AC / VISUAL COMMUNICATION DESIGN
+            </span>
+
+            <span>
+                ARHAVİ / ARTVİN / TÜRKİYE
+            </span>
+
+        </footer>
+
+    </section>
+
 
 </body>
 </html>
