@@ -1,348 +1,504 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Abdullah Cankı | Portfolyo & Görsel İletişim Tasarımı</title>
-  
-  <!-- Fontlar -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-  
-  <style>
-    :root {
-      --bg: #090a0f;
-      --card-bg: #12141c;
-      --card-hover: #181b26;
-      --accent: #3b82f6;
-      --accent-glow: rgba(59, 130, 246, 0.25);
-      --text: #f8fafc;
-      --text-muted: #94a3b8;
-      --border: rgba(255, 255, 255, 0.08);
-      --border-hover: rgba(59, 130, 246, 0.4);
-    }
-    
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    
-    body {
-      background-color: var(--bg);
-      color: var(--text);
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      line-height: 1.6;
-      overflow-x: hidden;
-      -webkit-font-smoothing: antialiased;
-    }
-    
-    .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
-    
-    /* Header */
-    header {
-      padding: 24px 0;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 1px solid var(--border);
-    }
-    .logo {
-      font-weight: 800;
-      font-size: 1.25rem;
-      letter-spacing: -0.5px;
-      color: #fff;
-      text-decoration: none;
-    }
-    .logo span { color: var(--accent); }
-    
-    nav a {
-      color: var(--text-muted);
-      text-decoration: none;
-      margin-left: 20px;
-      font-size: 0.95rem;
-      font-weight: 500;
-      transition: color 0.2s;
-    }
-    nav a:hover { color: #fff; }
-    
-    /* Hero */
-    .hero {
-      padding: 90px 0 60px;
-    }
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 6px 14px;
-      background: var(--accent-glow);
-      color: #60a5fa;
-      border: 1px solid rgba(59, 130, 246, 0.3);
-      border-radius: 99px;
-      font-size: 0.85rem;
-      font-weight: 600;
-      margin-bottom: 24px;
-    }
-    .hero h1 {
-      font-size: clamp(2.4rem, 5vw, 4rem);
-      font-weight: 800;
-      line-height: 1.15;
-      letter-spacing: -1px;
-      margin-bottom: 20px;
-      max-width: 850px;
-    }
-    .hero p {
-      font-size: 1.15rem;
-      color: var(--text-muted);
-      max-width: 620px;
-      line-height: 1.7;
-      margin-bottom: 32px;
-    }
-    .hero-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 16px;
-      align-items: center;
-    }
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 12px 26px;
-      border-radius: 10px;
-      font-weight: 600;
-      text-decoration: none;
-      transition: all 0.2s ease;
-      font-size: 0.95rem;
-    }
-    .btn-primary {
-      background: var(--accent);
-      color: #fff;
-      box-shadow: 0 4px 14px var(--accent-glow);
-    }
-    .btn-primary:hover {
-      background: #2563eb;
-      transform: translateY(-2px);
-    }
-    .btn-secondary {
-      background: var(--card-bg);
-      color: var(--text);
-      border: 1px solid var(--border);
-    }
-    .btn-secondary:hover {
-      border-color: var(--border-hover);
-      transform: translateY(-2px);
-    }
-
-    /* Skills / Etiketler */
-    .skills {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin: 40px 0 70px;
-      padding: 20px 0;
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-    }
-    .skill-tag {
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid var(--border);
-      padding: 6px 14px;
-      border-radius: 8px;
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      font-weight: 500;
-    }
-
-    /* Projeler */
-    .section-title {
-      font-size: 1.8rem;
-      font-weight: 700;
-      letter-spacing: -0.5px;
-      margin-bottom: 32px;
-    }
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 24px;
-      margin-bottom: 90px;
-    }
-    .card {
-      background: var(--card-bg);
-      border-radius: 16px;
-      overflow: hidden;
-      border: 1px solid var(--border);
-      transition: transform 0.25s ease, border-color 0.25s ease;
-    }
-    .card:hover {
-      transform: translateY(-6px);
-      border-color: var(--border-hover);
-    }
-    .card-img {
-      width: 100%;
-      height: 230px;
-      background: #1e2230;
-      object-fit: cover;
-      display: block;
-    }
-    .card-body { padding: 24px; }
-    .card-tag {
-      font-size: 0.75rem;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      color: var(--accent);
-      font-weight: 700;
-      margin-bottom: 8px;
-    }
-    .card-title {
-      font-size: 1.25rem;
-      font-weight: 700;
-      margin-bottom: 8px;
-    }
-    .card-desc {
-      font-size: 0.95rem;
-      color: var(--text-muted);
-      line-height: 1.5;
-    }
-
-    /* Footer & İletişim */
-    footer {
-      padding: 70px 0 40px;
-      border-top: 1px solid var(--border);
-      text-align: center;
-    }
-    footer h2 {
-      font-size: 2rem;
-      font-weight: 700;
-      margin-bottom: 12px;
-    }
-    footer p {
-      color: var(--text-muted);
-      max-width: 500px;
-      margin: 0 auto 28px;
-    }
-    .social-links {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 14px;
-      margin-top: 24px;
-    }
-    .social-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 10px 20px;
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      color: var(--text);
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 0.9rem;
-      transition: all 0.2s ease;
-    }
-    .social-badge:hover {
-      border-color: var(--accent);
-      background: var(--card-hover);
-      color: #60a5fa;
-      transform: translateY(-2px);
-    }
-    .copy {
-      font-size: 0.85rem;
-      color: #64748b;
-      margin-top: 50px;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Abdullah Cankı — Visual Communication & Design</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+--bg: #faf9f6;
+--surface: #ffffff;
+--text-main: #141416;
+--text-muted: #6e7178;
+--text-soft: #9aa0a6;
+--border: #e6e5e1;
+--border-hover: #141416;
+--accent: #2563eb;
+--tag-bg: #f2f1ed;
+}
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
+body {
+background-color: var(--bg);
+color: var(--text-main);
+font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+line-height: 1.6;
+-webkit-font-smoothing: antialiased;
+overflow-x: hidden;
+}
+.container {
+max-width: 1180px;
+margin: 0 auto;
+padding: 0 32px;
+}
+/* Header */
+header {
+padding: 36px 0;
+display: flex;
+justify-content: space-between;
+align-items: center;
+border-bottom: 1px solid var(--border);
+}
+.brand {
+font-family: 'Space Grotesk', sans-serif;
+font-weight: 700;
+font-size: 1.15rem;
+letter-spacing: -0.5px;
+text-decoration: none;
+color: var(--text-main);
+display: inline-flex;
+align-items: center;
+gap: 8px;
+}
+.brand-dot {
+width: 7px;
+height: 7px;
+background: var(--text-main);
+border-radius: 50%;
+}
+nav {
+display: flex;
+align-items: center;
+gap: 28px;
+}
+nav a {
+color: var(--text-muted);
+text-decoration: none;
+font-size: 0.9rem;
+font-weight: 500;
+transition: color 0.2s ease;
+}
+nav a:hover {
+color: var(--text-main);
+}
+/* Hero */
+.hero {
+padding: 100px 0 80px;
+max-width: 900px;
+}
+.hero-meta {
+display: inline-flex;
+align-items: center;
+gap: 10px;
+font-family: 'Space Grotesk', sans-serif;
+font-size: 0.85rem;
+font-weight: 600;
+text-transform: uppercase;
+letter-spacing: 1.2px;
+color: var(--text-muted);
+margin-bottom: 24px;
+}
+.live-status {
+display: inline-block;
+width: 8px;
+height: 8px;
+border-radius: 50%;
+background: #16a34a;
+box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.15);
+}
+.hero h1 {
+font-family: 'Space Grotesk', sans-serif;
+font-size: clamp(2.4rem, 5.2vw, 4.2rem);
+font-weight: 700;
+letter-spacing: -1.8px;
+line-height: 1.12;
+margin-bottom: 28px;
+color: var(--text-main);
+}
+.hero p {
+font-size: clamp(1.1rem, 2vw, 1.28rem);
+color: var(--text-muted);
+font-weight: 400;
+line-height: 1.65;
+max-width: 720px;
+margin-bottom: 40px;
+}
+.hero-actions {
+display: flex;
+align-items: center;
+gap: 14px;
+flex-wrap: wrap;
+}
+.btn {
+display: inline-flex;
+align-items: center;
+gap: 8px;
+padding: 13px 26px;
+border-radius: 99px;
+font-size: 0.92rem;
+font-weight: 600;
+text-decoration: none;
+transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+cursor: pointer;
+}
+.btn-solid {
+background: var(--text-main);
+color: #ffffff;
+border: 1px solid var(--text-main);
+}
+.btn-solid:hover {
+background: #2b2e35;
+transform: translateY(-2px);
+box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+.btn-outline {
+background: transparent;
+color: var(--text-main);
+border: 1px solid var(--border);
+}
+.btn-outline:hover {
+border-color: var(--text-main);
+transform: translateY(-2px);
+}
+/* Skills Row */
+.skills-row {
+padding: 30px 0 60px;
+border-bottom: 1px solid var(--border);
+display: flex;
+flex-wrap: wrap;
+gap: 10px;
+}
+.skill-chip {
+background: var(--tag-bg);
+color: var(--text-main);
+padding: 8px 16px;
+border-radius: 99px;
+font-size: 0.85rem;
+font-weight: 500;
+letter-spacing: -0.2px;
+}
+/* Work Section */
+.works {
+padding: 80px 0 100px;
+}
+.section-head {
+display: flex;
+justify-content: space-between;
+align-items: baseline;
+margin-bottom: 44px;
+}
+.section-head h2 {
+font-family: 'Space Grotesk', sans-serif;
+font-size: 2rem;
+font-weight: 700;
+letter-spacing: -0.8px;
+}
+.section-head span {
+font-size: 0.9rem;
+color: var(--text-soft);
+font-family: 'Space Grotesk', sans-serif;
+}
+.grid {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
+gap: 36px 28px;
+}
+.card {
+background: var(--surface);
+border: 1px solid var(--border);
+border-radius: 14px;
+overflow: hidden;
+display: flex;
+flex-direction: column;
+text-decoration: none;
+color: inherit;
+transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease, border-color 0.2s ease;
+}
+.card:hover {
+transform: translateY(-6px);
+box-shadow: 0 16px 36px rgba(0, 0, 0, 0.05);
+border-color: #d1d0cb;
+}
+.card-media {
+position: relative;
+width: 100%;
+height: 260px;
+background: #eeedea;
+overflow: hidden;
+}
+.card-media img {
+width: 100%;
+height: 100%;
+object-fit: cover;
+transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.card:hover .card-media img {
+transform: scale(1.04);
+}
+.card-body {
+padding: 24px;
+display: flex;
+flex-direction: column;
+flex-grow: 1;
+}
+.card-category {
+font-size: 0.75rem;
+text-transform: uppercase;
+letter-spacing: 1px;
+font-weight: 600;
+color: var(--text-soft);
+margin-bottom: 8px;
+}
+.card-title {
+font-family: 'Space Grotesk', sans-serif;
+font-size: 1.35rem;
+font-weight: 700;
+letter-spacing: -0.4px;
+margin-bottom: 10px;
+line-height: 1.3;
+}
+.card-desc {
+font-size: 0.95rem;
+color: var(--text-muted);
+line-height: 1.6;
+margin-bottom: 18px;
+flex-grow: 1;
+}
+.card-tools {
+display: flex;
+flex-wrap: wrap;
+gap: 6px;
+}
+.card-tools span {
+font-size: 0.75rem;
+background: #f4f3ef;
+color: var(--text-muted);
+padding: 3px 9px;
+border-radius: 6px;
+font-weight: 500;
+}
+/* About Minimal Strip */
+.about-strip {
+padding: 70px 0;
+border-top: 1px solid var(--border);
+border-bottom: 1px solid var(--border);
+display: grid;
+grid-template-columns: 260px 1fr;
+gap: 40px;
+}
+.about-label {
+font-family: 'Space Grotesk', sans-serif;
+font-size: 1.1rem;
+font-weight: 700;
+letter-spacing: -0.3px;
+}
+.about-content p {
+font-size: 1.1rem;
+color: var(--text-muted);
+line-height: 1.7;
+margin-bottom: 16px;
+}
+.about-content p strong {
+color: var(--text-main);
+font-weight: 600;
+}
+/* Footer */
+footer {
+padding: 100px 0 60px;
+}
+.footer-inner {
+display: flex;
+flex-direction: column;
+align-items: center;
+text-align: center;
+}
+.footer-title {
+font-family: 'Space Grotesk', sans-serif;
+font-size: clamp(2rem, 4.5vw, 3.2rem);
+font-weight: 700;
+letter-spacing: -1.2px;
+margin-bottom: 16px;
+}
+.footer-desc {
+font-size: 1.1rem;
+color: var(--text-muted);
+max-width: 500px;
+margin-bottom: 32px;
+}
+.contact-links {
+display: flex;
+gap: 14px;
+flex-wrap: wrap;
+justify-content: center;
+margin-bottom: 60px;
+}
+.social-btn {
+display: inline-flex;
+align-items: center;
+gap: 8px;
+padding: 12px 22px;
+background: var(--surface);
+border: 1px solid var(--border);
+border-radius: 99px;
+color: var(--text-main);
+text-decoration: none;
+font-weight: 600;
+font-size: 0.9rem;
+transition: all 0.2s ease;
+}
+.social-btn:hover {
+border-color: var(--text-main);
+transform: translateY(-2px);
+}
+.footer-bottom {
+width: 100%;
+border-top: 1px solid var(--border);
+padding-top: 30px;
+display: flex;
+justify-content: space-between;
+align-items: center;
+font-size: 0.85rem;
+color: var(--text-soft);
+flex-wrap: wrap;
+gap: 12px;
+}
+@media (max-width: 768px) {
+.container { padding: 0 20px; }
+.hero { padding: 60px 0 40px; }
+.about-strip { grid-template-columns: 1fr; gap: 16px; padding: 50px 0; }
+.footer-bottom { flex-direction: column; text-align: center; }
+}
+</style>
 </head>
 <body>
-
-  <div class="container">
-    <!-- Header -->
-    <header>
-      <a href="#" class="logo">Abdullah Cankı<span>.</span></a>
-      <nav>
-        <a href="#projeler">Çalışmalar</a>
-        <a href="#iletisim">İletişim</a>
-      </nav>
-    </header>
-
-    <!-- Hero Bölümü -->
-    <section class="hero">
-      <div class="badge">Visual Communication & Design</div>
-      <h1>Görsel hikayeler, güçlü kimlikler ve yaratıcı dijital deneyimler.</h1>
-      <p>Marka kimliği, 3D görselleştirme, kurgu ve hareketli grafik odaklı seçilmiş portfolyo çalışmalarım.</p>
-      
-      <div class="hero-actions">
-        <a href="#projeler" class="btn btn-primary">İşleri İncele</a>
-        <a href="https://www.linkedin.com/in/abdullah-cank%C4%B1-6952b2324/" target="_blank" class="btn btn-secondary">LinkedIn Profilim</a>
-      </div>
-    </section>
-
-    <!-- Uzmanlık / Yetenekler -->
-    <div class="skills">
-      <span class="skill-tag">Görsel İletişim Tasarımı</span>
-      <span class="skill-tag">Kurumsal Kimlik</span>
-      <span class="skill-tag">3D Modelleme & Render</span>
-      <span class="skill-tag">Video Kurgu & Post-Prodüksiyon</span>
-      <span class="skill-tag">Tipografi & Afiş Tasarımı</span>
-    </div>
-
-    <!-- Projeler -->
-    <section id="projeler">
-      <h2 class="section-title">Seçilmiş Çalışmalar</h2>
-      <div class="grid">
-        
-        <!-- Kart 1 -->
-        <div class="card">
-          <img class="card-img" src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&auto=format&fit=crop&q=80" alt="Kurumsal Kimlik">
-          <div class="card-body">
-            <div class="card-tag">Marka Kimliği</div>
-            <div class="card-title">Kapsamlı Marka & Logo Tasarımı</div>
-            <div class="card-desc">Tipografi, kurumsal renk dili ve 360 derece marka kimliği rehberi uygulaması.</div>
-          </div>
-        </div>
-
-        <!-- Kart 2 -->
-        <div class="card">
-          <img class="card-img" src="https://images.unsplash.com/photo-1634017839464-5c339ebe3cb4?w=800&auto=format&fit=crop&q=80" alt="3D Modelleme">
-          <div class="card-body">
-            <div class="card-tag">3D Modelleme / Render</div>
-            <div class="card-title">Prosedürel Görselleştirme & Sahne</div>
-            <div class="card-desc">Blender üzerinde geliştirilen düşük poligonlu yapılar ve atmosferik aydınlatma sahneleri.</div>
-          </div>
-        </div>
-
-        <!-- Kart 3 -->
-        <div class="card">
-          <img class="card-img" src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=800&auto=format&fit=crop&q=80" alt="Video & Kurgu">
-          <div class="card-body">
-            <div class="card-tag">Video & Kurgu</div>
-            <div class="card-title">Kısa Film & Stop-Motion Projesi</div>
-            <div class="card-desc">Senaryo, storyboard, kadraj planlaması ve profesyonel post-prodüksiyon kurgu süreci.</div>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- İletişim / Footer -->
-    <footer id="iletisim">
-      <h2>Birlikte bir şeyler üretelim</h2>
-      <p>Yeni projeler, freelance iş birlikleri veya profesyonel iletişim için bana dilediğin platformdan ulaşabilirsin.</p>
-      
-      <div class="social-links">
-        <a href="https://www.linkedin.com/in/abdullah-cank%C4%B1-6952b2324/" target="_blank" class="social-badge">
-          LinkedIn
-        </a>
-        <a href="https://instagram.com" target="_blank" class="social-badge">
-          Instagram
-        </a>
-        <a href="mailto:abdullah198579@outlook.com" class="social-badge">
-          E-Posta Gönder
-        </a>
-      </div>
-
-      <p class="copy">© 2026 Abdullah Cankı. Tüm Hakları Saklıdır.</p>
-    </footer>
-  </div>
-
+<div class="container">
+<!-- Header -->
+<header>
+<a href="#" class="brand">
+<span class="brand-dot"></span>
+ABDULLAH CANKI
+</a>
+<nav>
+<a href="#projeler">Projeler</a>
+<a href="#hakkimda">Hakkında</a>
+<a href="#iletisim">İletişim</a>
+</nav>
+</header>
+<!-- Hero Bölümü -->
+<section class="hero">
+<div class="hero-meta">
+<span class="live-status"></span>
+Görsel İletişim Tasarımı & Dijital Sanat
+</div>
+<h1>Fikirleri estetik, dengeli ve vurucu görsel dünyalara dönüştürüyorum.</h1>
+<p>
+Marka kimliği sistemleri, tipografi, 3D modelleme & render sahneleri ve hareketli görsel anlatımlar üzerine odaklanan yaratıcı tasarımcı.
+</p>
+<div class="hero-actions">
+<a href="#projeler" class="btn btn-solid">Çalışmaları Gör</a>
+<a href="https://www.linkedin.com/in/abdullah-cank%C4%B1-6952b2324/" target="_blank" class="btn btn-outline">
+LinkedIn Profilim ↗️
+</a>
+</div>
+</section>
+<!-- Yetenekler / Alanlar -->
+<div class="skills-row">
+<span class="skill-chip">Görsel İletişim Tasarımı</span>
+<span class="skill-chip">Kurumsal & Marka Kimliği</span>
+<span class="skill-chip">3D Modelleme (Blender)</span>
+<span class="skill-chip">Tipografi & Afiş Düzeni</span>
+<span class="skill-chip">Video Kurgu & Renk Düzenleme</span>
+<span class="skill-chip">Stop-Motion Animasyon</span>
+</div>
+<!-- Projeler -->
+<section id="projeler" class="works">
+<div class="section-head">
+<h2>Seçilmiş Projeler</h2>
+<span>[ 01 — 03 ]</span>
+</div>
+<div class="grid">
+<!-- Proje 1 -->
+<article class="card">
+<div class="card-media">
+<img src="https://images.unsplash.com/photo-1600132806370-bf17e65e942f?w=900&auto=format&fit=crop&q=80" alt="Cankixcreative Stüdyo Kimliği">
+</div>
+<div class="card-body">
+<span class="card-category">Marka Kimliği</span>
+<h3 class="card-title">Cankixcreative Studio</h3>
+<p class="card-desc">Modern tasarım stüdyosu için oluşturulan minimalist logo sistemi, grid mantığı ve kurumsal tipografi rehberi.</p>
+<div class="card-tools">
+<span>Illustrator</span>
+<span>Branding</span>
+<span>Grid Sistemi</span>
+</div>
+</div>
+</article>
+<!-- Proje 2 -->
+<article class="card">
+<div class="card-media">
+<img src="https://images.unsplash.com/photo-1633493106115-fa6c888a75e3?w=900&auto=format&fit=crop&q=80" alt="3D Sahne ve Modelleme">
+</div>
+<div class="card-body">
+<span class="card-category">3D Modelleme / Render</span>
+<h3 class="card-title">Minimalist Mekân & Işık</h3>
+<p class="card-desc">Blender üzerinde hazırlanan form, gölge ve materyal odaklı atmosferik sahne çalışması.</p>
+<div class="card-tools">
+<span>Blender</span>
+<span>Cycles</span>
+<span>Işık & Doku</span>
+</div>
+</div>
+</article>
+<!-- Proje 3 -->
+<article class="card">
+<div class="card-media">
+<img src="https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=900&auto=format&fit=crop&q=80" alt="Kurgu ve Hareketli Görseller">
+</div>
+<div class="card-body">
+<span class="card-category">Post-Prodüksiyon & Video</span>
+<h3 class="card-title">Kare Kare Hareketli Anlatı</h3>
+<p class="card-desc">Fiziksel objelerin kare bazlı ritmik kurgusu, ses tasarımı ve DaVinci Resolve üzerinde renk derecelendirmesi.</p>
+<div class="card-tools">
+<span>DaVinci Resolve</span>
+<span>Stop-Motion</span>
+<span>Ses Tasarımı</span>
+</div>
+</div>
+</article>
+</div>
+</section>
+<!-- Hakkımda Özeti -->
+<section id="hakkimda" class="about-strip">
+<div class="about-label">Yaklaşımım</div>
+<div class="about-content">
+<p>
+Tasarımın sadece "güzel görünmekle" sınırlı kalmayıp, <strong>doğru bir hiyerarşi ve net bir duygu</strong> aktarması gerektiğine inanıyorum.
+</p>
+<p>
+Görsel İletişim Tasarımı altyapımla hem 2 boyutlu grafik dengesini kuruyor hem de 3D ve video araçlarıyla derinlikli anlatılar inşa ediyorum.
+</p>
+</div>
+</section>
+<!-- İletişim / Footer -->
+<footer id="iletisim">
+<div class="footer-inner">
+<h2 class="footer-title">Birlikte çalışalım.</h2>
+<p class="footer-desc">
+Yeni bir proje, iş birliği veya yaratıcı fikirleriniz için her zaman iletişime geçebilirsiniz.
+</p>
+<div class="contact-links">
+<a href="mailto:abdullah198579@outlook.com" class="btn btn-solid">
+abdullah198579@outlook.com
+</a>
+<a href="https://www.linkedin.com/in/abdullah-cank%C4%B1-6952b2324/" target="_blank" class="social-btn">
+LinkedIn ↗️
+</a>
+<a href="https://instagram.com" target="_blank" class="social-btn">
+Instagram ↗️
+</a>
+</div>
+<div class="footer-bottom">
+<span>© 2026 Abdullah Cankı</span>
+<span>abdullahcanki.com.tr</span>
+</div>
+</div>
+</footer>
+</div>
 </body>
 </html>
