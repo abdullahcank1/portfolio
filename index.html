@@ -10,48 +10,40 @@
 <meta name="description"
 content="Abdullah Cankı — Visual Communication Design Portfolio">
 
-<!-- FAVICON -->
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='50' fill='%23F1EBDD'/%3E%3Ctext x='50' y='61' text-anchor='middle' font-family='Arial' font-size='32' font-weight='900' fill='%23151513'%3EAC%3C/text%3E%3Ccircle cx='82' cy='18' r='5' fill='%23B7D72A'/%3E%3C/svg%3E">
-
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Inter:wght@400;500;600;700;800;900&display=swap"
+rel="stylesheet">
 
 <style>
 
-/* =========================================================
-   ROOT
-========================================================= */
+/* =====================================================
+   VARIABLES
+===================================================== */
 
 :root{
 
-    --cream:#F1EBDD;
-    --cream-2:#E8E0D0;
-    --cream-3:#DCD1BE;
+    --paper:#F5F3ED;
+    --paper-dark:#E9E6DD;
 
-    --black:#151513;
-    --black-2:#272722;
-    --grey:#777268;
-    --grey-2:#A59E91;
+    --black:#11110F;
+    --grey:#77766F;
 
-    --lime:#B7D72A;
-    --lime-dark:#8EA914;
+    --blue:#1647FF;
+    --red:#FF3B30;
 
-    --white:#fffdf7;
+    --line:#C8C5BC;
 
-    --line:rgba(21,21,19,.16);
-
-    --serif:"Playfair Display",serif;
     --sans:"Inter",sans-serif;
     --mono:"DM Mono",monospace;
 
 }
 
 
-/* =========================================================
+/* =====================================================
    RESET
-========================================================= */
+===================================================== */
 
 *{
     margin:0;
@@ -65,7 +57,8 @@ html{
 
 body{
 
-    background:var(--cream);
+    background:var(--paper);
+
     color:var(--black);
 
     font-family:var(--sans);
@@ -74,202 +67,59 @@ body{
 
 }
 
-body.no-scroll{
-    overflow:hidden;
-}
-
 ::selection{
 
-    background:var(--lime);
-    color:var(--black);
+    background:var(--blue);
+
+    color:white;
 
 }
 
 a{
+
     color:inherit;
+
     text-decoration:none;
+
 }
 
 button{
-    border:0;
-    background:none;
-    color:inherit;
+
     font:inherit;
-    cursor:pointer;
+
 }
 
 
-/* =========================================================
+/* =====================================================
    GRAIN
-========================================================= */
+===================================================== */
 
-.grain{
+body::after{
+
+    content:"";
 
     position:fixed;
 
     inset:0;
+
+    pointer-events:none;
 
     z-index:9999;
 
-    pointer-events:none;
+    opacity:.035;
 
-    opacity:.045;
-
-    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-
-}
-
-
-/* =========================================================
-   LOADER
-========================================================= */
-
-.loader{
-
-    position:fixed;
-
-    inset:0;
-
-    z-index:10000;
-
-    background:var(--cream);
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    transition:
-        opacity .8s ease,
-        visibility .8s ease;
-
-}
-
-.loader.hide{
-
-    opacity:0;
-
-    visibility:hidden;
-
-}
-
-.loader-inner{
-
-    width:min(500px,80%);
-
-}
-
-.loader-top{
-
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:end;
-
-    margin-bottom:18px;
-
-}
-
-.loader-brand{
-
-    font-size:12px;
-
-    font-weight:800;
-
-    letter-spacing:-.05em;
-
-}
-
-.loader-percent{
-
-    font:10px var(--mono);
-
-}
-
-.loader-line{
-
-    height:2px;
-
-    background:var(--black);
-
-    transform-origin:left;
-
-    transform:scaleX(0);
-
-    transition:transform .2s linear;
+    background-image:url(
+        "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"
+    );
 
 }
 
 
-/* =========================================================
-   CURSOR
-========================================================= */
+/* =====================================================
+   TOP BAR
+===================================================== */
 
-.cursor{
-
-    position:fixed;
-
-    width:16px;
-
-    height:16px;
-
-    border:1px solid var(--black);
-
-    border-radius:50%;
-
-    pointer-events:none;
-
-    z-index:9998;
-
-    transform:translate(-50%,-50%);
-
-    transition:
-        width .3s ease,
-        height .3s ease,
-        background .3s ease,
-        border-color .3s ease;
-
-}
-
-.cursor-dot{
-
-    width:3px;
-
-    height:3px;
-
-    background:var(--lime-dark);
-
-    border-radius:50%;
-
-    position:absolute;
-
-    top:50%;
-    left:50%;
-
-    transform:translate(-50%,-50%);
-
-}
-
-.cursor.big{
-
-    width:60px;
-
-    height:60px;
-
-    background:var(--lime);
-
-    border-color:var(--lime);
-
-}
-
-
-/* =========================================================
-   NAVIGATION
-========================================================= */
-
-.nav{
+.topbar{
 
     position:fixed;
 
@@ -278,186 +128,118 @@ button{
 
     width:100%;
 
-    height:92px;
+    height:62px;
 
-    padding:0 clamp(20px,4vw,70px);
+    padding:0 28px;
 
-    display:flex;
+    display:grid;
+
+    grid-template-columns:1fr auto 1fr;
 
     align-items:center;
 
-    justify-content:space-between;
+    border-bottom:1px solid var(--line);
 
-    z-index:500;
+    background:rgba(245,243,237,.9);
 
-    background:rgba(241,235,221,.78);
+    backdrop-filter:blur(12px);
 
-    backdrop-filter:blur(15px);
-
-    border-bottom:1px solid rgba(21,21,19,.08);
+    z-index:1000;
 
 }
-
-
-/* AC */
 
 .logo{
 
-    width:50px;
-
-    height:50px;
-
-    border:1.5px solid var(--black);
-
-    border-radius:50%;
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
+    font-size:15px;
 
     font-weight:900;
 
-    font-size:14px;
+    letter-spacing:-.12em;
 
-    letter-spacing:-.13em;
+    width:max-content;
 
-    position:relative;
-
-    transition:.35s ease;
+    cursor:pointer;
 
 }
 
-.logo span:first-child{
-    transform:translateX(2px);
-}
+.logo span{
 
-.logo span:last-child{
-    transform:translateX(-1px);
-}
-
-.logo::after{
-
-    content:"";
-
-    width:6px;
-
-    height:6px;
-
-    background:var(--lime);
-
-    border-radius:50%;
-
-    position:absolute;
-
-    right:3px;
-
-    top:3px;
+    color:var(--blue);
 
 }
 
-.logo:hover{
-
-    background:var(--black);
-
-    color:var(--cream);
-
-    transform:rotate(-10deg);
-
-}
-
-
-/* NAV LINKS */
-
-.nav-links{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:32px;
-
-}
-
-.nav-links a{
+.top-center{
 
     font:9px var(--mono);
 
-    text-transform:uppercase;
-
-    position:relative;
+    letter-spacing:.05em;
 
 }
 
-.nav-links a::after{
+.top-right{
 
-    content:"";
-
-    position:absolute;
-
-    left:0;
-    bottom:-5px;
-
-    width:0;
-
-    height:1px;
-
-    background:var(--black);
-
-    transition:.3s;
-
-}
-
-.nav-links a:hover::after{
-
-    width:100%;
-
-}
-
-.nav-status{
+    justify-self:end;
 
     display:flex;
 
-    align-items:center;
+    gap:20px;
 
-    gap:9px;
-
-    font:8px var(--mono);
+    font:9px var(--mono);
 
 }
 
-.status-dot{
+.top-right a{
 
-    width:6px;
+    transition:.25s;
 
-    height:6px;
+}
 
-    background:var(--lime-dark);
+.top-right a:hover{
 
-    border-radius:50%;
-
-    box-shadow:0 0 10px rgba(142,169,20,.7);
+    color:var(--blue);
 
 }
 
 
-/* =========================================================
+/* =====================================================
    HERO
-========================================================= */
+===================================================== */
 
 .hero{
 
     min-height:100vh;
 
+    padding:105px 28px 30px;
+
+    display:grid;
+
+    grid-template-columns:
+        1fr
+        2fr;
+
+    grid-template-rows:
+        auto
+        1fr
+        auto;
+
+    border-bottom:1px solid var(--line);
+
     position:relative;
 
-    overflow:hidden;
+}
 
-    padding:
-        130px
-        clamp(20px,4vw,70px)
-        55px;
+
+/* left info */
+
+.hero-info{
+
+    grid-column:1;
+
+    grid-row:1 / 4;
+
+    border-right:1px solid var(--line);
+
+    padding-right:28px;
 
     display:flex;
 
@@ -467,67 +249,61 @@ button{
 
 }
 
-.hero-grid{
+.hero-index{
 
-    position:absolute;
-
-    inset:0;
-
-    pointer-events:none;
-
-    background-image:
-
-        linear-gradient(
-            rgba(21,21,19,.055) 1px,
-            transparent 1px
-        ),
-
-        linear-gradient(
-            90deg,
-            rgba(21,21,19,.055) 1px,
-            transparent 1px
-        );
-
-    background-size:90px 90px;
-
-    mask-image:
-        linear-gradient(
-            to bottom,
-            black,
-            transparent 80%
-        );
-
-}
-
-.hero-top{
-
-    display:flex;
-
-    justify-content:space-between;
-
-    position:relative;
-
-    z-index:2;
-
-}
-
-.eyebrow{
-
-    font:9px var(--mono);
+    font:10px var(--mono);
 
     color:var(--grey);
 
-    text-transform:uppercase;
+}
 
-    letter-spacing:.12em;
+.hero-index strong{
+
+    color:var(--red);
 
 }
 
-.hero-location{
 
-    font:8px var(--mono);
+.hero-description{
 
-    text-align:right;
+    max-width:220px;
+
+    font-size:12px;
+
+    line-height:1.7;
+
+    color:#55544F;
+
+}
+
+.hero-description span{
+
+    color:var(--blue);
+
+}
+
+
+/* right */
+
+.hero-main{
+
+    padding-left:45px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    position:relative;
+
+}
+
+.hero-kicker{
+
+    font:9px var(--mono);
+
+    margin-bottom:25px;
 
     color:var(--grey);
 
@@ -535,27 +311,30 @@ button{
 
 .hero-title{
 
-    position:relative;
+    font-size:
+        clamp(
+            65px,
+            11vw,
+            190px
+        );
 
-    z-index:2;
+    line-height:.78;
 
-    font-size:clamp(75px,15vw,225px);
+    letter-spacing:-.1em;
 
-    line-height:.75;
-
-    letter-spacing:-.105em;
-
-    font-weight:800;
-
-    margin-top:auto;
-
-    margin-bottom:70px;
+    font-weight:900;
 
 }
 
-.hero-title .line{
+.hero-title div{
 
-    display:block;
+    overflow:hidden;
+
+}
+
+.hero-title .blue{
+
+    color:var(--blue);
 
 }
 
@@ -563,156 +342,94 @@ button{
 
     color:transparent;
 
-    -webkit-text-stroke:1.2px var(--black);
+    -webkit-text-stroke:
+        1.5px var(--black);
 
 }
 
-.hero-title .italic{
+.hero-title .red{
 
-    font-family:var(--serif);
-
-    font-weight:500;
-
-    font-style:italic;
-
-    letter-spacing:-.08em;
-
-    margin-left:8vw;
+    color:var(--red);
 
 }
 
-.hero-accent{
 
-    color:var(--lime-dark);
+/* hero footer */
 
-}
+.hero-footer{
 
-.hero-bottom{
+    grid-column:2;
 
-    position:relative;
+    display:flex;
 
-    z-index:4;
-
-    display:grid;
-
-    grid-template-columns:1fr 1fr 1fr;
-
-    gap:30px;
+    justify-content:space-between;
 
     align-items:end;
 
-}
-
-.hero-intro{
-
-    max-width:340px;
-
-    font-size:13px;
-
-    line-height:1.7;
-
-    color:var(--grey);
+    padding:
+        25px
+        0
+        0
+        45px;
 
 }
 
-.hero-cta{
+.scroll{
 
     display:flex;
-
-    justify-content:center;
-
-}
-
-.circle-link{
-
-    width:105px;
-
-    height:105px;
-
-    border-radius:50%;
-
-    background:var(--black);
-
-    color:var(--cream);
-
-    display:flex;
-
-    flex-direction:column;
-
-    justify-content:center;
 
     align-items:center;
 
-    font:8px var(--mono);
+    gap:10px;
 
-    transition:.5s cubic-bezier(.16,1,.3,1);
-
-}
-
-.circle-link strong{
-
-    font-size:24px;
-
-    font-family:var(--sans);
-
-    font-weight:300;
-
-    margin-bottom:5px;
+    font:9px var(--mono);
 
 }
 
-.circle-link:hover{
+.scroll-line{
 
-    background:var(--lime);
+    width:45px;
 
-    color:var(--black);
+    height:1px;
 
-    transform:rotate(20deg) scale(1.1);
+    background:var(--black);
 
 }
 
-.hero-meta{
+.hero-year{
 
-    text-align:right;
-
-    font:8px var(--mono);
+    font:9px var(--mono);
 
     color:var(--grey);
 
-    line-height:1.8;
-
 }
 
 
-/* =========================================================
-   FLOATING 3D OBJECT
-========================================================= */
+/* =====================================================
+   3D OBJECT
+===================================================== */
 
-#three-container{
+#three{
 
     position:absolute;
 
-    width:48vw;
+    width:330px;
 
-    height:48vw;
+    height:330px;
 
-    max-width:720px;
+    right:7%;
 
-    max-height:720px;
+    bottom:13%;
 
-    right:2vw;
-
-    top:15vh;
-
-    z-index:1;
+    z-index:5;
 
     pointer-events:none;
 
-    opacity:.95;
+    mix-blend-mode:multiply;
 
 }
 
-#three-container canvas{
+#three canvas{
 
     width:100%!important;
 
@@ -721,94 +438,88 @@ button{
 }
 
 
-/* =========================================================
-   INTRO
-========================================================= */
+/* =====================================================
+   SECTION COMMON
+===================================================== */
 
-section{
+.section{
 
-    padding:
-        160px
-        clamp(20px,4vw,70px);
+    padding:150px 28px;
+
+    border-bottom:1px solid var(--line);
 
 }
 
-.section-head{
+.section-header{
 
     display:grid;
 
-    grid-template-columns:1fr 3fr;
+    grid-template-columns:1fr 2fr;
 
-    gap:30px;
+    gap:28px;
+
+    margin-bottom:100px;
 
 }
 
 .section-number{
 
-    font:9px var(--mono);
+    font:10px var(--mono);
 
     color:var(--grey);
 
-    padding-top:12px;
+}
 
-    border-top:1px solid var(--line);
+.section-number span{
+
+    color:var(--red);
 
 }
 
-.intro-heading{
 
-    font-size:clamp(50px,8vw,125px);
+/* =====================================================
+   STATEMENT
+===================================================== */
+
+.statement{
+
+    font-size:
+        clamp(
+            45px,
+            7vw,
+            110px
+        );
 
     line-height:.88;
 
-    letter-spacing:-.08em;
+    letter-spacing:-.075em;
 
-    font-weight:500;
+    font-weight:600;
 
-    max-width:1050px;
-
-}
-
-.intro-heading em{
-
-    font-family:var(--serif);
-
-    font-weight:500;
-
-    color:var(--grey);
+    max-width:1100px;
 
 }
 
-.intro-text{
+.statement em{
 
-    max-width:540px;
+    color:var(--blue);
 
-    margin:
-        100px
-        0
-        0
-        auto;
-
-    font-size:15px;
-
-    line-height:1.9;
-
-    color:var(--grey);
+    font-style:normal;
 
 }
 
 
-/* =========================================================
-   SELECTED WORK
-========================================================= */
+/* =====================================================
+   WORK
+===================================================== */
 
-.work-top{
+.work-header{
 
     display:flex;
 
-    align-items:end;
-
     justify-content:space-between;
+
+    align-items:end;
 
     margin-bottom:60px;
 
@@ -816,71 +527,30 @@ section{
 
 .work-title{
 
-    font-size:clamp(55px,9vw,140px);
+    font-size:
+        clamp(
+            65px,
+            10vw,
+            160px
+        );
 
-    line-height:.8;
+    line-height:.78;
 
     letter-spacing:-.09em;
 
-    font-weight:700;
+    font-weight:900;
 
 }
 
 .work-title span{
 
-    font-family:var(--serif);
-
-    font-weight:500;
-
-    font-style:italic;
+    color:var(--blue);
 
 }
 
 .work-count{
 
     font:9px var(--mono);
-
-    color:var(--grey);
-
-}
-
-
-/* FILTERS */
-
-.filters{
-
-    display:flex;
-
-    flex-wrap:wrap;
-
-    gap:8px;
-
-    margin-bottom:60px;
-
-}
-
-.filter{
-
-    border:1px solid var(--line);
-
-    border-radius:100px;
-
-    padding:11px 18px;
-
-    font:8px var(--mono);
-
-    transition:.3s;
-
-}
-
-.filter:hover,
-.filter.active{
-
-    background:var(--black);
-
-    color:var(--cream);
-
-    border-color:var(--black);
 
 }
 
@@ -891,11 +561,15 @@ section{
 
     display:grid;
 
-    grid-template-columns:repeat(12,1fr);
+    grid-template-columns:
+        repeat(12,1fr);
 
-    gap:80px 22px;
+    gap:80px 20px;
 
 }
+
+
+/* project */
 
 .project{
 
@@ -905,51 +579,54 @@ section{
 
 .project:nth-child(1){
 
-    grid-column:1 / 9;
+    grid-column:
+        1 / 8;
 
 }
 
 .project:nth-child(2){
 
-    grid-column:9 / 13;
-
-    margin-top:170px;
-
-}
-
-.project:nth-child(3){
-
-    grid-column:1 / 6;
-
-}
-
-.project:nth-child(4){
-
-    grid-column:6 / 13;
+    grid-column:
+        9 / 13;
 
     margin-top:150px;
 
 }
 
+.project:nth-child(3){
+
+    grid-column:
+        2 / 7;
+
+}
+
+.project:nth-child(4){
+
+    grid-column:
+        8 / 13;
+
+    margin-top:100px;
+
+}
+
 .project:nth-child(5){
 
-    grid-column:1 / 8;
+    grid-column:
+        1 / 9;
 
 }
 
 .project:nth-child(6){
 
-    grid-column:8 / 13;
+    grid-column:
+        9 / 13;
 
-    margin-top:130px;
-
-}
-
-.project.hidden{
-
-    display:none;
+    margin-top:150px;
 
 }
+
+
+/* image */
 
 .project-image{
 
@@ -959,366 +636,393 @@ section{
 
     overflow:hidden;
 
-    position:relative;
+    background:var(--paper-dark);
 
-    background:var(--cream-2);
+    position:relative;
 
 }
 
-.project:nth-child(1) .project-image,
-.project:nth-child(4) .project-image{
+.project:nth-child(1)
+.project-image,
+.project:nth-child(5)
+.project-image{
 
     aspect-ratio:16/10;
 
 }
 
 
-/* PROJECT ART */
+/* image number */
 
-.art{
+.project-number{
+
+    position:absolute;
+
+    top:18px;
+    left:18px;
+
+    z-index:5;
+
+    font:9px var(--mono);
+
+    mix-blend-mode:difference;
+
+    color:white;
+
+}
+
+
+/* ART 01 */
+
+.art-01{
+
+    background:#151515;
 
     position:absolute;
 
     inset:0;
 
-    transition:
-        transform 1s cubic-bezier(.16,1,.3,1);
-
 }
 
-.project:hover .art{
+.art-01::before{
 
-    transform:scale(1.06);
-
-}
-
-
-/* NOIR */
-
-.art-noir{
-
-    background:#191916;
-
-}
-
-.art-noir::before{
-
-    content:"NØIR";
+    content:"NOIR";
 
     position:absolute;
 
-    left:5%;
+    left:-8%;
 
     top:25%;
 
-    color:#F0EADA;
+    font-size:
+        clamp(
+            90px,
+            13vw,
+            200px
+        );
 
-    font-size:clamp(70px,12vw,170px);
+    line-height:.7;
 
     font-weight:900;
+
+    color:var(--paper);
 
     letter-spacing:-.13em;
 
+    transform:rotate(-7deg);
+
 }
 
-.art-noir::after{
+.art-01::after{
 
-    content:"VISUAL IDENTITY / 01";
+    content:"01";
 
     position:absolute;
 
-    bottom:25px;
+    right:5%;
 
-    left:25px;
+    bottom:3%;
 
-    color:var(--lime);
-
-    font:8px var(--mono);
-
-}
-
-
-/* FRAGMENT */
-
-.art-fragment{
-
-    background:#E2D8C6;
-
-}
-
-.art-fragment::before{
-
-    content:"FRAGMENT";
-
-    position:absolute;
-
-    white-space:nowrap;
-
-    left:-20%;
-
-    top:35%;
-
-    color:#181815;
-
-    font-size:clamp(45px,7vw,100px);
+    font-size:150px;
 
     font-weight:900;
 
-    letter-spacing:-.12em;
+    color:var(--red);
 
-    transform:rotate(-12deg);
+    letter-spacing:-.15em;
 
 }
 
-.art-fragment::after{
 
-    content:"02";
+/* ART 02 */
+
+.art-02{
 
     position:absolute;
 
-    right:20px;
+    inset:0;
 
-    top:15px;
-
-    font-size:100px;
-
-    font-weight:900;
-
-    color:var(--lime-dark);
+    background:var(--blue);
 
 }
 
-
-/* DIGITAL */
-
-.art-digital{
-
-    background:
-        radial-gradient(
-            circle at 50% 50%,
-            #B7D72A 0,
-            #7A8E1D 7%,
-            transparent 8%
-        ),
-        radial-gradient(
-            circle at 40% 40%,
-            #777 0,
-            transparent 25%
-        ),
-        #20201d;
-
-}
-
-.art-digital::before{
-
-    content:"";
-
-    width:50%;
-
-    aspect-ratio:1;
-
-    position:absolute;
-
-    left:25%;
-
-    top:25%;
-
-    border-radius:50%;
-
-    border:1px solid rgba(241,235,221,.8);
-
-    box-shadow:
-        0 0 80px rgba(183,215,42,.4),
-        inset 0 0 50px rgba(183,215,42,.15);
-
-    animation:spin 8s linear infinite;
-
-}
-
-@keyframes spin{
-
-    to{
-        transform:rotate(360deg);
-    }
-
-}
-
-
-/* TYPE */
-
-.art-type{
-
-    background:#F4EFE4;
-
-}
-
-.art-type::before{
+.art-02::before{
 
     content:"TYPE";
 
     position:absolute;
 
-    left:5%;
+    left:-20%;
 
-    top:20%;
+    top:22%;
 
-    font-size:clamp(100px,17vw,240px);
+    font-size:
+        clamp(
+            100px,
+            15vw,
+            230px
+        );
+
+    color:white;
 
     font-weight:900;
 
-    color:#181815;
+    letter-spacing:-.17em;
 
-    letter-spacing:-.16em;
-
-    animation:typeFloat 4s ease-in-out infinite alternate;
+    transform:rotate(90deg);
 
 }
 
-@keyframes typeFloat{
+.art-02::after{
 
-    from{
-        transform:translateX(-30px);
-    }
+    content:"TYPOGRAPHIC STUDY";
 
-    to{
-        transform:translateX(40px);
-    }
+    position:absolute;
+
+    right:20px;
+
+    bottom:20px;
+
+    color:white;
+
+    font:9px var(--mono);
+
+}
+
+
+/* ART 03 */
+
+.art-03{
+
+    position:absolute;
+
+    inset:0;
+
+    background:
+
+        radial-gradient(
+            circle at 50% 50%,
+            var(--red) 0 5%,
+            transparent 5.5%
+        ),
+
+        repeating-radial-gradient(
+            circle at 50% 50%,
+            transparent 0 24px,
+            rgba(255,255,255,.18) 25px 26px
+        ),
+
+        #111;
+
+}
+
+.art-03::after{
+
+    content:"DIGITAL / 03";
+
+    position:absolute;
+
+    bottom:20px;
+    left:20px;
+
+    color:white;
+
+    font:9px var(--mono);
 
 }
 
 
-/* OBJECT */
+/* ART 04 */
 
-.art-object{
+.art-04{
 
-    background:#CFC5B3;
+    position:absolute;
+
+    inset:0;
+
+    background:#D9D5CC;
 
 }
 
-.art-object::before{
+.art-04::before{
 
-    content:"";
-
-    width:45%;
-
-    aspect-ratio:1;
+    content:"MOTION";
 
     position:absolute;
 
     top:28%;
 
-    left:28%;
+    left:-10%;
 
-    border-radius:
-        43%
-        57%
-        55%
-        45%;
-
-    background:
-        linear-gradient(
-            135deg,
-            #F5F0E5,
-            #A7A093
+    font-size:
+        clamp(
+            70px,
+            11vw,
+            170px
         );
-
-    box-shadow:
-        25px 35px 60px rgba(0,0,0,.22);
-
-    transform:rotate(25deg);
-
-    animation:objectMove 5s ease-in-out infinite;
-
-}
-
-@keyframes objectMove{
-
-    0%,100%{
-
-        transform:
-            translateY(0)
-            rotate(25deg);
-
-    }
-
-    50%{
-
-        transform:
-            translateY(-20px)
-            rotate(55deg);
-
-    }
-
-}
-
-
-/* AFTERIMAGE */
-
-.art-after{
-
-    background:
-        linear-gradient(
-            135deg,
-            #E7DCC9,
-            #BFC9A1
-        );
-
-}
-
-.art-after::before{
-
-    content:"AFTER";
-
-    position:absolute;
-
-    top:30%;
-
-    left:3%;
-
-    color:#171714;
-
-    font-size:clamp(70px,11vw,160px);
 
     font-weight:900;
 
     letter-spacing:-.14em;
 
-    transform:skew(-10deg);
+    color:var(--black);
+
+    transform:
+        skewX(-12deg);
+
+    text-shadow:
+        25px 0 var(--red),
+        50px 0 var(--blue);
 
 }
 
-.art-after::after{
+
+/* ART 05 */
+
+.art-05{
+
+    position:absolute;
+
+    inset:0;
+
+    background:
+
+        linear-gradient(
+            135deg,
+            #111 50%,
+            #D8D5CC 50%
+        );
+
+}
+
+.art-05::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:43%;
+
+    aspect-ratio:1;
+
+    border-radius:50%;
+
+    top:27%;
+
+    left:29%;
+
+    background:
+
+        radial-gradient(
+            circle at 35% 30%,
+            white,
+            #888 20%,
+            #111 65%
+        );
+
+    box-shadow:
+        30px 40px 60px
+        rgba(0,0,0,.4);
+
+    animation:
+        floatObject
+        4s
+        ease-in-out
+        infinite
+        alternate;
+
+}
+
+@keyframes floatObject{
+
+    to{
+
+        transform:
+            translateY(-20px)
+            rotate(15deg);
+
+    }
+
+}
+
+
+/* ART 06 */
+
+.art-06{
+
+    position:absolute;
+
+    inset:0;
+
+    background:#E7E4DB;
+
+}
+
+.art-06::before{
+
+    content:"AFTER";
+
+    position:absolute;
+
+    left:-5%;
+
+    top:28%;
+
+    font-size:
+        clamp(
+            80px,
+            13vw,
+            200px
+        );
+
+    font-weight:900;
+
+    letter-spacing:-.14em;
+
+    color:transparent;
+
+    -webkit-text-stroke:
+        2px var(--black);
+
+}
+
+.art-06::after{
 
     content:"IMAGE";
 
     position:absolute;
 
-    top:52%;
-
     left:25%;
 
-    color:var(--lime-dark);
+    top:48%;
 
-    font-size:clamp(55px,9vw,130px);
+    font-size:
+        clamp(
+            65px,
+            10vw,
+            150px
+        );
 
-    font-family:var(--serif);
+    font-weight:900;
 
-    font-style:italic;
+    letter-spacing:-.12em;
+
+    color:var(--red);
 
 }
 
 
-/* PROJECT INFO */
+/* project info */
 
 .project-info{
 
     padding-top:17px;
 
-    display:flex;
+    display:grid;
 
-    justify-content:space-between;
+    grid-template-columns:1fr auto;
 
-    border-top:1px solid var(--line);
+    border-top:1px solid var(--black);
 
     margin-top:12px;
 
@@ -1326,9 +1030,21 @@ section{
 
 .project-name{
 
-    font-size:14px;
+    font-size:13px;
 
-    font-weight:600;
+    font-weight:700;
+
+    letter-spacing:-.02em;
+
+}
+
+.project-category{
+
+    margin-top:5px;
+
+    font:8px var(--mono);
+
+    color:var(--grey);
 
 }
 
@@ -1336,185 +1052,196 @@ section{
 
     font:8px var(--mono);
 
-    color:var(--grey);
-
-}
-
-.project-category{
-
-    font:8px var(--mono);
-
-    color:var(--grey);
-
 }
 
 
-/* =========================================================
-   MARQUEE
-========================================================= */
+/* hover */
 
-.marquee{
+.project-image .art{
+
+    transition:
+        transform
+        1s
+        cubic-bezier(.16,1,.3,1);
+
+}
+
+.project:hover
+.project-image .art{
+
+    transform:
+        scale(1.08)
+        rotate(.5deg);
+
+}
+
+
+/* =====================================================
+   BIG TYPE BAND
+===================================================== */
+
+.type-band{
 
     overflow:hidden;
 
-    border-top:1px solid var(--line);
-
     border-bottom:1px solid var(--line);
 
-    padding:35px 0;
+    padding:45px 0;
+
+    background:var(--blue);
+
+    color:white;
 
 }
 
-.marquee-track{
-
-    display:flex;
+.type-track{
 
     width:max-content;
 
-    animation:marquee 25s linear infinite;
+    display:flex;
+
+    animation:
+        ticker
+        25s
+        linear
+        infinite;
 
 }
 
-.marquee span{
-
-    font-size:clamp(50px,8vw,120px);
-
-    font-weight:800;
-
-    letter-spacing:-.09em;
+.type-track span{
 
     white-space:nowrap;
 
-    padding-right:40px;
+    font-size:
+        clamp(
+            60px,
+            9vw,
+            140px
+        );
+
+    line-height:.8;
+
+    font-weight:900;
+
+    letter-spacing:-.09em;
+
+    padding-right:50px;
 
 }
 
-.marquee .stroke{
+.type-track .outline{
 
     color:transparent;
 
-    -webkit-text-stroke:1px var(--black);
+    -webkit-text-stroke:
+        1px white;
 
 }
 
-@keyframes marquee{
+@keyframes ticker{
 
     to{
-        transform:translateX(-50%);
+
+        transform:
+            translateX(-50%);
+
     }
 
 }
 
 
-/* =========================================================
+/* =====================================================
    ABOUT
-========================================================= */
+===================================================== */
 
-.about-grid{
+.about-layout{
 
     display:grid;
 
-    grid-template-columns:1fr 1.5fr;
+    grid-template-columns:
+        1fr
+        2fr;
 
-    gap:100px;
-
-    margin-top:100px;
-
-}
-
-.about-card{
-
-    position:sticky;
-
-    top:120px;
-
-    aspect-ratio:3/4;
-
-    background:#181815;
-
-    overflow:hidden;
+    gap:28px;
 
 }
 
-.about-card::before{
+.about-left{
 
-    content:"AC";
+    border-right:1px solid var(--line);
 
-    position:absolute;
+    padding-right:30px;
 
-    inset:0;
+}
+
+.about-mark{
+
+    width:180px;
+
+    height:180px;
+
+    border-radius:50%;
+
+    background:var(--red);
 
     display:grid;
 
     place-items:center;
 
-    font-size:clamp(100px,15vw,220px);
+    font-size:55px;
 
     font-weight:900;
 
-    color:transparent;
-
-    -webkit-text-stroke:1px rgba(241,235,221,.65);
-
-    letter-spacing:-.15em;
+    letter-spacing:-.14em;
 
 }
 
-.about-card::after{
+.about-right{
 
-    content:"VISUAL COMMUNICATION / 2026";
-
-    position:absolute;
-
-    bottom:22px;
-
-    left:22px;
-
-    color:var(--lime);
-
-    font:8px var(--mono);
+    padding-left:20px;
 
 }
 
-.about-heading{
+.about-title{
 
-    font-size:clamp(50px,7vw,105px);
+    font-size:
+        clamp(
+            45px,
+            6vw,
+            95px
+        );
 
-    line-height:.9;
+    line-height:.87;
 
-    letter-spacing:-.08em;
+    letter-spacing:-.07em;
 
-    font-weight:500;
-
-}
-
-.about-heading em{
-
-    font-family:var(--serif);
-
-    font-style:italic;
+    font-weight:600;
 
 }
 
-.about-description{
+.about-title span{
 
-    max-width:600px;
+    color:var(--blue);
+
+}
+
+.about-text{
 
     margin-top:70px;
 
-    color:var(--grey);
+    max-width:600px;
 
     font-size:14px;
 
-    line-height:1.9;
+    line-height:1.8;
+
+    color:#595852;
 
 }
 
 .skills{
 
-    margin-top:90px;
-
-    border-top:1px solid var(--line);
+    margin-top:80px;
 
 }
 
@@ -1522,19 +1249,26 @@ section{
 
     display:grid;
 
-    grid-template-columns:50px 1fr auto;
+    grid-template-columns:
+        40px
+        1fr
+        80px;
 
-    gap:20px;
+    border-top:1px solid var(--line);
 
-    padding:18px 0;
+    padding:15px 0;
 
-    border-bottom:1px solid var(--line);
-
-    font:10px var(--mono);
+    font:9px var(--mono);
 
 }
 
-.skill-num{
+.skill:last-child{
+
+    border-bottom:1px solid var(--line);
+
+}
+
+.skill-number{
 
     color:var(--grey);
 
@@ -1542,191 +1276,187 @@ section{
 
 .skill-level{
 
-    color:var(--grey);
-
-}
-
-
-/* =========================================================
-   PROCESS
-========================================================= */
-
-.process-list{
-
-    margin-top:100px;
-
-}
-
-.process{
-
-    display:grid;
-
-    grid-template-columns:70px 1fr 1fr;
-
-    align-items:center;
-
-    gap:30px;
-
-    padding:35px 0;
-
-    border-bottom:1px solid var(--line);
-
-}
-
-.process-number{
-
-    font:9px var(--mono);
+    text-align:right;
 
     color:var(--grey);
 
 }
 
-.process h3{
 
-    font-size:clamp(35px,5vw,70px);
-
-    letter-spacing:-.07em;
-
-}
-
-.process p{
-
-    max-width:330px;
-
-    color:var(--grey);
-
-    font-size:12px;
-
-    line-height:1.7;
-
-}
-
-
-/* =========================================================
+/* =====================================================
    CONTACT
-========================================================= */
+===================================================== */
 
 .contact{
 
-    min-height:100vh;
+    min-height:90vh;
 
-    display:flex;
-
-    flex-direction:column;
-
-    justify-content:space-between;
+    padding:
+        150px
+        28px
+        35px;
 
     background:var(--black);
 
-    color:var(--cream);
+    color:var(--paper);
+
+    position:relative;
+
+    overflow:hidden;
 
 }
 
-.contact .section-number{
+.contact::before{
 
-    border-color:rgba(241,235,221,.2);
+    content:"AC";
 
-    color:#999;
+    position:absolute;
+
+    right:-5%;
+
+    bottom:-25%;
+
+    font-size:
+        clamp(
+            300px,
+            55vw,
+            850px
+        );
+
+    line-height:.7;
+
+    font-weight:900;
+
+    letter-spacing:-.17em;
+
+    color:#1E1E1B;
+
+    pointer-events:none;
 
 }
 
-.contact-heading{
+.contact-top{
 
-    padding:130px 0;
+    position:relative;
 
-}
+    z-index:2;
 
-.contact-small{
+    display:flex;
+
+    justify-content:space-between;
 
     font:9px var(--mono);
 
-    color:#999;
-
-    margin-bottom:30px;
+    color:#777;
 
 }
 
 .contact-title{
 
-    font-size:clamp(60px,11vw,170px);
+    position:relative;
 
-    line-height:.76;
+    z-index:2;
+
+    margin-top:130px;
+
+    font-size:
+        clamp(
+            65px,
+            12vw,
+            190px
+        );
+
+    line-height:.75;
 
     letter-spacing:-.1em;
 
-    font-weight:600;
+    font-weight:800;
 
 }
 
-.contact-title em{
+.contact-title span{
 
-    font-family:var(--serif);
-
-    font-weight:500;
-
-    color:var(--lime);
+    color:var(--red);
 
 }
 
-.contact-title a{
+.contact-email{
+
+    display:inline-block;
+
+    margin-top:70px;
+
+    position:relative;
+
+    z-index:2;
+
+    font-size:
+        clamp(
+            25px,
+            4vw,
+            60px
+        );
+
+    letter-spacing:-.05em;
+
+    border-bottom:2px solid var(--paper);
 
     transition:.3s;
 
 }
 
-.contact-title a:hover{
+.contact-email:hover{
 
-    color:var(--lime);
+    color:var(--red);
+
+    border-color:var(--red);
 
 }
 
-.contact-grid{
+.contact-bottom{
+
+    position:absolute;
+
+    bottom:35px;
+
+    left:28px;
+
+    right:28px;
 
     display:grid;
 
-    grid-template-columns:repeat(3,1fr);
+    grid-template-columns:1fr 1fr 1fr;
 
-    gap:30px;
+    border-top:1px solid #333;
 
-    border-top:1px solid rgba(241,235,221,.18);
+    padding-top:18px;
 
-    padding-top:25px;
-
-}
-
-.contact-grid label{
-
-    display:block;
-
-    font:8px var(--mono);
+    font:9px var(--mono);
 
     color:#777;
 
-    margin-bottom:15px;
+    z-index:3;
 
 }
 
-.contact-grid a,
-.contact-grid p{
+.contact-bottom a{
 
-    font:10px var(--mono);
+    color:#aaa;
 
-    color:#bbb;
-
-    transition:.3s;
+    transition:.25s;
 
 }
 
-.contact-grid a:hover{
+.contact-bottom a:hover{
 
-    color:var(--lime);
+    color:var(--red);
 
 }
 
 
-/* =========================================================
+/* =====================================================
    MODAL
-========================================================= */
+===================================================== */
 
 .modal{
 
@@ -1734,9 +1464,9 @@ section{
 
     inset:0;
 
-    z-index:8000;
+    background:var(--paper);
 
-    background:var(--cream);
+    z-index:5000;
 
     overflow-y:auto;
 
@@ -1744,7 +1474,7 @@ section{
 
     visibility:hidden;
 
-    transition:.45s ease;
+    transition:.4s;
 
 }
 
@@ -1760,11 +1490,11 @@ section{
 
     position:fixed;
 
+    right:25px;
+
     top:25px;
 
-    right:30px;
-
-    z-index:20;
+    z-index:10;
 
     width:50px;
 
@@ -1772,23 +1502,29 @@ section{
 
     border:1px solid var(--black);
 
-    border-radius:50%;
+    background:var(--paper);
+
+    cursor:pointer;
 
     font:9px var(--mono);
-
-    background:var(--cream);
 
 }
 
 .modal-inner{
 
-    width:min(1200px,calc(100% - 40px));
+    width:
+        min(
+            1200px,
+            calc(100% - 50px)
+        );
 
-    margin:130px auto;
+    margin:
+        130px
+        auto;
 
 }
 
-.modal-number{
+.modal-meta{
 
     font:9px var(--mono);
 
@@ -1798,17 +1534,26 @@ section{
 
 .modal-title{
 
-    font-size:clamp(55px,9vw,140px);
+    font-size:
+        clamp(
+            55px,
+            9vw,
+            145px
+        );
 
-    line-height:.8;
+    line-height:.78;
 
     letter-spacing:-.09em;
 
-    margin:25px 0 70px;
+    font-weight:900;
+
+    margin:
+        25px 0
+        70px;
 
 }
 
-.modal-image{
+.modal-art{
 
     width:100%;
 
@@ -1816,215 +1561,68 @@ section{
 
     overflow:hidden;
 
+    background:var(--paper-dark);
+
 }
 
-.modal-info{
+.modal-description{
 
     display:grid;
 
-    grid-template-columns:1fr 1fr 2fr;
+    grid-template-columns:
+        1fr
+        2fr;
 
     gap:30px;
 
-    padding:30px 0;
+    margin-top:30px;
 
-    border-bottom:1px solid var(--line);
+    padding-top:20px;
+
+    border-top:1px solid var(--line);
 
 }
 
-.modal-info label{
+.modal-description label{
 
-    font:8px var(--mono);
+    font:9px var(--mono);
 
     color:var(--grey);
 
 }
 
-.modal-info p{
+.modal-description p{
 
-    margin-top:10px;
+    max-width:600px;
 
-    font-size:12px;
+    font-size:14px;
 
-    line-height:1.7;
-
-    color:var(--grey);
+    line-height:1.8;
 
 }
 
 
-/* =========================================================
-   REVEAL
-========================================================= */
-
-.reveal{
-
-    opacity:0;
-
-    transform:translateY(45px);
-
-    transition:
-        opacity 1s cubic-bezier(.16,1,.3,1),
-        transform 1s cubic-bezier(.16,1,.3,1);
-
-}
-
-.reveal.show{
-
-    opacity:1;
-
-    transform:translateY(0);
-
-}
-
-
-/* =========================================================
+/* =====================================================
    MOBILE
-========================================================= */
+===================================================== */
 
-@media(max-width:900px){
+@media(max-width:800px){
 
-    .nav-links{
+    .topbar{
 
-        gap:15px;
+        grid-template-columns:
+            1fr
+            auto;
 
     }
 
-    .nav-links a:nth-child(3){
+    .top-center{
 
         display:none;
 
     }
 
-    .nav-status{
-
-        display:none;
-
-    }
-
-    #three-container{
-
-        width:70vw;
-
-        height:70vw;
-
-        right:-15vw;
-
-        top:16vh;
-
-        opacity:.65;
-
-    }
-
-    .hero-bottom{
-
-        grid-template-columns:1fr 1fr;
-
-    }
-
-    .hero-meta{
-
-        display:none;
-
-    }
-
-    .section-head{
-
-        grid-template-columns:1fr;
-
-    }
-
-    .section-number{
-
-        margin-bottom:30px;
-
-    }
-
-    .projects{
-
-        display:grid;
-
-        grid-template-columns:1fr;
-
-        gap:70px;
-
-    }
-
-    .project:nth-child(n){
-
-        grid-column:auto;
-
-        margin-top:0;
-
-    }
-
-    .project:nth-child(odd) .project-image,
-    .project:nth-child(even) .project-image{
-
-        aspect-ratio:4/3;
-
-    }
-
-    .about-grid{
-
-        grid-template-columns:1fr;
-
-        gap:60px;
-
-    }
-
-    .about-card{
-
-        position:relative;
-
-        top:auto;
-
-    }
-
-    .process{
-
-        grid-template-columns:50px 1fr;
-
-    }
-
-    .process p{
-
-        grid-column:2;
-
-    }
-
-    .contact-grid{
-
-        grid-template-columns:1fr;
-
-        gap:40px;
-
-    }
-
-    .modal-info{
-
-        grid-template-columns:1fr 1fr;
-
-    }
-
-    .modal-info div:last-child{
-
-        grid-column:1/-1;
-
-    }
-
-}
-
-
-@media(max-width:600px){
-
-    .nav{
-
-        height:75px;
-
-    }
-
-    .nav-links{
+    .top-right a:nth-child(1){
 
         display:none;
 
@@ -2032,47 +1630,60 @@ section{
 
     .hero{
 
-        padding-top:110px;
+        display:block;
+
+        min-height:auto;
+
+        padding:
+            100px
+            20px
+            30px;
 
     }
 
-    .hero-title{
+    .hero-info{
 
-        font-size:20vw;
+        border-right:0;
 
-        margin-bottom:40px;
+        padding:0;
 
-    }
-
-    .hero-title .italic{
-
-        margin-left:5vw;
+        min-height:140px;
 
     }
 
-    .hero-bottom{
+    .hero-main{
 
-        grid-template-columns:1fr;
-
-        gap:25px;
-
-    }
-
-    .hero-cta{
-
-        justify-content:flex-start;
+        padding:
+            100px
+            0
+            50px;
 
     }
 
-    .circle-link{
+    .hero-footer{
 
-        width:85px;
-
-        height:85px;
+        padding:
+            20px
+            0
+            0;
 
     }
 
-    section{
+    #three{
+
+        width:220px;
+
+        height:220px;
+
+        right:-30px;
+
+        top:270px;
+
+        opacity:.75;
+
+    }
+
+    .section{
 
         padding:
             100px
@@ -2080,70 +1691,115 @@ section{
 
     }
 
-    .work-top{
+    .section-header{
 
-        flex-direction:column;
+        grid-template-columns:1fr;
 
-        align-items:flex-start;
-
-        gap:30px;
+        margin-bottom:60px;
 
     }
 
-    .filters{
+    .projects{
 
-        margin-bottom:40px;
+        display:block;
 
     }
 
-    .about-description{
+    .project{
+
+        margin:
+            0
+            0
+            70px
+            0!important;
+
+    }
+
+    .project-image{
+
+        aspect-ratio:4/3!important;
+
+    }
+
+    .about-layout{
+
+        display:block;
+
+    }
+
+    .about-left{
+
+        border-right:0;
+
+        padding:0;
+
+        margin-bottom:60px;
+
+    }
+
+    .about-mark{
+
+        width:130px;
+
+        height:130px;
+
+        font-size:40px;
+
+    }
+
+    .about-right{
+
+        padding:0;
+
+    }
+
+    .about-text{
 
         margin-top:50px;
 
     }
 
-    .skill{
+    .contact{
 
-        grid-template-columns:35px 1fr;
+        min-height:100vh;
+
+        padding:
+            100px
+            20px
+            120px;
 
     }
 
-    .skill-level{
-
-        display:none;
-
-    }
-
-    .modal-inner{
-
-        width:calc(100% - 30px);
+    .contact-title{
 
         margin-top:100px;
 
     }
 
-    .modal-info{
+    .contact-bottom{
+
+        left:20px;
+
+        right:20px;
 
         grid-template-columns:1fr;
 
-    }
-
-    .modal-info div:last-child{
-
-        grid-column:auto;
+        gap:15px;
 
     }
 
-}
+    .modal-inner{
 
+        width:
+            calc(100% - 30px);
 
-/* TOUCH */
+        margin-top:100px;
 
-@media(pointer:coarse){
+    }
 
-    .cursor{
+    .modal-description{
 
-        display:none;
+        grid-template-columns:1fr;
 
     }
 
@@ -2157,116 +1813,44 @@ section{
 <body>
 
 
-<!-- GRAIN -->
-
-<div class="grain"></div>
-
-
-<!-- LOADER -->
-
-<div class="loader" id="loader">
-
-    <div class="loader-inner">
-
-        <div class="loader-top">
-
-            <div class="loader-brand">
-                AC / PORTFOLIO
-            </div>
-
-            <div class="loader-percent"
-                 id="loaderPercent">
-
-                0%
-
-            </div>
-
-        </div>
-
-        <div class="loader-line"
-             id="loaderLine">
-        </div>
-
-    </div>
-
-</div>
-
-
-<!-- CURSOR -->
-
-<div class="cursor" id="cursor">
-
-    <div class="cursor-dot"></div>
-
-</div>
-
-
 <!-- =====================================================
      NAV
 ===================================================== -->
 
-<header class="nav">
+<header class="topbar">
 
 
     <a href="#top"
-       class="logo hover-target"
-       aria-label="Abdullah Cankı">
+       class="logo">
 
-        <span>A</span>
-        <span>C</span>
+        A<span>C</span>
 
     </a>
 
 
-    <nav class="nav-links">
+    <div class="top-center">
 
-        <a href="#work"
-           class="hover-target">
-
-            Work
-
-        </a>
-
-        <a href="#about"
-           class="hover-target">
-
-            About
-
-        </a>
-
-        <a href="#process"
-           class="hover-target">
-
-            Process
-
-        </a>
-
-        <a href="#contact"
-           class="hover-target">
-
-            Contact
-
-        </a>
-
-        <a href="https://www.linkedin.com/in/abdullah-cank%C4%B1-6952b2324"
-           target="_blank"
-           rel="noopener noreferrer"
-           class="hover-target">
-
-            LinkedIn ↗
-
-        </a>
-
-    </nav>
-
-
-    <div class="nav-status">
-
-        <span class="status-dot"></span>
-
-        AVAILABLE FOR WORK
+        VISUAL COMMUNICATION DESIGN / 2026
 
     </div>
+
+
+    <div class="top-right">
+
+        <a href="#work">
+            WORK
+        </a>
+
+        <a href="#about">
+            ABOUT
+        </a>
+
+        <a href="#contact">
+            CONTACT
+        </a>
+
+    </div>
+
 
 </header>
 
@@ -2277,149 +1861,144 @@ section{
 
 <main id="top">
 
+
 <section class="hero">
 
 
-    <div class="hero-grid"></div>
+    <div class="hero-info">
 
 
-    <!-- THREE JS -->
+        <div class="hero-index">
 
-    <div id="three-container"></div>
+            001
+            <strong>/</strong>
+            PORTFOLIO
+
+        </div>
 
 
-    <div class="hero-top">
+        <p class="hero-description">
 
-        <div class="eyebrow">
+            <span>Abdullah Cankı</span>
+
+            <br><br>
 
             Visual Communication Design
-            <br>
-            Portfolio / 2026
-
-        </div>
-
-
-        <div class="hero-location">
-
-            SAMSUN / TURKEY
-            <br>
-            41°17' N / 36°20' E
-
-        </div>
-
-    </div>
-
-
-    <h1 class="hero-title">
-
-        <span class="line">
-            ABDULLAH
-        </span>
-
-        <span class="line outline">
-            CANKI
-        </span>
-
-        <span class="line italic">
-
-            <span class="hero-accent">/</span>
-            DESIGNER
-
-        </span>
-
-    </h1>
-
-
-    <div class="hero-bottom">
-
-
-        <p class="hero-intro">
-
-            Görsel iletişim tasarımı öğrencisi.
-            Marka, tipografi, dijital deneyim,
-            motion ve 3D arasında görsel
-            dünyalar tasarlıyorum.
+            student exploring identity,
+            typography, digital experiences,
+            motion and 3D.
 
         </p>
 
 
-        <div class="hero-cta">
+        <div class="hero-index">
 
-            <a href="#work"
-               class="circle-link hover-target">
-
-                <strong>↓</strong>
-
-                SELECTED
-                WORK
-
-            </a>
-
-        </div>
-
-
-        <div class="hero-meta">
-
-            SCROLL TO EXPLORE
+            SAMSUN
             <br>
-            ↓
-            <br>
-            2026 / AC
+            TURKEY
 
         </div>
 
 
     </div>
+
+
+    <div class="hero-main">
+
+
+        <div class="hero-kicker">
+
+            HELLO — I'M ABDULLAH
+
+        </div>
+
+
+        <h1 class="hero-title">
+
+
+            <div>
+                ABDULLAH
+            </div>
+
+
+            <div class="blue">
+                CANKI
+            </div>
+
+
+            <div class="outline">
+                DESIGN
+            </div>
+
+
+            <div class="red">
+                STUDENT.
+            </div>
+
+
+        </h1>
+
+
+        <div id="three"></div>
+
+
+    </div>
+
+
+    <div class="hero-footer">
+
+
+        <div class="scroll">
+
+            <div class="scroll-line"></div>
+
+            SCROLL TO EXPLORE
+
+        </div>
+
+
+        <div class="hero-year">
+
+            © 2026 AC
+
+        </div>
+
+
+    </div>
+
 
 </section>
 
 
 <!-- =====================================================
-     INTRO
+     STATEMENT
 ===================================================== -->
 
-<section>
+<section class="section">
 
 
-    <div class="section-head">
+    <div class="section-header">
 
         <div class="section-number">
-            01 / INTRO
-        </div>
 
-
-        <div>
-
-            <h2 class="intro-heading reveal">
-
-                Fikirleri
-                <em>görsel</em>
-                deneyimlere
-                dönüştürüyorum.
-
-            </h2>
-
-
-            <p class="intro-text reveal">
-
-                Tasarımı yalnızca güzel görünen
-                şeyler üretmek olarak değil,
-                bir fikri insanlara hissettiren
-                ve anlatan bir iletişim biçimi
-                olarak görüyorum.
-
-                <br><br>
-
-                Araştırma, konsept, tipografi,
-                renk, hareket ve teknoloji
-                benim tasarım sürecimin
-                parçaları.
-
-            </p>
+            <span>02</span>
+            / STATEMENT
 
         </div>
 
     </div>
+
+
+    <h2 class="statement">
+
+        I don't just make things
+        <em>look good.</em>
+
+        I make ideas
+        <em>visible.</em>
+
+    </h2>
+
 
 </section>
 
@@ -2428,112 +2007,58 @@ section{
      WORK
 ===================================================== -->
 
-<section id="work">
+<section class="section"
+         id="work">
 
 
-    <div class="work-top">
+    <div class="work-header">
 
-        <h2 class="work-title reveal">
 
-            Selected
-            <span>Work</span>
+        <h2 class="work-title">
+
+            SELECTED
+            <span>WORK</span>
 
         </h2>
 
 
         <div class="work-count">
 
-            <span id="projectCount">
-                06
-            </span>
-
-            PROJECTS
+            06 PROJECTS
 
         </div>
 
-    </div>
-
-
-    <!-- FILTERS -->
-
-    <div class="filters">
-
-
-        <button class="filter active hover-target"
-                data-filter="all">
-
-            ALL
-
-        </button>
-
-
-        <button class="filter hover-target"
-                data-filter="branding">
-
-            BRANDING
-
-        </button>
-
-
-        <button class="filter hover-target"
-                data-filter="poster">
-
-            POSTER
-
-        </button>
-
-
-        <button class="filter hover-target"
-                data-filter="digital">
-
-            DIGITAL
-
-        </button>
-
-
-        <button class="filter hover-target"
-                data-filter="motion">
-
-            MOTION
-
-        </button>
-
-
-        <button class="filter hover-target"
-                data-filter="3d">
-
-            3D
-
-        </button>
-
 
     </div>
 
-
-    <!-- PROJECTS -->
 
     <div class="projects">
 
 
         <!-- 01 -->
 
-        <article class="project hover-target"
-                 data-category="branding"
+        <article class="project"
                  data-index="0">
+
 
             <div class="project-image">
 
-                <div class="art art-noir"></div>
+                <div class="project-number">
+                    01
+                </div>
+
+                <div class="art art-01"></div>
 
             </div>
 
 
             <div class="project-info">
 
+
                 <div>
 
                     <div class="project-name">
-                        NØIR / Visual Identity
+                        NØIR — Visual Identity
                     </div>
 
                     <div class="project-category">
@@ -2542,65 +2067,81 @@ section{
 
                 </div>
 
+
                 <div class="project-year">
-                    01 / 26
+                    2026
                 </div>
 
+
             </div>
+
 
         </article>
 
 
         <!-- 02 -->
 
-        <article class="project hover-target"
-                 data-category="poster"
+        <article class="project"
                  data-index="1">
+
 
             <div class="project-image">
 
-                <div class="art art-fragment"></div>
+                <div class="project-number">
+                    02
+                </div>
+
+                <div class="art art-02"></div>
 
             </div>
 
 
             <div class="project-info">
 
+
                 <div>
 
                     <div class="project-name">
-                        Fragment
+                        Type / Experimental Poster
                     </div>
 
                     <div class="project-category">
-                        POSTER / TYPOGRAPHY
+                        TYPOGRAPHY / POSTER
                     </div>
 
                 </div>
 
+
                 <div class="project-year">
-                    02 / 26
+                    2026
                 </div>
 
+
             </div>
+
 
         </article>
 
 
         <!-- 03 -->
 
-        <article class="project hover-target"
-                 data-category="digital"
+        <article class="project"
                  data-index="2">
+
 
             <div class="project-image">
 
-                <div class="art art-digital"></div>
+                <div class="project-number">
+                    03
+                </div>
+
+                <div class="art art-03"></div>
 
             </div>
 
 
             <div class="project-info">
+
 
                 <div>
 
@@ -2609,39 +2150,47 @@ section{
                     </div>
 
                     <div class="project-category">
-                        DIGITAL / INTERACTIVE
+                        DIGITAL / INTERACTION
                     </div>
 
                 </div>
 
+
                 <div class="project-year">
-                    03 / 26
+                    2026
                 </div>
 
+
             </div>
+
 
         </article>
 
 
         <!-- 04 -->
 
-        <article class="project hover-target"
-                 data-category="motion"
+        <article class="project"
                  data-index="3">
+
 
             <div class="project-image">
 
-                <div class="art art-type"></div>
+                <div class="project-number">
+                    04
+                </div>
+
+                <div class="art art-04"></div>
 
             </div>
 
 
             <div class="project-info">
 
+
                 <div>
 
                     <div class="project-name">
-                        Moving Type
+                        Motion Type
                     </div>
 
                     <div class="project-category">
@@ -2650,65 +2199,81 @@ section{
 
                 </div>
 
+
                 <div class="project-year">
-                    04 / 26
+                    2026
                 </div>
 
+
             </div>
+
 
         </article>
 
 
         <!-- 05 -->
 
-        <article class="project hover-target"
-                 data-category="3d"
+        <article class="project"
                  data-index="4">
+
 
             <div class="project-image">
 
-                <div class="art art-object"></div>
+                <div class="project-number">
+                    05
+                </div>
+
+                <div class="art art-05"></div>
 
             </div>
 
 
             <div class="project-info">
 
+
                 <div>
 
                     <div class="project-name">
-                        Object 05
+                        Object / 3D Study
                     </div>
 
                     <div class="project-category">
-                        3D / ART DIRECTION
+                        3D / VISUAL EXPERIMENT
                     </div>
 
                 </div>
 
+
                 <div class="project-year">
-                    05 / 26
+                    2026
                 </div>
 
+
             </div>
+
 
         </article>
 
 
         <!-- 06 -->
 
-        <article class="project hover-target"
-                 data-category="poster"
+        <article class="project"
                  data-index="5">
+
 
             <div class="project-image">
 
-                <div class="art art-after"></div>
+                <div class="project-number">
+                    06
+                </div>
+
+                <div class="art art-06"></div>
 
             </div>
 
 
             <div class="project-info">
+
 
                 <div>
 
@@ -2717,66 +2282,75 @@ section{
                     </div>
 
                     <div class="project-category">
-                        POSTER / EXPERIMENTAL
+                        EXPERIMENTAL / POSTER
                     </div>
 
                 </div>
 
+
                 <div class="project-year">
-                    06 / 26
+                    2026
                 </div>
 
+
             </div>
+
 
         </article>
 
 
     </div>
 
+
 </section>
 
 
 <!-- =====================================================
-     MARQUEE
+     TYPE BAND
 ===================================================== -->
 
-<div class="marquee">
+<div class="type-band">
 
-    <div class="marquee-track">
 
-        <span>
-            IDEAS →
-        </span>
+    <div class="type-track">
 
-        <span class="stroke">
-            IMAGES →
-        </span>
 
         <span>
-            MOTION →
+            THINK →
         </span>
 
-        <span class="stroke">
-            EXPERIENCE →
+        <span class="outline">
+            DESIGN →
         </span>
 
         <span>
-            IDEAS →
+            EXPERIMENT →
         </span>
 
-        <span class="stroke">
-            IMAGES →
+        <span class="outline">
+            REPEAT →
+        </span>
+
+
+        <span>
+            THINK →
+        </span>
+
+        <span class="outline">
+            DESIGN →
         </span>
 
         <span>
-            MOTION →
+            EXPERIMENT →
         </span>
 
-        <span class="stroke">
-            EXPERIENCE →
+        <span class="outline">
+            REPEAT →
         </span>
+
 
     </div>
+
 
 </div>
 
@@ -2785,66 +2359,70 @@ section{
      ABOUT
 ===================================================== -->
 
-<section id="about">
+<section class="section"
+         id="about">
 
 
-    <div class="section-head">
+    <div class="section-header">
 
         <div class="section-number">
-            02 / ABOUT
-        </div>
 
-
-        <div>
-
-            <h2 class="about-heading reveal">
-
-                Görsel iletişimin
-                <em>geleceğini</em>
-                araştırıyorum.
-
-            </h2>
+            <span>03</span>
+            / ABOUT
 
         </div>
 
     </div>
 
 
-    <div class="about-grid">
+    <div class="about-layout">
 
 
-        <div>
+        <div class="about-left">
 
-            <div class="about-card"></div>
+            <div class="about-mark">
+
+                AC
+
+            </div>
 
         </div>
 
 
-        <div>
+        <div class="about-right">
 
-            <p class="about-description reveal">
+
+            <h2 class="about-title">
+
+                Design is a way
+                of making
+                <span>thought visible.</span>
+
+            </h2>
+
+
+            <p class="about-text">
 
                 Merhaba, ben Abdullah Cankı.
 
+                <br><br>
+
                 Görsel İletişim Tasarımı
-                öğrencisiyim. Tasarımın farklı
-                disiplinleri arasında bağlantılar
-                kurmayı seviyorum.
+                öğrencisiyim. Marka kimliği,
+                tipografi, poster, dijital
+                deneyim, motion ve 3D
+                alanlarında çalışıyorum.
 
                 <br><br>
 
-                Bir markanın kimliğini oluşturmak,
-                bir posterin görsel dilini
-                tasarlamak veya dijital bir
-                deneyimi hareketli ve interaktif
-                hale getirmek benim için aynı
-                problemin farklı biçimleri.
+                Tasarım sürecimde önce fikri
+                anlamaya, sonra o fikrin en
+                güçlü görsel karşılığını
+                bulmaya çalışıyorum.
 
-                <br><br>
-
-                Amacım; fikirleri sade,
-                karakterli ve hatırlanabilir
-                görsel sistemlere dönüştürmek.
+                Benim için iyi tasarım sadece
+                estetik değil; karakter,
+                fikir ve iletişim meselesi.
 
             </p>
 
@@ -2854,12 +2432,12 @@ section{
 
                 <div class="skill">
 
-                    <span class="skill-num">
+                    <span class="skill-number">
                         01
                     </span>
 
                     <span>
-                        ART DIRECTION
+                        BRAND IDENTITY
                     </span>
 
                     <span class="skill-level">
@@ -2871,25 +2449,8 @@ section{
 
                 <div class="skill">
 
-                    <span class="skill-num">
+                    <span class="skill-number">
                         02
-                    </span>
-
-                    <span>
-                        BRANDING
-                    </span>
-
-                    <span class="skill-level">
-                        88%
-                    </span>
-
-                </div>
-
-
-                <div class="skill">
-
-                    <span class="skill-num">
-                        03
                     </span>
 
                     <span>
@@ -2905,16 +2466,16 @@ section{
 
                 <div class="skill">
 
-                    <span class="skill-num">
-                        04
+                    <span class="skill-number">
+                        03
                     </span>
 
                     <span>
-                        UI / UX
+                        ART DIRECTION
                     </span>
 
                     <span class="skill-level">
-                        82%
+                        87%
                     </span>
 
                 </div>
@@ -2922,12 +2483,29 @@ section{
 
                 <div class="skill">
 
-                    <span class="skill-num">
+                    <span class="skill-number">
+                        04
+                    </span>
+
+                    <span>
+                        DIGITAL DESIGN
+                    </span>
+
+                    <span class="skill-level">
+                        84%
+                    </span>
+
+                </div>
+
+
+                <div class="skill">
+
+                    <span class="skill-number">
                         05
                     </span>
 
                     <span>
-                        MOTION DESIGN
+                        MOTION
                     </span>
 
                     <span class="skill-level">
@@ -2939,7 +2517,7 @@ section{
 
                 <div class="skill">
 
-                    <span class="skill-num">
+                    <span class="skill-number">
                         06
                     </span>
 
@@ -2956,131 +2534,12 @@ section{
 
             </div>
 
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- =====================================================
-     PROCESS
-===================================================== -->
-
-<section id="process">
-
-
-    <div class="section-head">
-
-        <div class="section-number">
-            03 / PROCESS
-        </div>
-
-
-        <div>
-
-            <h2 class="intro-heading reveal">
-
-                Think.
-                <em>Make.</em>
-                Refine.
-
-            </h2>
-
-        </div>
-
-    </div>
-
-
-    <div class="process-list">
-
-
-        <div class="process reveal">
-
-            <div class="process-number">
-                01
-            </div>
-
-            <h3>
-                RESEARCH
-            </h3>
-
-            <p>
-
-                Problemi, hedef kitleyi,
-                kültürü ve görsel referansları
-                araştırarak projenin temelini
-                oluşturuyorum.
-
-            </p>
-
-        </div>
-
-
-        <div class="process reveal">
-
-            <div class="process-number">
-                02
-            </div>
-
-            <h3>
-                CONCEPT
-            </h3>
-
-            <p>
-
-                Araştırmadan çıkan fikirleri
-                güçlü bir konsepte ve görsel
-                hikâyeye dönüştürüyorum.
-
-            </p>
-
-        </div>
-
-
-        <div class="process reveal">
-
-            <div class="process-number">
-                03
-            </div>
-
-            <h3>
-                DESIGN
-            </h3>
-
-            <p>
-
-                Tipografi, renk, kompozisyon,
-                fotoğraf, 3D ve hareket ile
-                görsel sistemi oluşturuyorum.
-
-            </p>
-
-        </div>
-
-
-        <div class="process reveal">
-
-            <div class="process-number">
-                04
-            </div>
-
-            <h3>
-                EXPERIENCE
-            </h3>
-
-            <p>
-
-                Son tasarımı dijital,
-                interaktif veya hareketli
-                bir deneyime dönüştürüyorum.
-
-            </p>
 
         </div>
 
 
     </div>
+
 
 </section>
 
@@ -3089,96 +2548,64 @@ section{
      CONTACT
 ===================================================== -->
 
-<section class="contact" id="contact">
+<section class="contact"
+         id="contact">
 
 
-    <div class="section-head">
+    <div class="contact-top">
 
-        <div class="section-number">
+        <span>
             04 / CONTACT
-        </div>
+        </span>
+
+        <span>
+            LET'S WORK TOGETHER
+        </span>
 
     </div>
 
 
-    <div class="contact-heading">
+    <h2 class="contact-title">
+
+        HAVE AN
+        <br>
+
+        <span>IDEA?</span>
+
+    </h2>
 
 
-        <div class="contact-small">
+    <a href="mailto:abdullah198579@outlook.com"
+       class="contact-email">
 
-            HAVE A PROJECT IN MIND?
+        abdullah198579@outlook.com ↗
 
+    </a>
+
+
+    <div class="contact-bottom">
+
+
+        <div>
+            ABDULLAH CANKI / 2026
         </div>
 
 
-        <h2 class="contact-title">
-
-            Let's make
-            <br>
-
-            something
-            <em>great.</em>
-
-        </h2>
-
-
-        <br><br>
-
-
-        <a href="mailto:abdullah198579@outlook.com"
-           class="contact-title hover-target">
-
-            ↗ GET IN TOUCH
-
-        </a>
-
-    </div>
-
-
-    <div class="contact-grid">
-
-
-        <!-- EMAIL -->
-
         <div>
-
-            <label>
-                EMAIL
-            </label>
-
-            <a href="mailto:abdullah198579@outlook.com"
-               class="hover-target">
-
-                abdullah198579@outlook.com
-
-            </a>
-
-        </div>
-
-
-        <!-- SOCIAL -->
-
-        <div>
-
-            <label>
-                SOCIAL
-            </label>
 
             <a href="https://www.instagram.com/abdullahcank1/"
                target="_blank"
-               rel="noopener noreferrer"
-               class="hover-target">
+               rel="noopener noreferrer">
 
-                INSTAGRAM @ABDULLAHCANK1 ↗
+                INSTAGRAM ↗
 
             </a>
 
-            <br>
+            &nbsp;&nbsp;
 
             <a href="https://www.linkedin.com/in/abdullah-cank%C4%B1-6952b2324"
                target="_blank"
-               rel="noopener noreferrer"
-               class="hover-target">
+               rel="noopener noreferrer">
 
                 LINKEDIN ↗
 
@@ -3187,22 +2614,13 @@ section{
         </div>
 
 
-        <!-- LOCATION -->
-
         <div>
-
-            <label>
-                LOCATION
-            </label>
-
-            <p>
-                SAMSUN / TURKEY
-            </p>
-
+            SAMSUN / TURKEY
         </div>
 
 
     </div>
+
 
 </section>
 
@@ -3211,13 +2629,14 @@ section{
 
 
 <!-- =====================================================
-     PROJECT MODAL
+     MODAL
 ===================================================== -->
 
-<div class="modal" id="modal">
+<div class="modal"
+     id="modal">
 
 
-    <button class="modal-close hover-target"
+    <button class="modal-close"
             id="modalClose">
 
         CLOSE ×
@@ -3228,10 +2647,10 @@ section{
     <div class="modal-inner">
 
 
-        <div class="modal-number"
-             id="modalNumber">
+        <div class="modal-meta"
+             id="modalMeta">
 
-            01 / 06
+            PROJECT / 01
 
         </div>
 
@@ -3239,68 +2658,40 @@ section{
         <h2 class="modal-title"
             id="modalTitle">
 
-            NØIR / VISUAL IDENTITY
+            NØIR
 
         </h2>
 
 
-        <div class="modal-image"
-             id="modalImage">
+        <div class="modal-art"
+             id="modalArt">
 
         </div>
 
 
-        <div class="modal-info">
+        <div class="modal-description">
 
 
-            <div>
-
-                <label>
-                    CATEGORY
-                </label>
-
-                <p id="modalCategory">
-                    BRANDING
-                </p>
-
-            </div>
+            <label>
+                ABOUT PROJECT
+            </label>
 
 
-            <div>
+            <p id="modalText">
 
-                <label>
-                    YEAR
-                </label>
+                Experimental visual identity
+                exploring typography,
+                atmosphere and contemporary
+                graphic language.
 
-                <p>
-                    2026
-                </p>
-
-            </div>
-
-
-            <div>
-
-                <label>
-                    PROJECT
-                </label>
-
-                <p id="modalDescription">
-
-                    Experimental visual identity
-                    exploring typography,
-                    atmosphere and contemporary
-                    brand language.
-
-                </p>
-
-            </div>
+            </p>
 
 
         </div>
 
 
     </div>
+
 
 </div>
 
@@ -3316,7 +2707,7 @@ import * as THREE from
 
 
 const container =
-document.getElementById("three-container");
+document.getElementById("three");
 
 
 const scene =
@@ -3325,15 +2716,14 @@ new THREE.Scene();
 
 const camera =
 new THREE.PerspectiveCamera(
-    38,
+    40,
     container.clientWidth /
     container.clientHeight,
     .1,
     100
 );
 
-
-camera.position.z=6;
+camera.position.z=5;
 
 
 const renderer =
@@ -3370,48 +2760,51 @@ container.appendChild(
 
 /* LIGHT */
 
-const ambient =
-new THREE.AmbientLight(
-    0xffffff,
-    .8
+scene.add(
+    new THREE.AmbientLight(
+        0xffffff,
+        1.2
+    )
 );
 
-scene.add(ambient);
 
-
-const limeLight =
+const blueLight =
 new THREE.PointLight(
-    0xB7D72A,
-    18,
-    12
+    0x1647FF,
+    20,
+    10
 );
 
-limeLight.position.set(
+blueLight.position.set(
     3,
     2,
     3
 );
 
-scene.add(limeLight);
-
-
-const warmLight =
-new THREE.PointLight(
-    0xffd6a0,
-    10,
-    12
+scene.add(
+    blueLight
 );
 
-warmLight.position.set(
+
+const redLight =
+new THREE.PointLight(
+    0xFF3B30,
+    10,
+    8
+);
+
+redLight.position.set(
     -3,
     -2,
     2
 );
 
-scene.add(warmLight);
+scene.add(
+    redLight
+);
 
 
-/* MAIN FORM */
+/* OBJECT */
 
 const group =
 new THREE.Group();
@@ -3420,12 +2813,8 @@ scene.add(group);
 
 
 const geometry =
-new THREE.TorusKnotGeometry(
-    1.25,
-    .34,
-    160,
-    32,
-    2,
+new THREE.IcosahedronGeometry(
+    1.35,
     3
 );
 
@@ -3433,193 +2822,107 @@ new THREE.TorusKnotGeometry(
 const material =
 new THREE.MeshPhysicalMaterial({
 
-    color:0xB7D72A,
+    color:0x1647FF,
 
-    metalness:.65,
+    metalness:.45,
 
-    roughness:.17,
+    roughness:.2,
 
     clearcoat:1,
 
-    clearcoatRoughness:.08
+    clearcoatRoughness:.05
 
 });
 
 
-const knot =
+const object =
 new THREE.Mesh(
     geometry,
     material
 );
 
-group.add(knot);
-
-
-/* OUTER RING */
-
-const ringGeometry =
-new THREE.TorusGeometry(
-    2.0,
-    .008,
-    16,
-    160
+group.add(
+    object
 );
 
 
-const ringMaterial =
-new THREE.MeshBasicMaterial({
-
-    color:0x151513,
-
-    transparent:true,
-
-    opacity:.35
-
-});
-
-
-const ring =
-new THREE.Mesh(
-    ringGeometry,
-    ringMaterial
-);
-
-
-ring.rotation.x=
-Math.PI/2;
-
-group.add(ring);
-
-
-/* WIREFRAME */
+/* INNER WIREFRAME */
 
 const wire =
 new THREE.Mesh(
 
     new THREE.IcosahedronGeometry(
-        1.85,
+        1.5,
         2
     ),
 
     new THREE.MeshBasicMaterial({
 
-        color:0x151513,
+        color:0xFF3B30,
 
         wireframe:true,
 
         transparent:true,
 
-        opacity:.09
+        opacity:.35
 
     })
 
 );
 
-group.add(wire);
-
-
-/* PARTICLES */
-
-const particleCount=650;
-
-const positions =
-new Float32Array(
-    particleCount*3
+group.add(
+    wire
 );
 
 
-for(
-    let i=0;
-    i<particleCount;
-    i++
-){
+/* RING */
 
-    const radius =
-    2.7+
-    Math.random()*2.5;
+const ring =
+new THREE.Mesh(
 
-    const theta =
-    Math.random()*
-    Math.PI*2;
+    new THREE.TorusGeometry(
+        1.85,
+        .008,
+        16,
+        120
+    ),
 
-    const phi =
-    Math.acos(
-        2*Math.random()-1
-    );
+    new THREE.MeshBasicMaterial({
 
+        color:0x11110F,
 
-    positions[i*3]=
-    radius*
-    Math.sin(phi)*
-    Math.cos(theta);
+        transparent:true,
 
+        opacity:.4
 
-    positions[i*3+1]=
-    radius*
-    Math.sin(phi)*
-    Math.sin(theta);
+    })
 
-
-    positions[i*3+2]=
-    radius*
-    Math.cos(phi);
-
-}
-
-
-const particleGeometry =
-new THREE.BufferGeometry();
-
-
-particleGeometry.setAttribute(
-    "position",
-    new THREE.BufferAttribute(
-        positions,
-        3
-    )
 );
 
+ring.rotation.x=
+Math.PI/2;
 
-const particleMaterial =
-new THREE.PointsMaterial({
-
-    color:0x8EA914,
-
-    size:.015,
-
-    transparent:true,
-
-    opacity:.45
-
-});
-
-
-const particles =
-new THREE.Points(
-    particleGeometry,
-    particleMaterial
+group.add(
+    ring
 );
-
-
-scene.add(particles);
 
 
 /* MOUSE */
 
-let mouseX=0;
-let mouseY=0;
+let mx=0;
+let my=0;
 
 
 window.addEventListener(
     "mousemove",
-    event=>{
+    e=>{
 
-        mouseX=
-        event.clientX/
+        mx=
+        e.clientX/
         window.innerWidth-.5;
 
-        mouseY=
-        event.clientY/
+        my=
+        e.clientY/
         window.innerHeight-.5;
 
     }
@@ -3639,50 +2942,47 @@ function animate(){
     );
 
 
-    const time=
+    const t=
     clock.getElapsedTime();
 
 
-    knot.rotation.x+=.002;
+    object.rotation.x=
+    t*.18;
 
-    knot.rotation.y+=.004;
-
-
-    ring.rotation.z=
-    time*.12;
+    object.rotation.y=
+    t*.3;
 
 
     wire.rotation.x=
-    time*.04;
+    -t*.12;
 
     wire.rotation.y=
-    time*.06;
+    t*.2;
 
 
-    particles.rotation.y=
-    time*.008;
+    ring.rotation.z=
+    t*.4;
 
 
     group.rotation.y +=
     (
-        mouseX*.4-
+        mx*.4-
         group.rotation.y
     )*.025;
 
 
     group.rotation.x +=
     (
-        mouseY*.2-
+        my*.25-
         group.rotation.x
     )*.025;
 
 
-    limeLight.position.x=
-    Math.sin(time*.7)*4;
+    blueLight.position.x=
+    Math.sin(t)*3;
 
-
-    limeLight.position.y=
-    Math.cos(time*.6)*3;
+    blueLight.position.y=
+    Math.cos(t*.7)*2;
 
 
     renderer.render(
@@ -3703,10 +3003,11 @@ window.addEventListener(
     ()=>{
 
         camera.aspect=
-        container.clientWidth/
+        container.clientWidth /
         container.clientHeight;
 
         camera.updateProjectionMatrix();
+
 
         renderer.setSize(
             container.clientWidth,
@@ -3720,406 +3021,85 @@ window.addEventListener(
 
 
 <!-- =====================================================
-     MAIN JAVASCRIPT
+     INTERACTIONS
 ===================================================== -->
 
 <script>
 
 
 /* =====================================================
-   LOADER
-===================================================== */
-
-let load=0;
-
-const loader=
-document.getElementById("loader");
-
-const loaderPercent=
-document.getElementById(
-    "loaderPercent"
-);
-
-const loaderLine=
-document.getElementById(
-    "loaderLine"
-);
-
-
-const loaderInterval=
-setInterval(()=>{
-
-    load +=
-    Math.random()*12;
-
-
-    if(load>=100){
-
-        load=100;
-
-        clearInterval(
-            loaderInterval
-        );
-
-        setTimeout(()=>{
-
-            loader.classList.add(
-                "hide"
-            );
-
-        },450);
-
-    }
-
-
-    loaderPercent.textContent=
-    Math.floor(load)+"%";
-
-
-    loaderLine.style.transform=
-    `scaleX(${load/100})`;
-
-
-},90);
-
-
-/* =====================================================
-   CURSOR
-===================================================== */
-
-const cursor=
-document.getElementById(
-    "cursor"
-);
-
-
-let mouseX=0;
-let mouseY=0;
-
-let cursorX=0;
-let cursorY=0;
-
-
-window.addEventListener(
-    "mousemove",
-    e=>{
-
-        mouseX=e.clientX;
-
-        mouseY=e.clientY;
-
-    }
-);
-
-
-function cursorAnimation(){
-
-    cursorX +=
-    (mouseX-cursorX)*.18;
-
-    cursorY +=
-    (mouseY-cursorY)*.18;
-
-
-    cursor.style.left=
-    cursorX+"px";
-
-    cursor.style.top=
-    cursorY+"px";
-
-
-    requestAnimationFrame(
-        cursorAnimation
-    );
-
-}
-
-
-cursorAnimation();
-
-
-document
-.querySelectorAll(
-    ".hover-target"
-)
-.forEach(element=>{
-
-    element.addEventListener(
-        "mouseenter",
-        ()=>{
-
-            cursor.classList.add(
-                "big"
-            );
-
-        }
-    );
-
-
-    element.addEventListener(
-        "mouseleave",
-        ()=>{
-
-            cursor.classList.remove(
-                "big"
-            );
-
-        }
-    );
-
-});
-
-
-/* =====================================================
-   REVEAL
-===================================================== */
-
-const revealObserver=
-new IntersectionObserver(
-
-    entries=>{
-
-        entries.forEach(
-            entry=>{
-
-                if(
-                    entry.isIntersecting
-                ){
-
-                    entry.target
-                    .classList
-                    .add("show");
-
-                }
-
-            }
-        );
-
-    },
-
-    {
-        threshold:.12
-    }
-
-);
-
-
-document
-.querySelectorAll(".reveal")
-.forEach(
-    element=>
-    revealObserver.observe(element)
-);
-
-
-/* =====================================================
-   FILTERS
-===================================================== */
-
-const filters=
-document.querySelectorAll(
-    ".filter"
-);
-
-const projects=
-document.querySelectorAll(
-    ".project"
-);
-
-const projectCount=
-document.getElementById(
-    "projectCount"
-);
-
-
-filters.forEach(filter=>{
-
-    filter.addEventListener(
-        "click",
-        ()=>{
-
-
-            filters.forEach(
-                item=>
-                item.classList
-                .remove("active")
-            );
-
-
-            filter.classList.add(
-                "active"
-            );
-
-
-            const category=
-            filter.dataset.filter;
-
-
-            let visible=0;
-
-
-            projects.forEach(
-                project=>{
-
-                    const show=
-                    category==="all" ||
-                    project.dataset.category===
-                    category;
-
-
-                    if(show){
-
-                        project.classList
-                        .remove("hidden");
-
-                        visible++;
-
-                    }else{
-
-                        project.classList
-                        .add("hidden");
-
-                    }
-
-                }
-            );
-
-
-            projectCount.textContent=
-            String(visible)
-            .padStart(2,"0");
-
-        }
-    );
-
-});
-
-
-/* =====================================================
    PROJECT DATA
 ===================================================== */
 
-const projectData=[
+const data=[
 
     {
 
-        number:"01 / 06",
+        title:"NØIR — VISUAL IDENTITY",
 
-        title:
-        "NØIR / VISUAL IDENTITY",
-
-        category:
-        "BRANDING / ART DIRECTION",
-
-        art:
-        "art-noir",
-
-        description:
-        "Gece kültürü, moda ve çağdaş görsel dil üzerinden geliştirilen deneysel marka kimliği."
+        text:
+        "Gece kültürü, moda ve çağdaş görsel iletişim dili üzerine kurgulanmış deneysel marka kimliği."
 
     },
 
 
     {
 
-        number:"02 / 06",
+        title:"TYPE — EXPERIMENTAL POSTER",
 
-        title:
-        "FRAGMENT",
-
-        category:
-        "POSTER / TYPOGRAPHY",
-
-        art:
-        "art-fragment",
-
-        description:
-        "Parçalanma fikrini tipografik deformasyon ve güçlü kompozisyonlarla araştıran poster serisi."
+        text:
+        "Tipografinin biçim, ölçek ve yön üzerinden yeniden yorumlandığı deneysel poster serisi."
 
     },
 
 
     {
 
-        number:"03 / 06",
+        title:"DIGITAL VOID",
 
-        title:
-        "DIGITAL VOID",
-
-        category:
-        "DIGITAL / INTERACTIVE",
-
-        art:
-        "art-digital",
-
-        description:
-        "Dijital boşluk, ışık ve hareket kavramlarını araştıran deneysel interaktif görsel çalışma."
+        text:
+        "Dijital alan, ışık ve hareket kavramlarını araştıran interaktif görsel deney."
 
     },
 
 
     {
 
-        number:"04 / 06",
+        title:"MOTION TYPE",
 
-        title:
-        "MOVING TYPE",
-
-        category:
-        "MOTION / TYPOGRAPHY",
-
-        art:
-        "art-type",
-
-        description:
-        "Tipografinin hareketli görüntü içerisindeki davranışını araştıran motion design çalışması."
+        text:
+        "Tipografinin zaman içerisinde nasıl davranabileceğini araştıran motion design projesi."
 
     },
 
 
     {
 
-        number:"05 / 06",
+        title:"OBJECT — 3D STUDY",
 
-        title:
-        "OBJECT 05",
-
-        category:
-        "3D / ART DIRECTION",
-
-        art:
-        "art-object",
-
-        description:
-        "Soyut form, materyal, ışık ve kamera kompozisyonu üzerinden oluşturulan 3D görsel araştırma."
+        text:
+        "Soyut geometriler, materyal ve ışık üzerinden gerçekleştirilen 3D görsel araştırma."
 
     },
 
 
     {
 
-        number:"06 / 06",
+        title:"AFTERIMAGE",
 
-        title:
-        "AFTERIMAGE",
-
-        category:
-        "POSTER / EXPERIMENTAL",
-
-        art:
-        "art-after",
-
-        description:
-        "Görüntünün gözde bıraktığı izden yola çıkan deneysel tipografi ve renk çalışması."
+        text:
+        "Görüntünün zihinde bıraktığı izden yola çıkan deneysel tipografi ve poster çalışması."
 
     }
 
 ];
 
 
-/* =====================================================
-   MODAL
-===================================================== */
+const projects=
+document.querySelectorAll(
+    ".project"
+);
+
 
 const modal=
 document.getElementById(
@@ -4131,81 +3111,25 @@ document.getElementById(
     "modalClose"
 );
 
-const modalNumber=
-document.getElementById(
-    "modalNumber"
-);
-
 const modalTitle=
 document.getElementById(
     "modalTitle"
 );
 
-const modalImage=
+const modalText=
 document.getElementById(
-    "modalImage"
+    "modalText"
 );
 
-const modalCategory=
+const modalMeta=
 document.getElementById(
-    "modalCategory"
+    "modalMeta"
 );
 
-const modalDescription=
+const modalArt=
 document.getElementById(
-    "modalDescription"
+    "modalArt"
 );
-
-
-function openProject(index){
-
-    const project=
-    projectData[index];
-
-
-    modalNumber.textContent=
-    project.number;
-
-
-    modalTitle.textContent=
-    project.title;
-
-
-    modalCategory.textContent=
-    project.category;
-
-
-    modalDescription.textContent=
-    project.description;
-
-
-    modalImage.innerHTML="";
-
-
-    const art=
-    document.createElement("div");
-
-
-    art.className=
-    "art "+
-    project.art;
-
-
-    modalImage.appendChild(
-        art
-    );
-
-
-    modal.classList.add(
-        "active"
-    );
-
-
-    document.body.classList.add(
-        "no-scroll"
-    );
-
-}
 
 
 projects.forEach(
@@ -4215,11 +3139,57 @@ projects.forEach(
             "click",
             ()=>{
 
-                openProject(
-                    Number(
-                        project.dataset.index
-                    )
+                const index=
+                Number(
+                    project.dataset.index
                 );
+
+
+                const item=
+                data[index];
+
+
+                modalTitle.textContent=
+                item.title;
+
+
+                modalText.textContent=
+                item.text;
+
+
+                modalMeta.textContent=
+                "PROJECT / "+
+                String(index+1)
+                .padStart(2,"0");
+
+
+                const original=
+                project.querySelector(
+                    ".art"
+                );
+
+
+                modalArt.innerHTML="";
+
+
+                const copy=
+                original.cloneNode(
+                    true
+                );
+
+
+                modalArt.appendChild(
+                    copy
+                );
+
+
+                modal.classList.add(
+                    "active"
+                );
+
+
+                document.body.style.overflow=
+                "hidden";
 
             }
         );
@@ -4228,22 +3198,21 @@ projects.forEach(
 );
 
 
-function closeProject(){
+function closeModal(){
 
     modal.classList.remove(
         "active"
     );
 
-    document.body.classList.remove(
-        "no-scroll"
-    );
+    document.body.style.overflow=
+    "";
 
 }
 
 
 modalClose.addEventListener(
     "click",
-    closeProject
+    closeModal
 );
 
 
@@ -4255,38 +3224,10 @@ document.addEventListener(
             event.key==="Escape"
         ){
 
-            closeProject();
+            closeModal();
 
         }
 
-    }
-);
-
-
-/* =====================================================
-   SCROLL PARALLAX
-===================================================== */
-
-window.addEventListener(
-    "scroll",
-    ()=>{
-
-        const grid=
-        document.querySelector(
-            ".hero-grid"
-        );
-
-
-        if(grid){
-
-            grid.style.transform=
-            `translateY(${window.scrollY*.12}px)`;
-
-        }
-
-    },
-    {
-        passive:true
     }
 );
 
