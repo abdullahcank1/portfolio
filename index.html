@@ -1,0 +1,1314 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>THE CANKI CHRONICLE — Abdullah Cankı / Özel Baskı 2026</title>
+  <meta name="description" content="Abdullah Cankı kişisel editoryal tasarım portfolyosu. Gazete mizanpajı, 3D interaktif etütler ve görsel sistemler.">
+
+  <!-- Özel Monogram Gazete Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23111111'/%3E%3Ctext x='32' y='46' font-family='serif' font-size='42' font-weight='900' fill='%23F4EFE6' text-anchor='middle'%3EAC%3C/text%3E%3Ccircle cx='48' cy='20' r='5' fill='%23D92318'/%3E%3C/svg%3E">
+
+  <!-- Google Fonts: Gazete Manşet Fontu (Playfair) + Brutalist Grotesk (Space Grotesk & Syne) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700;1,900&family=Space+Grotesk:wght@400;500;600;700&family=Syne:wght@700;800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&display=swap" rel="stylesheet">
+
+  <!-- Three.js (3D Gazete Sahnesi) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+  <style>
+    :root {
+      /* Klasik Gazete & Matbaa Renk Paleti */
+      --paper: #F3EFE6;
+      --paper-aged: #E9E3D5;
+      --ink: #111112;
+      --ink-lead: #28282B;
+      --ink-faded: #64625D;
+      --press-red: #D92318;
+      --press-red-soft: rgba(217, 35, 24, 0.1);
+      --rule: #111112;
+      --rule-light: #C8C2B3;
+      
+      --font-headline: 'Playfair Display', Georgia, serif;
+      --font-grotesk: 'Syne', -apple-system, sans-serif;
+      --font-mono: 'Space Grotesk', monospace;
+      --font-body: 'Newsreader', Georgia, serif;
+      --ease-press: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background-color: var(--paper);
+      color: var(--ink);
+      font-family: var(--font-body);
+    }
+
+    ::selection {
+      background: var(--press-red);
+      color: #FFFFFF;
+    }
+
+    body {
+      overflow-x: hidden;
+      line-height: 1.5;
+      background-color: var(--paper);
+      -webkit-font-smoothing: antialiased;
+      background-image: 
+        radial-gradient(rgba(17, 17, 18, 0.05) 1px, transparent 0),
+        linear-gradient(to right, rgba(17, 17, 18, 0.02) 1px, transparent 1px);
+      background-size: 24px 24px, 120px 100%;
+    }
+
+    /* Özel Matbaa İmleci */
+    @media (pointer: fine) {
+      .cursor-dot, .cursor-circle {
+        pointer-events: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        border-radius: 50%;
+        z-index: 99999;
+        transform: translate(-50%, -50%);
+        transition: opacity 0.2s ease;
+      }
+      .cursor-dot {
+        width: 8px;
+        height: 8px;
+        background: var(--press-red);
+      }
+      .cursor-circle {
+        width: 40px;
+        height: 40px;
+        border: 1.5px solid var(--ink);
+        transition: width 0.25s var(--ease-press), height 0.25s var(--ease-press), border-color 0.25s ease, background 0.25s ease;
+      }
+      body.cursor-hover .cursor-circle {
+        width: 70px;
+        height: 70px;
+        border-color: var(--press-red);
+        background: rgba(217, 35, 24, 0.08);
+      }
+    }
+
+    @media (pointer: coarse) {
+      .cursor-dot, .cursor-circle { display: none !important; }
+    }
+
+    /* Genel Gazete Konteyneri (Baskı Sayfası Marjları) */
+    .broadsheet-wrapper {
+      max-width: 1440px;
+      margin: 0 auto;
+      border-left: 2px solid var(--rule);
+      border-right: 2px solid var(--rule);
+      background: var(--paper);
+      box-shadow: 0 0 50px rgba(0,0,0,0.06);
+    }
+
+    /* Gazete Başlığı (Masthead) */
+    .newspaper-header {
+      border-bottom: 3px double var(--rule);
+      padding: 16px 4vw 20px;
+      background: var(--paper);
+    }
+
+    .masthead-meta-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--rule);
+      padding-bottom: 8px;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .issue-badge {
+      background: var(--press-red);
+      color: #fff;
+      padding: 2px 8px;
+      font-weight: 700;
+    }
+
+    .masthead-main {
+      text-align: center;
+      padding: 24px 0 16px;
+    }
+
+    .newspaper-name {
+      font-family: var(--font-headline);
+      font-size: clamp(2.8rem, 9.5vw, 7.8rem);
+      font-weight: 900;
+      text-transform: uppercase;
+      line-height: 0.9;
+      letter-spacing: -0.04em;
+    }
+
+    .newspaper-name span {
+      font-style: italic;
+      color: var(--press-red);
+    }
+
+    .masthead-tagline {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-top: 10px;
+      color: var(--ink-faded);
+    }
+
+    .masthead-nav-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid var(--rule);
+      border-bottom: 2px solid var(--rule);
+      padding: 8px 0;
+      margin-top: 12px;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .nav-sections {
+      display: flex;
+      gap: 24px;
+    }
+
+    .nav-sections a {
+      color: var(--ink);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .nav-sections a:hover {
+      color: var(--press-red);
+      text-decoration: underline;
+    }
+
+    /* Son Dakika / Flaş Şerit */
+    .ticker-tape {
+      background: var(--ink);
+      color: var(--paper);
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      border-bottom: 2px solid var(--rule);
+    }
+
+    .ticker-label {
+      background: var(--press-red);
+      color: #fff;
+      padding: 8px 18px;
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      z-index: 2;
+    }
+
+    .ticker-content {
+      display: flex;
+      white-space: nowrap;
+      animation: tickerRun 22s linear infinite;
+      gap: 40px;
+      padding-left: 20px;
+    }
+
+    @keyframes tickerRun {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* Hero / Manşet Izgarası */
+    .front-page-hero {
+      display: grid;
+      grid-template-columns: 1fr;
+      border-bottom: 2px solid var(--rule);
+    }
+
+    .hero-lead-col {
+      padding: clamp(24px, 4vw, 48px);
+      border-bottom: 2px solid var(--rule);
+    }
+
+    .lead-kicker {
+      font-family: var(--font-mono);
+      color: var(--press-red);
+      font-weight: 700;
+      font-size: 0.85rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .lead-headline {
+      font-family: var(--font-headline);
+      font-size: clamp(2.4rem, 6vw, 5.2rem);
+      font-weight: 900;
+      line-height: 0.98;
+      letter-spacing: -0.02em;
+      margin-bottom: 24px;
+      text-transform: uppercase;
+    }
+
+    .lead-columns-text {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 24px;
+      font-size: 1.05rem;
+      line-height: 1.65;
+      color: var(--ink-lead);
+      text-align: justify;
+    }
+
+    .first-letter-drop::first-letter {
+      font-family: var(--font-headline);
+      font-size: 4.2rem;
+      float: left;
+      line-height: 0.8;
+      margin-right: 12px;
+      font-weight: 900;
+      color: var(--press-red);
+    }
+
+    /* 3D İnteraktif Gazete / Sayfa Sahnesi */
+    .hero-3d-col {
+      background: var(--paper-aged);
+      position: relative;
+      min-height: 480px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      overflow: hidden;
+      border-top: 1px solid var(--rule);
+    }
+
+    #threeCanvas {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      cursor: grab;
+    }
+
+    #threeCanvas:active {
+      cursor: grabbing;
+    }
+
+    .stage-overlay-labels {
+      position: relative;
+      z-index: 2;
+      padding: 20px;
+      display: flex;
+      justify-content: space-between;
+      pointer-events: none;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .drag-hint {
+      background: var(--ink);
+      color: #fff;
+      padding: 4px 10px;
+      border-radius: 2px;
+    }
+
+    /* Gazete Filtreleme Barı */
+    .gazette-filter-bar {
+      padding: 16px 4vw;
+      background: var(--paper-aged);
+      border-bottom: 2px solid var(--rule);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+
+    .gazette-filter-bar::-webkit-scrollbar { display: none; }
+
+    .filter-label {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      margin-right: 8px;
+      white-space: nowrap;
+    }
+
+    .filter-btn {
+      background: transparent;
+      border: 1.5px solid var(--rule);
+      padding: 8px 16px;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      font-weight: 700;
+      cursor: pointer;
+      text-transform: uppercase;
+      white-space: nowrap;
+      transition: all 0.2s ease;
+    }
+
+    .filter-btn:hover {
+      background: var(--paper);
+    }
+
+    .filter-btn.active {
+      background: var(--ink);
+      color: #fff;
+      border-color: var(--ink);
+    }
+
+    /* Projeler / Gazete Sayfası Izgarası */
+    .broadsheet-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+    }
+
+    .broadsheet-article {
+      border-bottom: 2px solid var(--rule);
+      padding: 32px 4vw;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 24px;
+      cursor: pointer;
+      transition: background 0.25s ease;
+    }
+
+    .broadsheet-article:hover {
+      background: rgba(217, 35, 24, 0.03);
+    }
+
+    .article-lead-visual {
+      height: 280px;
+      border: 2px solid var(--rule);
+      background: #E5DFC9;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    /* Damgalar ve Barkodlar */
+    .gazette-stamp {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      border: 2px solid var(--press-red);
+      color: var(--press-red);
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      font-weight: 800;
+      padding: 3px 8px;
+      text-transform: uppercase;
+      transform: rotate(6deg);
+      letter-spacing: 0.1em;
+      pointer-events: none;
+    }
+
+    .article-header-meta {
+      display: flex;
+      justify-content: space-between;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      font-weight: 700;
+      border-bottom: 1px solid var(--rule);
+      padding-bottom: 6px;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+      color: var(--ink-faded);
+    }
+
+    .article-headline {
+      font-family: var(--font-headline);
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      font-weight: 900;
+      line-height: 1.05;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+
+    .article-deck {
+      font-size: 1.05rem;
+      line-height: 1.6;
+      color: var(--ink-lead);
+      margin-bottom: 20px;
+    }
+
+    .article-tags-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .ink-tag {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      font-weight: 700;
+      border: 1px solid var(--rule);
+      padding: 3px 8px;
+      text-transform: uppercase;
+    }
+
+    /* Süreç Bölümü (Gazete Baskı Aşamaları) */
+    .press-process-section {
+      padding: 60px 4vw;
+      border-bottom: 2px solid var(--rule);
+      background: var(--paper);
+    }
+
+    .section-banner-title {
+      font-family: var(--font-headline);
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 900;
+      text-align: center;
+      text-transform: uppercase;
+      border-top: 2px solid var(--rule);
+      border-bottom: 2px solid var(--rule);
+      padding: 14px 0;
+      margin-bottom: 40px;
+    }
+
+    .process-cols {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+
+    .press-step {
+      border: 1.5px solid var(--rule);
+      padding: 24px;
+      background: var(--paper-aged);
+      position: relative;
+    }
+
+    .step-folio {
+      font-family: var(--font-mono);
+      font-size: 2.4rem;
+      font-weight: 800;
+      color: var(--press-red);
+      line-height: 1;
+      margin-bottom: 10px;
+    }
+
+    .step-name {
+      font-family: var(--font-headline);
+      font-size: 1.3rem;
+      font-weight: 800;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+    }
+
+    .step-body {
+      font-size: 0.95rem;
+      color: var(--ink-lead);
+      line-height: 1.6;
+    }
+
+    /* İletişim / Arka Sayfa (Backpage / Classifieds) */
+    .classifieds-section {
+      padding: 60px 4vw;
+      background: var(--paper-aged);
+      border-bottom: 2px solid var(--rule);
+    }
+
+    .classified-box {
+      border: 3px solid var(--rule);
+      padding: clamp(24px, 5vw, 60px);
+      background: var(--paper);
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 36px;
+    }
+
+    .classified-title {
+      font-family: var(--font-headline);
+      font-size: clamp(2.4rem, 6vw, 4.6rem);
+      font-weight: 900;
+      line-height: 0.95;
+      text-transform: uppercase;
+    }
+
+    .classified-title em {
+      color: var(--press-red);
+      font-style: italic;
+    }
+
+    .copy-telegram-btn {
+      background: var(--ink);
+      color: var(--paper);
+      border: none;
+      padding: 18px 28px;
+      font-family: var(--font-mono);
+      font-size: 0.95rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: background 0.2s ease;
+      width: 100%;
+    }
+
+    .copy-telegram-btn:hover {
+      background: var(--press-red);
+    }
+
+    /* Footer Colophon */
+    .broadsheet-footer {
+      padding: 24px 4vw 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      background: var(--paper);
+    }
+
+    /* Gazete Manşet Detay Modalı */
+    .gazette-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(17, 17, 18, 0.85);
+      backdrop-filter: blur(8px);
+      z-index: 999999;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .modal-paper-sheet {
+      background: var(--paper);
+      border: 3px solid var(--rule);
+      max-width: 840px;
+      width: 100%;
+      max-height: 88vh;
+      overflow-y: auto;
+      padding: clamp(24px, 5vw, 50px);
+      position: relative;
+      box-shadow: 0 25px 60px rgba(0,0,0,0.4);
+    }
+
+    .modal-close-trigger {
+      position: sticky;
+      top: 0;
+      float: right;
+      background: var(--ink);
+      color: #fff;
+      border: none;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 6px 14px;
+      cursor: pointer;
+      text-transform: uppercase;
+      z-index: 10;
+    }
+
+    .modal-close-trigger:hover {
+      background: var(--press-red);
+    }
+
+    .modal-dossier-headline {
+      font-family: var(--font-headline);
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 900;
+      text-transform: uppercase;
+      margin: 12px 0 20px;
+      line-height: 1.05;
+      border-bottom: 2px solid var(--rule);
+      padding-bottom: 12px;
+    }
+
+    .dossier-specs-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 24px;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+    }
+
+    .dossier-specs-table td {
+      border: 1px solid var(--rule);
+      padding: 8px 12px;
+    }
+
+    .dossier-specs-table td strong {
+      color: var(--press-red);
+    }
+
+    /* Kopyalandı Bildirimi */
+    .press-toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: var(--ink);
+      color: #fff;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      font-weight: 700;
+      padding: 14px 22px;
+      border-left: 5px solid var(--press-red);
+      transform: translateY(150%);
+      opacity: 0;
+      transition: all 0.3s var(--ease-press);
+      z-index: 9999999;
+    }
+
+    .press-toast.active {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    /* Responsive Izgara Kırılımları */
+    @media (min-width: 768px) {
+      .front-page-hero { grid-template-columns: 1.25fr 0.75fr; }
+      .lead-columns-text { grid-template-columns: 1fr 1fr; }
+      .broadsheet-article { grid-template-columns: 360px 1fr; align-items: center; }
+      .process-cols { grid-template-columns: repeat(3, 1fr); }
+      .classified-box { grid-template-columns: 1.2fr 0.8fr; align-items: center; }
+      .broadsheet-footer { flex-direction: row; justify-content: space-between; }
+    }
+
+    @media (min-width: 1024px) {
+      .process-cols { grid-template-columns: repeat(5, 1fr); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- İnteraktif Matbaa İmleci -->
+  <div class="cursor-dot" id="cDot"></div>
+  <div class="cursor-circle" id="cRing"></div>
+
+  <!-- Ana Gazete Sayfası (Broadsheet) -->
+  <div class="broadsheet-wrapper">
+
+    <!-- Gazete Başlığı (Masthead) -->
+    <header class="newspaper-header" id="top">
+      <div class="masthead-meta-top">
+        <span>CİLT: XXIV // NO: 09</span>
+        <span>ARTVİN & İSTANBUL / TÜRKİYE BASKISI</span>
+        <span class="issue-badge">ÖZEL MANŞET PORTFOLYO</span>
+        <span>FİYAT: BİR FİKİR</span>
+      </div>
+
+      <div class="masthead-main">
+        <h1 class="newspaper-name">THE CANKI <span>CHRONICLE</span></h1>
+        <div class="masthead-tagline">Görsel İletişim Tasarımı • Sanat Yönetimi • 3D Form Sistemleri • Editoryal Arşiv</div>
+      </div>
+
+      <div class="masthead-nav-bar">
+        <span>GÜNLÜK BASKI // 2026</span>
+        <nav class="nav-sections">
+          <a href="#work">Manşetler (İşler)</a>
+          <a href="#press-process">Baskı Metodu</a>
+          <a href="#colophon">Künye</a>
+          <a href="#contact">Telgraf (İletişim)</a>
+        </nav>
+        <span>HAFTANIN 7 GÜNÜ AÇIK</span>
+      </div>
+    </header>
+
+    <!-- Flaş Haber Bandı (Breaking News Ticker) -->
+    <div class="ticker-tape">
+      <div class="ticker-label">★ SON BASKI</div>
+      <div class="ticker-content">
+        <span>YENİ MARKA KİMLİKLERİ VE 3D PROJELER İÇİN EDİTÖR MASASI AÇIK</span>
+        <span>✦</span>
+        <span>GÖRSEL GÖSTERGEBİLİM VE TİPOGRAFİK DİSİPLİN İLE ÜRETİM</span>
+        <span>✦</span>
+        <span>CANKIXCREATIVE 360° SİSTEMİ YAYINDA</span>
+        <span>✦</span>
+        <span>BLENDER & PARAMETRİK 3D FORM ETÜTLERİ ARŞİVDE</span>
+      </div>
+    </div>
+
+    <!-- 01 / Ön Sayfa Manşeti & Canlı 3D Gazete Sahnesi -->
+    <section class="front-page-hero">
+      <div class="hero-lead-col">
+        <div class="lead-kicker">MANŞET HABER // BAŞYAZI</div>
+        <h2 class="lead-headline">FİKRİ BASKIYA VERMEK: GÖRSEL DÜNYAYI YENİDEN ŞEKİLLENDİRMEK.</h2>
+        
+        <div class="lead-columns-text">
+          <p class="first-letter-drop">
+            Tasarım benim için sayfayı dolduran rastgele bir estetik değil; bir fikrin insan zihninde bıraktığı silinmez karakterdir. Artvin Çoruh Üniversitesi Sanat ve Tasarım Fakültesi'nde edindiğim akademik teoriyi, çağdaş editoryal ve 3D teknolojilerle buluşturuyorum.
+          </p>
+          <p>
+            Deneysel tipografi, kurumsal kimlik atlasları, hareketli grafikler ve prosedürel hacimler... Her proje, kendi gazetesini çıkaran bağımsız bir haber gibi ele alınır; araştırılır, tasarlanır ve baskıya verilir.
+          </p>
+        </div>
+      </div>
+
+      <!-- 3D İnteraktif Katlanmış Gazete Modeli -->
+      <div class="hero-3d-col">
+        <div class="stage-overlay-labels">
+          <span>3D BASKI ENSTALASYONU</span>
+          <span class="drag-hint">DÖNDÜRMEK İÇİN SÜRÜKLE ↻</span>
+        </div>
+        <canvas id="threeCanvas"></canvas>
+      </div>
+    </section>
+
+    <!-- Gazete Kategori Filtresi -->
+    <div class="gazette-filter-bar">
+      <span class="filter-label">KATEGORİ SEÇİNİZ:</span>
+      <button class="filter-btn active" data-filter="all">TÜM MANŞETLER (6)</button>
+      <button class="filter-btn" data-filter="branding">KİMLİK SİSTEMLERİ</button>
+      <button class="filter-btn" data-filter="type">TİPOGRAFİ</button>
+      <button class="filter-btn" data-filter="3d">3D & DİJİTAL FORM</button>
+      <button class="filter-btn" data-filter="editorial">EDİTORYAL BASKI</button>
+    </div>
+
+    <!-- 02 / Seçilmiş Manşetler (Projeler) -->
+    <section class="broadsheet-grid" id="work">
+
+      <!-- Proje 1 -->
+      <article class="broadsheet-article" data-cat="branding editorial" onclick="openDossier('cankix')">
+        <div class="article-lead-visual" style="background:#151518; color:#fff;">
+          <div class="gazette-stamp">KİMLİK ATLASI</div>
+          <div style="text-align:center;">
+            <div style="font-family:var(--font-headline); font-size:3.5rem; font-weight:900; color:var(--press-red);">CXC</div>
+            <div style="font-family:var(--font-mono); font-size:0.75rem; letter-spacing:0.2em;">CANKIXCREATIVE</div>
+          </div>
+        </div>
+        <div>
+          <div class="article-header-meta">
+            <span>SAYFA: 01 // KİMLİK SİSTEMLERİ</span>
+            <span>2026 BASKISI</span>
+          </div>
+          <h3 class="article-headline">Cankixcreative 360° Stüdyo Mimarisi</h3>
+          <p class="article-deck">Bağımsız tasarım stüdyosu kimliği için geliştirilen; monokrom matbaa nizamına ve rijit 12 kolonlu ızgara yapısına dayanan kurumsal sistem.</p>
+          <div class="article-tags-row">
+            <span class="ink-tag">Branding</span>
+            <span class="ink-tag">Grid Sistemi</span>
+            <span class="ink-tag">Kurumsal Kimlik</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- Proje 2 -->
+      <article class="broadsheet-article" data-cat="editorial" onclick="openDossier('noir')">
+        <div class="article-lead-visual" style="background:#0D0D10; color:#F3EFE6;">
+          <div class="gazette-stamp" style="border-color:#fff; color:#fff;">ÖZEL EDİSYON</div>
+          <div style="border-left: 3px solid var(--press-red); padding-left: 20px;">
+            <h4 style="font-family:var(--font-headline); font-size:2.8rem; letter-spacing:0.15em;">NØIR</h4>
+            <span style="font-family:var(--font-mono); font-size:0.75rem;">SERGİ KATALOĞU</span>
+          </div>
+        </div>
+        <div>
+          <div class="article-header-meta">
+            <span>SAYFA: 02 // SANAT YÖNETİMİ</span>
+            <span>2026 BASKISI</span>
+          </div>
+          <h3 class="article-headline">NØIR: Atmosferik Işık ve Sinematik Afişler</h3>
+          <p class="article-deck">Monokrom karanlık tonlar ve keskin ışık kırılmaları üzerinden kurgulanmış deneysel sergi kimliği ve büyük boy editoryal afiş serisi.</p>
+          <div class="article-tags-row">
+            <span class="ink-tag">Editorial</span>
+            <span class="ink-tag">Afiş Tasarımı</span>
+            <span class="ink-tag">Art Direction</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- Proje 3 -->
+      <article class="broadsheet-article" data-cat="3d" onclick="openDossier('void')">
+        <div class="article-lead-visual" style="background:#201F1D; color:#fff;">
+          <div class="gazette-stamp">PARAMETRİK</div>
+          <div style="font-family:var(--font-mono); font-size:5rem; font-weight:900; color:var(--press-red); letter-spacing:-0.05em;">
+            [ 3D ]
+          </div>
+        </div>
+        <div>
+          <div class="article-header-meta">
+            <span>SAYFA: 03 // 3D & PROSEDÜREL FORM</span>
+            <span>2026 BASKISI</span>
+          </div>
+          <h3 class="article-headline">VOID: Sayısal Uzayda Boşluk ve Hacim Etütleri</h3>
+          <p class="article-deck">Blender motoru ve Python betikleriyle üretilen; ışığın geometrik pürüzler üzerindeki dağılımını araştıran dijital heykel serisi.</p>
+          <div class="article-tags-row">
+            <span class="ink-tag">Blender 3D</span>
+            <span class="ink-tag">Python Scripting</span>
+            <span class="ink-tag">Cycles Render</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- Proje 4 -->
+      <article class="broadsheet-article" data-cat="type" onclick="openDossier('type')">
+        <div class="article-lead-visual" style="background:#FAF8F3;">
+          <div class="gazette-stamp">TIPOGRAFİ</div>
+          <div style="font-family:var(--font-headline); font-size:6.5rem; font-weight:900; line-height:0.8;">
+            G<span style="color:var(--press-red); font-style:italic;">&</span>T
+          </div>
+        </div>
+        <div>
+          <div class="article-header-meta">
+            <span>SAYFA: 04 // DENEYSEL TİPOGRAFİ</span>
+            <span>2026 BASKISI</span>
+          </div>
+          <h3 class="article-headline">Type / System 01: Harften Heykele Dekonstrüksiyon</h3>
+          <p class="article-deck">Geleneksel tipografi anatomisinin sınırlarını zorlayan, harfleri sadece okunacak bir metin değil heykelsi bir mimari olarak ele alan araştırma.</p>
+          <div class="article-tags-row">
+            <span class="ink-tag">Typography</span>
+            <span class="ink-tag">Tipografik Atlas</span>
+            <span class="ink-tag">Baskı</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- Proje 5 -->
+      <article class="broadsheet-article" data-cat="3d editorial" onclick="openDossier('gurultu')">
+        <div class="article-lead-visual" style="background:#E2DDD2;">
+          <div class="gazette-stamp">SİNEMA & ANİMASYON</div>
+          <div style="font-family:var(--font-headline); font-size:2.4rem; font-weight:900; text-align:center;">
+            GÜRÜLTÜ<br>
+            <span style="font-size:0.8rem; font-family:var(--font-mono); font-weight:400;">STOP-MOTION 2026</span>
+          </div>
+        </div>
+        <div>
+          <div class="article-header-meta">
+            <span>SAYFA: 05 // HAREKET & SİNEMA</span>
+            <span>2026 BASKISI</span>
+          </div>
+          <h3 class="article-headline">Gürültü: Stop-Motion Kısa Film Afiş & Kimliği</h3>
+          <p class="article-deck">Zihinsel karmaşa ve analog dokuların kare kare birleştirildiği bağımsız stop-motion animasyon filminin editoryal afiş ve jenerik dili.</p>
+          <div class="article-tags-row">
+            <span class="ink-tag">Stop-Motion</span>
+            <span class="ink-tag">DaVinci Resolve</span>
+            <span class="ink-tag">Film Afişi</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- Proje 6 -->
+      <article class="broadsheet-article" data-cat="branding editorial" onclick="openDossier('acu')">
+        <div class="article-lead-visual" style="background:#111112; color:#fff;">
+          <div class="gazette-stamp">RESMİ ETKİNLİK</div>
+          <div style="font-family:var(--font-mono); font-size:1.1rem; font-weight:700; text-align:center;">
+            AÇÜ FAKÜLTE<br>
+            <span style="color:var(--press-red); font-size:1.8rem; font-family:var(--font-headline);">MEZUNİYET '26</span>
+          </div>
+        </div>
+        <div>
+          <div class="article-header-meta">
+            <span>SAYFA: 06 // KURUMSAL ETKİNLİK</span>
+            <span>2026 BASKISI</span>
+          </div>
+          <h3 class="article-headline">AÇÜ Kuşak Bağlama & Mezuniyet Töreni</h3>
+          <p class="article-deck">Sanat ve Tasarım Fakültesi resmi diploma töreni için tasarlanan protokoler davetiyeler, sahne giydirmeleri ve basılı materyaller.</p>
+          <div class="article-tags-row">
+            <span class="ink-tag">Resmi Kimlik</span>
+            <span class="ink-tag">Davetiye</span>
+            <span class="ink-tag">Akademik Yayın</span>
+          </div>
+        </div>
+      </article>
+
+    </section>
+
+    <!-- 03 / Baskı Metodolojisi (Process) -->
+    <section class="press-process-section" id="press-process">
+      <div class="section-banner-title">★ BASKI & ÜRETİM SÜRECİ ★</div>
+      <div class="process-cols">
+        <div class="press-step">
+          <div class="step-folio">01</div>
+          <div class="step-name">Göstergebilim</div>
+          <p class="step-body">Umberto Eco ve Roland Barthes kuramlarıyla görsel anlam üretimi, pazar araştırması ve kavramsal eskizler.</p>
+        </div>
+        <div class="press-step">
+          <div class="step-folio">02</div>
+          <div class="step-name">Nizam & Grid</div>
+          <p class="step-body">Sayfanın omurgasını oluşturan katı matematiksel ızgaralar, kontrast dengesi ve tipografi hiyerarşisi.</p>
+        </div>
+        <div class="press-step">
+          <div class="step-folio">03</div>
+          <div class="step-name">Görsel Sistem</div>
+          <p class="step-body">Marka kimliğinin basılı materyalden piksele kadar tutarlı konuşmasını sağlayan kurallar bütünü.</p>
+        </div>
+        <div class="press-step">
+          <div class="step-folio">04</div>
+          <div class="step-name">3D & Simülasyon</div>
+          <p class="step-body">Blender ortamında prosedürel malzeme, stüdyo ışıklandırması ve hareketli grafik denemeleri.</p>
+        </div>
+        <div class="press-step">
+          <div class="step-folio">05</div>
+          <div class="step-name">Baskı & Teslim</div>
+          <p class="step-body">Ofset baskıya tam uyumlu vektörel üretim, renk ayrımı ve eksiksiz marka el kitabı.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 04 / Seri İlanlar & Telgraf (Contact) -->
+    <section class="classifieds-section" id="contact">
+      <div class="classified-box">
+        <div>
+          <div style="font-family:var(--font-mono); font-size:0.8rem; font-weight:700; color:var(--press-red); margin-bottom:8px;">★ SERİ İLANLAR / İŞ BİRLİĞİ</div>
+          <h3 class="classified-title">BİR SONRAKİ SAYIYI <em>BİRLİKTE</em> BASALIM.</h3>
+          <p style="font-size:1.05rem; color:var(--ink-lead); margin-top:14px; max-width:540px;">
+            Yeni marka kimlikleri, editoryal kitap & afiş tasarımları, 3D görselleştirmeler veya kreatif staj pozisyonları için editör masasına telgraf çekebilirsiniz.
+          </p>
+        </div>
+
+        <div>
+          <button class="copy-telegram-btn" onclick="copyTelegramEmail()">
+            <span id="telBtnText">TELGRAF: E-POSTAYI KOPYALA</span>
+            <span>↗</span>
+          </button>
+          
+          <div style="display:flex; justify-content:space-between; margin-top:16px; font-family:var(--font-mono); font-size:0.8rem; font-weight:700;">
+            <a href="https://www.instagram.com/abdullahcank1/" target="_blank" style="color:var(--ink); text-decoration:none;">INSTAGRAM ↗</a>
+            <a href="https://tr.linkedin.com/in/abdullah-cank%C4%B1-6952b2324" target="_blank" style="color:var(--ink); text-decoration:none;">LINKEDIN ↗</a>
+            <a href="https://www.behance.net" target="_blank" style="color:var(--ink); text-decoration:none;">BEHANCE ↗</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Künye (Colophon & Footer) -->
+    <footer class="broadsheet-footer" id="colophon">
+      <div>© 2026 THE CANKI CHRONICLE — ABDULLAH CANKI</div>
+      <div>GÖRSEL İLETİŞİM TASARIMI BÖLÜMÜ // ARTVİN & İSTANBUL</div>
+      <div>TÜM BASKI HAKLARI SAKLIDIR</div>
+    </footer>
+
+  </div>
+
+  <!-- Manşet Detay Modalı (Dossier) -->
+  <div class="gazette-modal" id="gazetteModal" onclick="closeDossier(event)">
+    <div class="modal-paper-sheet" onclick="event.stopPropagation()">
+      <button class="modal-close-trigger" onclick="closeDossier(null)">KAPAT (ESC) ✕</button>
+      <div style="font-family:var(--font-mono); font-size:0.75rem; color:var(--press-red); font-weight:800;" id="dosKicker">DOSYA RAPORU</div>
+      <h3 class="modal-dossier-headline" id="dosTitle">PROJE MANŞETİ</h3>
+
+      <table class="dossier-specs-table">
+        <tr>
+          <td><strong>DİSİPLİN:</strong> <span id="dosDisc">-</span></td>
+          <td><strong>YAZILIM / ARAÇLAR:</strong> <span id="dosTools">-</span></td>
+          <td><strong>YIL:</strong> 2026</td>
+        </tr>
+      </table>
+
+      <div style="margin-bottom:20px;">
+        <h4 style="font-family:var(--font-headline); font-size:1.2rem; text-transform:uppercase; margin-bottom:6px;">01 / Problem & Brifing</h4>
+        <p style="font-size:1rem; line-height:1.65; color:var(--ink-lead);" id="dosBrief"></p>
+      </div>
+
+      <div style="margin-bottom:20px;">
+        <h4 style="font-family:var(--font-headline); font-size:1.2rem; text-transform:uppercase; margin-bottom:6px;">02 / Baskı & Tasarım Metodu</h4>
+        <p style="font-size:1rem; line-height:1.65; color:var(--ink-lead);" id="dosMethod"></p>
+      </div>
+
+      <div>
+        <h4 style="font-family:var(--font-headline); font-size:1.2rem; text-transform:uppercase; margin-bottom:6px;">03 / Çıktılar & Arşiv Kaydı</h4>
+        <p style="font-size:1rem; line-height:1.65; color:var(--ink-lead);" id="dosResult"></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Kopyalandı Bildirimi (Toast) -->
+  <div class="press-toast" id="pressToast">
+    ✓ Telgraf adresi panoya alındı: abdullah198579@outlook.com
+  </div>
+
+  <!-- JavaScript Kodları -->
+  <script>
+    // 1. Matbaa İmleci
+    const dot = document.getElementById('cDot');
+    const ring = document.getElementById('cRing');
+    let mx = 0, my = 0, rx = 0, ry = 0;
+
+    if (window.matchMedia('(pointer: fine)').matches) {
+      window.addEventListener('mousemove', e => {
+        mx = e.clientX;
+        my = e.clientY;
+        dot.style.transform = `translate(${mx}px, ${my}px)`;
+      });
+
+      function cursorLoop() {
+        rx += (mx - rx) * 0.18;
+        ry += (my - ry) * 0.18;
+        ring.style.transform = `translate(${rx}px, ${ry}px)`;
+        requestAnimationFrame(cursorLoop);
+      }
+      cursorLoop();
+
+      document.querySelectorAll('a, button, .broadsheet-article, .copy-telegram-btn').forEach(el => {
+        el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
+        el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
+      });
+    }
+
+    // 2. Three.js İnteraktif 3D Katlanmış Gazete Modeli
+    const stage = document.querySelector('.hero-3d-col');
+    const canvas = document.getElementById('threeCanvas');
+
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(40, stage.clientWidth / stage.clientHeight, 0.1, 100);
+    camera.position.set(0, 0, 4.6);
+
+    const renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
+    renderer.setSize(stage.clientWidth, stage.clientHeight);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+    // 3D Sahne Grubu (Katlanmış Gazete Broşürü)
+    const paperGroup = new THREE.Group();
+    scene.add(paperGroup);
+
+    // Gazete Yaprağı 1 (Sol Kanat)
+    const pageGeo1 = new THREE.BoxGeometry(1.3, 1.8, 0.02);
+    const pageMat1 = new THREE.MeshBasicMaterial({ color: 0xF3EFE6 });
+    const page1 = new THREE.Mesh(pageGeo1, pageMat1);
+    page1.position.x = -0.65;
+    page1.rotation.y = 0.35;
+
+    // Tel Kafes Detay (Matbaa Nizamı)
+    const wireGeo1 = new THREE.WireframeGeometry(pageGeo1);
+    const wireMat1 = new THREE.LineBasicMaterial({ color: 0x111112, linewidth: 1 });
+    const wire1 = new THREE.LineSegments(wireGeo1, wireMat1);
+    page1.add(wire1);
+    paperGroup.add(page1);
+
+    // Gazete Yaprağı 2 (Sağ Kanat)
+    const pageGeo2 = new THREE.BoxGeometry(1.3, 1.8, 0.02);
+    const pageMat2 = new THREE.MeshBasicMaterial({ color: 0xE9E3D5 });
+    const page2 = new THREE.Mesh(pageGeo2, pageMat2);
+    page2.position.x = 0.65;
+    page2.rotation.y = -0.35;
+
+    const wireGeo2 = new THREE.WireframeGeometry(pageGeo2);
+    const wireMat2 = new THREE.LineBasicMaterial({ color: 0xD92318, linewidth: 1 });
+    const wire2 = new THREE.LineSegments(wireGeo2, wireMat2);
+    page2.add(wire2);
+    paperGroup.add(page2);
+
+    // Gazete İçi Kırmızı Vurgu Küpü (Matbaa Pulu)
+    const sealGeo = new THREE.BoxGeometry(0.3, 0.3, 0.3);
+    const sealMat = new THREE.MeshBasicMaterial({ color: 0xD92318, wireframe: true });
+    const seal = new THREE.Mesh(sealGeo, sealMat);
+    seal.position.set(0, 0, 0.2);
+    paperGroup.add(seal);
+
+    // Sürükleme ve Döndürme Etkileşimi
+    let isDragging = false;
+    let prevMouseX = 0, prevMouseY = 0;
+    let targetRotY = -0.2, targetRotX = 0.1;
+
+    stage.addEventListener('mousedown', e => {
+      isDragging = true;
+      prevMouseX = e.clientX;
+      prevMouseY = e.clientY;
+    });
+
+    window.addEventListener('mouseup', () => isDragging = false);
+
+    window.addEventListener('mousemove', e => {
+      if (!isDragging) return;
+      const deltaX = e.clientX - prevMouseX;
+      const deltaY = e.clientY - prevMouseY;
+      targetRotY += deltaX * 0.008;
+      targetRotX += deltaY * 0.008;
+      prevMouseX = e.clientX;
+      prevMouseY = e.clientY;
+    });
+
+    // Dokunmatik Sürükleme Desteği (Mobil)
+    stage.addEventListener('touchstart', e => {
+      if(e.touches.length === 1) {
+        isDragging = true;
+        prevMouseX = e.touches[0].clientX;
+        prevMouseY = e.touches[0].clientY;
+      }
+    }, { passive: true });
+
+    window.addEventListener('touchend', () => isDragging = false);
+
+    window.addEventListener('touchmove', e => {
+      if (!isDragging || e.touches.length !== 1) return;
+      const deltaX = e.touches[0].clientX - prevMouseX;
+      const deltaY = e.touches[0].clientY - prevMouseY;
+      targetRotY += deltaX * 0.008;
+      targetRotX += deltaY * 0.008;
+      prevMouseX = e.touches[0].clientX;
+      prevMouseY = e.touches[0].clientY;
+    }, { passive: true });
+
+    function render3D() {
+      requestAnimationFrame(render3D);
+
+      // Yavaşça nefes alan gazete animasyonu
+      if (!isDragging) {
+        targetRotY += 0.003;
+      }
+
+      paperGroup.rotation.y += (targetRotY - paperGroup.rotation.y) * 0.08;
+      paperGroup.rotation.x += (targetRotX - paperGroup.rotation.x) * 0.08;
+      seal.rotation.x += 0.02;
+      seal.rotation.y += 0.02;
+
+      renderer.render(scene, camera);
+    }
+    render3D();
+
+    window.addEventListener('resize', () => {
+      camera.aspect = stage.clientWidth / stage.clientHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(stage.clientWidth, stage.clientHeight);
+    });
+
+    // 3. Gazete Filtreleme
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const articles = document.querySelectorAll('.broadsheet-article');
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const filter = btn.dataset.filter;
+
+        articles.forEach(art => {
+          const cats = art.dataset.cat;
+          if (filter === 'all' || cats.includes(filter)) {
+            art.style.display = 'grid';
+          } else {
+            art.style.display = 'none';
+          }
+        });
+      });
+    });
+
+    // 4. Gazete Vaka Raporları (Dossier Data)
+    const dossiers = {
+      cankix: {
+        kicker: "01 // MARKA MİMARİSİ VE EDİTORYAL KİMLİK",
+        title: "Cankixcreative 360° Tasarım Kimliği",
+        discipline: "Branding, Art Direction, Grid Mimarisi",
+        tools: "Illustrator, InDesign, Figma",
+        brief: "Tasarım stüdyosu için hem matbu yayınlarda hem de yüksek kontrastlı dijital mecralarda anında tanınan, gazete mizampajı ciddiyetinde bir kurumsal kimlik inşa edilmesi amaçlandı.",
+        method: "Klasik matbaa tipografisi ile monokrom renk dengesi birleştirildi. 'CXC' monogramı katı 12 kolonlu grid üzerinde çizildi ve tüm antetli kâğıtlar, kartvizitler, yayın şablonları hazırlandı.",
+        result: "Uluslararası ölçekte freelance projelere hazır, eksiksiz bir tasarım kılavuzu (Brand Guideline) ve editoryal baskı kiti üretildi."
+      },
+      noir: {
+        kicker: "02 // SERGİ KİMLİĞİ VE BÜYÜK BOY AFİŞLER",
+        title: "NØIR — Atmosferik Görsel Deney",
+        discipline: "Poster Tasarımı, Sanat Yönetimi, Editorial",
+        tools: "Photoshop, InDesign, Baskı Tramı",
+        brief: "Sinematik gölge oyunları, yüksek kontrastlı siyah-beyaz fotoğraflar ve editoryal metin hiyerarşisiyle bir sergi kataloğu konsepti yaratmak.",
+        method: "Sert serif tipografi, negatif alanın baskın kullanımı ve grenli analog matbaa tramları ile afiş serisi kurgulandı.",
+        result: "Büyük boy editoryal serigrafi posterler ve özel ciltli sergi broşürü tamamlandı."
+      },
+      void: {
+        kicker: "03 // 3D PROSEDÜREL DİJİTAL FORM",
+        title: "VOID / 3D Hacim & Işık Araştırması",
+        discipline: "Generative 3D, Procedural Art",
+        tools: "Blender 4.5, Python, Cycles",
+        brief: "Sayısal boşlukta hacim, kütle ve ışığın matematiksel kırılımlarla nasıl somutlaşabileceğini test eden 3D etüt serisi.",
+        method: "Python betikleri ve geometrik modifier zincirleri kullanılarak parametrik yüzeyler modellendi; stüdyo ışık simülasyonları uygulandı.",
+        result: "Yüksek çözünürlüklü 3D sanat baskıları ve sosyal medya için döngüsel hareketli render çıktıları sağlandı."
+      },
+      type: {
+        kicker: "04 // DENEYSEL TİPOGRAFİK FORM",
+        title: "Type / System 01 — Tipografik Heykel",
+        discipline: "Deneysel Tipografi, Glif Tasarımı",
+        tools: "Illustrator, FontLab",
+        brief: "Harfleri salt okunabilir metinler olmaktan çıkarıp mimari birer hacim ve heykel olarak mekânda konumlandırmak.",
+        method: "Harf anatomisi kuralları dekonstrükte edilerek negatif boşluklar yapısal formlara dönüştürüldü.",
+        result: "Editoryal tipografi atlası ve deneysel tipografik afiş koleksiyonu basıldı."
+      },
+      gurultu: {
+        kicker: "05 // SİNEMA VE HAREKETLİ GRAFİK",
+        title: "Gürültü — Stop-Motion Kısa Film",
+        discipline: "Afiş Tasarımı, Storyboard, Motion",
+        tools: "DaVinci Resolve, CapCut, Illustrator",
+        brief: "Kaotik ses ve zihin gürültüsünü kare kare analog nesneler üzerinden anlatan bağımsız kısa filmin editoryal tanıtımı.",
+        method: "Storyboard eskizleri, editoryal afiş mizampajı ve ritmik hareketli jenerik sekansları hazırlandı.",
+        result: "Öğrenci film festivalleri için ana afiş, basın dosyası ve tanıtım materyalleri teslim edildi."
+      },
+      acu: {
+        kicker: "06 // RESMİ ETKİNLİK VE PROTOKOL",
+        title: "AÇÜ Mezuniyet ve Kuşak Töreni",
+        discipline: "Baskı, Kurumsal Kimlik, Davetiye",
+        tools: "Illustrator, InDesign",
+        brief: "Artvin Çoruh Üniversitesi Sanat ve Tasarım Fakültesi 2025–2026 mezuniyet töreni için prestijli ve resmi bir görsel dil inşası.",
+        method: "Fakültenin sanatsal kimliğini üniversite protokolüyle harmanlayan tipografik davetiyeler ve sahne giydirmeleri üretildi.",
+        result: "Tüm tören alanında kullanılan basılı davetiyeler, sosyal medya duyuruları ve diploma berat şablonları basıldı."
+      }
+    };
+
+    function openDossier(key) {
+      const d = dossiers[key];
+      if (!d) return;
+      document.getElementById('dosKicker').innerText = d.kicker;
+      document.getElementById('dosTitle').innerText = d.title;
+      document.getElementById('dosDisc').innerText = d.discipline;
+      document.getElementById('dosTools').innerText = d.tools;
+      document.getElementById('dosBrief').innerText = d.brief;
+      document.getElementById('dosMethod').innerText = d.method;
+      document.getElementById('dosResult').innerText = d.result;
+
+      document.getElementById('gazetteModal').style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeDossier(e) {
+      document.getElementById('gazetteModal').style.display = 'none';
+      document.body.style.overflow = 'auto';
+    }
+
+    window.addEventListener('keydown', e => {
+      if (e.key === 'Escape') closeDossier(null);
+    });
+
+    // 5. E-posta Kopyalama & Toast
+    function copyTelegramEmail() {
+      const mail = "abdullah198579@outlook.com";
+      navigator.clipboard.writeText(mail).then(() => {
+        const btnText = document.getElementById('telBtnText');
+        btnText.innerText = "TELGRAF ALINDI: KOPYALANDI! ✓";
+
+        const toast = document.getElementById('pressToast');
+        toast.classList.add('active');
+
+        setTimeout(() => {
+          btnText.innerText = "TELGRAF: E-POSTAYI KOPYALA";
+          toast.classList.remove('active');
+        }, 2800);
+      });
+    }
+  </script>
+</body>
+</html>
