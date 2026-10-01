@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ABDULLAH CANKI — Visual Communication Designer & Art Director</title>
+  <meta name="description" content="Portfolio of Abdullah Canki. Focused on identity systems, typography, 3D forms, motion and digital experiences.">
+
+  <!-- Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #09090b;
+      --surface: #121215;
+      --surface-border: #222227;
+      --text-main: #f4f4f5;
+      --text-muted: #82828d;
+      --accent: #ffffff;
+      --font-display: 'Space Grotesk', -apple-system, sans-serif;
+      --font-body: 'Plus Jakarta Sans', -apple-system, sans-serif;
+      --transition: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background: var(--bg);
+      color: var(--text-main);
+      font-family: var(--font-body);
+      selection-background-color: #ffffff;
+      selection-color: #000000;
+    }
+
+    ::selection {
+      background: #ffffff;
+      color: #000000;
+    }
+
+    body {
+      overflow-x: hidden;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Custom Cursor */
+    .cursor-dot, .cursor-circle {
+      pointer-events: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      border-radius: 50%;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+      transition: opacity 0.2s ease;
+    }
+
+    .cursor-dot {
+      width: 6px;
+      height: 6px;
+      background: #fff;
+    }
+
+    .cursor-circle {
+      width: 38px;
+      height: 38px;
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      transition: width 0.3s var(--transition), height 0.3s var(--transition), border-color 0.3s ease;
+    }
+
+    body:hover .cursor-dot,
+    body:hover .cursor-circle {
+      opacity: 1;
+    }
+
+    .cursor-hover .cursor-circle {
+      width: 64px;
+      height: 64px;
+      border-color: #fff;
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: invert(1);
+    }
+
+    /* Navigation */
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 100;
+      background: rgba(9, 9, 11, 0.75);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--surface-border);
+      padding: 18px 5vw;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: var(--font-display);
+      font-size: 0.82rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .nav-brand {
+      font-weight: 700;
+      color: var(--text-main);
+      text-decoration: none;
+    }
+
+    .nav-meta {
+      color: var(--text-muted);
+      display: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 28px;
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--text-main);
+    }
+
+    /* Section Foundations */
+    section {
+      padding: 120px 5vw;
+      border-bottom: 1px solid var(--surface-border);
+      max-width: 1500px;
+      margin: 0 auto;
+    }
+
+    .section-eyebrow {
+      font-family: var(--font-display);
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 40px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .section-eyebrow::after {
+      content: "";
+      height: 1px;
+      flex-grow: 1;
+      background: var(--surface-border);
+      max-width: 100px;
+    }
+
+    /* Hero Section */
+    .hero {
+      padding-top: 180px;
+      min-height: 85vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .hero-top-info {
+      display: flex;
+      justify-content: space-between;
+      font-family: var(--font-display);
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 30px;
+      letter-spacing: 0.06em;
+    }
+
+    .hero-headline {
+      font-family: var(--font-display);
+      font-size: clamp(3rem, 9.5vw, 8.5rem);
+      line-height: 0.92;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: -0.03em;
+      margin-bottom: 40px;
+    }
+
+    .hero-headline span {
+      display: block;
+    }
+
+    .hero-manifesto {
+      max-width: 580px;
+      font-size: 1.15rem;
+      color: var(--text-muted);
+      font-weight: 400;
+      line-height: 1.6;
+    }
+
+    /* Marquee */
+    .marquee-wrapper {
+      overflow: hidden;
+      white-space: nowrap;
+      padding: 24px 0;
+      border-bottom: 1px solid var(--surface-border);
+      background: #0d0d10;
+      user-select: none;
+    }
+
+    .marquee-inner {
+      display: inline-flex;
+      gap: 40px;
+      animation: marquee 26s linear infinite;
+      font-family: var(--font-display);
+      font-size: 0.85rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    .marquee-inner span {
+      display: inline-flex;
+      align-items: center;
+      gap: 40px;
+    }
+
+    @keyframes marquee {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* Work Section */
+    .work-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 40px;
+      margin-top: 50px;
+    }
+
+    .project-card {
+      background: var(--surface);
+      border: 1px solid var(--surface-border);
+      padding: 40px;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 24px;
+      cursor: pointer;
+      position: relative;
+      transition: border-color 0.3s ease, transform 0.3s var(--transition);
+    }
+
+    .project-card:hover {
+      border-color: #555;
+      transform: translateY(-4px);
+    }
+
+    .project-card-header {
+      display: flex;
+      justify-content: space-between;
+      font-family: var(--font-display);
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      letter-spacing: 0.1em;
+    }
+
+    .project-card-visual {
+      height: 280px;
+      background: #18181d;
+      border: 1px solid #282830;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-display);
+      font-size: 3rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      color: #33333e;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .project-card:hover .project-card-visual {
+      color: var(--text-main);
+      border-color: #444450;
+    }
+
+    .project-card-body h3 {
+      font-family: var(--font-display);
+      font-size: 1.6rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+    }
+
+    .project-card-body p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.6;
+      max-width: 600px;
+    }
+
+    .project-meta-tags {
+      display: flex;
+      gap: 10px;
+      margin-top: 18px;
+      flex-wrap: wrap;
+    }
+
+    .tag {
+      font-family: var(--font-display);
+      font-size: 0.7rem;
+      padding: 5px 12px;
+      border: 1px solid var(--surface-border);
+      color: var(--text-muted);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      border-radius: 100px;
+    }
+
+    /* Modal / Case Study Drawer */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(8px);
+      z-index: 1000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .modal-container {
+      background: #111115;
+      border: 1px solid var(--surface-border);
+      max-width: 800px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      padding: 48px;
+      position: relative;
+      border-radius: 4px;
+    }
+
+    .modal-close-btn {
+      position: absolute;
+      top: 24px;
+      right: 24px;
+      background: transparent;
+      border: 1px solid var(--surface-border);
+      color: var(--text-main);
+      padding: 8px 16px;
+      font-family: var(--font-display);
+      font-size: 0.75rem;
+      cursor: pointer;
+      text-transform: uppercase;
+    }
+
+    .modal-header h2 {
+      font-family: var(--font-display);
+      font-size: 2.2rem;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .modal-scope {
+      color: var(--text-muted);
+      font-family: var(--font-display);
+      font-size: 0.8rem;
+      letter-spacing: 0.08em;
+      margin-bottom: 30px;
+    }
+
+    .modal-section {
+      margin-top: 24px;
+      border-top: 1px solid var(--surface-border);
+      padding-top: 20px;
+    }
+
+    .modal-section h4 {
+      font-family: var(--font-display);
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .modal-section p {
+      color: #cfcfd4;
+      line-height: 1.7;
+      font-size: 0.95rem;
+    }
+
+    /* Capabilities / Matrix */
+    .capabilities-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+
+    .cap-column h3 {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--surface-border);
+    }
+
+    .cap-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .cap-list li {
+      display: flex;
+      justify-content: space-between;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      border-bottom: 1px dashed #1a1a20;
+      padding-bottom: 10px;
+    }
+
+    .cap-list li span:first-child {
+      color: var(--text-main);
+      font-weight: 500;
+    }
+
+    /* Contact */
+    .contact-container {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 50px;
+    }
+
+    .contact-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.4rem, 6vw, 5rem);
+      line-height: 1;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
+    }
+
+    .contact-box {
+      background: var(--surface);
+      border: 1px solid var(--surface-border);
+      padding: 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .copy-email-btn {
+      background: #ffffff;
+      color: #000000;
+      border: none;
+      padding: 16px 24px;
+      font-family: var(--font-display);
+      font-size: 0.9rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      transition: background 0.2s ease;
+      text-decoration: none;
+    }
+
+    .copy-email-btn:hover {
+      background: #d4d4d8;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 20px;
+    }
+
+    .social-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-family: var(--font-display);
+      font-size: 0.85rem;
+      letter-spacing: 0.08em;
+    }
+
+    .social-links a:hover {
+      color: var(--text-main);
+    }
+
+    /* Footer */
+    footer {
+      padding: 40px 5vw;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      font-family: var(--font-display);
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      letter-spacing: 0.08em;
+      border-top: 1px solid var(--surface-border);
+      max-width: 1500px;
+      margin: 0 auto;
+    }
+
+    @media (min-width: 768px) {
+      .nav-meta { display: block; }
+      .work-grid { grid-template-columns: repeat(2, 1fr); }
+      .capabilities-grid { grid-template-columns: repeat(2, 1fr); }
+      .contact-container { grid-template-columns: 1.2fr 0.8fr; align-items: center; }
+      footer { flex-direction: row; justify-content: space-between; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Custom Cursor Elements -->
+  <div class="cursor-dot" id="cursorDot"></div>
+  <div class="cursor-circle" id="cursorCircle"></div>
+
+  <!-- Header -->
+  <header>
+    <a href="#" class="nav-brand">AC</a>
+    <div class="nav-meta">ABDULLAH CANKI / PORTFOLIO 2026</div>
+    <div class="nav-links">
+      <a href="#work">WORK</a>
+      <a href="#about">ABOUT</a>
+      <a href="#contact">CONTACT</a>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero" id="top">
+    <div>
+      <div class="hero-top-info">
+        <span>VISUAL COMMUNICATION DESIGNER</span>
+        <span>ARTVİN & İSTANBUL / TR</span>
+      </div>
+      <h1 class="hero-headline">
+        <span>ABDULLAH</span>
+        <span>CANKI</span>
+        <span>VISUAL</span>
+        <span>SYSTEMS</span>
+      </h1>
+    </div>
+    <div class="hero-manifesto">
+      Görsel iletişim tasarımı öğrencisi ve bağımsız tasarımcı. Fikirleri; deneysel tipografi, 3D formlar, hareket ve dijital sistemler üzerinden somut deneyimlere dönüştürüyorum.
+    </div>
+  </section>
+
+  <!-- Infinite Marquee -->
+  <div class="marquee-wrapper">
+    <div class="marquee-inner">
+      <span>BRANDING ✦ TYPOGRAPHY ✦ 3D MOTION ✦ ART DIRECTION ✦ EDITORIAL ✦ CREATIVE CODE ✦ VISUAL RESEARCH ✦</span>
+      <span>BRANDING ✦ TYPOGRAPHY ✦ 3D MOTION ✦ ART DIRECTION ✦ EDITORIAL ✦ CREATIVE CODE ✦ VISUAL RESEARCH ✦</span>
+    </div>
+  </div>
+
+  <!-- Work Section -->
+  <section id="work">
+    <div class="section-eyebrow">01 / SELECTED WORK</div>
+    <div class="work-grid">
+
+      <!-- Project 1 -->
+      <article class="project-card" onclick="openCaseStudy('noir')">
+        <div class="project-card-header">
+          <span>01 / 06</span>
+          <span>IDENTITY SYSTEM</span>
+        </div>
+        <div class="project-card-visual">NØIR</div>
+        <div class="project-card-body">
+          <h3>NØIR — Visual Identity</h3>
+          <p>Kontrast, atmosfer ve sinematik karanlık tonlar etrafında kurgulanmış deneysel görsel kimlik çalışması.</p>
+          <div class="project-meta-tags">
+            <span class="tag">Branding</span>
+            <span class="tag">Poster</span>
+            <span class="tag">Digital</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- Project 2 -->
+      <article class="project-card" onclick="openCaseStudy('type')">
+        <div class="project-card-header">
+          <span>02 / 06</span>
+          <span>EXPERIMENTAL TYPE</span>
+        </div>
+        <div class="project-card-visual">TYPE</div>
+        <div class="project-card-body">
+          <h3>Type / System 01</h3>
+          <p>Harflerin okunabilir bir metin olmanın ötesine geçip bağımsız bir heykelimsi nesneye dönüştüğü tipografik araştırma.</p>
+          <div class="project-meta-tags">
+            <span class="tag">Typography</span>
+            <span class="tag">Editorial</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- Project 3 -->
+      <article class="project-card" onclick="openCaseStudy('void')">
+        <div class="project-card-header">
+          <span>03 / 06</span>
+          <span>3D & CREATIVE CODE</span>
+        </div>
+        <div class="project-card-visual">VOID</div>
+        <div class="project-card-body">
+          <h3>VOID / 3D Form Study</h3>
+          <p>Hacim, perspektif, derinlik ve prosedürel geometrik sistemleri araştıran üç boyutlu dijital form etüdü.</p>
+          <div class="project-meta-tags">
+            <span class="tag">Blender</span>
+            <span class="tag">Procedural 3D</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- Project 4 -->
+      <article class="project-card" onclick="openCaseStudy('watch')">
+        <div class="project-card-header">
+          <span>04 / 06</span>
+          <span>MOTION STUDY</span>
+        </div>
+        <div class="project-card-visual">WATCH</div>
+        <div class="project-card-body">
+          <h3>WATCH / Attention Dynamics</h3>
+          <p>Gözlem, görsel ritim ve dijital hareket algısı üzerine odaklanan görsel araştırma ve animasyon prototipi.</p>
+          <div class="project-meta-tags">
+            <span class="tag">Motion</span>
+            <span class="tag">Visual Research</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- Project 5 -->
+      <article class="project-card" onclick="openCaseStudy('object')">
+        <div class="project-card-header">
+          <span>05 / 06</span>
+          <span>SPATIAL PERCEPTION</span>
+        </div>
+        <div class="project-card-visual">OBJECT</div>
+        <div class="project-card-body">
+          <h3>Object / 03</h3>
+          <p>Işık kırılmaları, kütle hissi ve mekânsal yanılsamalara odaklanan soyut 3D obje modellemesi.</p>
+          <div class="project-meta-tags">
+            <span class="tag">3D Art</span>
+            <span class="tag">Lighting</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- Project 6 -->
+      <article class="project-card" onclick="openCaseStudy('afterimage')">
+        <div class="project-card-header">
+          <span>06 / 06</span>
+          <span>EDITORIAL POSTER</span>
+        </div>
+        <div class="project-card-visual">AFTER</div>
+        <div class="project-card-body">
+          <h3>AFTERIMAGE Series</h3>
+          <p>Hafıza, tekrar ve retina üzerinde kalan ardışık görsel izler üzerine deneysel editoryal poster serisi.</p>
+          <div class="project-meta-tags">
+            <span class="tag">Print</span>
+            <span class="tag">Editorial</span>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- Capabilities & Stack (Eski Yüzdeliklerin Yerine) -->
+  <section id="about">
+    <div class="section-eyebrow">02 / CORE CAPABILITIES & STACK</div>
+    <div class="capabilities-grid">
+      <div class="cap-column">
+        <h3>Disiplinler & Uzmanlıklar</h3>
+        <ul class="cap-list">
+          <li><span>Visual Identity Systems</span><span>Brand Guidelines & Assets</span></li>
+          <li><span>Experimental Typography</span><span>Custom Type & Editorial</span></li>
+          <li><span>3D & Procedural Form</span><span>Lighting, Shading & Staging</span></li>
+          <li><span>Motion Graphics</span><span>Kinetic Type & Loops</span></li>
+          <li><span>Digital Product Interface</span><span>Wireframing & UI Grid</span></li>
+        </ul>
+      </div>
+      <div class="cap-column">
+        <h3>Araçlar & Teknik Altyapı</h3>
+        <ul class="cap-list">
+          <li><span>Blender 3D</span><span>Modeling, Cycles, Scripting</span></li>
+          <li><span>Adobe After Effects</span><span>Kinetic Motion & Compositing</span></li>
+          <li><span>Illustrator & Photoshop</span><span>Vector Systems & Editorial</span></li>
+          <li><span>Figma</span><span>Design Systems & Prototypes</span></li>
+          <li><span>Creative Code</span><span>Python (3D), HTML5 / CSS3</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact">
+    <div class="section-eyebrow">03 / INITIATE CONTACT</div>
+    <div class="contact-container">
+      <div class="contact-title">
+        LET'S MAKE<br>SOMETHING<br>VISIBLE.
+      </div>
+      <div class="contact-box">
+        <p style="color: var(--text-muted); font-size: 0.95rem;">
+          Yeni projeler, staj/iş birlikleri veya deneysel sanat çalışmaları için dilediğiniz zaman iletişime geçebilirsiniz.
+        </p>
+        <button class="copy-email-btn" onclick="copyEmail(this)">
+          <span id="copyText">COPY EMAIL (CLICK)</span>
+        </button>
+        <div class="social-links">
+          <a href="https://www.instagram.com/abdullahcank1/" target="_blank" rel="noopener">INSTAGRAM ↗</a>
+          <a href="https://tr.linkedin.com/in/abdullah-cank%C4%B1-6952b2324" target="_blank" rel="noopener">LINKEDIN ↗</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <span>© 2026 ABDULLAH CANKI</span>
+    <span>VISUAL COMMUNICATION DESIGNER</span>
+    <span>ARHAVİ & İSTANBUL / TÜRKİYE</span>
+  </footer>
+
+  <!-- Case Study Modal -->
+  <div class="modal-overlay" id="caseStudyModal" onclick="closeCaseStudy(event)">
+    <div class="modal-container" onclick="event.stopPropagation()">
+      <button class="modal-close-btn" onclick="closeCaseStudy(null)">ESC / CLOSE</button>
+      <div class="modal-header">
+        <h2 id="modalTitle">PROJE BAŞLIĞI</h2>
+        <div class="modal-scope" id="modalScope">BRANDING / 2026</div>
+      </div>
+      <div class="modal-section">
+        <h4>Brief & Problem</h4>
+        <p id="modalBrief">Projenin çıkış noktası ve çözmeyi hedeflediği görsel iletişim problemi.</p>
+      </div>
+      <div class="modal-section">
+        <h4>Design Strategy & Execution</h4>
+        <p id="modalExecution">Kullanılan tipografik hiyerarşi, malzeme seçimleri, 3D yaklaşımı ve üretim aşaması.</p>
+      </div>
+      <div class="modal-section">
+        <h4>Deliverables & Impact</h4>
+        <p id="modalImpact">Poster çıktıları, kimlik kılavuzu ve hareketli format sunumları.</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // 1. Custom Cursor Logic
+    const dot = document.getElementById('cursorDot');
+    const circle = document.getElementById('cursorCircle');
+    let mouseX = 0, mouseY = 0;
+    let circleX = 0, circleY = 0;
+
+    window.addEventListener('mousemove', (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      dot.style.transform = `translate(${mouseX}px, ${mouseY}px)`;
+    });
+
+    function renderCursor() {
+      circleX += (mouseX - circleX) * 0.15;
+      circleY += (mouseY - circleY) * 0.15;
+      circle.style.transform = `translate(${circleX}px, ${circleY}px)`;
+      requestAnimationFrame(renderCursor);
+    }
+    renderCursor();
+
+    // Hover state on links & interactive elements
+    const interactiveElements = document.querySelectorAll('a, button, .project-card');
+    interactiveElements.forEach(el => {
+      el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
+      el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
+    });
+
+    // 2. Case Study Data & Modal Controller
+    const caseStudies = {
+      noir: {
+        title: "NØIR — Visual Identity",
+        scope: "BRANDING / ART DIRECTION / DIGITAL — 2026",
+        brief: "Minimalist ve sinematik estetiğin yüksek kontrastlı bir marka kimliği içinde nasıl var olabileceğini test etmek üzere kurgulandı. Monokrom renk paletine eşlik eden derinlikli gölgeler hedeflendi.",
+        execution: "Agresif serif ve monospaced tipografi kombinasyonu ile sert grid yapıları kuruldu. Logoform, ışık-gölge dengesizliği üzerinden şekillendirildi.",
+        impact: "Fiziksel editoryal yayın formatları, sergi posterleri ve dijital landing page prototipi olarak teslim edildi."
+      },
+      type: {
+        title: "Type / System 01",
+        scope: "EXPERIMENTAL TYPOGRAPHY / EDITORIAL — 2026",
+        brief: "Tipografik gliflerin yalnızca semantik anlam taşıyan araçlar değil, mimari ve hacimsel birer heykel olarak nasıl deneyimlenebileceğini araştırdı.",
+        execution: "Geleneksel tipografi anatomisi kuralları dekonstrükte edilerek harflerin negatif alanları modüler formlara dönüştürüldü.",
+        impact: "Büyük boy editoryal poster serisi ve deneysel glif kılavuzu oluşturuldu."
+      },
+      void: {
+        title: "VOID / 3D Form Study",
+        scope: "3D MODELING / PROCEDURAL / CODE — 2026",
+        brief: "Dijital boşluk ve hacim ilişkisinin matematiksel sistemlerle görselleştirilmesi.",
+        execution: "Blender üzerinde Python scriptleri ve modifiyer algoritmaları kullanılarak geometrik deformasyonlar üretildi. Işıklandırmada Cycles motoru tercih edildi.",
+        impact: "Yüksek çözünürlüklü dijital sanat baskıları ve hareketli render döngüleri hazırlandı."
+      },
+      watch: {
+        title: "WATCH / Attention Dynamics",
+        scope: "MOTION GRAPHICS / VISUAL RESEARCH — 2026",
+        brief: "Dijital çağda dikkatin dağılma ve toplanma döngülerini görsel hareket üzerinden irdeleyen bir motion study.",
+        execution: "After Effects ortamında kinetik tipografi ve görsel gözlem metaforları birleştirilerek ritmik bir loop kurgusu tasarlandı.",
+        impact: "Sosyal medya ve dikey ekran formatları için optimize edilmiş video enstalasyonu."
+      },
+      object: {
+        title: "Object / 03",
+        scope: "3D ART / SPATIAL PERCEPTION — 2026",
+        brief: "Soyut formların materyal dokusu, ışık kırılması ve yüzey pürüzlülüğü (roughness) ile mekân hissi yaratması.",
+        execution: "Fotogerçekçi stüdyo aydınlatma simülasyonları ve mikro-yüzey detayları oluşturuldu.",
+        impact: "3D dijital heykel arşivi ve portfolyo vaka çalışması."
+      },
+      afterimage: {
+        title: "AFTERIMAGE Series",
+        scope: "POSTER DESIGN / EDITORIAL — 2026",
+        brief: "Işığa maruz kalan retinanın ardından bıraktığı silik görsel artıkların ve hafıza katmanlarının poster düzleminde canlandırılması.",
+        execution: "Katmanlı raster/vektör bindirmeleri, tram efektleri ve monokrom renk geçişleri kullanıldı.",
+        impact: "6 parçalık sınırlı edisyon serigrafi poster konsepti."
+      }
+    };
+
+    function openCaseStudy(key) {
+      const data = caseStudies[key];
+      if (!data) return;
+      document.getElementById('modalTitle').innerText = data.title;
+      document.getElementById('modalScope').innerText = data.scope;
+      document.getElementById('modalBrief').innerText = data.brief;
+      document.getElementById('modalExecution').innerText = data.execution;
+      document.getElementById('modalImpact').innerText = data.impact;
+      document.getElementById('caseStudyModal').style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeCaseStudy(e) {
+      document.getElementById('caseStudyModal').style.display = 'none';
+      document.body.style.overflow = 'auto';
+    }
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeCaseStudy(null);
+    });
+
+    // 3. One-Click Email Copy
+    function copyEmail(btn) {
+      const email = "abdullah198579@outlook.com"; // Tercihe göre hello@abdullahcanki.com.tr yapabilirsiniz
+      navigator.clipboard.writeText(email).then(() => {
+        const textSpan = document.getElementById('copyText');
+        textSpan.innerText = "COPIED TO CLIPBOARD! ✓";
+        setTimeout(() => {
+          textSpan.innerText = "COPY EMAIL (CLICK)";
+        }, 2500);
+      });
+    }
+  </script>
+</body>
+</html>
