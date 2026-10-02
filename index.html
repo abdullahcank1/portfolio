@@ -1,0 +1,1166 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Abdullah Cankı — Görsel İletişim Tasarımı & 3D Sanatçısı</title>
+<meta name="description" content="Abdullah Cankı | Görsel İletişim Tasarımı, Marka Kimliği, 3D CGI ve Hareketli Görsel Sanatlar Portfolyosu.">
+
+<!-- Favicon -->
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%231d1e20'/><text x='50%' y='54%' font-size='42' font-family='Arial,sans-serif' font-weight='800' fill='%23f5f2eb' text-anchor='middle' dominant-baseline='middle'>AC</text></svg>">
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --bg: #f4f1ea;
+    --bg-soft: #ebe7df;
+    --surface: #ffffff;
+    --text: #1c1d1f;
+    --text-muted: #5c5e64;
+    --text-light: #8a8d96;
+    --border: #e0dcd3;
+    --accent: #1c1d1f;
+    --radius: 18px;
+    --radius-sm: 10px;
+    --shadow: 0 8px 30px rgba(28, 29, 31, 0.06);
+    --shadow-lg: 0 20px 50px rgba(28, 29, 31, 0.1);
+    --transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  /* Subtle paper texture */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.03;
+    background-image: radial-gradient(#000 0.8px, transparent 0.8px);
+    background-size: 18px 18px;
+    z-index: 9999;
+  }
+
+  .container {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+
+  /* ========== HEADER ========== */
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(244, 241, 234, 0.88);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+    padding: 20px 0;
+  }
+
+  .header-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    color: var(--text);
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 1.1rem;
+    letter-spacing: -0.3px;
+  }
+
+  .brand-mark {
+    width: 34px;
+    height: 34px;
+    background: var(--text);
+    color: var(--bg);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.78rem;
+    font-weight: 800;
+    transition: transform 0.3s ease;
+  }
+
+  .brand:hover .brand-mark {
+    transform: rotate(-5deg) scale(1.06);
+  }
+
+  nav {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+  }
+
+  nav a {
+    text-decoration: none;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: color 0.25s;
+  }
+
+  nav a:hover { color: var(--text); }
+
+  .nav-cta {
+    background: var(--text);
+    color: var(--bg) !important;
+    padding: 9px 20px;
+    border-radius: 999px;
+    font-size: 0.85rem;
+  }
+
+  .nav-cta:hover {
+    background: #2e3035;
+    transform: translateY(-1px);
+  }
+
+  /* ========== HERO ========== */
+  .hero {
+    padding: 100px 0 70px;
+  }
+
+  .status {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 7px 16px;
+    border-radius: 999px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 32px;
+    box-shadow: var(--shadow);
+  }
+
+  .status-dot {
+    width: 7px;
+    height: 7px;
+    background: #16a34a;
+    border-radius: 50%;
+    position: relative;
+  }
+
+  .status-dot::after {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    border-radius: 50%;
+    background: #16a34a;
+    opacity: 0.35;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    to { transform: scale(2.4); opacity: 0; }
+  }
+
+  .hero h1 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(2.6rem, 6vw, 4.4rem);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -1.6px;
+    max-width: 920px;
+    margin-bottom: 28px;
+  }
+
+  .hero h1 em {
+    font-style: normal;
+    position: relative;
+  }
+
+  .hero h1 em::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 4px;
+    width: 100%;
+    height: 12px;
+    background: #e5e0d4;
+    z-index: -1;
+    border-radius: 3px;
+  }
+
+  .hero-lead {
+    font-size: clamp(1.05rem, 2vw, 1.22rem);
+    color: var(--text-muted);
+    max-width: 640px;
+    line-height: 1.7;
+    margin-bottom: 40px;
+  }
+
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 70px;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 13px 26px;
+    border-radius: 999px;
+    font-size: 0.92rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: var(--transition);
+    border: 1px solid transparent;
+  }
+
+  .btn-primary {
+    background: var(--text);
+    color: var(--bg);
+  }
+
+  .btn-primary:hover {
+    background: #2e3035;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow);
+  }
+
+  .btn-ghost {
+    background: var(--surface);
+    color: var(--text);
+    border-color: var(--border);
+  }
+
+  .btn-ghost:hover {
+    border-color: var(--text);
+    transform: translateY(-2px);
+  }
+
+  /* Metrics */
+  .metrics {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+  }
+
+  .metric {
+    background: var(--surface);
+    padding: 28px 24px;
+  }
+
+  .metric strong {
+    display: block;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.55rem;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    margin-bottom: 4px;
+  }
+
+  .metric span {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    font-weight: 500;
+  }
+
+  /* ========== TOOLS ========== */
+  .tools {
+    padding: 50px 0 90px;
+  }
+
+  .label {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 1.6px;
+    font-weight: 700;
+    color: var(--text-light);
+    margin-bottom: 18px;
+  }
+
+  .tools-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .tool {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 9px 18px;
+    border-radius: 999px;
+    font-size: 0.86rem;
+    font-weight: 600;
+    color: var(--text);
+    transition: var(--transition);
+  }
+
+  .tool:hover {
+    border-color: var(--text);
+    transform: translateY(-2px);
+  }
+
+  /* ========== PROJECTS ========== */
+  .projects {
+    padding-bottom: 100px;
+  }
+
+  .projects-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+    gap: 24px;
+  }
+
+  .section-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    letter-spacing: -0.8px;
+  }
+
+  .filters {
+    display: flex;
+    gap: 6px;
+    background: var(--surface);
+    padding: 5px;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+  }
+
+  .filter-btn {
+    background: transparent;
+    border: none;
+    padding: 8px 18px;
+    border-radius: 999px;
+    font-size: 0.84rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    cursor: pointer;
+    font-family: inherit;
+    transition: var(--transition);
+  }
+
+  .filter-btn.active,
+  .filter-btn:hover {
+    background: var(--text);
+    color: var(--bg);
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 28px;
+  }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-lg);
+    border-color: #d4d0c5;
+  }
+
+  .card-media {
+    position: relative;
+    height: 260px;
+    background: var(--bg-soft);
+    overflow: hidden;
+  }
+
+  .card-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .card:hover .card-media img {
+    transform: scale(1.05);
+  }
+
+  .card-cat {
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    background: rgba(244, 241, 234, 0.92);
+    backdrop-filter: blur(8px);
+    padding: 5px 12px;
+    border-radius: 999px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+  }
+
+  .card-body {
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+  }
+
+  .card-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.25rem;
+    font-weight: 700;
+    letter-spacing: -0.3px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .card-title span:last-child {
+    font-size: 1rem;
+    opacity: 0.4;
+    transition: opacity 0.25s;
+  }
+
+  .card:hover .card-title span:last-child {
+    opacity: 1;
+  }
+
+  .card-desc {
+    font-size: 0.92rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+    margin-bottom: 18px;
+    flex-grow: 1;
+  }
+
+  .card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .card-tags span {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: var(--text-muted);
+  }
+
+  /* ========== PROCESS ========== */
+  .process {
+    padding: 90px 0;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 100px;
+  }
+
+  .process-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  .process-item {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 32px 28px;
+    border-radius: var(--radius);
+    transition: var(--transition);
+  }
+
+  .process-item:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow);
+  }
+
+  .process-num {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--text-light);
+    letter-spacing: 1px;
+    margin-bottom: 16px;
+  }
+
+  .process-item h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+    letter-spacing: -0.3px;
+  }
+
+  .process-item p {
+    font-size: 0.92rem;
+    color: var(--text-muted);
+    line-height: 1.65;
+  }
+
+  /* ========== ABOUT ========== */
+  .about {
+    display: grid;
+    grid-template-columns: 1fr 1.7fr;
+    gap: 60px;
+    margin-bottom: 110px;
+    align-items: start;
+  }
+
+  .about-left h2 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 2.1rem;
+    font-weight: 700;
+    letter-spacing: -0.7px;
+    margin-top: 6px;
+  }
+
+  .about-left p {
+    color: var(--text-muted);
+    margin-top: 8px;
+    font-size: 0.95rem;
+  }
+
+  .about-right {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 40px;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+  }
+
+  .about-right h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: -0.4px;
+    line-height: 1.3;
+    margin-bottom: 20px;
+  }
+
+  .about-right p {
+    font-size: 1.02rem;
+    color: var(--text-muted);
+    line-height: 1.8;
+    margin-bottom: 16px;
+  }
+
+  .about-right strong {
+    color: var(--text);
+    font-weight: 600;
+  }
+
+  /* ========== FOOTER ========== */
+  footer {
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    padding: 90px 0 50px;
+  }
+
+  .footer-inner {
+    text-align: center;
+  }
+
+  .footer-inner h2 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(2.1rem, 4.5vw, 3.2rem);
+    font-weight: 700;
+    letter-spacing: -1.2px;
+    margin-bottom: 16px;
+  }
+
+  .footer-inner > p {
+    font-size: 1.08rem;
+    color: var(--text-muted);
+    max-width: 520px;
+    margin: 0 auto 40px;
+  }
+
+  .socials {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+    margin-bottom: 70px;
+  }
+
+  .social {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 22px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    color: var(--text);
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: var(--transition);
+  }
+
+  .social:hover {
+    background: var(--text);
+    color: var(--bg);
+    border-color: var(--text);
+    transform: translateY(-2px);
+  }
+
+  .social svg {
+    width: 17px;
+    height: 17px;
+    fill: currentColor;
+  }
+
+  .subfooter {
+    border-top: 1px solid var(--border);
+    padding-top: 28px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.85rem;
+    color: var(--text-light);
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  /* ========== MODAL ========== */
+  .modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(28, 29, 31, 0.6);
+    backdrop-filter: blur(12px);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+  }
+
+  .modal.open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .modal-box {
+    background: var(--surface);
+    border-radius: var(--radius);
+    max-width: 780px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    transform: scale(0.96) translateY(16px);
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .modal.open .modal-box {
+    transform: scale(1) translateY(0);
+  }
+
+  .modal-close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 1.1rem;
+    z-index: 5;
+    transition: var(--transition);
+  }
+
+  .modal-close:hover {
+    background: var(--text);
+    color: var(--bg);
+  }
+
+  .modal-img {
+    width: 100%;
+    height: 360px;
+    object-fit: cover;
+    display: block;
+  }
+
+  .modal-content {
+    padding: 36px;
+  }
+
+  .modal-cat {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text-light);
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+
+  .modal-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.85rem;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    margin-bottom: 16px;
+  }
+
+  .modal-desc {
+    font-size: 1.02rem;
+    color: var(--text-muted);
+    line-height: 1.75;
+    margin-bottom: 24px;
+  }
+
+  .modal-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 28px;
+  }
+
+  .modal-tags span {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    padding: 6px 14px;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    font-weight: 600;
+  }
+
+  /* ========== RESPONSIVE ========== */
+  @media (max-width: 900px) {
+    .metrics { grid-template-columns: 1fr 1fr; }
+    .process-grid { grid-template-columns: 1fr; }
+    .about { grid-template-columns: 1fr; gap: 32px; }
+    nav a:not(.nav-cta) { display: none; }
+    .modal-img { height: 240px; }
+  }
+
+  @media (max-width: 560px) {
+    .metrics { grid-template-columns: 1fr; }
+    .grid { grid-template-columns: 1fr; }
+    .container { padding: 0 20px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="container header-inner">
+    <a href="#" class="brand">
+      <span class="brand-mark">AC</span>
+      <span>Abdullah Cankı</span>
+    </a>
+    <nav>
+      <a href="#projeler">Projeler</a>
+      <a href="#surec">Süreç</a>
+      <a href="#hakkimda">Hakkında</a>
+      <a href="#iletisim" class="nav-cta">İletişime Geç</a>
+    </nav>
+  </div>
+</header>
+
+<div class="container">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="status">
+      <span class="status-dot"></span>
+      Freelance & Yeni Projelere Açık
+    </div>
+
+    <h1>Fikirleri, markaları ve hikayeleri <em>güçlü görsel dünyalara</em> dönüştürüyorum.</h1>
+
+    <p class="hero-lead">
+      Görsel İletişim Tasarımı altyapısıyla marka kimliği sistemleri, tipografik gridler, Blender 3D render sahneleri ve hareketli video kurguları üretiyorum.
+    </p>
+
+    <div class="hero-actions">
+      <a href="#projeler" class="btn btn-primary">Seçilmiş İşler ↓</a>
+      <a href="https://www.linkedin.com/in/abdullah-cank%C4%B1-6952b2324/" target="_blank" class="btn btn-ghost">LinkedIn ↗</a>
+      <a href="https://instagram.com/cankixcreative" target="_blank" class="btn btn-ghost">@cankixcreative ↗</a>
+    </div>
+
+    <div class="metrics">
+      <div class="metric">
+        <strong>360°</strong>
+        <span>Görsel İletişim & Tasarım</span>
+      </div>
+      <div class="metric">
+        <strong>3D & CGI</strong>
+        <span>Blender Cycles & Sahne</span>
+      </div>
+      <div class="metric">
+        <strong>Video & FX</strong>
+        <span>Stop-Motion, Kurgu & Renk</span>
+      </div>
+      <div class="metric">
+        <strong>Branding</strong>
+        <span>Kimlik, Logo & Tipografi</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- TOOLS -->
+  <section class="tools">
+    <div class="label">Kullandığım Araçlar</div>
+    <div class="tools-list">
+      <span class="tool">Blender 3D</span>
+      <span class="tool">Adobe Illustrator</span>
+      <span class="tool">Adobe Photoshop</span>
+      <span class="tool">DaVinci Resolve</span>
+      <span class="tool">Adobe InDesign</span>
+      <span class="tool">After Effects</span>
+      <span class="tool">Tipografi & Grid</span>
+      <span class="tool">Stop-Motion</span>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section class="projects" id="projeler">
+    <div class="projects-top">
+      <div>
+        <div class="label">Portfolyo</div>
+        <h2 class="section-title">Seçilmiş Çalışmalar</h2>
+      </div>
+      <div class="filters">
+        <button class="filter-btn active" data-filter="all">Tümü</button>
+        <button class="filter-btn" data-filter="branding">Marka Kimliği</button>
+        <button class="filter-btn" data-filter="3d">3D & CGI</button>
+        <button class="filter-btn" data-filter="video">Video & Kurgu</button>
+      </div>
+    </div>
+
+    <div class="grid" id="projectGrid">
+      <!-- 1 -->
+      <article class="card" data-cat="branding" onclick="openModal(0)">
+        <div class="card-media">
+          <span class="card-cat">Marka Kimliği</span>
+          <img src="https://images.unsplash.com/photo-1600132806370-bf17e65e942f?w=900&auto=format&fit=crop&q=80" alt="Cankixcreative Stüdyo Kimliği">
+        </div>
+        <div class="card-body">
+          <div class="card-title">
+            <span>Cankixcreative Stüdyo Kimliği</span>
+            <span>↗</span>
+          </div>
+          <p class="card-desc">Minimalist monogram logo, tipografik grid sistemi ve sosyal medya şablon kiti.</p>
+          <div class="card-tags">
+            <span>Logo</span><span>Grid Sistemi</span><span>Kurumsal Kimlik</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- 2 -->
+      <article class="card" data-cat="3d" onclick="openModal(1)">
+        <div class="card-media">
+          <span class="card-cat">3D Modelleme</span>
+          <img src="https://images.unsplash.com/photo-1633493106115-fa6c888a75e3?w=900&auto=format&fit=crop&q=80" alt="Atmosferik Mekân">
+        </div>
+        <div class="card-body">
+          <div class="card-title">
+            <span>Atmosferik Mekân & Doku</span>
+            <span>↗</span>
+          </div>
+          <p class="card-desc">Blender Cycles ile form, gölge ve materyal odaklı minimalist 3D sahne.</p>
+          <div class="card-tags">
+            <span>Blender</span><span>Cycles</span><span>Işık & Doku</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- 3 -->
+      <article class="card" data-cat="video" onclick="openModal(2)">
+        <div class="card-media">
+          <span class="card-cat">Video & Kurgu</span>
+          <img src="https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=900&auto=format&fit=crop&q=80" alt="Stop-Motion">
+        </div>
+        <div class="card-body">
+          <div class="card-title">
+            <span>Kare Kare Anlatı</span>
+            <span>↗</span>
+          </div>
+          <p class="card-desc">Stop-motion canlandırma, storyboard ve DaVinci Resolve renk derecelendirmesi.</p>
+          <div class="card-tags">
+            <span>DaVinci</span><span>Stop-Motion</span><span>Post-Prodüksiyon</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- 4 -->
+      <article class="card" data-cat="branding" onclick="openModal(3)">
+        <div class="card-media">
+          <span class="card-cat">Tipografi & Baskı</span>
+          <img src="https://images.unsplash.com/photo-1509198397868-475647b2a1e5?w=900&auto=format&fit=crop&q=80" alt="Afiş Tasarımları">
+        </div>
+        <div class="card-body">
+          <div class="card-title">
+            <span>Deneysel Afiş Serisi</span>
+            <span>↗</span>
+          </div>
+          <p class="card-desc">İsviçre tarzı tipografi ve brutalist grid dengesiyle editoryal posterler.</p>
+          <div class="card-tags">
+            <span>İsviçre Tarzı</span><span>Afiş</span><span>Baskı</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- 5 -->
+      <article class="card" data-cat="3d" onclick="openModal(4)">
+        <div class="card-media">
+          <span class="card-cat">3D Sanat</span>
+          <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=900&auto=format&fit=crop&q=80" alt="Prosedürel Formlar">
+        </div>
+        <div class="card-body">
+          <div class="card-title">
+            <span>Prosedürel Formlar</span>
+            <span>↗</span>
+          </div>
+          <p class="card-desc">Geometry Nodes ve dinamik ışıklandırma ile soyut dijital sanat renderları.</p>
+          <div class="card-tags">
+            <span>Geometry Nodes</span><span>CGI</span><span>Dijital Sanat</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- 6 -->
+      <article class="card" data-cat="branding" onclick="openModal(5)">
+        <div class="card-media">
+          <span class="card-cat">Dijital Tasarım</span>
+          <img src="https://images.unsplash.com/photo-1542744094-3a31f272c490?w=900&auto=format&fit=crop&q=80" alt="Sosyal Medya">
+        </div>
+        <div class="card-body">
+          <div class="card-title">
+            <span>Sosyal Medya Görsel Dili</span>
+            <span>↗</span>
+          </div>
+          <p class="card-desc">Tutarlı renk paleti ve etkileşim odaklı Instagram & dijital içerik kitleri.</p>
+          <div class="card-tags">
+            <span>Instagram Kit</span><span>İçerik</span><span>Görsel Hiyerarşi</span>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section class="process" id="surec">
+    <div class="label" style="margin-bottom: 28px;">Çalışma Disiplinim</div>
+    <div class="process-grid">
+      <div class="process-item">
+        <div class="process-num">01 — KONSEPT</div>
+        <h3>Fikir & Hikaye</h3>
+        <p>Referans panoları, eskizler ve görsel hiyerarşi planlamasıyla her projeye amaca hizmet eden bir temel atıyorum.</p>
+      </div>
+      <div class="process-item">
+        <div class="process-num">02 — DETAY</div>
+        <h3>Form, Işık & Tipografi</h3>
+        <p>Vektör keskinliğinden 3D ışık kırılmalarına kadar detayları titizlikle işleyerek estetik bütünlüğü kuruyorum.</p>
+      </div>
+      <div class="process-item">
+        <div class="process-num">03 — UYGULAMA</div>
+        <h3>Çıktı & Platform</h3>
+        <p>Baskı, web veya sosyal medya fark etmeksizin tüm çıktıları en yüksek kalite standartlarında optimize ediyorum.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about" id="hakkimda">
+    <div class="about-left">
+      <div class="label">Hakkımda</div>
+      <h2>Abdullah Cankı</h2>
+      <p>Görsel İletişim Tasarımcısı & 3D Görselleştirme Sanatçısı</p>
+    </div>
+    <div class="about-right">
+      <h3>Görsel dilin gücüne ve dengeli sadeliğin zarafetine inanıyorum.</h3>
+      <p>
+        Tasarıma yaklaşımım; karmaşık fikirleri sade, anlaşılır ve estetik bir forma indirgemektir. 
+        <strong>Görsel İletişim Tasarımı</strong> disiplinim sayesinde grafik standartlarını korurken, 
+        <strong>Blender</strong> ve video araçlarıyla derinlikli görsel deneyimler kuruyorum.
+      </p>
+      <p>
+        Freelance projeler, marka kimliği oluşturma, 3D görselleştirme sahneleri ve dinamik içerik üretimi için her zaman yeni iş birliklerine açığım.
+      </p>
+    </div>
+  </section>
+
+</div>
+
+<!-- FOOTER -->
+<footer id="iletisim">
+  <div class="container footer-inner">
+    <h2>Birlikte yeni bir şey başlatalım.</h2>
+    <p>Yeni bir marka kimliği, 3D modelleme projesi veya fikir alışverişi için dilediğin kanaldan bana ulaşabilirsin.</p>
+
+    <div class="socials">
+      <a href="mailto:abdullah198579@outlook.com" class="social">
+        <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+        abdullah198579@outlook.com
+      </a>
+      <a href="https://www.linkedin.com/in/abdullah-cank%C4%B1-6952b2324/" target="_blank" class="social">
+        <svg viewBox="0 0 24 24"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.2V10.9H6.46M7.83 6.45a1.6 1.6 0 0 0-1.6 1.6 1.6 1.6 0 0 0 1.6 1.6 1.6 1.6 0 0 0 1.6-1.6 1.6 1.6 0 0 0-1.6-1.6Z"/></svg>
+        LinkedIn
+      </a>
+      <a href="https://instagram.com/cankixcreative" target="_blank" class="social">
+        <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        @cankixcreative
+      </a>
+    </div>
+
+    <div class="subfooter">
+      <span>© 2026 Abdullah Cankı</span>
+      <span>abdullahcanki.com.tr</span>
+    </div>
+  </div>
+</footer>
+
+<!-- MODAL -->
+<div class="modal" id="modal" onclick="closeOnOverlay(event)">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <img id="mImg" class="modal-img" src="" alt="">
+    <div class="modal-content">
+      <div id="mCat" class="modal-cat"></div>
+      <h3 id="mTitle" class="modal-title"></h3>
+      <p id="mDesc" class="modal-desc"></p>
+      <div id="mTags" class="modal-tags"></div>
+      <button class="btn btn-primary" onclick="closeModal()">Kapat</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  const projects = [
+    {
+      title: "Cankixcreative Stüdyo Kimliği",
+      cat: "Marka Kimliği",
+      desc: "Kişisel tasarım stüdyosu için oluşturulan minimalist monogram logo, tipografik grid sistemi ve sosyal medya şablon kiti. Markanın karakteristik hatları, dijital ve basılı tüm temas noktalarında modern ve bütüncül bir kimlik sunar.",
+      tags: ["Logo Tasarımı", "Grid Sistemi", "Kurumsal Kimlik", "Illustrator"],
+      img: "https://images.unsplash.com/photo-1600132806370-bf17e65e942f?w=1200&auto=format&fit=crop&q=85"
+    },
+    {
+      title: "Atmosferik Mekân & Doku",
+      cat: "3D Modelleme & Render",
+      desc: "Blender Cycles motoru üzerinde geliştirilen form, gölge ve materyal odaklı mimari ve minimalist 3D sahne renderı. Doğal gün ışığı simülasyonu, pürüzlü beton dokuları ve geometrik hacimlerin dengesi üzerine kurgulanmıştır.",
+      tags: ["Blender 3D", "Cycles Render", "Işık & Doku", "Materyal Tasarımı"],
+      img: "https://images.unsplash.com/photo-1633493106115-fa6c888a75e3?w=1200&auto=format&fit=crop&q=85"
+    },
+    {
+      title: "Kare Kare Anlatı (Stop-Motion)",
+      cat: "Video & Kurgu",
+      desc: "Fiziksel nesnelerin kare bazlı ritmik canlandırması, detaylı storyboard kurgusu ve DaVinci Resolve ile renk derecelendirmesi. Ses tasarımı ve kare hızının senkronize yürütüldüğü deneysel bir kısa film çalışması.",
+      tags: ["DaVinci Resolve", "Stop-Motion", "Post-Prodüksiyon", "Ses Tasarımı"],
+      img: "https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=1200&auto=format&fit=crop&q=85"
+    },
+    {
+      title: "Deneysel Afiş Tasarımları",
+      cat: "Tipografi & Baskı",
+      desc: "İsviçre tarzı tipografi prensipleri ve çağdaş brutalist grid dengesi kullanılarak hazırlanan editoryal poster serisi. Güçlü font kontrastı ve negatif alan kullanımıyla okuma hiyerarşisi maksimize edilmiştir.",
+      tags: ["İsviçre Tarzı", "Afiş Tasarımı", "Baskı Hazırlığı", "InDesign"],
+      img: "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?w=1200&auto=format&fit=crop&q=85"
+    },
+    {
+      title: "Prosedürel Formlar & Parçacıklar",
+      cat: "3D Sanat & CGI",
+      desc: "Blender Geometry Nodes ve dinamik ışıklandırma teknikleri ile oluşturulmuş soyut dijital sanat renderları. Matematiksel dağılımlar ve parametrik yüzeyler üzerine yoğunlaşılmış bir görsel araştırma.",
+      tags: ["Geometry Nodes", "CGI", "Dijital Sanat", "Blender"],
+      img: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=1200&auto=format&fit=crop&q=85"
+    },
+    {
+      title: "Sosyal Medya Görsel Dili",
+      cat: "Dijital Tasarım",
+      desc: "Instagram ve dijital kanallar için etkileşim odaklı, tutarlı renk paletine sahip şablon ve içerik tasarımları. Markanın dijital varlığını güçlendiren dinamik hikaye ve post şablonları.",
+      tags: ["Instagram Kit", "İçerik Stratejisi", "Görsel Hiyerarşi", "Photoshop"],
+      img: "https://images.unsplash.com/photo-1542744094-3a31f272c490?w=1200&auto=format&fit=crop&q=85"
+    }
+  ];
+
+  // Filter
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const filter = btn.dataset.filter;
+      document.querySelectorAll('.card').forEach(card => {
+        card.style.display = (filter === 'all' || card.dataset.cat === filter) ? 'flex' : 'none';
+      });
+    });
+  });
+
+  // Modal
+  function openModal(i) {
+    const p = projects[i];
+    document.getElementById('mImg').src = p.img;
+    document.getElementById('mCat').textContent = p.cat;
+    document.getElementById('mTitle').textContent = p.title;
+    document.getElementById('mDesc').textContent = p.desc;
+    const tags = document.getElementById('mTags');
+    tags.innerHTML = '';
+    p.tags.forEach(t => {
+      const s = document.createElement('span');
+      s.textContent = t;
+      tags.appendChild(s);
+    });
+    document.getElementById('modal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    document.getElementById('modal').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  function closeOnOverlay(e) {
+    if (e.target.id === 'modal') closeModal();
+  }
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeModal();
+  });
+</script>
+</body>
+</html>
