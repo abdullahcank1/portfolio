@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Abdullah Cankı | Graphic Designer</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg: #EBE8E0; /* Warm aesthetic cream */
+      --text: #111111; /* Almost black */
+      --accent: #FF3300; /* Vibrant bold Behance accent */
+      --border: #111111;
+    }
+    
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: 'Space Grotesk', sans-serif;
+      overflow-x: hidden;
+      cursor: none; /* Özel Tasarımcı İmleci */
+    }
+
+    /* Özel İmleç */
+    .cursor {
+      position: fixed;
+      width: 16px;
+      height: 16px;
+      background-color: var(--text);
+      border-radius: 50%;
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+      transition: transform 0.15s ease-out, width 0.2s, height 0.2s, background-color 0.2s;
+      z-index: 9999;
+      mix-blend-mode: difference;
+    }
+    .cursor.hover {
+      width: 60px;
+      height: 60px;
+      background-color: var(--bg);
+      border: 2px solid var(--text);
+      mix-blend-mode: normal;
+    }
+
+    /* Üst Menü */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem 3vw;
+      border-bottom: 2px solid var(--border);
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+    .logo {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.5rem;
+      text-decoration: none;
+      color: var(--text);
+      letter-spacing: -1px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    /* Online Favicon Noktası */
+    .status-dot {
+      width: 10px;
+      height: 10px;
+      background-color: #00FF00;
+      border-radius: 50%;
+      display: inline-block;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(0, 255, 0, 0.4); }
+      70% { box-shadow: 0 0 0 10px rgba(0, 255, 0, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(0, 255, 0, 0); }
+    }
+
+    .nav-links a {
+      margin-left: 2rem;
+      color: var(--text);
+      text-decoration: none;
+      font-size: 0.95rem;
+      transition: color 0.3s;
+    }
+    .nav-links a:hover { color: var(--accent); }
+
+    /* Dev Hero Alanı (Behance Stili) */
+    .hero {
+      padding: 6vw 3vw;
+      text-align: center;
+      border-bottom: 2px solid var(--border);
+    }
+    .hero h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: 13vw; /* Dev Tipografi */
+      line-height: 0.85;
+      letter-spacing: -4px;
+      text-transform: uppercase;
+      margin: 0;
+    }
+    .hero p {
+      margin-top: 3rem;
+      font-size: clamp(1rem, 2vw, 1.5rem);
+      text-transform: uppercase;
+      font-weight: 600;
+      letter-spacing: 2px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* Kayan Bant (Marquee) */
+    .marquee {
+      width: 100%;
+      overflow: hidden;
+      white-space: nowrap;
+      border-bottom: 2px solid var(--border);
+      background: var(--text);
+      color: var(--bg);
+      padding: 1.5rem 0;
+    }
+    .marquee-content {
+      display: inline-block;
+      animation: marquee 15s linear infinite;
+      font-size: 1.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      font-family: 'Syne', sans-serif;
+    }
+    @keyframes marquee {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* Projeler - Bento/Grid Sistemi */
+    .projects {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+      border-bottom: 2px solid var(--border);
+    }
+    .project-card {
+      border-right: 2px solid var(--border);
+      border-bottom: 2px solid var(--border);
+      position: relative;
+      overflow: hidden;
+      aspect-ratio: 4/3;
+      display: block;
+      background: var(--text);
+    }
+    .projects .project-card:nth-child(even) {
+      border-right: none;
+    }
+    .projects .project-card:nth-last-child(-n+2) {
+      border-bottom: none;
+    }
+    
+    .project-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1), filter 0.7s;
+      filter: grayscale(100%) contrast(1.1);
+      opacity: 0.8;
+    }
+    .project-card:hover .project-img {
+      transform: scale(1.05);
+      filter: grayscale(0%) contrast(1);
+      opacity: 1;
+    }
+    
+    /* Proje Hover Detayları */
+    .project-info {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      padding: 2rem;
+      background: var(--bg);
+      border-top: 2px solid var(--border);
+      transform: translateY(100%);
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .project-card:hover .project-info {
+      transform: translateY(0);
+    }
+    .project-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 2rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+      line-height: 1;
+    }
+    .project-tags {
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      font-weight: 600;
+      color: var(--accent);
+    }
+
+    /* Footer / Devasa İletişim */
+    footer {
+      padding: 8vw 3vw;
+      text-align: center;
+      background: var(--bg);
+    }
+    .huge-contact {
+      font-family: 'Syne', sans-serif;
+      font-size: 11vw;
+      line-height: 0.9;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--text);
+      display: inline-block;
+      margin-bottom: 4rem;
+      transition: color 0.3s;
+    }
+    .huge-contact:hover {
+      color: var(--accent);
+    }
+    
+    .socials {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+      flex-wrap: wrap;
+    }
+    .social-btn {
+      padding: 1.2rem 2.5rem;
+      border: 2px solid var(--border);
+      border-radius: 99px;
+      text-transform: uppercase;
+      font-weight: 700;
+      font-size: 1rem;
+      text-decoration: none;
+      color: var(--text);
+      transition: all 0.3s ease;
+      background: transparent;
+    }
+    .social-btn:hover {
+      background: var(--text);
+      color: var(--bg);
+      transform: translateY(-5px);
+    }
+
+    /* Mobil Uyumluluk */
+    @media (max-width: 900px) {
+      .projects { grid-template-columns: 1fr; }
+      .project-card { border-right: none !important; border-bottom: 2px solid var(--border) !important; }
+      .projects .project-card:last-child { border-bottom: none !important; }
+      .hero h1 { font-size: 18vw; }
+      .cursor { display: none; }
+      body { cursor: auto; }
+      .nav-links { display: none; }
+      .huge-contact { font-size: 14vw; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Özel İmleç -->
+  <div class="cursor" id="cursor"></div>
+
+  <!-- Header -->
+  <header>
+    <a href="#" class="logo">
+      <span class="status-dot"></span>
+      Abdullah Cankı
+    </a>
+    <div class="nav-links">
+      <a href="#work" class="hoverable">Selected Works</a>
+      <a href="https://www.linkedin.com/in/abdullah-cank%C4%B1-6952b2324/" target="_blank" class="hoverable">LinkedIn</a>
+      <a href="#contact" class="hoverable">Contact</a>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <h1>
+      Abdullah<br>Cankı
+    </h1>
+    <p>Visual Communication Designer based in Arhavi. Specialized in Branding, 3D CGI & Motion.</p>
+  </section>
+
+  <!-- Kayan Bant -->
+  <div class="marquee">
+    <div class="marquee-content">
+      BRAND IDENTITY ✦ 3D VISUALIZATION ✦ MOTION DESIGN ✦ EDITORIAL ✦ CREATIVE DIRECTION ✦ BRAND IDENTITY ✦ 3D VISUALIZATION ✦ MOTION DESIGN ✦ EDITORIAL ✦ CREATIVE DIRECTION ✦ 
+    </div>
+  </div>
+
+  <!-- Behance Stili Bento Grid Projeler -->
+  <section id="work" class="projects">
+    <!-- Proje 1 -->
+    <a href="https://instagram.com/cankixcreative" target="_blank" class="project-card hoverable">
+      <img src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&q=80" alt="Cankixcreative Branding" class="project-img">
+      <div class="project-info">
+        <div class="project-title">Cankixcreative</div>
+        <div class="project-tags">Brand Identity & Strategy</div>
+      </div>
+    </a>
+    
+    <!-- Proje 2 -->
+    <a href="https://instagram.com/cankixcreative" target="_blank" class="project-card hoverable">
+      <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&q=80" alt="3D Procedural Modeling" class="project-img">
+      <div class="project-info">
+        <div class="project-title">Cycles Render</div>
+        <div class="project-tags">3D Modeling / Blender</div>
+      </div>
+    </a>
+
+    <!-- Proje 3 -->
+    <a href="https://instagram.com/cankixcreative" target="_blank" class="project-card hoverable">
+      <img src="https://images.unsplash.com/photo-1536240478700-b869070f9279?auto=format&fit=crop&q=80" alt="Gürültü Short Film" class="project-img">
+      <div class="project-info">
+        <div class="project-title">"Gürültü" Film</div>
+        <div class="project-tags">Directing & Post-Production</div>
+      </div>
+    </a>
+
+    <!-- Proje 4 -->
+    <a href="https://instagram.com/cankixcreative" target="_blank" class="project-card hoverable">
+      <img src="https://images.unsplash.com/photo-1561070791-2526d30994b5?auto=format&fit=crop&q=80" alt="Editorial Typography" class="project-img">
+      <div class="project-info">
+        <div class="project-title">AÇÜ Editorial</div>
+        <div class="project-tags">Typography & Print Design</div>
+      </div>
+    </a>
+  </section>
+
+  <!-- Footer -->
+  <footer id="contact">
+    <a href="mailto:abdullah198579@outlook.com" class="huge-contact hoverable">LET'S TALK ↗</a>
+    
+    <div class="socials">
+      <a href="https://www.linkedin.com/in/abdullah-cank%C4%B1-6952b2324/" target="_blank" class="social-btn hoverable">LinkedIn</a>
+      <a href="https://instagram.com/cankixcreative" target="_blank" class="social-btn hoverable">Instagram</a>
+      <a href="mailto:abdullah198579@outlook.com" class="social-btn hoverable">E-Mail</a>
+    </div>
+    
+    <p style="font-weight: 600; font-size: 0.95rem; text-transform: uppercase;">© 2026 Abdullah Cankı. Designed in Turkey.</p>
+  </footer>
+
+  <script>
+    // Özel Tasarımcı İmleci (Custom Cursor) Mantığı
+    const cursor = document.getElementById('cursor');
+    const hoverables = document.querySelectorAll('.hoverable');
+
+    // Mobilde imleci kapat
+    if (window.innerWidth > 900) {
+      document.addEventListener('mousemove', (e) => {
+        // Yumuşak takip efekti için doğrudan pozisyonlama
+        cursor.style.left = e.clientX + 'px';
+        cursor.style.top = e.clientY + 'px';
+      });
+
+      hoverables.forEach(elem => {
+        elem.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+        elem.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+      });
+    }
+  </script>
+</body>
+</html>
