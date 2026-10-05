@@ -1,1033 +1,3301 @@
+```html
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Abdullah Cankı — Görsel İletişim Tasarımı & 3D</title>
-<meta name="description" content="Abdullah Cankı | Görsel İletişim Tasarımı, Marka Kimliği, 3D CGI ve Motion Portfolyosu">
-
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%231a1a1a'/><text x='50%' y='54%' font-size='40' font-family='Arial' font-weight='800' fill='%23f5f0e8' text-anchor='middle' dominant-baseline='middle'>AC</text></svg>">
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
-
-<style>
-  :root {
-    --bg: #f7f4ef;
-    --bg-soft: #efebe3;
-    --surface: #ffffff;
-    --text: #1c1c1c;
-    --text-muted: #5f5f5f;
-    --text-light: #8c8c8c;
-    --border: #e4dfd6;
-    --accent: #c45c26;
-    --radius: 18px;
-    --shadow: 0 16px 48px rgba(28,28,28,0.07);
-    --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
-
-  body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: 'Inter', system-ui, sans-serif;
-    font-size: 16px;
-    line-height: 1.7;
-    -webkit-font-smoothing: antialiased;
-    overflow-x: hidden;
-  }
-
-  .container {
-    max-width: 1220px;
-    margin: 0 auto;
-    padding: 0 32px;
-  }
-
-  /* Header */
-  header {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 100;
-    padding: 18px 0;
-    background: rgba(247,244,239,0.88);
-    backdrop-filter: blur(18px);
-    border-bottom: 1px solid transparent;
-    transition: var(--transition);
-  }
-  header.scrolled { border-bottom-color: var(--border); }
-
-  .header-inner {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .logo {
-    font-family: 'Manrope', sans-serif;
-    font-weight: 800;
-    font-size: 1.2rem;
-    letter-spacing: -0.4px;
-    text-decoration: none;
-    color: var(--text);
-  }
-
-  nav {
-    display: flex;
-    gap: 36px;
-    align-items: center;
-  }
-  nav a {
-    text-decoration: none;
-    color: var(--text-muted);
-    font-size: 0.9rem;
-    font-weight: 500;
-    transition: color 0.25s;
-  }
-  nav a:hover { color: var(--text); }
-
-  .nav-cta {
-    background: var(--text);
-    color: var(--bg) !important;
-    padding: 10px 22px;
-    border-radius: 999px;
-    font-size: 0.85rem;
-    font-weight: 600;
-  }
-  .nav-cta:hover { background: var(--accent); }
-
-  .menu-btn {
-    display: none;
-    background: none;
-    border: none;
-    font-size: 1.4rem;
-    cursor: pointer;
-    color: var(--text);
-  }
-
-  /* Hero */
-  .hero {
-    padding: 170px 0 90px;
-  }
-
-  .hero-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 0.82rem;
-    font-weight: 600;
-    color: var(--accent);
-    margin-bottom: 26px;
-  }
-
-  .hero h1 {
-    font-family: 'Manrope', sans-serif;
-    font-size: clamp(2.7rem, 6.5vw, 4.6rem);
-    font-weight: 800;
-    line-height: 1.08;
-    letter-spacing: -1.6px;
-    max-width: 880px;
-    margin-bottom: 26px;
-  }
-
-  .hero h1 span { color: var(--accent); }
-
-  .hero-lead {
-    font-size: 1.15rem;
-    color: var(--text-muted);
-    max-width: 540px;
-    line-height: 1.75;
-    margin-bottom: 44px;
-  }
-
-  .hero-actions {
-    display: flex;
-    gap: 14px;
-    flex-wrap: wrap;
-  }
-
-  .btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 14px 28px;
-    border-radius: 999px;
-    font-size: 0.95rem;
-    font-weight: 600;
-    text-decoration: none;
-    transition: var(--transition);
-    border: 1.5px solid transparent;
-  }
-
-  .btn-dark {
-    background: var(--text);
-    color: var(--bg);
-  }
-  .btn-dark:hover {
-    background: var(--accent);
-    transform: translateY(-2px);
-  }
-
-  .btn-outline {
-    background: transparent;
-    color: var(--text);
-    border-color: var(--border);
-  }
-  .btn-outline:hover {
-    border-color: var(--text);
-    transform: translateY(-2px);
-  }
-
-  /* Services */
-  .services { padding: 70px 0 90px; }
-
-  .section-label {
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 1.8px;
-    font-weight: 600;
-    color: var(--text-light);
-    margin-bottom: 14px;
-  }
-
-  .section-title {
-    font-family: 'Manrope', sans-serif;
-    font-size: 2.3rem;
-    font-weight: 700;
-    letter-spacing: -0.8px;
-    margin-bottom: 44px;
-  }
-
-  .services-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 18px;
-  }
-
-  .service-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 30px 26px;
-    transition: var(--transition);
-  }
-  .service-card:hover {
-    transform: translateY(-5px);
-    box-shadow: var(--shadow);
-  }
-
-  .service-num {
-    font-family: 'Manrope', sans-serif;
-    font-size: 0.82rem;
-    font-weight: 700;
-    color: var(--accent);
-    margin-bottom: 16px;
-  }
-
-  .service-card h3 {
-    font-family: 'Manrope', sans-serif;
-    font-size: 1.15rem;
-    font-weight: 700;
-    margin-bottom: 10px;
-  }
-
-  .service-card p {
-    font-size: 0.9rem;
-    color: var(--text-muted);
-    line-height: 1.65;
-  }
-
-  /* Projects */
-  .projects { padding: 30px 0 100px; }
-
-  .projects-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    margin-bottom: 44px;
-    flex-wrap: wrap;
-    gap: 24px;
-  }
-
-  .filters {
-    display: flex;
-    gap: 6px;
-    background: var(--surface);
-    padding: 5px;
-    border-radius: 999px;
-    border: 1px solid var(--border);
-  }
-
-  .filter-btn {
-    background: transparent;
-    border: none;
-    padding: 8px 18px;
-    border-radius: 999px;
-    font-size: 0.84rem;
-    font-weight: 600;
-    color: var(--text-muted);
-    cursor: pointer;
-    font-family: inherit;
-    transition: var(--transition);
-  }
-  .filter-btn.active,
-  .filter-btn:hover {
-    background: var(--text);
-    color: var(--bg);
-  }
-
-  .projects-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 28px;
-  }
-
-  .project-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 20px;
-    overflow: hidden;
-    cursor: pointer;
-    transition: var(--transition);
-    display: flex;
-    flex-direction: column;
-  }
-  .project-card:hover {
-    transform: translateY(-7px);
-    box-shadow: 0 24px 60px rgba(28,28,28,0.1);
-  }
-
-  .project-media {
-    position: relative;
-    height: 300px;
-    overflow: hidden;
-    background: var(--bg-soft);
-  }
-  .project-media img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-  .project-card:hover .project-media img {
-    transform: scale(1.05);
-  }
-
-  .project-cat {
-    position: absolute;
-    top: 16px;
-    left: 16px;
-    background: rgba(247,244,239,0.94);
-    backdrop-filter: blur(8px);
-    padding: 6px 13px;
-    border-radius: 999px;
-    font-size: 0.7rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-  }
-
-  .project-body {
-    padding: 26px;
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
-  }
-
-  .project-title {
-    font-family: 'Manrope', sans-serif;
-    font-size: 1.3rem;
-    font-weight: 700;
-    letter-spacing: -0.3px;
-    margin-bottom: 10px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .project-title span:last-child {
-    font-size: 1rem;
-    opacity: 0.25;
-    transition: opacity 0.3s;
-  }
-  .project-card:hover .project-title span:last-child {
-    opacity: 1;
-    color: var(--accent);
-  }
-
-  .project-desc {
-    font-size: 0.93rem;
-    color: var(--text-muted);
-    line-height: 1.65;
-    margin-bottom: 18px;
-    flex-grow: 1;
-  }
-
-  .project-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-  }
-  .project-tags span {
-    background: var(--bg-soft);
-    padding: 5px 11px;
-    border-radius: 6px;
-    font-size: 0.74rem;
-    font-weight: 600;
-    color: var(--text-muted);
-  }
-
-  /* Approach */
-  .approach {
-    padding: 90px 0;
-    border-top: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
-  }
-
-  .approach-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
-  }
-
-  .approach-item {
-    padding: 34px 28px;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    transition: var(--transition);
-  }
-  .approach-item:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow);
-  }
-
-  .approach-num {
-    font-family: 'Manrope', sans-serif;
-    font-size: 0.82rem;
-    font-weight: 700;
-    color: var(--accent);
-    margin-bottom: 14px;
-  }
-
-  .approach-item h3 {
-    font-family: 'Manrope', sans-serif;
-    font-size: 1.25rem;
-    font-weight: 700;
-    margin-bottom: 10px;
-  }
-
-  .approach-item p {
-    font-size: 0.93rem;
-    color: var(--text-muted);
-    line-height: 1.65;
-  }
-
-  /* About */
-  .about { padding: 100px 0; }
-
-  .about-grid {
-    display: grid;
-    grid-template-columns: 1fr 1.4fr;
-    gap: 70px;
-    align-items: center;
-  }
-
-  .about-text h2 {
-    font-family: 'Manrope', sans-serif;
-    font-size: 2.4rem;
-    font-weight: 700;
-    letter-spacing: -0.8px;
-    margin-bottom: 22px;
-  }
-
-  .about-text p {
-    font-size: 1.08rem;
-    color: var(--text-muted);
-    line-height: 1.8;
-    margin-bottom: 16px;
-  }
-
-  .about-text strong { color: var(--text); }
-
-  .about-visual {
-    background: var(--bg-soft);
-    border-radius: 22px;
-    height: 460px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid var(--border);
-  }
-
-  .about-visual span {
-    font-family: 'Manrope', sans-serif;
-    font-size: 1rem;
-    font-weight: 600;
-    color: var(--text-light);
-  }
-
-  /* Tools */
-  .tools { padding: 50px 0 90px; }
-
-  .tools-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-  }
-
-  .tool {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    padding: 11px 20px;
-    border-radius: 999px;
-    font-size: 0.88rem;
-    font-weight: 600;
-    color: var(--text);
-    transition: var(--transition);
-  }
-  .tool:hover {
-    border-color: var(--accent);
-    color: var(--accent);
-    transform: translateY(-2px);
-  }
-
-  /* Contact */
-  .contact {
-    padding: 100px 0 70px;
-    text-align: center;
-  }
-
-  .contact h2 {
-    font-family: 'Manrope', sans-serif;
-    font-size: clamp(2.3rem, 5vw, 3.4rem);
-    font-weight: 800;
-    letter-spacing: -1.3px;
-    margin-bottom: 18px;
-  }
-
-  .contact p {
-    font-size: 1.1rem;
-    color: var(--text-muted);
-    max-width: 500px;
-    margin: 0 auto 44px;
-  }
-
-  .contact-links {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
-    justify-content: center;
-    margin-bottom: 70px;
-  }
-
-  .contact-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    padding: 14px 26px;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 999px;
-    color: var(--text);
-    font-size: 0.93rem;
-    font-weight: 600;
-    text-decoration: none;
-    transition: var(--transition);
-  }
-  .contact-link:hover {
-    background: var(--text);
-    color: var(--bg);
-    border-color: var(--text);
-    transform: translateY(-2px);
-  }
-
-  .contact-link svg {
-    width: 17px;
-    height: 17px;
-    fill: currentColor;
-  }
-
-  footer {
-    border-top: 1px solid var(--border);
-    padding: 28px 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 0.85rem;
-    color: var(--text-light);
-    flex-wrap: wrap;
-    gap: 12px;
-  }
-
-  /* Modal */
-  .modal {
-    position: fixed;
-    inset: 0;
-    background: rgba(28,28,28,0.72);
-    backdrop-filter: blur(12px);
-    z-index: 1000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 24px;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.35s ease;
-  }
-  .modal.open {
-    opacity: 1;
-    pointer-events: auto;
-  }
-
-  .modal-box {
-    background: var(--surface);
-    border-radius: 20px;
-    max-width: 800px;
-    width: 100%;
-    max-height: 90vh;
-    overflow-y: auto;
-    position: relative;
-    transform: scale(0.96) translateY(16px);
-    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-  .modal.open .modal-box {
-    transform: scale(1) translateY(0);
-  }
-
-  .modal-close {
-    position: absolute;
-    top: 16px;
-    right: 16px;
-    width: 38px;
-    height: 38px;
-    border-radius: 50%;
-    background: var(--bg);
-    border: 1px solid var(--border);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    font-size: 1.15rem;
-    z-index: 5;
-    transition: var(--transition);
-  }
-  .modal-close:hover {
-    background: var(--text);
-    color: var(--bg);
-  }
-
-  .modal-img {
-    width: 100%;
-    height: 360px;
-    object-fit: cover;
-  }
-
-  .modal-body { padding: 36px; }
-
-  .modal-cat {
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 1.2px;
-    color: var(--accent);
-    font-weight: 700;
-    margin-bottom: 8px;
-  }
-
-  .modal-title {
-    font-family: 'Manrope', sans-serif;
-    font-size: 1.85rem;
-    font-weight: 700;
-    letter-spacing: -0.5px;
-    margin-bottom: 16px;
-  }
-
-  .modal-desc {
-    font-size: 1.02rem;
-    color: var(--text-muted);
-    line-height: 1.75;
-    margin-bottom: 24px;
-  }
-
-  .modal-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-bottom: 28px;
-  }
-  .modal-tags span {
-    background: var(--bg-soft);
-    padding: 6px 14px;
-    border-radius: 999px;
-    font-size: 0.8rem;
-    font-weight: 600;
-  }
-
-  /* Responsive */
-  @media (max-width: 1000px) {
-    .services-grid { grid-template-columns: 1fr 1fr; }
-    .projects-grid { grid-template-columns: 1fr; }
-    .approach-grid { grid-template-columns: 1fr; }
-    .about-grid { grid-template-columns: 1fr; gap: 40px; }
-    .about-visual { height: 340px; }
-  }
-
-  @media (max-width: 700px) {
-    nav { display: none; }
-    .menu-btn { display: block; }
-    nav.open {
-      display: flex;
-      flex-direction: column;
-      position: absolute;
-      top: 100%;
-      left: 0; right: 0;
-      background: var(--bg);
-      padding: 24px 32px;
-      border-bottom: 1px solid var(--border);
-      gap: 16px;
-    }
-    .services-grid { grid-template-columns: 1fr; }
-    .container { padding: 0 20px; }
-    .hero { padding-top: 140px; }
-    .modal-img { height: 230px; }
-  }
-</style>
+
+    <!-- =========================================================
+         BASIC
+    ========================================================== -->
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    >
+
+    <meta
+        name="description"
+        content="Abdullah Cankı — Görsel İletişim Tasarımcısı. Marka kimliği, 3D, CGI, motion design, video kurgu ve yaratıcı dijital deneyimler."
+    >
+
+    <meta
+        name="keywords"
+        content="Abdullah Cankı, Cankixcreative, grafik tasarım, görsel iletişim tasarımı, Artvin tasarımcı, Blender, 3D, CGI, motion design, branding"
+    >
+
+    <meta name="author" content="Abdullah Cankı">
+
+    <meta name="theme-color" content="#090909">
+
+    <meta name="robots" content="index, follow">
+
+    <link rel="canonical" href="https://cankixcreative.com/">
+
+    <title>Abdullah Cankı — Cankixcreative</title>
+
+
+    <!-- =========================================================
+         SOCIAL / OPEN GRAPH
+    ========================================================== -->
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Abdullah Cankı — Cankixcreative">
+    <meta
+        property="og:description"
+        content="Visual stories, strong identities and creative digital experiences."
+    >
+    <meta property="og:url" content="https://cankixcreative.com/">
+    <meta property="og:site_name" content="Cankixcreative">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Abdullah Cankı — Cankixcreative">
+    <meta
+        name="twitter:description"
+        content="Görsel İletişim Tasarımcısı — Branding, 3D, CGI & Motion."
+    >
+
+
+    <!-- =========================================================
+         FAVICON — CANKIX ✦
+    ========================================================== -->
+
+    <link
+        rel="icon"
+        type="image/svg+xml"
+        href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='24' fill='%23090909'/%3E%3Cpath d='M50 17 L56 43 L83 50 L56 57 L50 84 L44 57 L17 50 L44 43 Z' fill='%23d7ff45'/%3E%3C/svg%3E"
+    >
+
+    <link
+        rel="apple-touch-icon"
+        href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='24' fill='%23090909'/%3E%3Cpath d='M50 17 L56 43 L83 50 L56 57 L50 84 L44 57 L17 50 L44 43 Z' fill='%23d7ff45'/%3E%3C/svg%3E"
+    >
+
+
+    <!-- =========================================================
+         FONTS
+    ========================================================== -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+
+    <!-- =========================================================
+         CSS
+    ========================================================== -->
+
+    <style>
+
+        /* =====================================================
+           RESET
+        ====================================================== */
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+
+        :root {
+
+            --bg: #090909;
+            --bg-soft: #101010;
+            --surface: #151515;
+
+            --white: #f2f1ed;
+            --gray: #9b9b96;
+            --dark-gray: #555550;
+
+            --line: rgba(255,255,255,.10);
+
+            --accent: #d7ff45;
+
+            --max-width: 1600px;
+
+            --ease: cubic-bezier(.16,1,.3,1);
+        }
+
+
+        html {
+            scroll-behavior: smooth;
+            background: var(--bg);
+        }
+
+
+        body {
+            background: var(--bg);
+            color: var(--white);
+
+            font-family: "Manrope", sans-serif;
+
+            min-height: 100vh;
+
+            overflow-x: hidden;
+
+            -webkit-font-smoothing: antialiased;
+            text-rendering: optimizeLegibility;
+        }
+
+
+        body.menu-open {
+            overflow: hidden;
+        }
+
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+
+        button {
+            font: inherit;
+        }
+
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+
+        ::selection {
+            background: var(--accent);
+            color: #000;
+        }
+
+
+        /* =====================================================
+           CUSTOM CURSOR
+        ====================================================== */
+
+        .cursor {
+            position: fixed;
+
+            width: 10px;
+            height: 10px;
+
+            border: 1px solid var(--accent);
+            border-radius: 50%;
+
+            pointer-events: none;
+
+            z-index: 99999;
+
+            transform: translate(-50%, -50%);
+
+            transition:
+                width .35s var(--ease),
+                height .35s var(--ease),
+                background .35s var(--ease),
+                border-color .35s var(--ease);
+
+            mix-blend-mode: difference;
+
+            display: none;
+        }
+
+
+        .cursor.is-hover {
+            width: 64px;
+            height: 64px;
+
+            background: var(--accent);
+            border-color: var(--accent);
+        }
+
+
+        /* =====================================================
+           PAGE LOADER
+        ====================================================== */
+
+        .loader {
+            position: fixed;
+
+            inset: 0;
+
+            background: var(--bg);
+
+            z-index: 99998;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            transition:
+                opacity .8s var(--ease),
+                visibility .8s;
+        }
+
+
+        .loader.hide {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+
+        .loader-inner {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+
+            font-family: "DM Mono", monospace;
+
+            font-size: 11px;
+
+            letter-spacing: .12em;
+            text-transform: uppercase;
+        }
+
+
+        .loader-mark {
+            width: 12px;
+            height: 12px;
+
+            background: var(--accent);
+
+            clip-path: polygon(
+                50% 0,
+                61% 39%,
+                100% 50%,
+                61% 61%,
+                50% 100%,
+                39% 61%,
+                0 50%,
+                39% 39%
+            );
+
+            animation: loaderPulse 1s infinite alternate;
+        }
+
+
+        @keyframes loaderPulse {
+            from {
+                transform: scale(.65);
+                opacity: .4;
+            }
+
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+
+        /* =====================================================
+           CONTAINER
+        ====================================================== */
+
+        .container {
+            width: min(
+                calc(100% - 10vw),
+                var(--max-width)
+            );
+
+            margin-inline: auto;
+        }
+
+
+        /* =====================================================
+           NAVIGATION
+        ====================================================== */
+
+        .nav {
+            position: fixed;
+
+            top: 0;
+            left: 0;
+
+            width: 100%;
+
+            z-index: 5000;
+
+            padding:
+                max(22px, env(safe-area-inset-top))
+                5vw
+                22px;
+
+            transition:
+                background .4s ease,
+                backdrop-filter .4s ease,
+                padding .4s ease;
+        }
+
+
+        .nav.scrolled {
+            background: rgba(9,9,9,.78);
+
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+
+            border-bottom: 1px solid var(--line);
+
+            padding-top: 17px;
+            padding-bottom: 17px;
+        }
+
+
+        .nav-inner {
+            width: min(100%, var(--max-width));
+
+            margin-inline: auto;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+
+            font-size: 16px;
+
+            font-weight: 800;
+
+            letter-spacing: -.04em;
+
+            position: relative;
+
+            z-index: 20;
+        }
+
+
+        .brand-mark {
+            width: 13px;
+            height: 13px;
+
+            background: var(--accent);
+
+            clip-path: polygon(
+                50% 0,
+                61% 39%,
+                100% 50%,
+                61% 61%,
+                50% 100%,
+                39% 61%,
+                0 50%,
+                39% 39%
+            );
+        }
+
+
+        .brand span {
+            color: var(--accent);
+        }
+
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 34px;
+        }
+
+
+        .nav-link {
+            position: relative;
+
+            font-family: "DM Mono", monospace;
+
+            font-size: 10px;
+
+            letter-spacing: .08em;
+
+            text-transform: uppercase;
+
+            color: #aaa;
+
+            transition: color .3s ease;
+        }
+
+
+        .nav-link::after {
+            content: "";
+
+            position: absolute;
+
+            left: 0;
+            bottom: -7px;
+
+            width: 0;
+            height: 1px;
+
+            background: var(--accent);
+
+            transition: width .4s var(--ease);
+        }
+
+
+        .nav-link:hover {
+            color: var(--white);
+        }
+
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+
+        .menu-button {
+            display: none;
+
+            width: 42px;
+            height: 42px;
+
+            border: 1px solid var(--line);
+
+            background: transparent;
+
+            color: white;
+
+            align-items: center;
+            justify-content: center;
+
+            flex-direction: column;
+
+            gap: 5px;
+
+            cursor: pointer;
+
+            position: relative;
+            z-index: 20;
+        }
+
+
+        .menu-button span {
+            display: block;
+
+            width: 17px;
+            height: 1px;
+
+            background: white;
+
+            transition: transform .4s var(--ease);
+        }
+
+
+        .menu-button.active span:first-child {
+            transform: translateY(3px) rotate(45deg);
+        }
+
+
+        .menu-button.active span:last-child {
+            transform: translateY(-3px) rotate(-45deg);
+        }
+
+
+        /* =====================================================
+           MOBILE MENU
+        ====================================================== */
+
+        .mobile-menu {
+            position: fixed;
+
+            inset: 0;
+
+            background: var(--bg);
+
+            z-index: 10;
+
+            padding:
+                130px 8vw
+                50px;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+
+            transform: translateY(-100%);
+
+            transition: transform .7s var(--ease);
+
+            visibility: hidden;
+        }
+
+
+        .mobile-menu.active {
+            transform: translateY(0);
+
+            visibility: visible;
+        }
+
+
+        .mobile-menu-links {
+            display: flex;
+            flex-direction: column;
+        }
+
+
+        .mobile-menu-link {
+            font-size: clamp(48px, 15vw, 90px);
+
+            font-weight: 800;
+
+            letter-spacing: -.07em;
+
+            line-height: .95;
+
+            border-bottom: 1px solid var(--line);
+
+            padding: 18px 0;
+        }
+
+
+        .mobile-menu-footer {
+            display: flex;
+            justify-content: space-between;
+
+            font-family: "DM Mono", monospace;
+
+            font-size: 10px;
+
+            color: var(--gray);
+        }
+
+
+        /* =====================================================
+           HERO
+        ====================================================== */
+
+        .hero {
+            min-height: 100svh;
+
+            padding:
+                170px 0
+                70px;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+
+            position: relative;
+
+            isolation: isolate;
+        }
+
+
+        .hero::before {
+            content: "";
+
+            position: absolute;
+
+            width: 45vw;
+            height: 45vw;
+
+            max-width: 700px;
+            max-height: 700px;
+
+            right: -18vw;
+            top: 20%;
+
+            background: var(--accent);
+
+            filter: blur(160px);
+
+            opacity: .035;
+
+            pointer-events: none;
+
+            z-index: -1;
+        }
+
+
+        .hero-meta {
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            font-family: "DM Mono", monospace;
+
+            font-size: 10px;
+
+            text-transform: uppercase;
+
+            letter-spacing: .06em;
+
+            color: var(--gray);
+        }
+
+
+        .status {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+        }
+
+
+        .status-dot {
+            width: 6px;
+            height: 6px;
+
+            border-radius: 50%;
+
+            background: var(--accent);
+
+            box-shadow: 0 0 14px var(--accent);
+        }
+
+
+        .hero-main {
+            margin-top: clamp(90px, 12vh, 160px);
+        }
+
+
+        .hero-title {
+            font-size: clamp(
+                62px,
+                10.2vw,
+                165px
+            );
+
+            line-height: .84;
+
+            letter-spacing: -.085em;
+
+            font-weight: 800;
+
+            max-width: 1450px;
+        }
+
+
+        .hero-title-line {
+            display: block;
+        }
+
+
+        .hero-title .outline {
+            color: transparent;
+
+            -webkit-text-stroke:
+                clamp(1px, .08vw, 1.5px)
+                #656560;
+        }
+
+
+        .hero-title .accent {
+            color: var(--accent);
+        }
+
+
+        .hero-description-row {
+            margin-top: 75px;
+
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            gap: 40px;
+        }
+
+
+        .hero-description {
+            max-width: 510px;
+
+            font-size: clamp(15px, 1.25vw, 18px);
+
+            line-height: 1.75;
+
+            color: #a4a4a0;
+        }
+
+
+        .hero-cta {
+            justify-self: end;
+
+            align-self: end;
+
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+
+            padding: 17px 21px;
+
+            border: 1px solid var(--line);
+
+            font-family: "DM Mono", monospace;
+
+            font-size: 10px;
+
+            text-transform: uppercase;
+
+            letter-spacing: .06em;
+
+            transition:
+                background .4s ease,
+                color .4s ease,
+                border-color .4s ease,
+                transform .4s var(--ease);
+        }
+
+
+        .hero-cta:hover {
+            background: var(--accent);
+
+            color: #000;
+
+            border-color: var(--accent);
+
+            transform: translateY(-3px);
+        }
+
+
+        .hero-cta-arrow {
+            font-size: 17px;
+
+            transition: transform .4s var(--ease);
+        }
+
+
+        .hero-cta:hover .hero-cta-arrow {
+            transform: translate(4px,-4px);
+        }
+
+
+        .hero-bottom {
+            margin-top: 80px;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: flex-end;
+        }
+
+
+        .scroll-indicator {
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            font-family: "DM Mono", monospace;
+
+            font-size: 9px;
+
+            text-transform: uppercase;
+
+            color: #666;
+        }
+
+
+        .scroll-line {
+            width: 50px;
+            height: 1px;
+
+            background: #444;
+
+            position: relative;
+
+            overflow: hidden;
+        }
+
+
+        .scroll-line::after {
+            content: "";
+
+            position: absolute;
+
+            inset: 0;
+
+            background: var(--accent);
+
+            transform: translateX(-100%);
+
+            animation: scrollLine 2s infinite;
+        }
+
+
+        @keyframes scrollLine {
+            0% { transform: translateX(-100%); }
+            50%,100% { transform: translateX(100%); }
+        }
+
+
+        /* =====================================================
+           MARQUEE
+        ====================================================== */
+
+        .marquee {
+            overflow: hidden;
+
+            border-top: 1px solid var(--line);
+            border-bottom: 1px solid var(--line);
+
+            white-space: nowrap;
+
+            padding: 20px 0;
+        }
+
+
+        .marquee-track {
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 45px;
+
+            animation: marquee 28s linear infinite;
+        }
+
+
+        .marquee-item {
+            font-family: "DM Mono", monospace;
+
+            font-size: 10px;
+
+            letter-spacing: .1em;
+
+            color: #777;
+
+            text-transform: uppercase;
+        }
+
+
+        .marquee-star {
+            color: var(--accent);
+
+            font-size: 16px;
+        }
+
+
+        @keyframes marquee {
+            to {
+                transform: translateX(-50%);
+            }
+        }
+
+
+        /* =====================================================
+           SECTION
+        ====================================================== */
+
+        .section {
+            padding: 160px 0;
+        }
+
+
+        .section-top {
+            display: grid;
+
+            grid-template-columns: 1fr 2fr;
+
+            gap: 40px;
+
+            margin-bottom: 90px;
+        }
+
+
+        .section-label {
+            font-family: "DM Mono", monospace;
+
+            font-size: 10px;
+
+            color: var(--accent);
+
+            letter-spacing: .08em;
+
+            text-transform: uppercase;
+        }
+
+
+        .section-title {
+            font-size: clamp(
+                42px,
+                6.4vw,
+                92px
+            );
+
+            line-height: .91;
+
+            letter-spacing: -.07em;
+
+            font-weight: 700;
+        }
+
+
+        /* =====================================================
+           PROJECTS
+        ====================================================== */
+
+        .projects {
+            display: grid;
+
+            grid-template-columns: repeat(12, 1fr);
+
+            gap:
+                clamp(35px, 5vw, 90px)
+                20px;
+        }
+
+
+        .project {
+            position: relative;
+        }
+
+
+        .project:nth-child(1) {
+            grid-column: 1 / 8;
+        }
+
+
+        .project:nth-child(2) {
+            grid-column: 9 / 13;
+
+            margin-top: 170px;
+        }
+
+
+        .project:nth-child(3) {
+            grid-column: 2 / 9;
+
+            margin-top: 40px;
+        }
+
+
+        .project:nth-child(4) {
+            grid-column: 10 / 13;
+
+            margin-top: 220px;
+        }
+
+
+        .project:nth-child(5) {
+            grid-column: 1 / 6;
+
+            margin-top: 80px;
+        }
+
+
+        .project:nth-child(6) {
+            grid-column: 7 / 13;
+
+            margin-top: 10px;
+        }
+
+
+        .project-visual {
+            position: relative;
+
+            width: 100%;
+
+            overflow: hidden;
+
+            background: #151515;
+
+            aspect-ratio: 1.2 / 1;
+
+            isolation: isolate;
+
+            cursor: pointer;
+        }
+
+
+        .project:nth-child(2) .project-visual {
+            aspect-ratio: .82 / 1;
+        }
+
+
+        .project:nth-child(3) .project-visual {
+            aspect-ratio: 1.35 / 1;
+        }
+
+
+        .project:nth-child(4) .project-visual {
+            aspect-ratio: .75 / 1;
+        }
+
+
+        .project:nth-child(5) .project-visual {
+            aspect-ratio: 1 / 1.1;
+        }
+
+
+        .project:nth-child(6) .project-visual {
+            aspect-ratio: 1.3 / 1;
+        }
+
+
+        /*
+            Placeholder görseller.
+
+            Kendi görsellerini eklemek için örnek:
+
+            background-image:
+            url("images/proje-01.webp");
+
+            veya img etiketi kullanabilirsin.
+        */
+
+
+        .project-visual::before {
+            content: "";
+
+            position: absolute;
+
+            inset: 0;
+
+            background:
+                radial-gradient(
+                    circle at 70% 30%,
+                    rgba(255,255,255,.18),
+                    transparent 28%
+                ),
+                linear-gradient(
+                    135deg,
+                    #151515,
+                    #292929
+                );
+
+            z-index: -2;
+
+            transition:
+                transform 1s var(--ease),
+                filter 1s ease;
+        }
+
+
+        .project:nth-child(2) .project-visual::before {
+            background:
+                radial-gradient(
+                    circle at 35% 25%,
+                    rgba(215,255,69,.18),
+                    transparent 24%
+                ),
+                linear-gradient(
+                    145deg,
+                    #101010,
+                    #353535
+                );
+        }
+
+
+        .project:nth-child(3) .project-visual::before {
+            background:
+                radial-gradient(
+                    circle at 50% 50%,
+                    #454545,
+                    transparent 20%
+                ),
+                linear-gradient(
+                    120deg,
+                    #202020,
+                    #080808
+                );
+        }
+
+
+        .project:nth-child(4) .project-visual::before {
+            background:
+                linear-gradient(
+                    135deg,
+                    #080808,
+                    #303030
+                );
+        }
+
+
+        .project:nth-child(5) .project-visual::before {
+            background:
+                radial-gradient(
+                    circle at 25% 70%,
+                    rgba(215,255,69,.12),
+                    transparent 30%
+                ),
+                #171717;
+        }
+
+
+        .project:nth-child(6) .project-visual::before {
+            background:
+                linear-gradient(
+                    145deg,
+                    #2c2c2c,
+                    #080808
+                );
+        }
+
+
+        .project-visual::after {
+            content: "";
+
+            position: absolute;
+
+            inset: 0;
+
+            background:
+                linear-gradient(
+                    to top,
+                    rgba(0,0,0,.4),
+                    transparent 50%
+                );
+
+            z-index: -1;
+        }
+
+
+        .project:hover .project-visual::before {
+            transform: scale(1.06);
+
+            filter: brightness(1.1);
+        }
+
+
+        .project-number {
+            position: absolute;
+
+            top: 20px;
+            left: 20px;
+
+            font-family: "DM Mono", monospace;
+
+            font-size: 9px;
+
+            color: rgba(255,255,255,.7);
+
+            z-index: 2;
+        }
+
+
+        .project-arrow {
+            position: absolute;
+
+            top: 16px;
+            right: 16px;
+
+            width: 48px;
+            height: 48px;
+
+            border:
+                1px solid
+                rgba(255,255,255,.3);
+
+            border-radius: 50%;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            font-size: 18px;
+
+            transition:
+                background .5s var(--ease),
+                color .5s var(--ease),
+                transform .5s var(--ease),
+                border-color .5s ease;
+        }
+
+
+        .project:hover .project-arrow {
+            background: var(--accent);
+
+            color: #000;
+
+            border-color: var(--accent);
+
+            transform: rotate(45deg);
+        }
+
+
+        .project-info {
+            display: flex;
+
+            justify-content: space-between;
+
+            gap: 20px;
+
+            padding-top: 20px;
+        }
+
+
+        .project-name {
+            font-size: 17px;
+
+            font-weight: 700;
+
+            letter-spacing: -.025em;
+        }
+
+
+        .project-category {
+            margin-top: 7px;
+
+            font-family: "DM Mono", monospace;
+
+            font-size: 9px;
+
+            text-transform: uppercase;
+
+            letter-spacing: .05em;
+
+            color: #666;
+        }
+
+
+        .project-year {
+            font-family: "DM Mono", monospace;
+
+            font-size: 9px;
+
+            color: #555;
+
+            padding-top: 4px;
+
+            white-space: nowrap;
+        }
+
+
+        /* =====================================================
+           ABOUT
+        ====================================================== */
+
+        .about {
+            border-top: 1px solid var(--line);
+        }
+
+
+        .about-grid {
+            display: grid;
+
+            grid-template-columns:
+                minmax(250px, 1fr)
+                minmax(400px, 2fr);
+
+            gap: 10vw;
+        }
+
+
+        .about-statement {
+            font-size: clamp(
+                30px,
+                4.2vw,
+                64px
+            );
+
+            line-height: 1.03;
+
+            letter-spacing: -.055em;
+        }
+
+
+        .about-statement strong {
+            color: var(--accent);
+
+            font-weight: 600;
+        }
+
+
+        .about-copy {
+            max-width: 700px;
+        }
+
+
+        .about-copy p {
+            color: #999;
+
+            font-size: 16px;
+
+            line-height: 1.85;
+        }
+
+
+        .about-copy p + p {
+            margin-top: 25px;
+        }
+
+
+        .skills {
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            margin-top: 80px;
+
+            border-top: 1px solid var(--line);
+        }
+
+
+        .skill {
+            padding: 18px 0;
+
+            border-bottom: 1px solid var(--line);
+
+            font-family: "DM Mono", monospace;
+
+            font-size: 9px;
+
+            letter-spacing: .04em;
+
+            color: #8b8b87;
+
+            text-transform: uppercase;
+        }
+
+
+        .skill:nth-child(odd) {
+            margin-right: 20px;
+        }
+
+
+        .skill-number {
+            color: var(--accent);
+
+            margin-right: 15px;
+        }
+
+
+        /* =====================================================
+           TOOLS
+        ====================================================== */
+
+        .tools {
+            margin-top: 110px;
+
+            padding-top: 30px;
+
+            border-top: 1px solid var(--line);
+        }
+
+
+        .tools-label {
+            font-family: "DM Mono", monospace;
+
+            font-size: 9px;
+
+            color: #555;
+
+            text-transform: uppercase;
+
+            margin-bottom: 28px;
+        }
+
+
+        .tool-list {
+            display: flex;
+
+            flex-wrap: wrap;
+
+            gap: 8px;
+        }
+
+
+        .tool {
+            border: 1px solid var(--line);
+
+            padding: 11px 14px;
+
+            font-family: "DM Mono", monospace;
+
+            font-size: 9px;
+
+            color: #888;
+
+            transition:
+                border-color .3s ease,
+                color .3s ease;
+        }
+
+
+        .tool:hover {
+            color: var(--accent);
+
+            border-color: var(--accent);
+        }
+
+
+        /* =====================================================
+           CONTACT
+        ====================================================== */
+
+        .contact {
+            min-height: 85svh;
+
+            display: flex;
+
+            flex-direction: column;
+
+            justify-content: center;
+
+            border-top: 1px solid var(--line);
+
+            position: relative;
+        }
+
+
+        .contact::after {
+            content: "✦";
+
+            position: absolute;
+
+            right: 2vw;
+            bottom: 8%;
+
+            font-size: 30vw;
+
+            line-height: 1;
+
+            color: transparent;
+
+            -webkit-text-stroke: 1px rgba(255,255,255,.035);
+
+            pointer-events: none;
+
+            z-index: -1;
+        }
+
+
+        .contact-label {
+            font-family: "DM Mono", monospace;
+
+            font-size: 10px;
+
+            color: var(--accent);
+
+            text-transform: uppercase;
+
+            letter-spacing: .08em;
+
+            margin-bottom: 45px;
+        }
+
+
+        .contact-title {
+            font-size: clamp(
+                65px,
+                12vw,
+                190px
+            );
+
+            line-height: .79;
+
+            letter-spacing: -.09em;
+
+            font-weight: 800;
+        }
+
+
+        .contact-title .outline {
+            color: transparent;
+
+            -webkit-text-stroke: 1px #555;
+        }
+
+
+        .contact-link {
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 16px;
+
+            margin-top: 70px;
+
+            font-family: "DM Mono", monospace;
+
+            font-size: clamp(13px, 1.3vw, 18px);
+
+            color: #aaa;
+
+            width: fit-content;
+
+            border-bottom: 1px solid #444;
+
+            padding-bottom: 10px;
+
+            transition:
+                color .3s ease,
+                border-color .3s ease;
+        }
+
+
+        .contact-link:hover {
+            color: var(--accent);
+
+            border-color: var(--accent);
+        }
+
+
+        /* =====================================================
+           FOOTER
+        ====================================================== */
+
+        footer {
+            border-top: 1px solid var(--line);
+
+            padding:
+                30px 0
+                max(30px, env(safe-area-inset-bottom));
+
+            font-family: "DM Mono", monospace;
+
+            font-size: 9px;
+
+            color: #555;
+        }
+
+
+        .footer-inner {
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 30px;
+        }
+
+
+        .footer-socials {
+            display: flex;
+
+            gap: 25px;
+        }
+
+
+        .footer-socials a {
+            transition: color .3s ease;
+        }
+
+
+        .footer-socials a:hover {
+            color: var(--accent);
+        }
+
+
+        /* =====================================================
+           REVEAL ANIMATIONS
+        ====================================================== */
+
+        .reveal {
+            opacity: 0;
+
+            transform: translateY(55px);
+
+            transition:
+                opacity 1s var(--ease),
+                transform 1s var(--ease);
+        }
+
+
+        .reveal.visible {
+            opacity: 1;
+
+            transform: translateY(0);
+        }
+
+
+        .delay-1 {
+            transition-delay: .08s;
+        }
+
+
+        .delay-2 {
+            transition-delay: .16s;
+        }
+
+
+        .delay-3 {
+            transition-delay: .24s;
+        }
+
+
+        /* =====================================================
+           RESPONSIVE — TABLET
+        ====================================================== */
+
+        @media (max-width: 1000px) {
+
+            .hero-title {
+                font-size: clamp(
+                    58px,
+                    10vw,
+                    105px
+                );
+            }
+
+
+            .projects {
+                gap: 60px 16px;
+            }
+
+
+            .project:nth-child(1) {
+                grid-column: 1 / 8;
+            }
+
+
+            .project:nth-child(2) {
+                grid-column: 9 / 13;
+
+                margin-top: 100px;
+            }
+
+
+            .project:nth-child(3) {
+                grid-column: 1 / 9;
+            }
+
+
+            .project:nth-child(4) {
+                grid-column: 9 / 13;
+            }
+
+
+            .project:nth-child(5) {
+                grid-column: 1 / 6;
+            }
+
+
+            .project:nth-child(6) {
+                grid-column: 7 / 13;
+            }
+
+
+            .about-grid {
+                gap: 7vw;
+            }
+
+        }
+
+
+        /* =====================================================
+           RESPONSIVE — MOBILE
+        ====================================================== */
+
+        @media (max-width: 700px) {
+
+            .cursor {
+                display: none !important;
+            }
+
+
+            .container {
+                width: calc(100% - 40px);
+            }
+
+
+            .nav {
+                padding:
+                    max(18px, env(safe-area-inset-top))
+                    20px
+                    18px;
+            }
+
+
+            .nav-links {
+                display: none;
+            }
+
+
+            .menu-button {
+                display: flex;
+            }
+
+
+            .hero {
+                min-height: 100svh;
+
+                padding:
+                    125px 0
+                    45px;
+            }
+
+
+            .hero-meta {
+                font-size: 8px;
+            }
+
+
+            .hero-meta > span:last-child {
+                display: none;
+            }
+
+
+            .hero-main {
+                margin-top: 80px;
+            }
+
+
+            .hero-title {
+                font-size: clamp(
+                    55px,
+                    16vw,
+                    100px
+                );
+
+                line-height: .86;
+            }
+
+
+            .hero-description-row {
+                display: block;
+
+                margin-top: 50px;
+            }
+
+
+            .hero-description {
+                font-size: 14px;
+
+                line-height: 1.7;
+            }
+
+
+            .hero-cta {
+                margin-top: 35px;
+
+                width: 100%;
+
+                justify-content: space-between;
+            }
+
+
+            .hero-bottom {
+                margin-top: 55px;
+            }
+
+
+            .scroll-indicator {
+                font-size: 8px;
+            }
+
+
+            .section {
+                padding: 100px 0;
+            }
+
+
+            .section-top {
+                display: block;
+
+                margin-bottom: 55px;
+            }
+
+
+            .section-title {
+                margin-top: 28px;
+
+                font-size: clamp(
+                    42px,
+                    13vw,
+                    65px
+                );
+            }
+
+
+            .projects {
+                display: block;
+            }
+
+
+            .project,
+            .project:nth-child(n) {
+                margin:
+                    0 0
+                    65px;
+            }
+
+
+            .project:last-child {
+                margin-bottom: 0;
+            }
+
+
+            .project-visual,
+            .project:nth-child(n) .project-visual {
+                aspect-ratio: 1 / 1.08;
+            }
+
+
+            .project:nth-child(3) .project-visual,
+            .project:nth-child(6) .project-visual {
+                aspect-ratio: 1 / .82;
+            }
+
+
+            .project-arrow {
+                width: 42px;
+                height: 42px;
+
+                top: 12px;
+                right: 12px;
+            }
+
+
+            .project-number {
+                top: 15px;
+                left: 15px;
+            }
+
+
+            .project-name {
+                font-size: 15px;
+            }
+
+
+            .project-category,
+            .project-year {
+                font-size: 8px;
+            }
+
+
+            .about-grid {
+                display: block;
+            }
+
+
+            .about-statement {
+                font-size: clamp(
+                    32px,
+                    10vw,
+                    55px
+                );
+            }
+
+
+            .about-copy {
+                margin-top: 65px;
+            }
+
+
+            .about-copy p {
+                font-size: 14px;
+
+                line-height: 1.8;
+            }
+
+
+            .skills {
+                margin-top: 60px;
+            }
+
+
+            .skill {
+                font-size: 8px;
+
+                padding: 15px 0;
+            }
+
+
+            .skill:nth-child(odd) {
+                margin-right: 12px;
+            }
+
+
+            .tools {
+                margin-top: 70px;
+            }
+
+
+            .tool {
+                font-size: 8px;
+
+                padding: 9px 11px;
+            }
+
+
+            .contact {
+                min-height: 75svh;
+            }
+
+
+            .contact-title {
+                font-size: clamp(
+                    62px,
+                    18vw,
+                    110px
+                );
+            }
+
+
+            .contact-link {
+                margin-top: 50px;
+
+                font-size: 12px;
+            }
+
+
+            .contact::after {
+                font-size: 55vw;
+
+                right: -5vw;
+            }
+
+
+            .footer-inner {
+                align-items: flex-start;
+
+                flex-direction: column;
+
+                gap: 20px;
+            }
+
+
+            .footer-socials {
+                gap: 18px;
+            }
+
+        }
+
+
+        /* =====================================================
+           REDUCED MOTION
+        ====================================================== */
+
+        @media (prefers-reduced-motion: reduce) {
+
+            html {
+                scroll-behavior: auto;
+            }
+
+
+            *,
+            *::before,
+            *::after {
+                animation-duration: .01ms !important;
+
+                animation-iteration-count: 1 !important;
+
+                transition-duration: .01ms !important;
+            }
+
+        }
+
+    </style>
+
 </head>
+
+
 <body>
 
-<header id="header">
-  <div class="container header-inner">
-    <a href="#" class="logo">Abdullah Cankı</a>
-    <nav id="nav">
-      <a href="#isler">İşler</a>
-      <a href="#hizmetler">Hizmetler</a>
-      <a href="#yaklasim">Yaklaşım</a>
-      <a href="#hakkimda">Hakkında</a>
-      <a href="#iletisim" class="nav-cta">İletişim</a>
-    </nav>
-    <button class="menu-btn" id="menuBtn">☰</button>
-  </div>
+
+<!-- =========================================================
+     LOADER
+========================================================== -->
+
+<div class="loader" id="loader">
+
+    <div class="loader-inner">
+
+        <div class="loader-mark"></div>
+
+        <span>Cankixcreative</span>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     CURSOR
+========================================================== -->
+
+<div class="cursor" id="cursor"></div>
+
+
+<!-- =========================================================
+     NAVIGATION
+========================================================== -->
+
+<header class="nav" id="nav">
+
+    <div class="nav-inner">
+
+        <a
+            href="#top"
+            class="brand"
+            aria-label="Cankixcreative ana sayfa"
+        >
+
+            <span class="brand-mark"></span>
+
+            CANKIX<span>✦</span>
+
+        </a>
+
+
+        <nav
+            class="nav-links"
+            aria-label="Ana navigasyon"
+        >
+
+            <a class="nav-link" href="#work">
+                Çalışmalar
+            </a>
+
+            <a class="nav-link" href="#about">
+                Hakkımda
+            </a>
+
+            <a class="nav-link" href="#contact">
+                İletişim
+            </a>
+
+        </nav>
+
+
+        <button
+            class="menu-button"
+            id="menuButton"
+            aria-label="Menüyü aç"
+            aria-expanded="false"
+        >
+
+            <span></span>
+            <span></span>
+
+        </button>
+
+    </div>
+
 </header>
 
-<div class="container">
 
-  <section class="hero">
-    <div class="hero-badge">● Freelance & Yeni Projelere Açık</div>
-    <h1>Markaları ve hikayeleri <span>görsel dünyalara</span> dönüştürüyorum.</h1>
-    <p class="hero-lead">
-      Görsel iletişim tasarımı, marka kimliği, 3D CGI ve motion alanında çalışan bir tasarımcıyım. Fikirleri sade, güçlü ve akılda kalıcı formlara taşıyorum.
-    </p>
-    <div class="hero-actions">
-      <a href="#isler" class="btn btn-dark">Seçilmiş İşler</a>
-      <a href="#iletisim" class="btn btn-outline">İletişime Geç</a>
+<!-- =========================================================
+     MOBILE MENU
+========================================================== -->
+
+<div class="mobile-menu" id="mobileMenu">
+
+    <nav class="mobile-menu-links">
+
+        <a
+            href="#work"
+            class="mobile-menu-link"
+        >
+            Çalışmalar
+        </a>
+
+        <a
+            href="#about"
+            class="mobile-menu-link"
+        >
+            Hakkımda
+        </a>
+
+        <a
+            href="#contact"
+            class="mobile-menu-link"
+        >
+            İletişim
+        </a>
+
+    </nav>
+
+
+    <div class="mobile-menu-footer">
+
+        <span>
+            Artvin / Türkiye
+        </span>
+
+        <span>
+            © 2026 Cankixcreative
+        </span>
+
     </div>
-  </section>
-
-  <section class="services" id="hizmetler">
-    <div class="section-label">Ne Yapıyorum</div>
-    <h2 class="section-title">Hizmetler</h2>
-    <div class="services-grid">
-      <div class="service-card">
-        <div class="service-num">01</div>
-        <h3>Marka Kimliği</h3>
-        <p>Logo, tipografi, renk sistemi ve tüm temas noktalarında tutarlı kurumsal kimlik tasarımı.</p>
-      </div>
-      <div class="service-card">
-        <div class="service-num">02</div>
-        <h3>3D & CGI</h3>
-        <p>Blender ile ürün görselleştirme, atmosferik sahneler ve prosedürel formlar.</p>
-      </div>
-      <div class="service-card">
-        <div class="service-num">03</div>
-        <h3>Motion & Video</h3>
-        <p>Stop-motion, kurgu, renk derecelendirme ve hareketli görsel anlatılar.</p>
-      </div>
-      <div class="service-card">
-        <div class="service-num">04</div>
-        <h3>Tipografi & Baskı</h3>
-        <p>Editoryal tasarım, afiş serileri ve güçlü tipografik sistemler.</p>
-      </div>
-    </div>
-  </section>
-
-  <section class="projects" id="isler">
-    <div class="projects-header">
-      <div>
-        <div class="section-label">Portfolyo</div>
-        <h2 class="section-title">Seçilmiş Çalışmalar</h2>
-      </div>
-      <div class="filters">
-        <button class="filter-btn active" data-filter="all">Tümü</button>
-        <button class="filter-btn" data-filter="branding">Marka</button>
-        <button class="filter-btn" data-filter="3d">3D</button>
-        <button class="filter-btn" data-filter="video">Video</button>
-      </div>
-    </div>
-
-    <div class="projects-grid">
-      <article class="project-card" data-cat="branding" onclick="openModal(0)">
-        <div class="project-media">
-          <span class="project-cat">Marka Kimliği</span>
-          <img src="https://images.unsplash.com/photo-1600132806370-bf17e65e942f?w=900&auto=format&fit=crop&q=80" alt="Cankixcreative">
-        </div>
-        <div class="project-body">
-          <div class="project-title"><span>Cankixcreative Stüdyo Kimliği</span><span>↗</span></div>
-          <p class="project-desc">Minimalist monogram, tipografik grid ve sosyal medya sistemi.</p>
-          <div class="project-tags"><span>Logo</span><span>Grid</span><span>Kimlik</span></div>
-        </div>
-      </article>
-
-      <article class="project-card" data-cat="3d" onclick="openModal(1)">
-        <div class="project-media">
-          <span class="project-cat">3D Modelleme</span>
-          <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=900&auto=format&fit=crop&q=80" alt="Atmosferik Mekân">
-        </div>
-        <div class="project-body">
-          <div class="project-title"><span>Atmosferik Mekân & Doku</span><span>↗</span></div>
-          <p class="project-desc">Blender Cycles ile ışık, form ve materyal odaklı sahne.</p>
-          <div class="project-tags"><span>Blender</span><span>Cycles</span><span>Doku</span></div>
-        </div>
-      </article>
-
-      <article class="project-card" data-cat="video" onclick="openModal(2)">
-        <div class="project-media">
-          <span class="project-cat">Video & Kurgu</span>
-          <img src="https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=900&auto=format&fit=crop&q=80" alt="Stop-Motion">
-        </div>
-        <div class="project-body">
-          <div class="project-title"><span>Kare Kare Anlatı</span><span>↗</span></div>
-          <p class="project-desc">Stop-motion, storyboard ve DaVinci Resolve ile post-prodüksiyon.</p>
-          <div class="project-tags"><span>Stop-Motion</span><span>DaVinci</span><span>Kurgu</span></div>
-        </div>
-      </article>
-
-      <article class="project-card" data-cat="branding" onclick="openModal(3)">
-        <div class="project-media">
-          <span class="project-cat">Tipografi</span>
-          <img src="https://images.unsplash.com/photo-1509198397868-475647b2a1e5?w=900&auto=format&fit=crop&q=80" alt="Afiş">
-        </div>
-        <div class="project-body">
-          <div class="project-title"><span>Deneysel Afiş Serisi</span><span>↗</span></div>
-          <p class="project-desc">İsviçre tarzı tipografi ve brutalist grid dengesi.</p>
-          <div class="project-tags"><span>Afiş</span><span>Tipografi</span><span>Baskı</span></div>
-        </div>
-      </article>
-
-      <article class="project-card" data-cat="3d" onclick="openModal(4)">
-        <div class="project-media">
-          <span class="project-cat">3D Sanat</span>
-          <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=900&auto=format&fit=crop&q=80" alt="Prosedürel">
-        </div>
-        <div class="project-body">
-          <div class="project-title"><span>Prosedürel Formlar</span><span>↗</span></div>
-          <p class="project-desc">Geometry Nodes ile soyut dijital sanat ve parçacık sistemleri.</p>
-          <div class="project-tags"><span>Geometry Nodes</span><span>CGI</span><span>Sanat</span></div>
-        </div>
-      </article>
-
-      <article class="project-card" data-cat="branding" onclick="openModal(5)">
-        <div class="project-media">
-          <span class="project-cat">Dijital</span>
-          <img src="https://images.unsplash.com/photo-1542744094-3a31f272c490?w=900&auto=format&fit=crop&q=80" alt="Sosyal">
-        </div>
-        <div class="project-body">
-          <div class="project-title"><span>Sosyal Medya Görsel Dili</span><span>↗</span></div>
-          <p class="project-desc">Tutarlı renk paleti ve etkileşim odaklı içerik sistemleri.</p>
-          <div class="project-tags"><span>Instagram</span><span>İçerik</span><span>Sistem</span></div>
-        </div>
-      </article>
-    </div>
-  </section>
-
-  <section class="approach" id="yaklasim">
-    <div class="section-label">Nasıl Çalışıyorum</div>
-    <h2 class="section-title">Yaklaşım</h2>
-    <div class="approach-grid">
-      <div class="approach-item">
-        <div class="approach-num">01 — KONSEPT</div>
-        <h3>Fikir & Hikaye</h3>
-        <p>Her projeye referans panoları, eskizler ve net bir görsel hiyerarşi planıyla başlıyorum.</p>
-      </div>
-      <div class="approach-item">
-        <div class="approach-num">02 — DETAY</div>
-        <h3>Form & Işık</h3>
-        <p>Tipografiden 3D ışık kırılmalarına kadar her detayı titizlikle işliyorum.</p>
-      </div>
-      <div class="approach-item">
-        <div class="approach-num">03 — UYGULAMA</div>
-        <h3>Çıktı & Uyum</h3>
-        <p>Baskı, dijital veya motion fark etmeksizin tüm çıktıları yüksek kalitede teslim ediyorum.</p>
-      </div>
-    </div>
-  </section>
-
-  <section class="about" id="hakkimda">
-    <div class="about-grid">
-      <div class="about-text">
-        <div class="section-label">Hakkımda</div>
-        <h2>Abdullah Cankı</h2>
-        <p>Görsel iletişim tasarımı altyapısıyla marka kimliği, 3D görselleştirme ve motion alanında çalışan bir tasarımcıyım.</p>
-        <p>Karmaşık fikirleri <strong>sade, güçlü ve akılda kalıcı</strong> formlara dönüştürmeyi seviyorum. Blender, Adobe Suite ve DaVinci Resolve ile hem statik hem hareketli işler üretiyorum.</p>
-        <p>Yeni marka kimlikleri, 3D sahneler ve yaratıcı projeler için her zaman açığım.</p>
-      </div>
-      <div class="about-visual">
-        <span>Fotoğraf / Portre Alanı</span>
-      </div>
-    </div>
-  </section>
-
-  <section class="tools">
-    <div class="section-label">Araçlar</div>
-    <div class="tools-list">
-      <span class="tool">Blender 3D</span>
-      <span class="tool">Adobe Illustrator</span>
-      <span class="tool">Adobe Photoshop</span>
-      <span class="tool">DaVinci Resolve</span>
-      <span class="tool">Adobe InDesign</span>
-      <span class="tool">After Effects</span>
-      <span class="tool">Tipografi</span>
-      <span class="tool">Stop-Motion</span>
-    </div>
-  </section>
-
-  <section class="contact" id="iletisim">
-    <h2>Birlikte bir şeyler yapalım.</h2>
-    <p>Yeni bir marka kimliği, 3D proje veya sadece fikir alışverişi için yazabilirsin.</p>
-    <div class="contact-links">
-      <a href="mailto:abdullah198579@outlook.com" class="contact-link">
-        <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
-        E-posta
-      </a>
-      <a href="https://www.linkedin.com/in/abdullah-cank%C4%B1-6952b2324/" target="_blank" class="contact-link">
-        <svg viewBox="0 0 24 24"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.2V10.9H6.46M7.83 6.45a1.6 1.6 0 0 0-1.6 1.6 1.6 1.6 0 0 0 1.6 1.6 1.6 1.6 0 0 0 1.6-1.6 1.6 1.6 0 0 0-1.6-1.6Z"/></svg>
-        LinkedIn
-      </a>
-      <a href="https://instagram.com/cankixcreative" target="_blank" class="contact-link">
-        <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-        Instagram
-      </a>
-    </div>
-  </section>
-
-  <footer>
-    <span>© 2026 Abdullah Cankı</span>
-    <span>abdullahcanki.com.tr</span>
-  </footer>
 
 </div>
 
-<div class="modal" id="modal" onclick="closeOnOverlay(event)">
-  <div class="modal-box">
-    <button class="modal-close" onclick="closeModal()">✕</button>
-    <img id="mImg" class="modal-img" src="" alt="">
-    <div class="modal-body">
-      <div id="mCat" class="modal-cat"></div>
-      <h3 id="mTitle" class="modal-title"></h3>
-      <p id="mDesc" class="modal-desc"></p>
-      <div id="mTags" class="modal-tags"></div>
-      <button class="btn btn-dark" onclick="closeModal()">Kapat</button>
+
+<main id="top">
+
+
+<!-- =========================================================
+     HERO
+========================================================== -->
+
+<section class="hero">
+
+    <div class="container">
+
+        <div class="hero-meta">
+
+            <div class="status">
+
+                <span class="status-dot"></span>
+
+                <span>
+                    Available for creative projects
+                </span>
+
+            </div>
+
+
+            <span>
+                Artvin — Türkiye / 2026
+            </span>
+
+        </div>
+
+
+        <div class="hero-main">
+
+            <h1 class="hero-title">
+
+                <span class="hero-title-line reveal">
+                    VISUAL
+                </span>
+
+                <span class="hero-title-line outline reveal delay-1">
+                    STORIES
+                </span>
+
+                <span class="hero-title-line accent reveal delay-2">
+                    THAT MOVE.
+                </span>
+
+            </h1>
+
+
+            <div class="hero-description-row">
+
+                <p class="hero-description reveal delay-2">
+
+                    Görsel iletişim tasarımı, marka kimliği,
+                    3D görselleştirme ve hareketli görüntü
+                    üzerine çalışan bağımsız tasarımcı.
+
+                </p>
+
+
+                <a
+                    href="#work"
+                    class="hero-cta magnetic reveal delay-3"
+                >
+
+                    <span>
+                        Çalışmaları keşfet
+                    </span>
+
+                    <span class="hero-cta-arrow">
+                        ↗
+                    </span>
+
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <div class="hero-bottom">
+
+            <div class="scroll-indicator">
+
+                <span class="scroll-line"></span>
+
+                <span>
+                    Scroll to explore
+                </span>
+
+            </div>
+
+        </div>
+
     </div>
-  </div>
+
+</section>
+
+
+<!-- =========================================================
+     MARQUEE
+========================================================== -->
+
+<div class="marquee">
+
+    <div class="marquee-track">
+
+        <span class="marquee-item">
+            Brand Identity
+        </span>
+
+        <span class="marquee-star">✦</span>
+
+        <span class="marquee-item">
+            3D / CGI
+        </span>
+
+        <span class="marquee-star">✦</span>
+
+        <span class="marquee-item">
+            Motion Design
+        </span>
+
+        <span class="marquee-star">✦</span>
+
+        <span class="marquee-item">
+            Film / Editing
+        </span>
+
+        <span class="marquee-star">✦</span>
+
+        <span class="marquee-item">
+            Typography
+        </span>
+
+        <span class="marquee-star">✦</span>
+
+        <span class="marquee-item">
+            Art Direction
+        </span>
+
+        <span class="marquee-star">✦</span>
+
+
+        <!-- duplicate -->
+
+        <span class="marquee-item">
+            Brand Identity
+        </span>
+
+        <span class="marquee-star">✦</span>
+
+        <span class="marquee-item">
+            3D / CGI
+        </span>
+
+        <span class="marquee-star">✦</span>
+
+        <span class="marquee-item">
+            Motion Design
+        </span>
+
+        <span class="marquee-star">✦</span>
+
+        <span class="marquee-item">
+            Film / Editing
+        </span>
+
+        <span class="marquee-star">✦</span>
+
+        <span class="marquee-item">
+            Typography
+        </span>
+
+        <span class="marquee-star">✦</span>
+
+        <span class="marquee-item">
+            Art Direction
+        </span>
+
+        <span class="marquee-star">✦</span>
+
+    </div>
+
 </div>
+
+
+<!-- =========================================================
+     WORK
+========================================================== -->
+
+<section
+    class="section"
+    id="work"
+>
+
+    <div class="container">
+
+        <div class="section-top reveal">
+
+            <span class="section-label">
+                01 / Selected Works
+            </span>
+
+
+            <h2 class="section-title">
+                Ideas become<br>
+                visual systems.
+            </h2>
+
+        </div>
+
+
+        <div class="projects">
+
+
+            <!-- PROJECT 01 -->
+
+            <article class="project reveal">
+
+                <div
+                    class="project-visual"
+                    data-project="01"
+                >
+
+                    <span class="project-number">
+                        01
+                    </span>
+
+                    <span class="project-arrow">
+                        ↗
+                    </span>
+
+                </div>
+
+
+                <div class="project-info">
+
+                    <div>
+
+                        <h3 class="project-name">
+                            Cankixcreative Branding
+                        </h3>
+
+                        <p class="project-category">
+                            Brand Identity / Art Direction
+                        </p>
+
+                    </div>
+
+
+                    <span class="project-year">
+                        2026
+                    </span>
+
+                </div>
+
+            </article>
+
+
+            <!-- PROJECT 02 -->
+
+            <article class="project reveal delay-1">
+
+                <div
+                    class="project-visual"
+                    data-project="02"
+                >
+
+                    <span class="project-number">
+                        02
+                    </span>
+
+                    <span class="project-arrow">
+                        ↗
+                    </span>
+
+                </div>
+
+
+                <div class="project-info">
+
+                    <div>
+
+                        <h3 class="project-name">
+                            Prosedürel Çevre
+                        </h3>
+
+                        <p class="project-category">
+                            Blender / 3D / CGI
+                        </p>
+
+                    </div>
+
+
+                    <span class="project-year">
+                        2026
+                    </span>
+
+                </div>
+
+            </article>
+
+
+            <!-- PROJECT 03 -->
+
+            <article class="project reveal">
+
+                <div
+                    class="project-visual"
+                    data-project="03"
+                >
+
+                    <span class="project-number">
+                        03
+                    </span>
+
+                    <span class="project-arrow">
+                        ↗
+                    </span>
+
+                </div>
+
+
+                <div class="project-info">
+
+                    <div>
+
+                        <h3 class="project-name">
+                            “Gürültü”
+                        </h3>
+
+                        <p class="project-category">
+                            Film / Direction / Editing
+                        </p>
+
+                    </div>
+
+
+                    <span class="project-year">
+                        2026
+                    </span>
+
+                </div>
+
+            </article>
+
+
+            <!-- PROJECT 04 -->
+
+            <article class="project reveal delay-1">
+
+                <div
+                    class="project-visual"
+                    data-project="04"
+                >
+
+                    <span class="project-number">
+                        04
+                    </span>
+
+                    <span class="project-arrow">
+                        ↗
+                    </span>
+
+                </div>
+
+
+                <div class="project-info">
+
+                    <div>
+
+                        <h3 class="project-name">
+                            AÇÜ Sergi Afişleri
+                        </h3>
+
+                        <p class="project-category">
+                            Editorial / Typography
+                        </p>
+
+                    </div>
+
+
+                    <span class="project-year">
+                        2025
+                    </span>
+
+                </div>
+
+            </article>
+
+
+            <!-- PROJECT 05 -->
+
+            <article class="project reveal">
+
+                <div
+                    class="project-visual"
+                    data-project="05"
+                >
+
+                    <span class="project-number">
+                        05
+                    </span>
+
+                    <span class="project-arrow">
+                        ↗
+                    </span>
+
+                </div>
+
+
+                <div class="project-info">
+
+                    <div>
+
+                        <h3 class="project-name">
+                            Stop-Motion Project
+                        </h3>
+
+                        <p class="project-category">
+                            Animation / Experimental
+                        </p>
+
+                    </div>
+
+
+                    <span class="project-year">
+                        2025
+                    </span>
+
+                </div>
+
+            </article>
+
+
+            <!-- PROJECT 06 -->
+
+            <article class="project reveal delay-1">
+
+                <div
+                    class="project-visual"
+                    data-project="06"
+                >
+
+                    <span class="project-number">
+                        06
+                    </span>
+
+                    <span class="project-arrow">
+                        ↗
+                    </span>
+
+                </div>
+
+
+                <div class="project-info">
+
+                    <div>
+
+                        <h3 class="project-name">
+                            Instagram Kit
+                        </h3>
+
+                        <p class="project-category">
+                            Social Media / Digital
+                        </p>
+
+                    </div>
+
+
+                    <span class="project-year">
+                        2025
+                    </span>
+
+                </div>
+
+            </article>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     ABOUT
+========================================================== -->
+
+<section
+    class="section about"
+    id="about"
+>
+
+    <div class="container">
+
+        <div class="section-top reveal">
+
+            <span class="section-label">
+                02 / About
+            </span>
+
+        </div>
+
+
+        <div class="about-grid">
+
+            <div class="about-statement reveal">
+
+                Tasarımı yalnızca
+                <strong>güzel görünen</strong>
+                bir şey olarak değil,
+                bir anlatı biçimi
+                olarak görüyorum.
+
+            </div>
+
+
+            <div class="about-copy">
+
+                <p class="reveal">
+
+                    Ben Abdullah Cankı. Artvin merkezli
+                    Görsel İletişim Tasarımcısıyım.
+
+                </p>
+
+
+                <p class="reveal delay-1">
+
+                    Marka kimliği, 3D görselleştirme,
+                    hareketli grafik, video kurgu ve
+                    tipografi alanlarında çalışıyorum.
+
+                </p>
+
+
+                <p class="reveal delay-2">
+
+                    Bir fikrin yalnızca nasıl göründüğüyle
+                    değil, izleyicide nasıl bir his
+                    bıraktığıyla ilgileniyorum.
+
+                </p>
+
+
+                <div class="skills reveal delay-2">
+
+                    <div class="skill">
+                        <span class="skill-number">01</span>
+                        Visual Communication
+                    </div>
+
+                    <div class="skill">
+                        <span class="skill-number">02</span>
+                        Brand Identity
+                    </div>
+
+                    <div class="skill">
+                        <span class="skill-number">03</span>
+                        3D / CGI
+                    </div>
+
+                    <div class="skill">
+                        <span class="skill-number">04</span>
+                        Motion Design
+                    </div>
+
+                    <div class="skill">
+                        <span class="skill-number">05</span>
+                        Film / Editing
+                    </div>
+
+                    <div class="skill">
+                        <span class="skill-number">06</span>
+                        Typography
+                    </div>
+
+                    <div class="skill">
+                        <span class="skill-number">07</span>
+                        Art Direction
+                    </div>
+
+                    <div class="skill">
+                        <span class="skill-number">08</span>
+                        Social Media
+                    </div>
+
+                </div>
+
+
+                <div class="tools reveal delay-3">
+
+                    <div class="tools-label">
+                        Tools / Workflow
+                    </div>
+
+
+                    <div class="tool-list">
+
+                        <span class="tool">
+                            Blender
+                        </span>
+
+                        <span class="tool">
+                            DaVinci Resolve
+                        </span>
+
+                        <span class="tool">
+                            Photoshop
+                        </span>
+
+                        <span class="tool">
+                            Illustrator
+                        </span>
+
+                        <span class="tool">
+                            After Effects
+                        </span>
+
+                        <span class="tool">
+                            Figma
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     CONTACT
+========================================================== -->
+
+<section
+    class="contact"
+    id="contact"
+>
+
+    <div class="container">
+
+        <div class="contact-label reveal">
+            03 / Let's create something
+        </div>
+
+
+        <h2 class="contact-title reveal">
+
+            HAVE<br>
+
+            <span class="outline">
+                AN IDEA?
+            </span>
+
+        </h2>
+
+
+        <a
+            href="mailto:abdullah198579@outlook.com"
+            class="contact-link reveal delay-1"
+        >
+
+            <span>
+                abdullah198579@outlook.com
+            </span>
+
+            <span>
+                ↗
+            </span>
+
+        </a>
+
+    </div>
+
+</section>
+
+
+</main>
+
+
+<!-- =========================================================
+     FOOTER
+========================================================== -->
+
+<footer>
+
+    <div class="container">
+
+        <div class="footer-inner">
+
+            <span>
+                © 2026 Abdullah Cankı — Cankixcreative
+            </span>
+
+
+            <div class="footer-socials">
+
+                <a
+                    href="https://www.instagram.com/cankixcreative"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    Instagram
+                </a>
+
+
+                <a
+                    href="https://www.linkedin.com/in/abdullah-cank%C4%B1-6952b2324/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    LinkedIn
+                </a>
+
+
+                <a
+                    href="mailto:abdullah198579@outlook.com"
+                >
+                    E-Mail
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</footer>
+
+
+<!-- =========================================================
+     JAVASCRIPT
+========================================================== -->
 
 <script>
-  const header = document.getElementById('header');
-  window.addEventListener('scroll', () => {
-    header.classList.toggle('scrolled', window.scrollY > 30);
-  });
 
-  const menuBtn = document.getElementById('menuBtn');
-  const nav = document.getElementById('nav');
-  menuBtn.addEventListener('click', () => nav.classList.toggle('open'));
-  document.querySelectorAll('nav a').forEach(a => a.addEventListener('click', () => nav.classList.remove('open')));
+document.addEventListener("DOMContentLoaded", () => {
 
-  document.querySelectorAll('.filter-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      const f = btn.dataset.filter;
-      document.querySelectorAll('.project-card').forEach(card => {
-        card.style.display = (f === 'all' || card.dataset.cat === f) ? 'flex' : 'none';
-      });
+
+    /* =====================================================
+       LOADER
+    ====================================================== */
+
+    const loader = document.getElementById("loader");
+
+    window.addEventListener("load", () => {
+
+        setTimeout(() => {
+
+            loader.classList.add("hide");
+
+        }, 450);
+
     });
-  });
 
-  const projects = [
-    {
-      title: "Cankixcreative Stüdyo Kimliği",
-      cat: "Marka Kimliği",
-      desc: "Kişisel tasarım stüdyosu için oluşturulan minimalist monogram logo, tipografik grid sistemi ve sosyal medya şablon kiti.",
-      tags: ["Logo Tasarımı", "Grid Sistemi", "Kurumsal Kimlik", "Illustrator"],
-      img: "https://images.unsplash.com/photo-1600132806370-bf17e65e942f?w=1200&auto=format&fit=crop&q=85"
-    },
-    {
-      title: "Atmosferik Mekân & Doku",
-      cat: "3D Modelleme & Render",
-      desc: "Blender Cycles motoru üzerinde geliştirilen form, gölge ve materyal odaklı mimari ve minimalist 3D sahne renderı.",
-      tags: ["Blender 3D", "Cycles Render", "Işık & Doku", "Materyal"],
-      img: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1200&auto=format&fit=crop&q=85"
-    },
-    {
-      title: "Kare Kare Anlatı (Stop-Motion)",
-      cat: "Video & Kurgu",
-      desc: "Fiziksel nesnelerin kare bazlı ritmik canlandırması, detaylı storyboard kurgusu ve DaVinci Resolve ile renk derecelendirmesi.",
-      tags: ["DaVinci Resolve", "Stop-Motion", "Post-Prodüksiyon", "Ses"],
-      img: "https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=1200&auto=format&fit=crop&q=85"
-    },
-    {
-      title: "Deneysel Afiş Tasarımları",
-      cat: "Tipografi & Baskı",
-      desc: "İsviçre tarzı tipografi prensipleri ve çağdaş brutalist grid dengesi kullanılarak hazırlanan editoryal poster serisi.",
-      tags: ["İsviçre Tarzı", "Afiş", "Baskı", "InDesign"],
-      img: "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?w=1200&auto=format&fit=crop&q=85"
-    },
-    {
-      title: "Prosedürel Formlar & Parçacıklar",
-      cat: "3D Sanat & CGI",
-      desc: "Blender Geometry Nodes ve dinamik ışıklandırma teknikleri ile oluşturulmuş soyut dijital sanat renderları.",
-      tags: ["Geometry Nodes", "CGI", "Dijital Sanat", "Blender"],
-      img: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=1200&auto=format&fit=crop&q=85"
-    },
-    {
-      title: "Sosyal Medya Görsel Dili",
-      cat: "Dijital Tasarım",
-      desc: "Instagram ve dijital kanallar için etkileşim odaklı, tutarlı renk paletine sahip şablon ve içerik tasarımları.",
-      tags: ["Instagram Kit", "İçerik", "Görsel Hiyerarşi", "Photoshop"],
-      img: "https://images.unsplash.com/photo-1542744094-3a31f272c490?w=1200&auto=format&fit=crop&q=85"
+
+    /* =====================================================
+       NAV SCROLL
+    ====================================================== */
+
+    const nav = document.getElementById("nav");
+
+    const updateNav = () => {
+
+        if (window.scrollY > 40) {
+
+            nav.classList.add("scrolled");
+
+        } else {
+
+            nav.classList.remove("scrolled");
+
+        }
+
+    };
+
+
+    window.addEventListener(
+        "scroll",
+        updateNav,
+        { passive: true }
+    );
+
+
+    updateNav();
+
+
+    /* =====================================================
+       MOBILE MENU
+    ====================================================== */
+
+    const menuButton =
+        document.getElementById("menuButton");
+
+    const mobileMenu =
+        document.getElementById("mobileMenu");
+
+    const mobileLinks =
+        document.querySelectorAll(
+            ".mobile-menu-link"
+        );
+
+
+    const toggleMenu = () => {
+
+        const active =
+            menuButton.classList.toggle("active");
+
+
+        mobileMenu.classList.toggle(
+            "active",
+            active
+        );
+
+
+        document.body.classList.toggle(
+            "menu-open",
+            active
+        );
+
+
+        menuButton.setAttribute(
+            "aria-expanded",
+            active
+        );
+
+    };
+
+
+    menuButton.addEventListener(
+        "click",
+        toggleMenu
+    );
+
+
+    mobileLinks.forEach(link => {
+
+        link.addEventListener(
+            "click",
+            () => {
+
+                if (
+                    menuButton.classList.contains(
+                        "active"
+                    )
+                ) {
+
+                    toggleMenu();
+
+                }
+
+            }
+        );
+
+    });
+
+
+    /* =====================================================
+       SCROLL REVEAL
+    ====================================================== */
+
+    const revealElements =
+        document.querySelectorAll(".reveal");
+
+
+    const revealObserver =
+        new IntersectionObserver(
+            entries => {
+
+                entries.forEach(entry => {
+
+                    if (
+                        entry.isIntersecting
+                    ) {
+
+                        entry.target.classList.add(
+                            "visible"
+                        );
+
+                        revealObserver.unobserve(
+                            entry.target
+                        );
+
+                    }
+
+                });
+
+            },
+            {
+                threshold: .08,
+                rootMargin: "0px 0px -40px 0px"
+            }
+        );
+
+
+    revealElements.forEach(element => {
+
+        revealObserver.observe(element);
+
+    });
+
+
+    /* =====================================================
+       CUSTOM CURSOR — DESKTOP
+    ====================================================== */
+
+    const cursor =
+        document.getElementById("cursor");
+
+
+    const desktop =
+        window.matchMedia(
+            "(min-width: 701px)"
+        );
+
+
+    if (desktop.matches) {
+
+        let mouseX = 0;
+        let mouseY = 0;
+
+        let currentX = 0;
+        let currentY = 0;
+
+
+        window.addEventListener(
+            "mousemove",
+            event => {
+
+                mouseX = event.clientX;
+                mouseY = event.clientY;
+
+            },
+            { passive: true }
+        );
+
+
+        const renderCursor = () => {
+
+            currentX +=
+                (mouseX - currentX) * .18;
+
+            currentY +=
+                (mouseY - currentY) * .18;
+
+
+            cursor.style.left =
+                `${currentX}px`;
+
+            cursor.style.top =
+                `${currentY}px`;
+
+
+            requestAnimationFrame(
+                renderCursor
+            );
+
+        };
+
+
+        renderCursor();
+
+
+        const hoverTargets =
+            document.querySelectorAll(
+                "a, button, .project-visual"
+            );
+
+
+        hoverTargets.forEach(element => {
+
+            element.addEventListener(
+                "mouseenter",
+                () => {
+                    cursor.classList.add(
+                        "is-hover"
+                    );
+                }
+            );
+
+
+            element.addEventListener(
+                "mouseleave",
+                () => {
+                    cursor.classList.remove(
+                        "is-hover"
+                    );
+                }
+            );
+
+        });
+
     }
-  ];
 
-  function openModal(i) {
-    const p = projects[i];
-    document.getElementById('mImg').src = p.img;
-    document.getElementById('mCat').textContent = p.cat;
-    document.getElementById('mTitle').textContent = p.title;
-    document.getElementById('mDesc').textContent = p.desc;
-    const tags = document.getElementById('mTags');
-    tags.innerHTML = '';
-    p.tags.forEach(t => {
-      const s = document.createElement('span');
-      s.textContent = t;
-      tags.appendChild(s);
-    });
-    document.getElementById('modal').classList.add('open');
-    document.body.style.overflow = 'hidden';
-  }
 
-  function closeModal() {
-    document.getElementById('modal').classList.remove('open');
-    document.body.style.overflow = '';
-  }
+    /* =====================================================
+       PROJECT IMAGE PARALLAX
+    ====================================================== */
 
-  function closeOnOverlay(e) {
-    if (e.target.id === 'modal') closeModal();
-  }
+    if (desktop.matches) {
 
-  document.addEventListener('keydown', e => {
-    if (e.key === 'Escape') closeModal();
-  });
+        const projects =
+            document.querySelectorAll(
+                ".project-visual"
+            );
+
+
+        projects.forEach(project => {
+
+            project.addEventListener(
+                "mousemove",
+                event => {
+
+                    const rect =
+                        project.getBoundingClientRect();
+
+
+                    const x =
+                        (
+                            event.clientX -
+                            rect.left
+                        ) /
+                        rect.width -
+                        .5;
+
+
+                    const y =
+                        (
+                            event.clientY -
+                            rect.top
+                        ) /
+                        rect.height -
+                        .5;
+
+
+                    project.style.transform =
+                        `
+                        perspective(900px)
+                        rotateX(${y * -2}deg)
+                        rotateY(${x * 2}deg)
+                        scale(1.008)
+                        `;
+
+                }
+            );
+
+
+            project.addEventListener(
+                "mouseleave",
+                () => {
+
+                    project.style.transform =
+                        "";
+
+                }
+            );
+
+        });
+
+    }
+
+
+    /* =====================================================
+       MAGNETIC BUTTON
+    ====================================================== */
+
+    if (desktop.matches) {
+
+        document
+            .querySelectorAll(".magnetic")
+            .forEach(button => {
+
+                button.addEventListener(
+                    "mousemove",
+                    event => {
+
+                        const rect =
+                            button.getBoundingClientRect();
+
+
+                        const x =
+                            event.clientX -
+                            rect.left -
+                            rect.width / 2;
+
+
+                        const y =
+                            event.clientY -
+                            rect.top -
+                            rect.height / 2;
+
+
+                        button.style.transform =
+                            `
+                            translate(
+                                ${x * .08}px,
+                                ${y * .08}px
+                            )
+                            `;
+
+                    }
+                );
+
+
+                button.addEventListener(
+                    "mouseleave",
+                    () => {
+
+                        button.style.transform =
+                            "";
+
+                    }
+                );
+
+            });
+
+    }
+
+
+    /* =====================================================
+       SMOOTH ANCHOR FALLBACK
+    ====================================================== */
+
+    document
+        .querySelectorAll(
+            'a[href^="#"]'
+        )
+        .forEach(anchor => {
+
+            anchor.addEventListener(
+                "click",
+                event => {
+
+                    const targetId =
+                        anchor
+                            .getAttribute("href");
+
+
+                    if (
+                        targetId === "#"
+                    ) {
+
+                        return;
+
+                    }
+
+
+                    const target =
+                        document.querySelector(
+                            targetId
+                        );
+
+
+                    if (target) {
+
+                        event.preventDefault();
+
+
+                        target.scrollIntoView({
+                            behavior: "smooth",
+                            block: "start"
+                        });
+
+                    }
+
+                }
+            );
+
+        });
+
+
+});
+
 </script>
+
 </body>
 </html>
+```
