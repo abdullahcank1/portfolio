@@ -81,7 +81,9 @@ a{
   text-decoration:none;
 }
 
-button{
+button,
+input,
+textarea{
   font:inherit;
 }
 
@@ -1706,36 +1708,190 @@ body::before{
   fill:currentColor;
 }
 
-.contact-links{
+
+/* =========================================================
+   CONTACT FORM
+========================================================= */
+
+.contact-form{
+  position:relative;
+
   border-top:1px solid var(--border);
 }
 
-.contact-row{
+.form-field{
+  position:relative;
+
+  padding:20px 0;
+
+  border-bottom:1px solid var(--border);
+}
+
+.form-field label{
+  display:block;
+
+  margin-bottom:12px;
+
+  font-family:"DM Mono",monospace;
+
+  font-size:8px;
+
+  letter-spacing:.12em;
+
+  color:var(--lime);
+}
+
+.form-field input,
+.form-field textarea{
+  width:100%;
+
+  border:0;
+  outline:0;
+
+  background:transparent;
+
+  color:var(--text);
+
+  font-family:"Manrope",sans-serif;
+
+  font-size:14px;
+
+  font-weight:400;
+
+  resize:none;
+}
+
+.form-field input::placeholder,
+.form-field textarea::placeholder{
+  color:var(--muted2);
+
+  transition:.3s ease;
+}
+
+.form-field input:focus::placeholder,
+.form-field textarea:focus::placeholder{
+  opacity:.3;
+}
+
+.form-field input:focus,
+.form-field textarea:focus{
+  color:var(--text);
+}
+
+.form-field textarea{
+  min-height:125px;
+
+  line-height:1.7;
+}
+
+.submit-wrap{
   display:flex;
 
   align-items:center;
+
   justify-content:space-between;
 
-  padding:23px 0;
+  gap:20px;
 
-  border-bottom:1px solid var(--border);
+  padding-top:22px;
+}
+
+.submit-btn{
+  border:1px solid var(--border2);
+
+  background:transparent;
+
+  color:var(--text);
+
+  min-height:58px;
+
+  padding:0 20px;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:space-between;
+
+  gap:40px;
+
+  cursor:pointer;
 
   font-family:"DM Mono",monospace;
 
   font-size:9px;
 
-  color:var(--muted);
+  letter-spacing:.1em;
 
-  transition:.3s;
+  transition:
+    background .35s ease,
+    color .35s ease,
+    border-color .35s ease,
+    transform .35s var(--ease);
 }
 
-.contact-row:hover{
-  color:var(--text);
-  padding-left:8px;
+.submit-btn:hover{
+  background:var(--lime);
+
+  color:#000;
+
+  border-color:var(--lime);
+
+  transform:translateY(-4px);
 }
 
-.contact-arrow{
+.submit-btn span:last-child{
+  font-size:18px;
+
+  line-height:1;
+
+  transition:.35s var(--ease);
+}
+
+.submit-btn:hover span:last-child{
+  transform:translate(5px,-5px);
+}
+
+.submit-btn:disabled{
+  cursor:wait;
+
+  opacity:.65;
+
+  transform:none!important;
+}
+
+.form-status{
+  min-height:20px;
+
+  padding-top:17px;
+
+  font-family:"DM Mono",monospace;
+
+  font-size:8px;
+
+  line-height:1.6;
+
+  opacity:0;
+
+  transform:translateY(8px);
+
+  transition:
+    opacity .4s ease,
+    transform .4s ease;
+}
+
+.form-status.show{
+  opacity:1;
+
+  transform:translateY(0);
+}
+
+.form-status.success{
   color:var(--lime);
+}
+
+.form-status.error{
+  color:#ff6262;
 }
 
 
@@ -1847,6 +2003,11 @@ footer{
   .skills-grid{
     grid-template-columns:repeat(2,1fr);
   }
+
+  .contact-grid{
+    gap:60px;
+  }
+
 }
 
 
@@ -1991,12 +2152,27 @@ footer{
     margin-top:-87px;
   }
 
+  .stop-card:before{
+    width:60px;
+    height:60px;
+
+    left:35px;
+    top:55px;
+  }
+
   .phone{
     width:130px;
     height:245px;
 
     margin-left:-65px;
     margin-top:-122px;
+  }
+
+  .phone:after{
+    left:16px;
+    bottom:28px;
+
+    font-size:38px;
   }
 
 
@@ -2050,6 +2226,20 @@ footer{
     gap:60px;
 
     margin-top:60px;
+  }
+
+  .contact-form{
+    margin-top:10px;
+  }
+
+  .submit-wrap{
+    align-items:flex-start;
+
+    flex-direction:column;
+  }
+
+  .submit-btn{
+    width:100%;
   }
 
 
@@ -2190,7 +2380,7 @@ footer{
     </nav>
 
 
-    <button class="menu" id="menu">
+    <button class="menu" id="menu" aria-label="Menüyü aç">
 
       <span></span>
       <span></span>
@@ -2980,6 +3170,8 @@ footer{
     <div class="contact-grid">
 
 
+      <!-- LEFT -->
+
       <div>
 
         <p class="contact-copy reveal">
@@ -2990,7 +3182,7 @@ footer{
 
           <br><br>
 
-          Aşağıdaki ikonlardan doğrudan ulaşabilirsin.
+          Formu doldur. Mesajın doğrudan bana ulaşsın.
 
         </p>
 
@@ -3059,59 +3251,129 @@ footer{
       </div>
 
 
-      <div class="contact-links reveal delay2">
+      <!-- RIGHT / WORKING FORM -->
+
+      <form
+        class="contact-form reveal delay2"
+        id="contactForm"
+        action="https://api.web3forms.com/submit"
+        method="POST"
+        novalidate>
+
+        <!-- WEB3FORMS -->
+
+        <input
+          type="hidden"
+          name="access_key"
+          value="d366b13d-9482-4e66-a1fc-fc74f827771b">
+
+        <input
+          type="hidden"
+          name="subject"
+          value="Abdullah Cankı Portfolio — Yeni Mesaj">
+
+        <input
+          type="hidden"
+          name="from_name"
+          value="Abdullah Cankı Portfolio">
+
+        <!-- Honeypot / spam protection -->
+
+        <input
+          type="checkbox"
+          name="botcheck"
+          tabindex="-1"
+          autocomplete="off"
+          style="display:none!important">
 
 
-        <a
-          href="https://www.linkedin.com/in/abdullah-cank%C4%B1-6952b2324/"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="contact-row">
+        <!-- NAME -->
 
-          <span>
-            LINKEDIN
-          </span>
+        <div class="form-field">
 
-          <span class="contact-arrow">
-            ↗
-          </span>
+          <label for="name">
+            AD SOYAD
+          </label>
 
-        </a>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            placeholder="Adınız Soyadınız"
+            autocomplete="name"
+            maxlength="100"
+            required>
 
-
-        <a
-          href="https://instagram.com/cankixcreative"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="contact-row">
-
-          <span>
-            INSTAGRAM
-          </span>
-
-          <span class="contact-arrow">
-            ↗
-          </span>
-
-        </a>
+        </div>
 
 
-        <a
-          href="mailto:abdullah198579@outlook.com"
-          class="contact-row">
+        <!-- EMAIL -->
 
-          <span>
-            E-MAIL
-          </span>
+        <div class="form-field">
 
-          <span class="contact-arrow">
-            ↗
-          </span>
+          <label for="email">
+            E-POSTA
+          </label>
 
-        </a>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="ornek@email.com"
+            autocomplete="email"
+            maxlength="160"
+            required>
+
+        </div>
 
 
-      </div>
+        <!-- MESSAGE -->
+
+        <div class="form-field">
+
+          <label for="message">
+            MESAJ
+          </label>
+
+          <textarea
+            id="message"
+            name="message"
+            placeholder="Projenizden, fikrinizden veya iş birliğinden bahsedin..."
+            maxlength="3000"
+            required></textarea>
+
+        </div>
+
+
+        <!-- SUBMIT -->
+
+        <div class="submit-wrap">
+
+          <button
+            type="submit"
+            class="submit-btn"
+            id="submitButton">
+
+            <span id="submitText">
+              MESAJI GÖNDER
+            </span>
+
+            <span>
+              ↗
+            </span>
+
+          </button>
+
+        </div>
+
+
+        <div
+          class="form-status"
+          id="formStatus"
+          aria-live="polite">
+        </div>
+
+      </form>
 
     </div>
 
@@ -3385,7 +3647,7 @@ if(
 
   document
     .querySelectorAll(
-      "a,button,.project,.skill,.social"
+      "a,button,.project,.skill,.social,.submit-btn"
     )
     .forEach(el => {
 
@@ -3496,7 +3758,7 @@ if(
 ){
 
   document
-    .querySelectorAll(".cta,.social")
+    .querySelectorAll(".cta,.social,.submit-btn")
     .forEach(el => {
 
       el.addEventListener(
@@ -3583,6 +3845,154 @@ if(
       glow.style.transform =
         `translate(${x*40}px,
                    ${y*40}px)`;
+
+    }
+  );
+
+}
+
+
+/* =========================================================
+   CONTACT FORM — WEB3FORMS
+========================================================= */
+
+const contactForm =
+  document.getElementById("contactForm");
+
+const submitButton =
+  document.getElementById("submitButton");
+
+const submitText =
+  document.getElementById("submitText");
+
+const formStatus =
+  document.getElementById("formStatus");
+
+
+if(contactForm){
+
+  contactForm.addEventListener(
+    "submit",
+    async function(e){
+
+      e.preventDefault();
+
+
+      /* Browser validation */
+
+      if(!contactForm.checkValidity()){
+
+        contactForm.reportValidity();
+
+        return;
+
+      }
+
+
+      /* Loading state */
+
+      submitButton.disabled = true;
+
+      submitText.textContent =
+        "GÖNDERİLİYOR...";
+
+      formStatus.textContent = "";
+
+      formStatus.className =
+        "form-status";
+
+
+      const formData =
+        new FormData(contactForm);
+
+
+      try{
+
+        const response =
+          await fetch(
+            "https://api.web3forms.com/submit",
+            {
+              method:"POST",
+              body:formData,
+              headers:{
+                "Accept":"application/json"
+              }
+            }
+          );
+
+
+        const data =
+          await response.json();
+
+
+        if(
+          response.ok &&
+          data.success
+        ){
+
+          submitText.textContent =
+            "MESAJ GÖNDERİLDİ ✓";
+
+
+          formStatus.textContent =
+            "Mesajın başarıyla ulaştı. En kısa sürede dönüş yapacağım.";
+
+
+          formStatus.className =
+            "form-status show success";
+
+
+          contactForm.reset();
+
+
+          setTimeout(() => {
+
+            submitText.textContent =
+              "MESAJI GÖNDER";
+
+            submitButton.disabled =
+              false;
+
+            formStatus.className =
+              "form-status";
+
+          },5000);
+
+
+        }else{
+
+          throw new Error(
+            data.message ||
+            "Gönderim başarısız."
+          );
+
+        }
+
+
+      }catch(error){
+
+        console.error(
+          "Contact form error:",
+          error
+        );
+
+
+        submitText.textContent =
+          "TEKRAR DENE ↗";
+
+
+        formStatus.textContent =
+          "Mesaj gönderilemedi. Lütfen tekrar deneyin.";
+
+
+        formStatus.className =
+          "form-status show error";
+
+
+        submitButton.disabled =
+          false;
+
+      }
 
     }
   );
