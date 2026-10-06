@@ -4,45 +4,30 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta name="theme-color" content="#070707">
-<meta name="description" content="Abdullah Cankı — Visual Communication Designer. Brand identity, 3D, CGI, motion design, typography and visual storytelling.">
-
 <title>Abdullah Cankı — Visual Communication Designer</title>
 
-<!-- FAVICON -->
-<link rel="icon" type="image/svg+xml"
-href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%23070707'/%3E%3Cpath d='M22 76L47 20h8l25 56H67l-5-13H39l-5 13H22zm21-25h15l-7.5-20L43 51z' fill='%23d7ff3f'/%3E%3C/svg%3E">
+<meta name="description" content="Abdullah Cankı — Visual Communication Designer. Visual identity, 3D, motion design, video and digital content.">
+<meta name="author" content="Abdullah Cankı">
+<meta name="theme-color" content="#080808">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23080808'/%3E%3Cpath d='M25 72V28h9l15 23 15-23h9v44h-9V43L49 66 34 43v29z' fill='%23d7ff3f'/%3E%3C/svg%3E">
 
 <style>
-
-/* =========================================================
-   CORE
-========================================================= */
-
 :root{
-  --bg:#070707;
-  --bg2:#0d0d0d;
-  --surface:#111;
-  --surface2:#181818;
-
-  --text:#f2f2ed;
-  --muted:#8b8b86;
-  --muted2:#555550;
-
+  --bg:#080808;
+  --surface:#0d0d0c;
+  --surface-2:#11110f;
+  --text:#e9e9e3;
+  --muted:#777772;
+  --muted-2:#55554f;
+  --line:rgba(255,255,255,.07);
   --lime:#d7ff3f;
-  --lime2:#b9e52e;
-
-  --border:rgba(255,255,255,.1);
-  --border2:rgba(255,255,255,.18);
-
-  --container:1380px;
-
-  --ease:cubic-bezier(.16,1,.3,1);
+  --mono:"DM Mono",monospace;
+  --sans:"Manrope",sans-serif;
 }
 
 *{
@@ -59,21 +44,14 @@ html{
 body{
   background:var(--bg);
   color:var(--text);
-
-  font-family:"Manrope",sans-serif;
-
+  font-family:var(--sans);
   overflow-x:hidden;
-
-  -webkit-font-smoothing:antialiased;
+  font-size:13px;
+  line-height:1.7;
 }
 
-body.menu-open{
+body.no-scroll{
   overflow:hidden;
-}
-
-::selection{
-  background:var(--lime);
-  color:#000;
 }
 
 a{
@@ -87,66 +65,15 @@ textarea{
   font:inherit;
 }
 
-img{
-  display:block;
-  max-width:100%;
+button{
+  border:0;
+  background:none;
+  color:inherit;
 }
 
-
-/* =========================================================
-   NOISE
-========================================================= */
-
-body::before{
-  content:"";
-
-  position:fixed;
-  inset:0;
-
-  pointer-events:none;
-
-  z-index:9997;
-
-  opacity:.035;
-
-  background-image:
-    url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.8'/%3E%3C/svg%3E");
-}
-
-
-/* =========================================================
-   CURSOR
-========================================================= */
-
-.cursor{
-  position:fixed;
-
-  width:10px;
-  height:10px;
-
-  border-radius:50%;
-
+::selection{
   background:var(--lime);
-
-  pointer-events:none;
-
-  z-index:10000;
-
-  transform:translate(-50%,-50%);
-
-  opacity:0;
-
-  mix-blend-mode:difference;
-
-  transition:
-    width .3s var(--ease),
-    height .3s var(--ease),
-    opacity .2s;
-}
-
-.cursor.big{
-  width:55px;
-  height:55px;
+  color:#080808;
 }
 
 
@@ -157,100 +84,91 @@ body::before{
 .loader{
   position:fixed;
   inset:0;
-
-  z-index:10001;
-
-  background:#070707;
-
+  z-index:9999;
+  background:#080808;
   display:flex;
   align-items:center;
   justify-content:center;
-
-  transition:
-    opacity .8s var(--ease),
-    visibility .8s;
+  transition:opacity .8s ease,visibility .8s ease;
 }
 
-.loader.done{
+.loader.hide{
   opacity:0;
   visibility:hidden;
 }
 
-.loader-box{
-  width:min(350px,80vw);
+.loader-inner{
+  width:min(260px,70vw);
 }
 
 .loader-top{
   display:flex;
   justify-content:space-between;
-
-  font-family:"DM Mono",monospace;
-  font-size:9px;
-
-  color:var(--muted);
-
   margin-bottom:12px;
+  font:8px var(--mono);
+  letter-spacing:.12em;
+  color:#777772;
 }
 
-.loader-track{
+.loader-line{
   height:1px;
-  background:var(--border);
-
+  background:rgba(255,255,255,.1);
   overflow:hidden;
 }
 
 .loader-progress{
   height:100%;
   width:0;
-
   background:var(--lime);
-
-  transition:width .15s linear;
 }
 
 
 /* =========================================================
-   GENERAL
+   CURSOR
 ========================================================= */
 
-.container{
-  width:min(var(--container),calc(100% - 80px));
-  margin:auto;
+.cursor{
+  position:fixed;
+  width:9px;
+  height:9px;
+  border-radius:50%;
+  background:var(--lime);
+  pointer-events:none;
+  z-index:10000;
+  transform:translate(-50%,-50%);
+  mix-blend-mode:difference;
+  transition:width .2s ease,height .2s ease;
 }
 
-.mono{
-  font-family:"DM Mono",monospace;
+.cursor-ring{
+  position:fixed;
+  width:32px;
+  height:32px;
+  border:1px solid rgba(215,255,63,.55);
+  border-radius:50%;
+  pointer-events:none;
+  z-index:9999;
+  transform:translate(-50%,-50%);
+  transition:
+    width .3s ease,
+    height .3s ease;
 }
 
-.lime{
-  color:var(--lime);
+.cursor.active{
+  width:16px;
+  height:16px;
 }
 
-.section{
-  padding:160px 0;
-  position:relative;
+.cursor-ring.active{
+  width:52px;
+  height:52px;
 }
 
-.section-number{
-  font-family:"DM Mono",monospace;
-
-  color:var(--lime);
-
-  font-size:10px;
-
-  letter-spacing:.12em;
-}
-
-.section-title{
-  margin-top:20px;
-
-  font-size:clamp(50px,7vw,100px);
-
-  line-height:.9;
-
-  letter-spacing:-.065em;
-
-  font-weight:600;
+@media(max-width:800px){
+  .cursor,
+  .cursor-ring{
+    display:none;
+  }
 }
 
 
@@ -260,187 +178,107 @@ body::before{
 
 .nav{
   position:fixed;
-
+  z-index:500;
   top:0;
   left:0;
-  right:0;
-
-  height:82px;
-
-  z-index:9000;
-
-  border-bottom:1px solid transparent;
-
-  transition:.4s ease;
-}
-
-.nav.scrolled{
-  background:rgba(7,7,7,.78);
-
-  backdrop-filter:blur(20px);
-
-  border-color:var(--border);
+  width:100%;
+  height:76px;
+  display:flex;
+  align-items:center;
+  padding:0 5vw;
+  background:linear-gradient(
+    to bottom,
+    rgba(8,8,8,.88),
+    transparent
+  );
+  backdrop-filter:blur(4px);
 }
 
 .nav-inner{
-  height:100%;
-
+  width:100%;
   display:flex;
   align-items:center;
   justify-content:space-between;
 }
 
-.logo{
+.nav-brand{
   display:flex;
   align-items:center;
-  gap:12px;
+  gap:13px;
 }
 
-.logo-box{
-  width:34px;
-  height:34px;
-
-  border:1px solid var(--lime);
-
+.nav-logo{
+  width:30px;
+  height:30px;
+  border:1px solid rgba(215,255,63,.5);
   display:grid;
   place-items:center;
-
-  font-family:"DM Mono",monospace;
-
-  font-size:11px;
-
   color:var(--lime);
-
-  position:relative;
+  font:500 9px var(--mono);
 }
 
-.logo-box:after{
-  content:"";
-
-  position:absolute;
-
-  width:5px;
-  height:5px;
-
-  right:-3px;
-  top:-3px;
-
-  background:var(--lime);
-}
-
-.logo-name{
-  font-size:12px;
-  font-weight:700;
-  letter-spacing:.04em;
-}
-
-.logo-role{
-  display:block;
-
-  font-family:"DM Mono",monospace;
-
-  font-size:7px;
-
-  color:var(--muted);
-
-  letter-spacing:.08em;
+.nav-brand-text{
+  font:8px var(--mono);
+  line-height:1.4;
+  letter-spacing:.1em;
+  color:#8b8b85;
 }
 
 .nav-links{
   display:flex;
   align-items:center;
-  gap:35px;
+  gap:32px;
 }
 
 .nav-links a{
-  font-family:"DM Mono",monospace;
+  position:relative;
+  font:8px var(--mono);
+  letter-spacing:.13em;
+  color:#888881;
+  transition:color .3s ease;
+}
 
-  font-size:9px;
-
-  color:var(--muted);
-
-  letter-spacing:.1em;
-
-  transition:.25s ease;
+.nav-links a::after{
+  content:"";
+  position:absolute;
+  left:0;
+  bottom:-7px;
+  width:0;
+  height:1px;
+  background:var(--lime);
+  transition:width .3s ease;
 }
 
 .nav-links a:hover{
-  color:var(--text);
+  color:#fff;
 }
 
-.availability{
+.nav-links a:hover::after{
+  width:100%;
+}
+
+.nav-status{
   display:flex;
   align-items:center;
   gap:8px;
-
-  margin-left:10px;
-
-  font-family:"DM Mono",monospace;
-
-  font-size:8px;
-
-  color:var(--muted);
+  font:7px var(--mono);
+  letter-spacing:.12em;
+  color:#686862;
 }
 
-.availability-dot{
-  width:6px;
-  height:6px;
-
-  background:var(--lime);
-
+.status-dot{
+  width:5px;
+  height:5px;
   border-radius:50%;
-
-  box-shadow:0 0 20px var(--lime);
+  background:var(--lime);
+  box-shadow:0 0 10px rgba(215,255,63,.5);
 }
 
-.menu{
+.menu-btn{
   display:none;
-
-  width:42px;
-  height:42px;
-
-  background:none;
-
-  border:1px solid var(--border);
-
-  color:white;
-
+  font:8px var(--mono);
+  letter-spacing:.13em;
   cursor:pointer;
-
-  position:relative;
-}
-
-.menu span{
-  position:absolute;
-
-  width:17px;
-  height:1px;
-
-  background:white;
-
-  left:50%;
-
-  transform:translateX(-50%);
-
-  transition:.3s;
-}
-
-.menu span:first-child{
-  top:17px;
-}
-
-.menu span:last-child{
-  top:24px;
-}
-
-.menu.active span:first-child{
-  top:21px;
-  transform:translateX(-50%) rotate(45deg);
-}
-
-.menu.active span:last-child{
-  top:21px;
-  transform:translateX(-50%) rotate(-45deg);
 }
 
 
@@ -451,60 +289,37 @@ body::before{
 .mobile-menu{
   position:fixed;
   inset:0;
-
-  z-index:8000;
-
-  background:#070707;
-
+  z-index:400;
+  background:#080808;
   display:flex;
   align-items:center;
-
-  padding:100px 30px;
-
-  transform:translateY(-100%);
-
-  transition:transform .7s var(--ease);
+  justify-content:center;
+  opacity:0;
+  visibility:hidden;
+  transition:.5s ease;
 }
 
-.mobile-menu.active{
-  transform:translateY(0);
+.mobile-menu.open{
+  opacity:1;
+  visibility:visible;
 }
 
-.mobile-links{
+.mobile-menu nav{
   display:flex;
   flex-direction:column;
-  gap:5px;
+  gap:20px;
+  text-align:center;
 }
 
-.mobile-links a{
-  font-size:clamp(55px,13vw,100px);
-
-  font-weight:600;
-
-  letter-spacing:-.07em;
-
-  line-height:.85;
+.mobile-menu a{
+  font-size:38px;
+  line-height:1;
+  letter-spacing:-.05em;
+  font-weight:500;
 }
 
-.mobile-links a:last-child{
+.mobile-menu a:hover{
   color:var(--lime);
-}
-
-.mobile-footer{
-  position:absolute;
-
-  bottom:30px;
-  left:30px;
-  right:30px;
-
-  display:flex;
-  justify-content:space-between;
-
-  font-family:"DM Mono",monospace;
-
-  font-size:8px;
-
-  color:var(--muted);
 }
 
 
@@ -514,364 +329,211 @@ body::before{
 
 .hero{
   min-height:100svh;
-
   position:relative;
-
+  overflow:hidden;
   display:flex;
   align-items:center;
-
-  overflow:hidden;
-
-  padding:140px 0 80px;
+  padding:125px 5vw 70px;
 }
 
 .hero-grid{
   position:absolute;
   inset:0;
-
   background-image:
-    linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);
-
-  background-size:90px 90px;
-
+    linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
+  background-size:100px 100px;
   mask-image:linear-gradient(
     to bottom,
-    transparent,
-    black 15%,
-    black 80%,
+    black,
+    rgba(0,0,0,.4),
     transparent
   );
-
-  animation:gridMove 25s linear infinite;
-}
-
-@keyframes gridMove{
-  from{
-    background-position:0 0;
-  }
-
-  to{
-    background-position:90px 90px;
-  }
-}
-
-
-/* HERO GLOW */
-
-.hero-glow{
-  position:absolute;
-
-  width:700px;
-  height:700px;
-
-  border-radius:50%;
-
-  background:radial-gradient(
-    circle,
-    rgba(215,255,63,.11),
-    transparent 65%
-  );
-
-  right:-250px;
-  top:5%;
-
-  pointer-events:none;
-
-  animation:floatGlow 8s ease-in-out infinite;
-}
-
-@keyframes floatGlow{
-  0%,100%{
-    transform:translate3d(0,0,0);
-  }
-
-  50%{
-    transform:translate3d(-80px,50px,0);
-  }
-}
-
-
-/* 3D OBJECT */
-
-.hero-orb{
-  position:absolute;
-
-  width:300px;
-  height:300px;
-
-  right:8%;
-  top:28%;
-
-  border-radius:50%;
-
-  background:
-    radial-gradient(
-      circle at 30% 25%,
-      #fff 0,
-      #bfc3b0 8%,
-      #4b4d47 28%,
-      #111 65%,
-      #000 100%
-    );
-
-  box-shadow:
-    inset -30px -30px 70px rgba(0,0,0,.9),
-    40px 50px 100px rgba(0,0,0,.7),
-    0 0 80px rgba(215,255,63,.05);
-
-  animation:
-    orbFloat 7s ease-in-out infinite,
-    orbSpin 18s linear infinite;
-
-  transform-style:preserve-3d;
-
-  opacity:.85;
-}
-
-.hero-orb:before{
-  content:"";
-
-  position:absolute;
-  inset:-25px;
-
-  border:1px solid rgba(215,255,63,.3);
-
-  border-radius:50%;
-
-  transform:rotateX(70deg) rotateY(10deg);
-
-  animation:ringSpin 9s linear infinite;
-}
-
-.hero-orb:after{
-  content:"";
-
-  position:absolute;
-  inset:-55px;
-
-  border:1px solid rgba(255,255,255,.08);
-
-  border-radius:50%;
-
-  transform:rotateX(70deg) rotateY(40deg);
-
-  animation:ringSpin 15s linear infinite reverse;
-}
-
-@keyframes orbFloat{
-  0%,100%{
-    transform:translateY(0) rotateX(0) rotateY(0);
-  }
-
-  50%{
-    transform:translateY(-35px) rotateX(12deg) rotateY(18deg);
-  }
-}
-
-@keyframes orbSpin{
-  from{
-    filter:hue-rotate(0deg);
-  }
-
-  to{
-    filter:hue-rotate(20deg);
-  }
-}
-
-@keyframes ringSpin{
-  from{
-    transform:rotateX(70deg) rotateZ(0);
-  }
-
-  to{
-    transform:rotateX(70deg) rotateZ(360deg);
-  }
-}
-
-
-/* FLOATING SYMBOLS */
-
-.float-symbol{
-  position:absolute;
-
-  font-family:"DM Mono",monospace;
-
-  color:rgba(215,255,63,.5);
-
-  pointer-events:none;
-
-  font-size:12px;
-}
-
-.symbol-one{
-  top:22%;
-  left:9%;
-
-  animation:float1 6s ease-in-out infinite;
-}
-
-.symbol-two{
-  bottom:20%;
-  right:35%;
-
-  animation:float2 8s ease-in-out infinite;
-}
-
-.symbol-three{
-  top:34%;
-  left:45%;
-
-  animation:float1 9s ease-in-out infinite reverse;
-}
-
-@keyframes float1{
-  0%,100%{
-    transform:translateY(0) rotate(0);
-  }
-
-  50%{
-    transform:translateY(-25px) rotate(90deg);
-  }
-}
-
-@keyframes float2{
-  0%,100%{
-    transform:translate(0,0);
-  }
-
-  50%{
-    transform:translate(30px,-30px);
-  }
 }
 
 .hero-content{
-  width:100%;
-
   position:relative;
-
   z-index:5;
+  width:100%;
+  max-width:1380px;
+  margin:auto;
 }
 
 .hero-meta{
   display:flex;
-  justify-content:space-between;
   align-items:center;
-
-  margin-bottom:50px;
-
-  font-family:"DM Mono",monospace;
-
-  font-size:9px;
-
-  color:var(--muted);
-
-  letter-spacing:.08em;
+  gap:10px;
+  margin-bottom:38px;
+  font:8px var(--mono);
+  letter-spacing:.11em;
+  color:#777772;
 }
 
-.status{
-  display:flex;
-  align-items:center;
-  gap:9px;
-}
-
-.status-dot{
-  width:6px;
-  height:6px;
-
-  background:var(--lime);
-
-  border-radius:50%;
-
-  box-shadow:0 0 15px var(--lime);
+.hero-meta span{
+  color:var(--lime);
 }
 
 .hero-title{
-  font-size:clamp(75px,13.5vw,205px);
-
-  line-height:.76;
-
-  font-weight:700;
-
-  letter-spacing:-.08em;
-
-  position:relative;
+  font-size:clamp(64px,10.8vw,158px);
+  line-height:.82;
+  letter-spacing:-.075em;
+  font-weight:650;
+  max-width:1150px;
 }
 
 .hero-line{
   display:block;
+  transform:translateZ(0);
 }
 
 .hero-line.outline{
   color:transparent;
-
-  -webkit-text-stroke:1px rgba(255,255,255,.55);
+  -webkit-text-stroke:1px rgba(255,255,255,.38);
 }
 
 .hero-line.lime{
-  margin-left:10vw;
-
+  margin-left:7vw;
   color:var(--lime);
-
-  text-shadow:
-    0 0 80px rgba(215,255,63,.08);
+  text-shadow:0 0 60px rgba(215,255,63,.06);
 }
 
 .hero-bottom{
   display:flex;
   align-items:flex-end;
   justify-content:space-between;
-
-  margin-top:65px;
+  gap:50px;
+  margin-top:48px;
+  max-width:1080px;
 }
 
 .hero-description{
-  max-width:480px;
-
-  color:var(--muted);
-
-  font-size:13px;
-
-  line-height:1.9;
+  max-width:410px;
+  font-size:12px;
+  line-height:1.8;
+  color:#777772;
 }
 
 .hero-description strong{
-  color:var(--text);
+  color:#b7b7b0;
   font-weight:500;
 }
 
 .cta{
-  display:flex;
+  display:inline-flex;
   align-items:center;
-  gap:14px;
-
-  font-family:"DM Mono",monospace;
-
-  font-size:9px;
-
-  letter-spacing:.1em;
+  gap:12px;
+  font:8px var(--mono);
+  letter-spacing:.12em;
+  color:#bdbdb6;
 }
 
 .cta-arrow{
-  width:48px;
-  height:48px;
-
-  border:1px solid var(--border);
-
+  width:42px;
+  height:42px;
+  border:1px solid rgba(255,255,255,.12);
   display:grid;
   place-items:center;
-
-  color:var(--lime);
-
-  transition:.4s var(--ease);
+  transition:.35s ease;
 }
 
 .cta:hover .cta-arrow{
   background:var(--lime);
+  color:#080808;
+  border-color:var(--lime);
+  transform:rotate(45deg);
+}
 
-  color:#000;
+.hero-glow{
+  position:absolute;
+  width:580px;
+  height:580px;
+  right:-220px;
+  top:8%;
+  border-radius:50%;
+  background:radial-gradient(
+    circle,
+    rgba(215,255,63,.09),
+    transparent 68%
+  );
+  filter:blur(10px);
+  opacity:.65;
+}
 
-  transform:translateY(7px) rotate(45deg);
+.hero-orb{
+  position:absolute;
+  z-index:3;
+  width:245px;
+  height:245px;
+  right:9%;
+  top:31%;
+  border-radius:50%;
+  border:1px solid rgba(215,255,63,.28);
+  opacity:.62;
+  background:
+    radial-gradient(
+      circle at 35% 30%,
+      rgba(215,255,63,.16),
+      transparent 28%
+    ),
+    radial-gradient(
+      circle at 65% 70%,
+      rgba(255,255,255,.05),
+      transparent 45%
+    );
+  box-shadow:
+    inset -25px -20px 50px rgba(0,0,0,.9),
+    0 0 70px rgba(215,255,63,.04);
+  animation:orbFloat 9s ease-in-out infinite;
+}
+
+.hero-orb::before{
+  content:"";
+  position:absolute;
+  inset:-20px;
+  border:1px solid rgba(215,255,63,.22);
+  border-radius:50%;
+}
+
+.hero-orb::after{
+  content:"";
+  position:absolute;
+  inset:-42px;
+  border:1px dashed rgba(255,255,255,.09);
+  border-radius:50%;
+  opacity:.55;
+  animation:spin 18s linear infinite;
+}
+
+.float-symbol{
+  position:absolute;
+  z-index:4;
+  color:rgba(215,255,63,.32);
+  font:10px var(--mono);
+  pointer-events:none;
+}
+
+.symbol-one{
+  top:27%;
+  left:5%;
+}
+
+.symbol-two{
+  right:34%;
+  top:20%;
+}
+
+.symbol-three{
+  right:10%;
+  bottom:22%;
+}
+
+@keyframes orbFloat{
+  0%,100%{transform:translateY(0) rotate(0deg)}
+  50%{transform:translateY(-18px) rotate(8deg)}
+}
+
+@keyframes spin{
+  to{transform:rotate(360deg)}
 }
 
 
@@ -881,46 +543,86 @@ body::before{
 
 .marquee{
   overflow:hidden;
-
-  border-top:1px solid var(--border);
-  border-bottom:1px solid var(--border);
-
-  padding:18px 0;
-
-  white-space:nowrap;
+  padding:26px 0;
+  border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line);
 }
 
 .marquee-track{
-  display:inline-flex;
-
+  width:max-content;
+  display:flex;
+  gap:50px;
   animation:marquee 30s linear infinite;
 }
 
 .marquee-item{
-  display:inline-flex;
+  display:flex;
   align-items:center;
-
-  gap:35px;
-
-  margin-right:35px;
-
-  font-family:"DM Mono",monospace;
-
-  font-size:9px;
-
+  gap:50px;
+  white-space:nowrap;
+  font:9px var(--mono);
   letter-spacing:.12em;
-
-  color:var(--muted);
+  color:#777772;
 }
 
-.marquee-star{
-  color:var(--lime);
+.marquee-dot{
+  width:4px;
+  height:4px;
+  border-radius:50%;
+  background:var(--lime);
 }
 
 @keyframes marquee{
-  to{
-    transform:translateX(-50%);
-  }
+  to{transform:translateX(-50%)}
+}
+
+
+/* =========================================================
+   SECTIONS
+========================================================= */
+
+.section{
+  position:relative;
+  padding:140px 5vw;
+}
+
+.container{
+  width:100%;
+  max-width:1380px;
+  margin:auto;
+}
+
+.section-head{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:40px;
+  margin-bottom:80px;
+}
+
+.section-label{
+  font:8px var(--mono);
+  letter-spacing:.16em;
+  color:#65655f;
+}
+
+.section-label span{
+  color:var(--lime);
+}
+
+.section-title{
+  font-size:clamp(42px,6vw,82px);
+  line-height:.92;
+  letter-spacing:-.055em;
+  font-weight:600;
+  max-width:900px;
+}
+
+.section-intro{
+  font-size:12px;
+  line-height:1.8;
+  color:#777772;
+  max-width:520px;
 }
 
 
@@ -928,471 +630,249 @@ body::before{
    WORK
 ========================================================= */
 
-.work{
-  position:relative;
-}
-
-.work-header{
+.work-grid{
   display:grid;
-
-  grid-template-columns:1fr 1fr;
-
-  margin-bottom:100px;
-}
-
-.work-info{
-  display:flex;
-  justify-content:flex-end;
-
-  padding-top:60px;
-}
-
-.work-info p{
-  max-width:370px;
-
-  color:var(--muted);
-
-  font-size:13px;
-
-  line-height:1.9;
-}
-
-.projects{
-  display:grid;
-
   grid-template-columns:repeat(2,1fr);
-
-  gap:100px 30px;
-}
-
-.project{
-  perspective:1200px;
-}
-
-.project:nth-child(even){
-  margin-top:120px;
+  gap:70px 28px;
 }
 
 .project-card{
+  min-width:0;
+}
+
+.project-visual{
   position:relative;
-
-  aspect-ratio:16/11;
-
-  background:#111;
-
-  border:1px solid var(--border);
-
+  aspect-ratio:1.35/1;
   overflow:hidden;
-
-  transform-style:preserve-3d;
-
-  transition:
-    transform .15s ease,
-    border-color .4s ease;
+  border:1px solid rgba(255,255,255,.055);
+  background:#10100f;
 }
 
-.project:hover .project-card{
-  border-color:rgba(215,255,63,.35);
-}
-
-.project-light{
-  position:absolute;
-
-  width:300px;
-  height:300px;
-
-  border-radius:50%;
-
-  background:radial-gradient(
-    circle,
-    rgba(215,255,63,.14),
-    transparent 65%
-  );
-
-  pointer-events:none;
-
-  transform:translate(-50%,-50%);
-
-  z-index:4;
-}
-
-.project-bg{
+.project-visual::after{
+  content:"";
   position:absolute;
   inset:0;
-
-  transition:transform 1s var(--ease);
+  background:linear-gradient(
+    135deg,
+    transparent,
+    rgba(255,255,255,.03)
+  );
+  pointer-events:none;
 }
 
-.project:hover .project-bg{
-  transform:scale(1.06);
-}
-
-
-/* PROJECT 01 */
-
-.project-brand{
-  background:
-    radial-gradient(circle at 70% 30%,rgba(215,255,63,.2),transparent 25%),
-    linear-gradient(135deg,#191919,#050505);
-}
-
-.brand-shape{
-  position:absolute;
-
-  width:160px;
-  height:160px;
-
-  border:1px solid rgba(215,255,63,.7);
-
-  transform:rotate(45deg);
-
-  left:50%;
-  top:50%;
-
-  margin:-80px;
-
-  box-shadow:
-    0 0 70px rgba(215,255,63,.08);
-}
-
-.brand-shape:before,
-.brand-shape:after{
-  content:"";
-
-  position:absolute;
-
-  background:var(--lime);
-}
-
-.brand-shape:before{
-  width:1px;
-  height:230px;
-
-  left:50%;
-  top:-35px;
-}
-
-.brand-shape:after{
-  height:1px;
-  width:230px;
-
-  top:50%;
-  left:-35px;
-}
-
-
-/* PROJECT 02 */
-
-.project-3d{
-  background:
-    radial-gradient(circle at center,#353535,#101010 60%,#050505);
-}
-
-.project-sphere{
-  position:absolute;
-
-  width:190px;
-  height:190px;
-
-  border-radius:50%;
-
-  left:50%;
-  top:50%;
-
-  margin:-95px;
-
-  background:
-    radial-gradient(circle at 32% 25%,#fff,#a5a5a0 8%,#4a4a46 25%,#111 68%,#000);
-
-  box-shadow:
-    inset -30px -40px 70px rgba(0,0,0,.9),
-    35px 45px 80px rgba(0,0,0,.7);
-
-  transform-style:preserve-3d;
-
-  animation:projectSphere 7s ease-in-out infinite;
-}
-
-.project-sphere:before{
-  content:"";
-
-  position:absolute;
-  inset:-30px;
-
-  border:1px solid rgba(215,255,63,.4);
-
-  border-radius:50%;
-
-  transform:rotateX(70deg);
-
-  animation:ringSpin 8s linear infinite;
-}
-
-@keyframes projectSphere{
-  0%,100%{
-    transform:translateY(0) rotateY(0);
-  }
-
-  50%{
-    transform:translateY(-20px) rotateY(30deg);
-  }
-}
-
-
-/* PROJECT 03 */
-
-.project-film{
-  background:
-    linear-gradient(130deg,#191919,#050505);
-}
-
-.film-title{
-  position:absolute;
-
-  width:100%;
-
-  text-align:center;
-
-  top:50%;
-
-  transform:translateY(-50%) rotate(-7deg);
-
-  font-size:clamp(45px,7vw,105px);
-
-  font-weight:800;
-
-  letter-spacing:-.08em;
-
-  color:transparent;
-
-  -webkit-text-stroke:1px rgba(255,255,255,.5);
-}
-
-.film-line{
-  position:absolute;
-
-  left:15%;
-  width:70%;
-
-  height:1px;
-
-  background:var(--lime);
-
-  top:50%;
-
-  transform:rotate(-7deg);
-
-  box-shadow:0 0 20px var(--lime);
-}
-
-
-/* PROJECT 04 */
-
-.project-poster{
-  background:#e9e7e0;
-
-  color:#111;
-
-  padding:30px;
-
-  display:flex;
-
-  flex-direction:column;
-
-  justify-content:space-between;
-}
-
-.poster-top{
-  font-family:"DM Mono",monospace;
-
-  font-size:8px;
-
-  letter-spacing:.1em;
-}
-
-.poster-title{
-  font-size:clamp(55px,8vw,110px);
-
-  line-height:.72;
-
-  letter-spacing:-.09em;
-
-  font-weight:800;
-}
-
-.poster-bottom{
-  display:flex;
-  justify-content:space-between;
-
-  border-top:1px solid rgba(0,0,0,.25);
-
-  padding-top:10px;
-
-  font-family:"DM Mono",monospace;
-
-  font-size:8px;
-}
-
-
-/* PROJECT 05 */
-
-.project-stop{
-  background:
-    radial-gradient(circle at center,#242424,#050505 70%);
-}
-
-.stop-card{
-  position:absolute;
-
-  width:170px;
-  height:220px;
-
-  left:50%;
-  top:50%;
-
-  margin-left:-85px;
-  margin-top:-110px;
-
-  border:1px solid rgba(255,255,255,.35);
-
-  transform:rotate(8deg);
-
-  box-shadow:
-    25px 25px 0 rgba(215,255,63,.13),
-    50px 50px 0 rgba(255,255,255,.04);
-}
-
-.stop-card:before{
-  content:"";
-
-  position:absolute;
-
-  width:75px;
-  height:75px;
-
-  border-radius:50%;
-
-  background:var(--lime);
-
-  left:47px;
-  top:70px;
-
-  box-shadow:0 0 50px rgba(215,255,63,.2);
-}
-
-
-/* PROJECT 06 */
-
-.project-social{
-  background:
-    radial-gradient(circle at 50% 50%,#232323,#070707 70%);
-}
-
-.phone{
-  position:absolute;
-
-  width:170px;
-  height:310px;
-
-  left:50%;
-  top:50%;
-
-  margin:-155px -85px;
-
-  border:5px solid #303030;
-
-  border-radius:25px;
-
-  background:
-    linear-gradient(145deg,var(--lime),#101010 75%);
-
-  transform:rotate(-8deg);
-
-  box-shadow:
-    30px 40px 80px rgba(0,0,0,.7);
-}
-
-.phone:before{
-  content:"";
-
-  position:absolute;
-
-  width:55px;
-  height:6px;
-
-  border-radius:20px;
-
-  background:#151515;
-
-  top:8px;
-
-  left:50%;
-
-  transform:translateX(-50%);
-}
-
-.phone:after{
-  content:"AC";
-
-  position:absolute;
-
-  left:20px;
-  bottom:35px;
-
-  font-size:50px;
-
-  font-weight:800;
-
-  letter-spacing:-.1em;
-
-  color:#090909;
-}
-
-
-/* PROJECT META */
-
-.project-meta{
-  display:flex;
-
-  justify-content:space-between;
-
-  border-top:1px solid var(--border);
-
-  margin-top:16px;
-
-  padding-top:17px;
+.project-info{
+  display:grid;
+  grid-template-columns:40px 1fr auto;
+  gap:14px;
+  padding:22px 2px 0;
+  align-items:start;
 }
 
 .project-number{
-  color:var(--lime);
-
-  font-family:"DM Mono",monospace;
-
-  font-size:9px;
+  font:7px var(--mono);
+  letter-spacing:.14em;
+  color:#55554f;
 }
 
-.project-name{
-  margin-top:3px;
-
-  font-size:19px;
-
+.project-title{
+  font-size:13px;
+  letter-spacing:-.015em;
   font-weight:500;
-
-  letter-spacing:-.03em;
 }
 
-.project-type{
-  align-self:flex-end;
-
-  color:var(--muted);
-
-  font-family:"DM Mono",monospace;
-
-  font-size:8px;
-
+.project-category{
+  font:7px var(--mono);
+  letter-spacing:.13em;
+  color:#66665f;
   text-align:right;
+}
 
-  line-height:1.6;
+
+/* Project visuals */
+
+.visual-brand{
+  background:
+    linear-gradient(
+      135deg,
+      #171714,
+      #0b0b0a
+    );
+  display:grid;
+  place-items:center;
+}
+
+.brand-mark{
+  width:150px;
+  height:150px;
+  border:1px solid rgba(215,255,63,.5);
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  color:var(--lime);
+  font-size:42px;
+  letter-spacing:-.1em;
+  position:relative;
+}
+
+.brand-mark::before,
+.brand-mark::after{
+  content:"";
+  position:absolute;
+  border:1px solid rgba(215,255,63,.15);
+  border-radius:50%;
+}
+
+.brand-mark::before{
+  inset:-25px;
+}
+
+.brand-mark::after{
+  inset:-50px;
+}
+
+.visual-stage{
+  background:
+    radial-gradient(
+      circle at 50% 45%,
+      rgba(215,255,63,.14),
+      transparent 28%
+    ),
+    #0b0b0a;
+  display:grid;
+  place-items:center;
+}
+
+.stage-box{
+  width:44%;
+  height:50%;
+  border:1px solid rgba(255,255,255,.22);
+  transform:perspective(600px) rotateX(55deg) rotateZ(-35deg);
+  position:relative;
+}
+
+.stage-box::before,
+.stage-box::after{
+  content:"";
+  position:absolute;
+  inset:15%;
+  border:1px solid rgba(215,255,63,.35);
+}
+
+.stage-box::after{
+  inset:30%;
+}
+
+.visual-film{
+  background:#121210;
+  display:grid;
+  place-items:center;
+  overflow:hidden;
+}
+
+.film-word{
+  font-size:clamp(55px,8vw,120px);
+  font-weight:600;
+  letter-spacing:-.08em;
+  transform:rotate(-8deg);
+  color:transparent;
+  -webkit-text-stroke:1px rgba(255,255,255,.45);
+}
+
+.film-word::first-letter{
+  color:var(--lime);
+}
+
+.visual-poster{
+  background:
+    linear-gradient(
+      135deg,
+      #161613 0 50%,
+      #0c0c0b 50%
+    );
+  padding:8%;
+  display:flex;
+  align-items:flex-end;
+}
+
+.poster-frame{
+  width:65%;
+  height:72%;
+  border:1px solid rgba(255,255,255,.18);
+  padding:18px;
+  display:flex;
+  justify-content:space-between;
+  flex-direction:column;
+}
+
+.poster-big{
+  font-size:clamp(42px,6vw,85px);
+  line-height:.8;
+  letter-spacing:-.08em;
+  color:var(--lime);
+}
+
+.poster-small{
+  font:7px var(--mono);
+  color:#777772;
+  letter-spacing:.12em;
+}
+
+.visual-stop{
+  background:
+    radial-gradient(
+      circle at center,
+      rgba(215,255,63,.08),
+      transparent 38%
+    ),
+    #0c0c0b;
+  display:grid;
+  place-items:center;
+}
+
+.stop-object{
+  width:130px;
+  height:130px;
+  border:1px solid rgba(255,255,255,.3);
+  transform:rotate(45deg);
+  position:relative;
+}
+
+.stop-object::before{
+  content:"";
+  position:absolute;
+  inset:22px;
+  background:var(--lime);
+}
+
+.visual-social{
+  background:
+    linear-gradient(
+      145deg,
+      #171714,
+      #0b0b0a
+    );
+  padding:7%;
+  display:flex;
+  justify-content:flex-end;
+  align-items:flex-end;
+}
+
+.social-grid{
+  width:70%;
+  height:75%;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:5px;
+}
+
+.social-grid span{
+  background:#1d1d19;
+  border:1px solid rgba(255,255,255,.07);
+}
+
+.social-grid span:nth-child(2),
+.social-grid span:nth-child(5){
+  background:var(--lime);
 }
 
 
@@ -1400,242 +880,197 @@ body::before{
    ABOUT
 ========================================================= */
 
-.about{
-  border-top:1px solid var(--border);
-}
-
 .about-grid{
   display:grid;
-
-  grid-template-columns:1fr 1fr;
-
-  gap:100px;
-
-  margin-top:70px;
+  grid-template-columns:.8fr 1.6fr;
+  gap:90px;
 }
 
-.about-big{
-  font-size:clamp(38px,5vw,70px);
-
-  line-height:1.02;
-
-  letter-spacing:-.06em;
+.about-copy{
+  max-width:620px;
 }
 
-.about-big span{
-  color:var(--lime);
-}
-
-.about-text{
-  color:var(--muted);
-
+.about-copy p{
   font-size:14px;
-
-  line-height:1.95;
+  line-height:1.85;
+  color:#777772;
+  max-width:590px;
 }
 
-.about-text p+p{
+.about-copy p + p{
   margin-top:25px;
 }
 
-.signature{
+.about-copy strong{
+  color:#c7c7c0;
+  font-weight:500;
+}
+
+.about-meta{
+  margin-top:45px;
+  font:8px var(--mono);
+  letter-spacing:.12em;
+  color:#65655f;
+}
+
+.about-stats{
+  margin-top:60px;
+}
+
+.about-stat{
   display:flex;
+  justify-content:space-between;
   align-items:center;
-
-  gap:15px;
-
-  margin-top:50px;
+  padding:24px 0;
+  border-top:1px solid rgba(255,255,255,.07);
 }
 
-.signature-mark{
-  width:45px;
-  height:45px;
-
-  border:1px solid var(--lime);
-
-  display:grid;
-  place-items:center;
-
-  color:var(--lime);
-
-  font-family:"DM Mono",monospace;
-
-  font-size:11px;
+.about-stat:last-child{
+  border-bottom:1px solid rgba(255,255,255,.07);
 }
 
-.signature-name strong{
-  display:block;
-
-  font-size:13px;
+.about-stat-number{
+  font-size:34px;
+  letter-spacing:-.05em;
+  font-weight:500;
 }
 
-.signature-name small{
-  display:block;
-
-  color:var(--muted);
-
-  font-family:"DM Mono",monospace;
-
-  font-size:8px;
+.about-stat-label{
+  font:7px var(--mono);
+  letter-spacing:.13em;
+  color:#62625d;
 }
 
 
 /* =========================================================
-   SKILLS
+   EXPERTISE
 ========================================================= */
 
-.skills{
-  border-top:1px solid var(--border);
-}
-
-.skills-grid{
+.expertise-grid{
   display:grid;
-
   grid-template-columns:repeat(3,1fr);
-
-  margin-top:80px;
-
-  border-left:1px solid var(--border);
-  border-top:1px solid var(--border);
+  gap:1px;
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.06);
 }
 
-.skill{
-  min-height:240px;
-
-  padding:30px;
-
-  border-right:1px solid var(--border);
-  border-bottom:1px solid var(--border);
-
-  transition:
-    background .4s ease,
-    transform .4s var(--ease);
+.expertise-item{
+  position:relative;
+  min-height:190px;
+  padding:34px 30px;
+  background:#0a0a09;
+  transition:background .4s ease;
 }
 
-.skill:hover{
-  background:#101010;
-
-  transform:translateY(-5px);
+.expertise-item:hover{
+  background:#10100e;
 }
 
-.skill-num{
-  font-family:"DM Mono",monospace;
+.expertise-number{
+  font:7px var(--mono);
+  color:#55554f;
+  letter-spacing:.14em;
+}
 
-  font-size:9px;
-
+.expertise-icon{
+  position:absolute;
+  right:30px;
+  top:30px;
   color:var(--lime);
+  font:20px var(--mono);
+  opacity:.75;
 }
 
-.skill h3{
-  margin-top:70px;
-
-  font-size:25px;
-
+.expertise-title{
+  margin-top:48px;
+  font-size:16px;
+  letter-spacing:-.025em;
   font-weight:500;
-
-  letter-spacing:-.04em;
 }
 
-.skill p{
+.expertise-description{
   margin-top:12px;
-
-  color:var(--muted);
-
-  font-size:11px;
-
+  font-size:10px;
   line-height:1.7;
+  color:#666660;
+  max-width:330px;
 }
+
+
+/* =========================================================
+   TOOLS
+========================================================= */
 
 .tools{
+  margin-top:80px;
+}
+
+.tools-title{
+  margin-bottom:18px;
+  font:8px var(--mono);
+  letter-spacing:.15em;
+  color:#5e5e58;
+}
+
+.tools-list{
   display:flex;
   flex-wrap:wrap;
-
-  gap:8px;
-
-  margin-top:55px;
+  gap:10px;
 }
 
 .tool{
-  padding:8px 12px;
-
-  border:1px solid var(--border);
-
-  font-family:"DM Mono",monospace;
-
-  font-size:8px;
-
-  color:var(--muted);
-
-  transition:.3s;
+  padding:9px 13px;
+  border:1px solid rgba(255,255,255,.07);
+  font:8px var(--mono);
+  letter-spacing:.07em;
+  color:#888881;
+  transition:.3s ease;
 }
 
 .tool:hover{
-  color:var(--text);
-  border-color:var(--lime);
+  border-color:rgba(215,255,63,.28);
+  color:var(--lime);
 }
 
 
 /* =========================================================
-   CANKIX
+   CANKIXCREATIVE
 ========================================================= */
 
 .cankix{
-  background:var(--lime);
-
-  color:#050505;
-
-  overflow:hidden;
-
-  position:relative;
+  border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+  background:#0a0a09;
 }
 
-.cankix-inner{
-  padding:110px 0;
-
-  position:relative;
+.cankix-content{
+  max-width:1000px;
 }
 
 .cankix-label{
-  font-family:"DM Mono",monospace;
-
-  font-size:9px;
-
-  letter-spacing:.1em;
+  font:8px var(--mono);
+  letter-spacing:.16em;
+  color:#62625c;
 }
 
 .cankix-title{
-  margin-top:30px;
-
-  font-size:clamp(65px,12vw,170px);
-
-  line-height:.75;
-
-  font-weight:800;
-
-  letter-spacing:-.08em;
+  margin-top:28px;
+  font-size:clamp(48px,7vw,100px);
+  line-height:.88;
+  letter-spacing:-.065em;
+  font-weight:600;
 }
 
-.cankix-text{
-  max-width:500px;
-
-  margin-top:50px;
-
-  font-size:14px;
-
-  line-height:1.8;
+.cankix-title span{
+  color:var(--lime);
 }
 
-.cankix-symbol{
-  position:absolute;
-
-  right:-60px;
-  bottom:-160px;
-
-  font-size:500px;
-
-  line-height:.5;
-
-  opacity:.1;
+.cankix-description{
+  margin-top:35px;
+  max-width:470px;
+  font-size:12px;
+  line-height:1.85;
+  color:#70706a;
 }
 
 
@@ -1644,254 +1079,150 @@ body::before{
 ========================================================= */
 
 .contact{
-  border-top:1px solid var(--border);
+  padding-top:160px;
+  padding-bottom:120px;
 }
 
-.contact-grid{
+.contact-title{
+  font-size:clamp(48px,7.5vw,105px);
+  line-height:.88;
+  letter-spacing:-.065em;
+  max-width:950px;
+  font-weight:600;
+}
+
+.contact-title span{
+  color:var(--lime);
+}
+
+.contact-description{
+  margin-top:35px;
+  font-size:12px;
+  line-height:1.8;
+  color:#70706a;
+  max-width:430px;
+}
+
+.contact-layout{
   display:grid;
-
-  grid-template-columns:1fr 1fr;
-
+  grid-template-columns:1fr .8fr;
   gap:100px;
-
-  margin-top:80px;
+  margin-top:85px;
 }
 
-.contact-copy{
-  max-width:520px;
-
-  color:var(--muted);
-
-  font-size:14px;
-
-  line-height:1.9;
-}
-
-.socials{
+.contact-links{
   display:flex;
-
-  gap:12px;
-
-  margin-top:45px;
+  flex-direction:column;
+  gap:10px;
 }
 
-.social{
-  width:52px;
-  height:52px;
+.contact-link{
+  min-height:62px;
+  padding:0 20px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  border:1px solid rgba(255,255,255,.07);
+  transition:.35s ease;
+}
 
-  border:1px solid var(--border);
+.contact-link:hover{
+  border-color:rgba(215,255,63,.25);
+  background:#10100e;
+  transform:translateX(5px);
+}
 
+.contact-link-left{
+  display:flex;
+  align-items:center;
+  gap:15px;
+}
+
+.contact-link-icon{
+  width:27px;
+  height:27px;
   display:grid;
   place-items:center;
-
-  transition:
-    background .35s ease,
-    border-color .35s ease,
-    color .35s ease,
-    transform .35s var(--ease);
+  border:1px solid rgba(255,255,255,.1);
+  color:#999991;
+  font:8px var(--mono);
 }
 
-.social:hover{
-  background:var(--lime);
-
-  border-color:var(--lime);
-
-  color:#000;
-
-  transform:translateY(-6px) rotate(-4deg);
+.contact-link-label{
+  font:8px var(--mono);
+  letter-spacing:.11em;
 }
 
-.social svg{
-  width:18px;
-  height:18px;
-
-  fill:currentColor;
+.contact-link-meta{
+  font:7px var(--mono);
+  letter-spacing:.08em;
+  color:#5c5c56;
 }
 
 
 /* =========================================================
-   CONTACT FORM
+   FORM
 ========================================================= */
 
 .contact-form{
-  position:relative;
-
-  border-top:1px solid var(--border);
+  max-width:680px;
 }
 
-.form-field{
-  position:relative;
-
-  padding:20px 0;
-
-  border-bottom:1px solid var(--border);
+.form-group{
+  margin-bottom:28px;
 }
 
-.form-field label{
+.form-label{
   display:block;
-
-  margin-bottom:12px;
-
-  font-family:"DM Mono",monospace;
-
-  font-size:8px;
-
-  letter-spacing:.12em;
-
-  color:var(--lime);
+  margin-bottom:10px;
+  font:7px var(--mono);
+  letter-spacing:.15em;
+  color:#5f5f59;
 }
 
-.form-field input,
-.form-field textarea{
+.form-input,
+.form-textarea{
   width:100%;
-
+  padding:14px 0;
   border:0;
-  outline:0;
-
+  border-bottom:1px solid rgba(255,255,255,.1);
   background:transparent;
-
-  color:var(--text);
-
-  font-family:"Manrope",sans-serif;
-
-  font-size:14px;
-
-  font-weight:400;
-
-  resize:none;
+  color:#e8e8e2;
+  outline:none;
+  font-size:12px;
+  transition:border-color .3s ease;
 }
 
-.form-field input::placeholder,
-.form-field textarea::placeholder{
-  color:var(--muted2);
-
-  transition:.3s ease;
-}
-
-.form-field input:focus::placeholder,
-.form-field textarea:focus::placeholder{
-  opacity:.3;
-}
-
-.form-field input:focus,
-.form-field textarea:focus{
-  color:var(--text);
-}
-
-.form-field textarea{
-  min-height:125px;
-
-  line-height:1.7;
-}
-
-.submit-wrap{
-  display:flex;
-
-  align-items:center;
-
-  justify-content:space-between;
-
-  gap:20px;
-
-  padding-top:22px;
-}
-
-.submit-btn{
-  border:1px solid var(--border2);
-
-  background:transparent;
-
-  color:var(--text);
-
-  min-height:58px;
-
-  padding:0 20px;
-
-  display:flex;
-
-  align-items:center;
-
-  justify-content:space-between;
-
-  gap:40px;
-
-  cursor:pointer;
-
-  font-family:"DM Mono",monospace;
-
-  font-size:9px;
-
-  letter-spacing:.1em;
-
-  transition:
-    background .35s ease,
-    color .35s ease,
-    border-color .35s ease,
-    transform .35s var(--ease);
-}
-
-.submit-btn:hover{
-  background:var(--lime);
-
-  color:#000;
-
+.form-input:focus,
+.form-textarea:focus{
   border-color:var(--lime);
-
-  transform:translateY(-4px);
 }
 
-.submit-btn span:last-child{
-  font-size:18px;
-
-  line-height:1;
-
-  transition:.35s var(--ease);
+.form-textarea{
+  min-height:120px;
+  resize:vertical;
 }
 
-.submit-btn:hover span:last-child{
-  transform:translate(5px,-5px);
+.form-submit{
+  margin-top:12px;
+  padding:14px 20px;
+  border:1px solid rgba(255,255,255,.1);
+  cursor:pointer;
+  font:8px var(--mono);
+  letter-spacing:.12em;
+  transition:.35s ease;
 }
 
-.submit-btn:disabled{
-  cursor:wait;
-
-  opacity:.65;
-
-  transform:none!important;
+.form-submit:hover{
+  background:var(--lime);
+  color:#080808;
+  border-color:var(--lime);
 }
 
 .form-status{
-  min-height:20px;
-
-  padding-top:17px;
-
-  font-family:"DM Mono",monospace;
-
-  font-size:8px;
-
-  line-height:1.6;
-
-  opacity:0;
-
-  transform:translateY(8px);
-
-  transition:
-    opacity .4s ease,
-    transform .4s ease;
-}
-
-.form-status.show{
-  opacity:1;
-
-  transform:translateY(0);
-}
-
-.form-status.success{
+  margin-top:14px;
+  font:8px var(--mono);
   color:var(--lime);
-}
-
-.form-status.error{
-  color:#ff6262;
 }
 
 
@@ -1899,45 +1230,28 @@ body::before{
    FOOTER
 ========================================================= */
 
-footer{
-  border-top:1px solid var(--border);
-
-  padding:25px 0;
+.footer{
+  padding:32px 5vw;
+  border-top:1px solid rgba(255,255,255,.07);
 }
 
-.footer{
+.footer-inner{
+  max-width:1380px;
+  margin:auto;
   display:flex;
-
   justify-content:space-between;
   align-items:center;
+  gap:20px;
 }
 
-.footer-copy{
-  font-family:"DM Mono",monospace;
-
-  font-size:8px;
-
-  color:var(--muted2);
-
-  letter-spacing:.08em;
+.footer-left,
+.footer-right{
+  font:7px var(--mono);
+  letter-spacing:.12em;
+  color:#55554f;
 }
 
-.footer-links{
-  display:flex;
-  gap:25px;
-}
-
-.footer-links a{
-  font-family:"DM Mono",monospace;
-
-  font-size:8px;
-
-  color:var(--muted);
-
-  transition:.25s;
-}
-
-.footer-links a:hover{
+.footer-accent{
   color:var(--lime);
 }
 
@@ -1948,30 +1262,15 @@ footer{
 
 .reveal{
   opacity:0;
-
-  transform:translateY(45px);
-
+  transform:translateY(25px);
   transition:
-    opacity 1s var(--ease),
-    transform 1s var(--ease);
+    opacity .8s ease,
+    transform .8s cubic-bezier(.16,1,.3,1);
 }
 
-.reveal.visible{
+.reveal.active{
   opacity:1;
-
-  transform:none;
-}
-
-.delay1{
-  transition-delay:.1s;
-}
-
-.delay2{
-  transition-delay:.2s;
-}
-
-.delay3{
-  transition-delay:.3s;
+  transform:translateY(0);
 }
 
 
@@ -1979,32 +1278,32 @@ footer{
    RESPONSIVE
 ========================================================= */
 
-@media(max-width:1050px){
+@media(max-width:900px){
 
-  .container{
-    width:calc(100% - 50px);
-  }
-
-  .nav-links{
-    gap:20px;
-  }
-
-  .availability{
+  .nav-links,
+  .nav-status{
     display:none;
   }
 
-  .hero-orb{
-    width:220px;
-    height:220px;
-
-    right:-30px;
+  .menu-btn{
+    display:block;
   }
 
-  .skills-grid{
+  .work-grid{
+    grid-template-columns:1fr;
+  }
+
+  .about-grid{
+    grid-template-columns:1fr;
+    gap:55px;
+  }
+
+  .expertise-grid{
     grid-template-columns:repeat(2,1fr);
   }
 
-  .contact-grid{
+  .contact-layout{
+    grid-template-columns:1fr;
     gap:60px;
   }
 
@@ -2013,248 +1312,179 @@ footer{
 
 @media(max-width:720px){
 
-  .container{
-    width:calc(100% - 36px);
-  }
-
-  .section{
-    padding:105px 0;
-  }
-
-
-  /* NAV */
-
   .nav{
-    height:70px;
+    height:68px;
+    padding:0 6vw;
   }
-
-  .nav-links{
-    display:none;
-  }
-
-  .menu{
-    display:block;
-  }
-
-
-  /* HERO */
 
   .hero{
     min-height:100svh;
-
-    padding:120px 0 70px;
-  }
-
-  .hero-grid{
-    background-size:60px 60px;
+    padding:105px 6vw 60px;
   }
 
   .hero-meta{
-    align-items:flex-start;
-
-    flex-direction:column;
-
-    gap:9px;
-
-    margin-bottom:35px;
+    margin-bottom:30px;
+    font-size:7px;
   }
 
   .hero-title{
-    font-size:clamp(58px,16vw,105px);
+    font-size:clamp(53px,15vw,88px);
+    line-height:.84;
+    letter-spacing:-.07em;
   }
 
-  .hero-orb{
-    width:170px;
-    height:170px;
-
-    right:-60px;
-    top:22%;
-
-    opacity:.5;
+  .hero-line.lime{
+    margin-left:4vw;
   }
 
   .hero-bottom{
+    margin-top:42px;
+    display:flex;
     flex-direction:column;
-
     align-items:flex-start;
-
-    gap:35px;
-
-    margin-top:50px;
+    gap:30px;
   }
 
   .hero-description{
-    font-size:12px;
+    max-width:350px;
+    font-size:11px;
+    line-height:1.8;
+  }
+
+  .cta-arrow{
+    width:40px;
+    height:40px;
+  }
+
+  .hero-orb{
+    width:145px;
+    height:145px;
+    right:-48px;
+    top:24%;
+    opacity:.35;
+  }
+
+  .hero-glow{
+    width:380px;
+    height:380px;
+    right:-180px;
+    top:8%;
+    opacity:.45;
+  }
+
+  .hero-grid{
+    background-size:65px 65px;
   }
 
   .float-symbol{
     display:none;
   }
 
-
-  /* WORK */
-
-  .work-header{
-    grid-template-columns:1fr;
-
-    gap:25px;
-
-    margin-bottom:60px;
+  .section{
+    padding:95px 6vw;
   }
 
-  .work-info{
-    padding-top:0;
-
-    justify-content:flex-start;
-  }
-
-  .projects{
-    grid-template-columns:1fr;
-
-    gap:65px;
-  }
-
-  .project:nth-child(even){
-    margin-top:0;
-  }
-
-  .project-meta{
+  .section-head{
     flex-direction:column;
-
-    gap:12px;
+    margin-bottom:55px;
+    gap:25px;
   }
 
-  .project-type{
-    align-self:flex-start;
+  .section-title{
+    font-size:clamp(38px,11vw,62px);
+    line-height:.94;
+  }
 
+  .section-intro{
+    font-size:11px;
+    line-height:1.8;
+  }
+
+  .work-grid{
+    gap:48px;
+  }
+
+  .project-info{
+    padding-top:16px;
+    grid-template-columns:30px 1fr;
+  }
+
+  .project-category{
+    grid-column:2;
     text-align:left;
+    margin-top:4px;
   }
 
-  .project-sphere{
-    width:130px;
-    height:130px;
-
-    margin:-65px;
+  .project-title{
+    font-size:12px;
   }
 
-  .brand-shape{
-    width:110px;
-    height:110px;
-
-    margin:-55px;
+  .project-description{
+    font-size:9.5px;
   }
-
-  .stop-card{
-    width:130px;
-    height:175px;
-
-    margin-left:-65px;
-    margin-top:-87px;
-  }
-
-  .stop-card:before{
-    width:60px;
-    height:60px;
-
-    left:35px;
-    top:55px;
-  }
-
-  .phone{
-    width:130px;
-    height:245px;
-
-    margin-left:-65px;
-    margin-top:-122px;
-  }
-
-  .phone:after{
-    left:16px;
-    bottom:28px;
-
-    font-size:38px;
-  }
-
-
-  /* ABOUT */
 
   .about-grid{
+    gap:50px;
+  }
+
+  .about-copy p{
+    font-size:12px;
+    line-height:1.85;
+  }
+
+  .about-stat-number{
+    font-size:28px;
+  }
+
+  .expertise-grid{
     grid-template-columns:1fr;
+  }
 
-    gap:55px;
+  .expertise-item{
+    min-height:160px;
+    padding:27px 22px;
+  }
 
+  .expertise-title{
+    font-size:14px;
+  }
+
+  .expertise-description{
+    font-size:9.5px;
+  }
+
+  .cankix-title{
+    font-size:clamp(43px,12vw,70px);
+  }
+
+  .cankix-description{
+    font-size:11px;
+  }
+
+  .contact{
+    padding-top:100px;
+    padding-bottom:80px;
+  }
+
+  .contact-title{
+    font-size:clamp(43px,12vw,76px);
+  }
+
+  .contact-description{
+    font-size:11px;
+  }
+
+  .contact-layout{
     margin-top:55px;
   }
-
-
-  /* SKILLS */
-
-  .skills-grid{
-    grid-template-columns:1fr;
-
-    margin-top:55px;
-  }
-
-  .skill{
-    min-height:190px;
-  }
-
-  .skill h3{
-    margin-top:45px;
-  }
-
-
-  /* CANKIX */
-
-  .cankix-inner{
-    padding:80px 0;
-  }
-
-  .cankix-symbol{
-    font-size:280px;
-
-    right:-20px;
-    bottom:-80px;
-  }
-
-
-  /* CONTACT */
-
-  .contact-grid{
-    grid-template-columns:1fr;
-
-    gap:60px;
-
-    margin-top:60px;
-  }
-
-  .contact-form{
-    margin-top:10px;
-  }
-
-  .submit-wrap{
-    align-items:flex-start;
-
-    flex-direction:column;
-  }
-
-  .submit-btn{
-    width:100%;
-  }
-
-
-  /* FOOTER */
 
   .footer{
-    flex-direction:column;
-
-    align-items:flex-start;
-
-    gap:18px;
+    padding:25px 6vw;
   }
 
-  .footer-links{
-    gap:18px;
+  .footer-inner{
+    align-items:flex-start;
+    flex-direction:column;
   }
 
 }
@@ -2262,16 +1492,46 @@ footer{
 
 @media(max-width:390px){
 
-  .container{
-    width:calc(100% - 28px);
+  .hero{
+    padding-top:100px;
   }
 
   .hero-title{
-    font-size:54px;
+    font-size:51px;
+    line-height:.86;
+  }
+
+  .hero-meta{
+    font-size:6.5px;
+  }
+
+  .hero-description{
+    font-size:10.5px;
+  }
+
+  .section{
+    padding-top:82px;
+    padding-bottom:82px;
   }
 
   .section-title{
-    font-size:45px;
+    font-size:38px;
+  }
+
+  .about-copy p{
+    font-size:11px;
+  }
+
+  .expertise-item{
+    padding:24px 18px;
+  }
+
+  .cankix-title{
+    font-size:42px;
+  }
+
+  .contact-title{
+    font-size:42px;
   }
 
 }
@@ -2286,174 +1546,105 @@ footer{
   *,
   *::before,
   *::after{
-    animation-duration:.01ms!important;
-    transition-duration:.01ms!important;
-  }
-
-  html{
-    scroll-behavior:auto;
+    animation-duration:.01ms !important;
+    animation-iteration-count:1 !important;
+    transition-duration:.01ms !important;
+    scroll-behavior:auto !important;
   }
 
   .reveal{
     opacity:1;
     transform:none;
   }
-}
 
+}
 </style>
 </head>
 
+
 <body>
 
-
-<!-- =======================================================
-     LOADER
-======================================================== -->
-
 <div class="loader" id="loader">
-
-  <div class="loader-box">
-
+  <div class="loader-inner">
     <div class="loader-top">
       <span>ABDULLAH CANKI</span>
-      <span id="percent">0%</span>
+      <span id="loaderPercent">0%</span>
     </div>
-
-    <div class="loader-track">
-      <div class="loader-progress" id="progress"></div>
+    <div class="loader-line">
+      <div class="loader-progress" id="loaderProgress"></div>
     </div>
-
   </div>
-
 </div>
 
 
-<!-- CURSOR -->
-
 <div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
 
 
-<!-- =======================================================
-     NAV
-======================================================== -->
+<header class="nav">
+  <div class="nav-inner">
 
-<header class="nav" id="nav">
-
-  <div class="container nav-inner">
-
-    <a href="#top" class="logo">
-
-      <div class="logo-box">
-        AC
+    <a href="#top" class="nav-brand">
+      <div class="nav-logo">AC</div>
+      <div class="nav-brand-text">
+        ABDULLAH CANKI<br>
+        VISUAL COMMUNICATION DESIGNER
       </div>
-
-      <div>
-
-        <div class="logo-name">
-          ABDULLAH CANKI
-        </div>
-
-        <span class="logo-role">
-          VISUAL COMMUNICATION DESIGNER
-        </span>
-
-      </div>
-
     </a>
 
-
     <nav class="nav-links">
-
       <a href="#work">WORK</a>
       <a href="#about">ABOUT</a>
-      <a href="#skills">EXPERTISE</a>
+      <a href="#expertise">EXPERTISE</a>
       <a href="#contact">CONTACT</a>
-
-      <div class="availability">
-
-        <span class="availability-dot"></span>
-
-        AVAILABLE FOR PROJECTS
-
-      </div>
-
     </nav>
 
+    <div class="nav-status">
+      <span class="status-dot"></span>
+      AVAILABLE FOR WORK
+    </div>
 
-    <button class="menu" id="menu" aria-label="Menüyü aç">
-
-      <span></span>
-      <span></span>
-
+    <button class="menu-btn" id="menuBtn">
+      MENU
     </button>
 
   </div>
-
 </header>
 
 
-<!-- =======================================================
-     MOBILE
-======================================================== -->
-
 <div class="mobile-menu" id="mobileMenu">
-
-  <nav class="mobile-links">
-
+  <nav>
     <a href="#work">WORK</a>
     <a href="#about">ABOUT</a>
-    <a href="#skills">EXPERTISE</a>
+    <a href="#expertise">EXPERTISE</a>
     <a href="#contact">CONTACT</a>
-
   </nav>
-
-  <div class="mobile-footer">
-
-    <span>ABDULLAH CANKI</span>
-    <span>ARTVİN — TÜRKİYE</span>
-
-  </div>
-
 </div>
 
 
-<!-- =======================================================
-     HERO
-======================================================== -->
-
 <main id="top">
+
+
+<!-- =====================================================
+     HERO
+===================================================== -->
 
 <section class="hero">
 
   <div class="hero-grid"></div>
-
   <div class="hero-glow"></div>
-
   <div class="hero-orb"></div>
 
-  <div class="float-symbol symbol-one">✦</div>
-  <div class="float-symbol symbol-two">+</div>
-  <div class="float-symbol symbol-three">01</div>
+  <span class="float-symbol symbol-one">+</span>
+  <span class="float-symbol symbol-two">×</span>
+  <span class="float-symbol symbol-three">○</span>
 
-
-  <div class="container hero-content">
+  <div class="hero-content">
 
     <div class="hero-meta reveal">
-
-      <div class="status">
-
-        <span class="status-dot"></span>
-
-        VISUAL COMMUNICATION DESIGNER
-
-      </div>
-
-      <span>
-        ARTVİN — TÜRKİYE / 2026
-      </span>
-
+      <span>01</span>
+      VISUAL COMMUNICATION DESIGNER
     </div>
-
 
     <h1 class="hero-title">
 
@@ -2461,39 +1652,27 @@ footer{
         ABDULLAH
       </span>
 
-      <span class="hero-line outline reveal delay1">
+      <span class="hero-line outline reveal">
         CANKI
       </span>
 
-      <span class="hero-line lime reveal delay2">
+      <span class="hero-line lime reveal">
         DESIGNER.
       </span>
 
     </h1>
 
+    <div class="hero-bottom reveal">
 
-    <div class="hero-bottom">
-
-      <p class="hero-description reveal delay2">
-
-        Fikirleri görsel sistemlere, markalara ve
-        deneyimlere dönüştüren bağımsız tasarımcı.
-        <strong>Brand identity, 3D, motion, typography
-        ve visual storytelling.</strong>
-
+      <p class="hero-description">
+        Görsel iletişim, <strong>3D / CGI</strong>, motion design,
+        video ve dijital deneyimler arasında çalışan bağımsız
+        bir tasarımcıyım.
       </p>
 
-
-      <a href="#work" class="cta reveal delay3">
-
-        <span>
-          SELECTED WORK
-        </span>
-
-        <span class="cta-arrow">
-          ↓
-        </span>
-
+      <a href="#work" class="cta">
+        EXPLORE SELECTED WORK
+        <span class="cta-arrow">↗</span>
       </a>
 
     </div>
@@ -2503,61 +1682,42 @@ footer{
 </section>
 
 
-<!-- =======================================================
+<!-- =====================================================
      MARQUEE
-======================================================== -->
+===================================================== -->
 
 <div class="marquee">
 
   <div class="marquee-track">
 
     <div class="marquee-item">
-      BRAND IDENTITY <span class="marquee-star">✦</span>
+      VISUAL IDENTITY
+      <span class="marquee-dot"></span>
+      3D / CGI
+      <span class="marquee-dot"></span>
+      MOTION DESIGN
+      <span class="marquee-dot"></span>
+      VIDEO
+      <span class="marquee-dot"></span>
+      TYPOGRAPHY
+      <span class="marquee-dot"></span>
+      DIGITAL CONTENT
+      <span class="marquee-dot"></span>
     </div>
 
     <div class="marquee-item">
-      3D / CGI <span class="marquee-star">✦</span>
-    </div>
-
-    <div class="marquee-item">
-      MOTION DESIGN <span class="marquee-star">✦</span>
-    </div>
-
-    <div class="marquee-item">
-      TYPOGRAPHY <span class="marquee-star">✦</span>
-    </div>
-
-    <div class="marquee-item">
-      VIDEO <span class="marquee-star">✦</span>
-    </div>
-
-    <div class="marquee-item">
-      VISUAL STORYTELLING <span class="marquee-star">✦</span>
-    </div>
-
-
-    <div class="marquee-item">
-      BRAND IDENTITY <span class="marquee-star">✦</span>
-    </div>
-
-    <div class="marquee-item">
-      3D / CGI <span class="marquee-star">✦</span>
-    </div>
-
-    <div class="marquee-item">
-      MOTION DESIGN <span class="marquee-star">✦</span>
-    </div>
-
-    <div class="marquee-item">
-      TYPOGRAPHY <span class="marquee-star">✦</span>
-    </div>
-
-    <div class="marquee-item">
-      VIDEO <span class="marquee-star">✦</span>
-    </div>
-
-    <div class="marquee-item">
-      VISUAL STORYTELLING <span class="marquee-star">✦</span>
+      VISUAL IDENTITY
+      <span class="marquee-dot"></span>
+      3D / CGI
+      <span class="marquee-dot"></span>
+      MOTION DESIGN
+      <span class="marquee-dot"></span>
+      VIDEO
+      <span class="marquee-dot"></span>
+      TYPOGRAPHY
+      <span class="marquee-dot"></span>
+      DIGITAL CONTENT
+      <span class="marquee-dot"></span>
     </div>
 
   </div>
@@ -2565,306 +1725,168 @@ footer{
 </div>
 
 
-<!-- =======================================================
+<!-- =====================================================
      WORK
-======================================================== -->
+===================================================== -->
 
-<section class="section work" id="work">
+<section class="section" id="work">
 
   <div class="container">
 
-    <div class="work-header">
+    <div class="section-head reveal">
 
-      <div>
-
-        <div class="section-number">
-          01 — SELECTED WORK
-        </div>
-
-        <h2 class="section-title">
-          Seçilmiş<br>
-          Çalışmalar.
-        </h2>
-
+      <div class="section-label">
+        <span>02</span> / SELECTED WORK
       </div>
 
-
-      <div class="work-info">
-
-        <p>
-          Görsel kimlikten 3D sahne tasarımına,
-          kısa filmden deneysel tipografiye uzanan
-          seçilmiş çalışmalar.
-        </p>
-
+      <div class="section-intro">
+        Farklı disiplinler arasında şekillenen seçilmiş
+        görsel iletişim ve deneysel tasarım çalışmaları.
       </div>
 
     </div>
 
+    <div class="work-grid">
 
-    <div class="projects">
 
+      <article class="project-card reveal">
 
-      <!-- 01 -->
-
-      <article class="project reveal">
-
-        <div class="project-card">
-
-          <div class="project-light"></div>
-
-          <div class="project-bg project-brand">
-
-            <div class="brand-shape"></div>
-
-          </div>
-
+        <div class="project-visual visual-brand">
+          <div class="brand-mark">AC</div>
         </div>
 
-        <div class="project-meta">
-
-          <div>
-
-            <div class="project-number">
-              01
-            </div>
-
-            <h3 class="project-name">
-              Cankixcreative Branding
-            </h3>
-
+        <div class="project-info">
+          <div class="project-number">01</div>
+          <div class="project-title">
+            Cankixcreative Branding
           </div>
-
-          <div class="project-type">
-            BRAND IDENTITY<br>
-            VISUAL SYSTEM
+          <div class="project-category">
+            BRAND IDENTITY
           </div>
-
         </div>
 
       </article>
 
 
-      <!-- 02 -->
+      <article class="project-card reveal">
 
-      <article class="project reveal delay1">
-
-        <div class="project-card">
-
-          <div class="project-light"></div>
-
-          <div class="project-bg project-3d">
-
-            <div class="project-sphere"></div>
-
-          </div>
-
+        <div class="project-visual visual-stage">
+          <div class="stage-box"></div>
         </div>
 
-        <div class="project-meta">
-
-          <div>
-
-            <div class="project-number">
-              02
-            </div>
-
-            <h3 class="project-name">
-              Prosedürel Çevre & Sahne
-            </h3>
-
+        <div class="project-info">
+          <div class="project-number">02</div>
+          <div class="project-title">
+            Prosedürel Çevre & Sahne
           </div>
-
-          <div class="project-type">
-            3D / CGI<br>
-            BLENDER
+          <div class="project-category">
+            3D / CGI
           </div>
-
         </div>
 
       </article>
 
 
-      <!-- 03 -->
+      <article class="project-card reveal">
 
-      <article class="project reveal">
-
-        <div class="project-card">
-
-          <div class="project-light"></div>
-
-          <div class="project-bg project-film">
-
-            <div class="film-title">
-              GÜRÜLTÜ
-            </div>
-
-            <div class="film-line"></div>
-
-          </div>
-
+        <div class="project-visual visual-film">
+          <div class="film-word">GÜRÜLTÜ</div>
         </div>
 
-        <div class="project-meta">
-
-          <div>
-
-            <div class="project-number">
-              03
-            </div>
-
-            <h3 class="project-name">
-              “Gürültü” Kısa Filmi
-            </h3>
-
+        <div class="project-info">
+          <div class="project-number">03</div>
+          <div class="project-title">
+            “Gürültü” Kısa Filmi
           </div>
-
-          <div class="project-type">
-            FILM<br>
-            VIDEO EDITING
+          <div class="project-category">
+            FILM / MOTION
           </div>
-
         </div>
 
       </article>
 
 
-      <!-- 04 -->
+      <article class="project-card reveal">
 
-      <article class="project reveal delay1">
+        <div class="project-visual visual-poster">
 
-        <div class="project-card">
+          <div class="poster-frame">
 
-          <div class="project-bg project-poster">
-
-            <div class="poster-top">
-              AÇÜ / EXHIBITION / 2026
+            <div class="poster-big">
+              AÇÜ
             </div>
 
-            <div class="poster-title">
-              FORM<br>
-              / /<br>
-              SPACE
-            </div>
-
-            <div class="poster-bottom">
-
-              <span>
-                VISUAL COMMUNICATION
-              </span>
-
-              <span>
-                04
-              </span>
-
+            <div class="poster-small">
+              EXHIBITION<br>
+              VISUAL SYSTEM
             </div>
 
           </div>
 
         </div>
 
-        <div class="project-meta">
-
-          <div>
-
-            <div class="project-number">
-              04
-            </div>
-
-            <h3 class="project-name">
-              AÇÜ Sergi Afişleri
-            </h3>
-
+        <div class="project-info">
+          <div class="project-number">04</div>
+          <div class="project-title">
+            AÇÜ Sergi Afişleri
           </div>
-
-          <div class="project-type">
-            POSTER DESIGN<br>
-            TYPOGRAPHY
+          <div class="project-category">
+            POSTER DESIGN
           </div>
-
         </div>
 
       </article>
 
 
-      <!-- 05 -->
+      <article class="project-card reveal">
 
-      <article class="project reveal">
-
-        <div class="project-card">
-
-          <div class="project-light"></div>
-
-          <div class="project-bg project-stop">
-
-            <div class="stop-card"></div>
-
-          </div>
-
+        <div class="project-visual visual-stop">
+          <div class="stop-object"></div>
         </div>
 
-        <div class="project-meta">
-
-          <div>
-
-            <div class="project-number">
-              05
-            </div>
-
-            <h3 class="project-name">
-              Stop-Motion Projesi
-            </h3>
-
+        <div class="project-info">
+          <div class="project-number">05</div>
+          <div class="project-title">
+            Stop-Motion Projesi
           </div>
-
-          <div class="project-type">
-            STOP MOTION<br>
+          <div class="project-category">
             ANIMATION
           </div>
-
         </div>
 
       </article>
 
 
-      <!-- 06 -->
+      <article class="project-card reveal">
 
-      <article class="project reveal delay1">
+        <div class="project-visual visual-social">
 
-        <div class="project-card">
-
-          <div class="project-light"></div>
-
-          <div class="project-bg project-social">
-
-            <div class="phone"></div>
-
+          <div class="social-grid">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
           </div>
 
         </div>
 
-        <div class="project-meta">
-
-          <div>
-
-            <div class="project-number">
-              06
-            </div>
-
-            <h3 class="project-name">
-              Instagram Kit Tasarımı
-            </h3>
-
+        <div class="project-info">
+          <div class="project-number">06</div>
+          <div class="project-title">
+            Instagram Kit Tasarımı
           </div>
-
-          <div class="project-type">
-            SOCIAL MEDIA<br>
-            ART DIRECTION
+          <div class="project-category">
+            DIGITAL CONTENT
           </div>
-
         </div>
 
       </article>
+
 
     </div>
 
@@ -2873,85 +1895,74 @@ footer{
 </section>
 
 
-<!-- =======================================================
+<!-- =====================================================
      ABOUT
-======================================================== -->
+===================================================== -->
 
-<section class="section about" id="about">
+<section class="section" id="about">
 
   <div class="container">
 
-    <div class="section-number">
-      02 — ABOUT ABDULLAH
+    <div class="section-head reveal">
+
+      <div class="section-label">
+        <span>03</span> / ABOUT
+      </div>
+
     </div>
 
 
     <div class="about-grid">
 
-      <div>
-
-        <h2 class="about-big reveal">
-
-          Görsel iletişimi;
-          fikir, form ve
-          <span>hikâyenin</span>
-          kesiştiği alan
-          olarak görüyorum.
-
-        </h2>
-
+      <div class="about-meta reveal">
+        BASED IN TURKEY<br><br>
+        VISUAL COMMUNICATION<br>
+        DESIGN / DIGITAL MEDIA
       </div>
 
 
-      <div>
+      <div class="about-copy reveal">
 
-        <div class="about-text reveal delay1">
+        <p>
+          Ben Abdullah Cankı. Görsel iletişim tasarımı,
+          dijital üretim ve hareketli görüntü kesişiminde
+          çalışan bir tasarımcıyım.
+        </p>
 
-          <p>
-            Ben Abdullah Cankı. Görsel İletişim Tasarımı
-            alanında çalışan, tasarımın farklı disiplinlerini
-            bir araya getirmeyi seven bir tasarımcıyım.
-          </p>
+        <p>
+          Tasarım benim için yalnızca estetik bir sonuç değil;
+          <strong>fikrin görünür hale gelmesi</strong> için
+          kullanılan bir iletişim aracıdır.
+        </p>
 
-          <p>
-            Marka kimliği, tipografi, 3D görselleştirme,
-            video kurgu, motion design ve deneysel görsel
-            çalışmalar üretiyorum.
-          </p>
-
-          <p>
-            Benim için iyi tasarım yalnızca güzel görünen
-            bir sonuç değil; fikri taşıyan, karakteri olan
-            ve iz bırakan bir görsel sistemdir.
-          </p>
-
-          <p>
-            <strong style="color:#f2f2ed">
-              Cankixcreative
-            </strong>
-            ise kişisel yaratıcı üretimlerimi bir araya
-            getirdiğim bağımsız yaratıcı kimliğim.
-          </p>
-
-        </div>
+        <p>
+          Marka kimliği, 3D / CGI, motion design, video,
+          tipografi ve dijital içerik üretimini tek bir
+          görsel sistem içerisinde birleştirmeyi seviyorum.
+        </p>
 
 
-        <div class="signature reveal delay2">
+        <div class="about-stats">
 
-          <div class="signature-mark">
-            AC
+          <div class="about-stat">
+            <div class="about-stat-number">06+</div>
+            <div class="about-stat-label">
+              CREATIVE DISCIPLINES
+            </div>
           </div>
 
-          <div class="signature-name">
+          <div class="about-stat">
+            <div class="about-stat-number">3D</div>
+            <div class="about-stat-label">
+              DIGITAL / SPATIAL THINKING
+            </div>
+          </div>
 
-            <strong>
-              Abdullah Cankı
-            </strong>
-
-            <small>
-              VISUAL COMMUNICATION DESIGNER
-            </small>
-
+          <div class="about-stat">
+            <div class="about-stat-number">∞</div>
+            <div class="about-stat-label">
+              EXPERIMENTATION
+            </div>
           </div>
 
         </div>
@@ -2965,146 +1976,140 @@ footer{
 </section>
 
 
-<!-- =======================================================
+<!-- =====================================================
      EXPERTISE
-======================================================== -->
+===================================================== -->
 
-<section class="section skills" id="skills">
+<section class="section" id="expertise">
 
   <div class="container">
 
-    <div class="section-number">
-      03 — EXPERTISE
+    <div class="section-head reveal">
+
+      <div class="section-label">
+        <span>04</span> / EXPERTISE
+      </div>
+
+      <div class="section-intro">
+        Fikirden son çıktıya kadar farklı üretim
+        süreçlerini bir arada kullanıyorum.
+      </div>
+
     </div>
 
-    <h2 class="section-title">
-      Ne üretiyorum?
-    </h2>
+
+    <div class="expertise-grid">
 
 
-    <div class="skills-grid">
+      <div class="expertise-item reveal">
+        <div class="expertise-number">01</div>
+        <div class="expertise-icon">◌</div>
 
-
-      <div class="skill reveal">
-
-        <div class="skill-num">
-          01
-        </div>
-
-        <h3>
+        <div class="expertise-title">
           Visual Identity
-        </h3>
+        </div>
 
-        <p>
-          Marka kimliği, logo, görsel sistem,
-          tipografi ve iletişim dili.
-        </p>
-
+        <div class="expertise-description">
+          Marka dili, görsel sistem, logo ve
+          iletişim kimliği.
+        </div>
       </div>
 
 
-      <div class="skill reveal delay1">
+      <div class="expertise-item reveal">
+        <div class="expertise-number">02</div>
+        <div class="expertise-icon">◇</div>
 
-        <div class="skill-num">
-          02
-        </div>
-
-        <h3>
+        <div class="expertise-title">
           3D / CGI
-        </h3>
+        </div>
 
-        <p>
-          Blender ile modelleme, sahne tasarımı,
-          materyal, ışık ve render.
-        </p>
-
+        <div class="expertise-description">
+          3D sahneler, çevre tasarımı,
+          deneysel görselleştirme.
+        </div>
       </div>
 
 
-      <div class="skill reveal delay2">
+      <div class="expertise-item reveal">
+        <div class="expertise-number">03</div>
+        <div class="expertise-icon">↗</div>
 
-        <div class="skill-num">
-          03
-        </div>
-
-        <h3>
+        <div class="expertise-title">
           Motion Design
-        </h3>
+        </div>
 
-        <p>
-          Hareketli grafik, animasyon ve
-          deneysel dijital anlatı.
-        </p>
-
+        <div class="expertise-description">
+          Hareketli grafikler, animasyon ve
+          görsel ritim.
+        </div>
       </div>
 
 
-      <div class="skill reveal">
+      <div class="expertise-item reveal">
+        <div class="expertise-number">04</div>
+        <div class="expertise-icon">□</div>
 
-        <div class="skill-num">
-          04
-        </div>
-
-        <h3>
+        <div class="expertise-title">
           Video
-        </h3>
+        </div>
 
-        <p>
-          Video kurgu, kısa film, renk ve
-          görsel hikâye anlatımı.
-        </p>
-
+        <div class="expertise-description">
+          Kurgu, renk, görsel anlatı ve
+          kısa format video.
+        </div>
       </div>
 
 
-      <div class="skill reveal delay1">
+      <div class="expertise-item reveal">
+        <div class="expertise-number">05</div>
+        <div class="expertise-icon">A</div>
 
-        <div class="skill-num">
-          05
-        </div>
-
-        <h3>
+        <div class="expertise-title">
           Typography
-        </h3>
-
-        <p>
-          Poster, editorial, deneysel tipografi
-          ve görsel kompozisyon.
-        </p>
-
-      </div>
-
-
-      <div class="skill reveal delay2">
-
-        <div class="skill-num">
-          06
         </div>
 
-        <h3>
-          Digital Content
-        </h3>
-
-        <p>
-          Sosyal medya sistemleri, içerik tasarımı
-          ve art direction.
-        </p>
-
+        <div class="expertise-description">
+          Tipografik kompozisyon, hiyerarşi
+          ve deneysel yazı kullanımı.
+        </div>
       </div>
+
+
+      <div class="expertise-item reveal">
+        <div class="expertise-number">06</div>
+        <div class="expertise-icon">+</div>
+
+        <div class="expertise-title">
+          Digital Content
+        </div>
+
+        <div class="expertise-description">
+          Sosyal medya, dijital kampanya
+          ve içerik sistemleri.
+        </div>
+      </div>
+
 
     </div>
 
 
     <div class="tools reveal">
 
-      <span class="tool">BLENDER</span>
-      <span class="tool">DAVINCI RESOLVE</span>
-      <span class="tool">PHOTOSHOP</span>
-      <span class="tool">ILLUSTRATOR</span>
-      <span class="tool">AFTER EFFECTS</span>
-      <span class="tool">FIGMA</span>
-      <span class="tool">3D / CGI</span>
-      <span class="tool">MOTION</span>
+      <div class="tools-title">
+        TOOLS / WORKFLOW
+      </div>
+
+      <div class="tools-list">
+        <span class="tool">BLENDER</span>
+        <span class="tool">DAVINCI RESOLVE</span>
+        <span class="tool">PHOTOSHOP</span>
+        <span class="tool">ILLUSTRATOR</span>
+        <span class="tool">AFTER EFFECTS</span>
+        <span class="tool">FIGMA</span>
+        <span class="tool">3D / CGI</span>
+        <span class="tool">MOTION</span>
+      </div>
 
     </div>
 
@@ -3113,34 +2118,29 @@ footer{
 </section>
 
 
-<!-- =======================================================
+<!-- =====================================================
      CANKIXCREATIVE
-======================================================== -->
+===================================================== -->
 
-<section class="cankix">
+<section class="section cankix">
 
   <div class="container">
 
-    <div class="cankix-inner">
+    <div class="cankix-content reveal">
 
       <div class="cankix-label">
         PERSONAL CREATIVE IDENTITY
       </div>
 
       <h2 class="cankix-title">
-        CANKIX<br>
-        CREATIVE.
+        CANKIX<span>CREATIVE.</span>
       </h2>
 
-      <p class="cankix-text">
-        Abdullah Cankı'nın kişisel yaratıcı üretim alanı.
-        Deneysel işler, dijital görseller ve tasarım
-        araştırmalarının bir araya geldiği bağımsız kimlik.
+      <p class="cankix-description">
+        Deneysel işler, kişisel görsel araştırmalar ve
+        tasarımın sınırlarını test eden bağımsız üretimler
+        için kullandığım yaratıcı alan.
       </p>
-
-      <div class="cankix-symbol">
-        ✦
-      </div>
 
     </div>
 
@@ -3149,229 +2149,180 @@ footer{
 </section>
 
 
-<!-- =======================================================
+<!-- =====================================================
      CONTACT
-======================================================== -->
+===================================================== -->
 
 <section class="section contact" id="contact">
 
   <div class="container">
 
-    <div class="section-number">
-      04 — CONTACT
+    <div class="section-label reveal">
+      <span>05</span> / CONTACT
     </div>
 
-    <h2 class="section-title">
-      Let's create<br>
-      something.
+    <h2 class="contact-title reveal">
+      LET'S MAKE<br>
+      SOMETHING <span>VISIBLE.</span>
     </h2>
 
-
-    <div class="contact-grid">
-
-
-      <!-- LEFT -->
-
-      <div>
-
-        <p class="contact-copy reveal">
-
-          Yeni bir marka, görsel kimlik, 3D çalışma,
-          motion projesi veya yaratıcı iş birliği
-          için benimle iletişime geçebilirsin.
-
-          <br><br>
-
-          Formu doldur. Mesajın doğrudan bana ulaşsın.
-
-        </p>
+    <p class="contact-description reveal">
+      Bir proje fikrin, iş birliği teklifin veya sadece
+      konuşmak istediğin bir fikir varsa bana ulaşabilirsin.
+    </p>
 
 
-        <!-- SADECE İKONLAR -->
-
-        <div class="socials reveal delay1">
+    <div class="contact-layout">
 
 
-          <!-- LINKEDIN -->
+      <div class="contact-links reveal">
 
-          <a
-            href="https://www.linkedin.com/in/abdullah-cank%C4%B1-6952b2324/"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="social"
-            aria-label="LinkedIn">
+        <a
+          href="https://www.linkedin.com/in/abdullah-cank%C4%B1-6952b2324/"
+          target="_blank"
+          rel="noopener"
+          class="contact-link"
+        >
+          <div class="contact-link-left">
+            <div class="contact-link-icon">in</div>
+            <div class="contact-link-label">LINKEDIN</div>
+          </div>
 
-            <svg viewBox="0 0 24 24">
-              <path d="M20.45 20.45h-3.56v-5.58c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.68H9.34V8.99h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.45v6.3zM5.32 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14zM3.54 20.45H7.1V8.99H3.54v11.46z"/>
-            </svg>
-
-          </a>
-
-
-          <!-- INSTAGRAM -->
-
-          <a
-            href="https://instagram.com/cankixcreative"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="social"
-            aria-label="Instagram">
-
-            <svg viewBox="0 0 24 24">
-
-              <path d="M7.8 2h8.4A5.8 5.8 0 0 1 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8A5.8 5.8 0 0 1 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2zm-.2 2A3.6 3.6 0 0 0 4 7.6v8.8A3.6 3.6 0 0 0 7.6 20h8.8a3.6 3.6 0 0 0 3.6-3.6V7.6A3.6 3.6 0 0 0 16.4 4H7.6z"/>
-
-              <path d="M12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6z"/>
-
-              <circle cx="17.3" cy="6.7" r="1.2"/>
-
-            </svg>
-
-          </a>
+          <div class="contact-link-meta">
+            OPEN ↗
+          </div>
+        </a>
 
 
-          <!-- MAIL -->
+        <a
+          href="https://instagram.com/cankixcreative"
+          target="_blank"
+          rel="noopener"
+          class="contact-link"
+        >
+          <div class="contact-link-left">
+            <div class="contact-link-icon">ig</div>
+            <div class="contact-link-label">INSTAGRAM</div>
+          </div>
 
-          <a
-            href="mailto:abdullah198579@outlook.com"
-            class="social"
-            aria-label="E-mail">
-
-            <svg viewBox="0 0 24 24">
-
-              <path d="M2.5 5.5h19v13h-19v-13zm2 2v9h15v-9l-7.5 5-7.5-5zm1.7 0L12 10.2l5.8-2.7H6.2z"/>
-
-            </svg>
-
-          </a>
+          <div class="contact-link-meta">
+            OPEN ↗
+          </div>
+        </a>
 
 
-        </div>
+        <a
+          href="mailto:abdullah198579@outlook.com"
+          class="contact-link"
+        >
+          <div class="contact-link-left">
+            <div class="contact-link-icon">@</div>
+            <div class="contact-link-label">EMAIL</div>
+          </div>
+
+          <div class="contact-link-meta">
+            SEND ↗
+          </div>
+        </a>
 
       </div>
 
 
-      <!-- RIGHT / WORKING FORM -->
-
+      <!-- Web3Forms -->
       <form
-        class="contact-form reveal delay2"
+        class="contact-form reveal"
         id="contactForm"
         action="https://api.web3forms.com/submit"
         method="POST"
-        novalidate>
-
-        <!-- WEB3FORMS -->
+      >
 
         <input
           type="hidden"
           name="access_key"
-          value="d366b13d-9482-4e66-a1fc-fc74f827771b">
+          value="d366b13d-9482-4e66-a1fc-fc74f827771b"
+        >
 
         <input
           type="hidden"
           name="subject"
-          value="Abdullah Cankı Portfolio — Yeni Mesaj">
+          value="Abdullah Cankı Portfolio — Yeni Mesaj"
+        >
 
         <input
           type="hidden"
           name="from_name"
-          value="Abdullah Cankı Portfolio">
-
-        <!-- Honeypot / spam protection -->
+          value="Abdullah Cankı Portfolio"
+        >
 
         <input
           type="checkbox"
           name="botcheck"
-          tabindex="-1"
-          autocomplete="off"
-          style="display:none!important">
+          style="display:none"
+        >
 
 
-        <!-- NAME -->
+        <div class="form-group">
 
-        <div class="form-field">
-
-          <label for="name">
-            AD SOYAD
+          <label class="form-label">
+            NAME
           </label>
 
           <input
+            class="form-input"
             type="text"
-            id="name"
             name="name"
-            placeholder="Adınız Soyadınız"
-            autocomplete="name"
-            maxlength="100"
-            required>
+            placeholder="Adınız"
+            required
+          >
 
         </div>
 
 
-        <!-- EMAIL -->
+        <div class="form-group">
 
-        <div class="form-field">
-
-          <label for="email">
-            E-POSTA
+          <label class="form-label">
+            EMAIL
           </label>
 
           <input
+            class="form-input"
             type="email"
-            id="email"
             name="email"
-            placeholder="ornek@email.com"
-            autocomplete="email"
-            maxlength="160"
-            required>
+            placeholder="E-posta adresiniz"
+            required
+          >
 
         </div>
 
 
-        <!-- MESSAGE -->
+        <div class="form-group">
 
-        <div class="form-field">
-
-          <label for="message">
-            MESAJ
+          <label class="form-label">
+            MESSAGE
           </label>
 
           <textarea
-            id="message"
+            class="form-textarea"
             name="message"
-            placeholder="Projenizden, fikrinizden veya iş birliğinden bahsedin..."
-            maxlength="3000"
-            required></textarea>
+            placeholder="Projenizden bahsedin..."
+            required
+          ></textarea>
 
         </div>
 
 
-        <!-- SUBMIT -->
-
-        <div class="submit-wrap">
-
-          <button
-            type="submit"
-            class="submit-btn"
-            id="submitButton">
-
-            <span id="submitText">
-              MESAJI GÖNDER
-            </span>
-
-            <span>
-              ↗
-            </span>
-
-          </button>
-
-        </div>
-
+        <button
+          type="submit"
+          class="form-submit"
+        >
+          SEND MESSAGE ↗
+        </button>
 
         <div
           class="form-status"
           id="formStatus"
-          aria-live="polite">
-        </div>
+          aria-live="polite"
+        ></div>
 
       </form>
 
@@ -3384,38 +2335,21 @@ footer{
 </main>
 
 
-<!-- =======================================================
+<!-- =====================================================
      FOOTER
-======================================================== -->
+===================================================== -->
 
-<footer>
+<footer class="footer">
 
-  <div class="container footer">
+  <div class="footer-inner">
 
-    <div class="footer-copy">
-      © 2026 ABDULLAH CANKI — ALL RIGHTS RESERVED.
+    <div class="footer-left">
+      © 2026 ABDULLAH CANKI
     </div>
 
-    <div class="footer-links">
-
-      <a href="#top">
-        TOP ↑
-      </a>
-
-      <a
-        href="https://instagram.com/cankixcreative"
-        target="_blank"
-        rel="noopener noreferrer">
-        INSTAGRAM
-      </a>
-
-      <a
-        href="https://www.linkedin.com/in/abdullah-cank%C4%B1-6952b2324/"
-        target="_blank"
-        rel="noopener noreferrer">
-        LINKEDIN
-      </a>
-
+    <div class="footer-right">
+      VISUAL COMMUNICATION DESIGNER
+      <span class="footer-accent">●</span>
     </div>
 
   </div>
@@ -3429,634 +2363,356 @@ footer{
    LOADER
 ========================================================= */
 
-const loader =
-  document.getElementById("loader");
+let progress = 0;
 
-const progress =
-  document.getElementById("progress");
+const loader = document.getElementById("loader");
+const loaderProgress = document.getElementById("loaderProgress");
+const loaderPercent = document.getElementById("loaderPercent");
 
-const percent =
-  document.getElementById("percent");
+const loaderTimer = setInterval(() => {
 
-let loadValue = 0;
+  progress += Math.floor(Math.random() * 8) + 3;
 
-const loading = setInterval(() => {
-
-  loadValue += Math.floor(
-    Math.random() * 10
-  ) + 4;
-
-  if(loadValue >= 100){
-
-    loadValue = 100;
-
-    clearInterval(loading);
+  if(progress >= 100){
+    progress = 100;
+    clearInterval(loaderTimer);
 
     setTimeout(() => {
-      loader.classList.add("done");
+      loader.classList.add("hide");
     },300);
   }
 
-  progress.style.width =
-    loadValue + "%";
+  loaderProgress.style.width = progress + "%";
+  loaderPercent.textContent = progress + "%";
 
-  percent.textContent =
-    loadValue + "%";
-
-},90);
-
-
-/* =========================================================
-   NAV
-========================================================= */
-
-const nav =
-  document.getElementById("nav");
-
-window.addEventListener(
-  "scroll",
-  () => {
-
-    nav.classList.toggle(
-      "scrolled",
-      window.scrollY > 40
-    );
-
-  },
-  {passive:true}
-);
+},70);
 
 
 /* =========================================================
    MOBILE MENU
 ========================================================= */
 
-const menu =
-  document.getElementById("menu");
+const menuBtn = document.getElementById("menuBtn");
+const mobileMenu = document.getElementById("mobileMenu");
 
-const mobileMenu =
-  document.getElementById("mobileMenu");
+menuBtn.addEventListener("click", () => {
 
-const mobileLinks =
-  document.querySelectorAll(
-    ".mobile-links a"
+  mobileMenu.classList.toggle("open");
+  document.body.classList.toggle(
+    "no-scroll",
+    mobileMenu.classList.contains("open")
   );
 
+  menuBtn.textContent =
+    mobileMenu.classList.contains("open")
+      ? "CLOSE"
+      : "MENU";
 
-function closeMobile(){
-
-  menu.classList.remove("active");
-
-  mobileMenu.classList.remove("active");
-
-  document.body.classList.remove(
-    "menu-open"
-  );
-
-}
+});
 
 
-menu.addEventListener(
-  "click",
-  () => {
+document.querySelectorAll(".mobile-menu a").forEach(link => {
 
-    const active =
-      menu.classList.toggle("active");
+  link.addEventListener("click", () => {
 
-    mobileMenu.classList.toggle(
-      "active",
-      active
-    );
+    mobileMenu.classList.remove("open");
+    document.body.classList.remove("no-scroll");
 
-    document.body.classList.toggle(
-      "menu-open",
-      active
-    );
+    menuBtn.textContent = "MENU";
 
-  }
-);
-
-
-mobileLinks.forEach(link => {
-
-  link.addEventListener(
-    "click",
-    closeMobile
-  );
+  });
 
 });
 
 
 /* =========================================================
-   SCROLL REVEAL
+   REVEAL
 ========================================================= */
 
-const reveal =
-  document.querySelectorAll(
-    ".reveal"
-  );
+const revealObserver = new IntersectionObserver(
+  entries => {
 
-const observer =
-  new IntersectionObserver(
-    entries => {
+    entries.forEach(entry => {
 
-      entries.forEach(entry => {
+      if(entry.isIntersecting){
 
-        if(entry.isIntersecting){
+        entry.target.classList.add("active");
 
-          entry.target.classList.add(
-            "visible"
-          );
+        revealObserver.unobserve(entry.target);
 
-          observer.unobserve(
-            entry.target
-          );
+      }
 
-        }
+    });
 
-      });
-
-    },
-    {
-      threshold:.1,
-      rootMargin:"0px 0px -40px"
-    }
-  );
-
-
-reveal.forEach(el =>
-  observer.observe(el)
+  },
+  {
+    threshold:.12
+  }
 );
+
+
+document.querySelectorAll(".reveal").forEach(el => {
+  revealObserver.observe(el);
+});
 
 
 /* =========================================================
    CUSTOM CURSOR
 ========================================================= */
 
-const cursor =
-  document.getElementById("cursor");
+const cursor = document.getElementById("cursor");
+const cursorRing = document.getElementById("cursorRing");
 
-if(
-  window.matchMedia(
-    "(pointer:fine)"
-  ).matches
-){
+let mouseX = 0;
+let mouseY = 0;
+let ringX = 0;
+let ringY = 0;
 
-  let mouseX = 0;
-  let mouseY = 0;
+document.addEventListener("mousemove", e => {
 
-  let cursorX = 0;
-  let cursorY = 0;
+  mouseX = e.clientX;
+  mouseY = e.clientY;
 
+  cursor.style.left = mouseX + "px";
+  cursor.style.top = mouseY + "px";
 
-  window.addEventListener(
-    "mousemove",
-    e => {
-
-      mouseX = e.clientX;
-      mouseY = e.clientY;
-
-      cursor.style.opacity = "1";
-
-    }
-  );
+});
 
 
-  function cursorAnimation(){
+function cursorLoop(){
 
-    cursorX +=
-      (mouseX-cursorX)*.18;
+  ringX += (mouseX - ringX) * .14;
+  ringY += (mouseY - ringY) * .14;
 
-    cursorY +=
-      (mouseY-cursorY)*.18;
+  cursorRing.style.left = ringX + "px";
+  cursorRing.style.top = ringY + "px";
 
-    cursor.style.left =
-      cursorX+"px";
-
-    cursor.style.top =
-      cursorY+"px";
-
-    requestAnimationFrame(
-      cursorAnimation
-    );
-
-  }
-
-  cursorAnimation();
-
-
-  document
-    .querySelectorAll(
-      "a,button,.project,.skill,.social,.submit-btn"
-    )
-    .forEach(el => {
-
-      el.addEventListener(
-        "mouseenter",
-        () => cursor.classList.add("big")
-      );
-
-      el.addEventListener(
-        "mouseleave",
-        () => cursor.classList.remove("big")
-      );
-
-    });
+  requestAnimationFrame(cursorLoop);
 
 }
 
-
-/* =========================================================
-   3D PROJECT TILT
-========================================================= */
-
-if(
-  window.matchMedia(
-    "(pointer:fine)"
-  ).matches
-){
-
-  document
-    .querySelectorAll(".project")
-    .forEach(project => {
-
-      const card =
-        project.querySelector(
-          ".project-card"
-        );
-
-      const light =
-        project.querySelector(
-          ".project-light"
-        );
+cursorLoop();
 
 
-      project.addEventListener(
-        "mousemove",
-        e => {
+document.querySelectorAll("a,button").forEach(el => {
 
-          const rect =
-            project.getBoundingClientRect();
+  el.addEventListener("mouseenter", () => {
+    cursor.classList.add("active");
+    cursorRing.classList.add("active");
+  });
 
-          const x =
-            e.clientX - rect.left;
+  el.addEventListener("mouseleave", () => {
+    cursor.classList.remove("active");
+    cursorRing.classList.remove("active");
+  });
 
-          const y =
-            e.clientY - rect.top;
-
-
-          const rotateY =
-            ((x / rect.width)-.5)*10;
-
-          const rotateX =
-            ((y / rect.height)-.5)*-10;
-
-
-          card.style.transform =
-            `rotateX(${rotateX}deg)
-             rotateY(${rotateY}deg)
-             translateZ(10px)`;
-
-
-          if(light){
-
-            light.style.left =
-              x+"px";
-
-            light.style.top =
-              y+"px";
-
-          }
-
-        }
-      );
-
-
-      project.addEventListener(
-        "mouseleave",
-        () => {
-
-          card.style.transform =
-            "";
-
-        }
-      );
-
-    });
-
-}
-
-
-/* =========================================================
-   MAGNETIC BUTTON
-========================================================= */
-
-if(
-  window.matchMedia(
-    "(pointer:fine)"
-  ).matches
-){
-
-  document
-    .querySelectorAll(".cta,.social,.submit-btn")
-    .forEach(el => {
-
-      el.addEventListener(
-        "mousemove",
-        e => {
-
-          const rect =
-            el.getBoundingClientRect();
-
-          const x =
-            e.clientX -
-            rect.left -
-            rect.width/2;
-
-          const y =
-            e.clientY -
-            rect.top -
-            rect.height/2;
-
-          el.style.transform =
-            `translate(${x*.15}px,
-                       ${y*.15}px)`;
-
-        }
-      );
-
-
-      el.addEventListener(
-        "mouseleave",
-        () => {
-
-          el.style.transform =
-            "";
-
-        }
-      );
-
-    });
-
-}
+});
 
 
 /* =========================================================
    HERO PARALLAX
 ========================================================= */
 
-if(
-  window.matchMedia(
-    "(pointer:fine)"
-  ).matches
-){
+const hero = document.querySelector(".hero");
+const orb = document.querySelector(".hero-orb");
 
-  const orb =
-    document.querySelector(
-      ".hero-orb"
-    );
+if(window.matchMedia("(min-width:801px)").matches){
 
-  const glow =
-    document.querySelector(
-      ".hero-glow"
-    );
+  hero.addEventListener("mousemove", e => {
 
+    const rect = hero.getBoundingClientRect();
 
-  window.addEventListener(
-    "mousemove",
-    e => {
+    const x =
+      (e.clientX - rect.left) / rect.width - .5;
 
-      const x =
-        (e.clientX /
-        window.innerWidth - .5);
+    const y =
+      (e.clientY - rect.top) / rect.height - .5;
 
-      const y =
-        (e.clientY /
-        window.innerHeight - .5);
-
-
-      orb.style.marginLeft =
-        x * 25 + "px";
-
-      orb.style.marginTop =
-        y * 25 + "px";
-
-
-      glow.style.transform =
-        `translate(${x*40}px,
-                   ${y*40}px)`;
-
-    }
-  );
-
-}
-
-
-/* =========================================================
-   CONTACT FORM — WEB3FORMS
-========================================================= */
-
-const contactForm =
-  document.getElementById("contactForm");
-
-const submitButton =
-  document.getElementById("submitButton");
-
-const submitText =
-  document.getElementById("submitText");
-
-const formStatus =
-  document.getElementById("formStatus");
-
-
-if(contactForm){
-
-  contactForm.addEventListener(
-    "submit",
-    async function(e){
-
-      e.preventDefault();
-
-
-      /* Browser validation */
-
-      if(!contactForm.checkValidity()){
-
-        contactForm.reportValidity();
-
-        return;
-
-      }
-
-
-      /* Loading state */
-
-      submitButton.disabled = true;
-
-      submitText.textContent =
-        "GÖNDERİLİYOR...";
-
-      formStatus.textContent = "";
-
-      formStatus.className =
-        "form-status";
-
-
-      const formData =
-        new FormData(contactForm);
-
-
-      try{
-
-        const response =
-          await fetch(
-            "https://api.web3forms.com/submit",
-            {
-              method:"POST",
-              body:formData,
-              headers:{
-                "Accept":"application/json"
-              }
-            }
-          );
-
-
-        const data =
-          await response.json();
-
-
-        if(
-          response.ok &&
-          data.success
-        ){
-
-          submitText.textContent =
-            "MESAJ GÖNDERİLDİ ✓";
-
-
-          formStatus.textContent =
-            "Mesajın başarıyla ulaştı. En kısa sürede dönüş yapacağım.";
-
-
-          formStatus.className =
-            "form-status show success";
-
-
-          contactForm.reset();
-
-
-          setTimeout(() => {
-
-            submitText.textContent =
-              "MESAJI GÖNDER";
-
-            submitButton.disabled =
-              false;
-
-            formStatus.className =
-              "form-status";
-
-          },5000);
-
-
-        }else{
-
-          throw new Error(
-            data.message ||
-            "Gönderim başarısız."
-          );
-
-        }
-
-
-      }catch(error){
-
-        console.error(
-          "Contact form error:",
-          error
-        );
-
-
-        submitText.textContent =
-          "TEKRAR DENE ↗";
-
-
-        formStatus.textContent =
-          "Mesaj gönderilemedi. Lütfen tekrar deneyin.";
-
-
-        formStatus.className =
-          "form-status show error";
-
-
-        submitButton.disabled =
-          false;
-
-      }
-
-    }
-  );
-
-}
-
-
-/* =========================================================
-   SMOOTH ANCHORS
-========================================================= */
-
-document
-  .querySelectorAll(
-    'a[href^="#"]'
-  )
-  .forEach(anchor => {
-
-    anchor.addEventListener(
-      "click",
-      e => {
-
-        const id =
-          anchor.getAttribute("href");
-
-        const target =
-          document.querySelector(id);
-
-        if(!target) return;
-
-        e.preventDefault();
-
-        const offset =
-          nav.offsetHeight;
-
-        const position =
-          target.getBoundingClientRect().top +
-          window.scrollY -
-          offset;
-
-        window.scrollTo({
-          top:position,
-          behavior:"smooth"
-        });
-
-      }
-    );
+    orb.style.transform =
+      `translate(${x * 18}px,${y * 18}px)`;
 
   });
 
+}
+
 
 /* =========================================================
-   ESC
+   PROJECT TILT
 ========================================================= */
 
-document.addEventListener(
-  "keydown",
-  e => {
+if(window.matchMedia("(min-width:901px)").matches){
 
-    if(e.key === "Escape"){
-      closeMobile();
+  document.querySelectorAll(".project-card").forEach(card => {
+
+    card.addEventListener("mousemove", e => {
+
+      const rect = card.getBoundingClientRect();
+
+      const x =
+        (e.clientX - rect.left) / rect.width - .5;
+
+      const y =
+        (e.clientY - rect.top) / rect.height - .5;
+
+      card.style.transform =
+        `perspective(1200px)
+         rotateX(${y * -2}deg)
+         rotateY(${x * 2}deg)
+         translateY(-3px)`;
+
+    });
+
+    card.addEventListener("mouseleave", () => {
+
+      card.style.transform =
+        "perspective(1200px) rotateX(0) rotateY(0) translateY(0)";
+
+    });
+
+  });
+
+}
+
+
+/* =========================================================
+   MAGNETIC CTA
+========================================================= */
+
+document.querySelectorAll(".cta,.form-submit").forEach(button => {
+
+  button.addEventListener("mousemove", e => {
+
+    if(window.innerWidth < 801) return;
+
+    const rect = button.getBoundingClientRect();
+
+    const x =
+      e.clientX - rect.left - rect.width / 2;
+
+    const y =
+      e.clientY - rect.top - rect.height / 2;
+
+    button.style.transform =
+      `translate(${x * .08}px,${y * .08}px)`;
+
+  });
+
+  button.addEventListener("mouseleave", () => {
+    button.style.transform = "";
+  });
+
+});
+
+
+/* =========================================================
+   WEB3FORMS
+========================================================= */
+
+const form = document.getElementById("contactForm");
+const formStatus = document.getElementById("formStatus");
+
+form.addEventListener("submit", async event => {
+
+  event.preventDefault();
+
+  const submitButton =
+    form.querySelector(".form-submit");
+
+  const originalText =
+    submitButton.textContent;
+
+  submitButton.disabled = true;
+  submitButton.textContent = "SENDING...";
+
+  formStatus.textContent = "";
+
+  const formData = new FormData(form);
+
+  try{
+
+    const response = await fetch(
+      form.action,
+      {
+        method:"POST",
+        body:formData,
+        headers:{
+          "Accept":"application/json"
+        }
+      }
+    );
+
+    const result = await response.json();
+
+    if(result.success){
+
+      formStatus.textContent =
+        "MESAJINIZ BAŞARIYLA GÖNDERİLDİ.";
+
+      form.reset();
+
+    }else{
+
+      formStatus.textContent =
+        "MESAJ GÖNDERİLEMEDİ. LÜTFEN TEKRAR DENEYİN.";
+
     }
 
+  }catch(error){
+
+    formStatus.textContent =
+      "BİR HATA OLUŞTU. LÜTFEN TEKRAR DENEYİN.";
+
   }
-);
+
+  submitButton.disabled = false;
+  submitButton.textContent = originalText;
+
+});
+
+
+/* =========================================================
+   SMOOTH ANCHOR
+========================================================= */
+
+document.querySelectorAll('a[href^="#"]').forEach(link => {
+
+  link.addEventListener("click", e => {
+
+    const targetId =
+      link.getAttribute("href");
+
+    const target =
+      document.querySelector(targetId);
+
+    if(!target) return;
+
+    e.preventDefault();
+
+    target.scrollIntoView({
+      behavior:"smooth",
+      block:"start"
+    });
+
+  });
+
+});
+
+
+/* =========================================================
+   ESCAPE
+========================================================= */
+
+document.addEventListener("keydown", e => {
+
+  if(e.key === "Escape"){
+
+    mobileMenu.classList.remove("open");
+    document.body.classList.remove("no-scroll");
+    menuBtn.textContent = "MENU";
+
+  }
+
+});
 
 </script>
 
