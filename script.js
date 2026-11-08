@@ -25,12 +25,16 @@ function showProduct(p, trigger) {
  $('#dialogClose').focus();
 }
 function closeProduct() {
- dialog.close();
+ if (typeof dialog.close === 'function') dialog.close(); else dialog.removeAttribute('open');
  if (lastTrigger && lastTrigger.isConnected) lastTrigger.focus();
 }
-function renderProducts(category='all') {
+let currentCategory = 'all';
+let currentSearch = '';
+function renderProducts(category=currentCategory) {
+ currentCategory=category;
+ const filtered=products.filter(p=>(category==='all'||p.category===category)&&[p.name,p.categoryLabel,p.description].join(' ').toLocaleLowerCase('tr-TR').includes(currentSearch));
  const fragment = document.createDocumentFragment();
- for (const p of products.filter(p=>category==='all'||p.category===category)) {
+ for (const p of filtered) {
   const article=document.createElement('article'); article.className='product-card'; article.dataset.category=p.category;
   const visual=document.createElement('div');visual.className='product-visual';
   const image=document.createElement('img'); image.src='assets/'+p.image;image.alt='KIVA '+p.name+' ürün ambalajı';image.loading='lazy';image.decoding='async';image.width=500;image.height=600;visual.append(image);
@@ -41,8 +45,12 @@ function renderProducts(category='all') {
   body.append(cat,name,button);article.append(visual,body);fragment.append(article);
  }
  grid.replaceChildren(fragment);
+ $('#productCount').textContent=filtered.length+' ürün görüntüleniyor';
+ $('#noResults').hidden=filtered.length!==0;
 }
 renderProducts();
+$('#productSearch').addEventListener('input',event=>{currentSearch=event.target.value.trim().toLocaleLowerCase('tr-TR');renderProducts()});
+$('#clearSearch').addEventListener('click',()=>{$('#productSearch').value='';currentSearch='';document.querySelector('[data-filter="all"]').click();$('#productSearch').focus()});
 document.querySelectorAll('.filter').forEach(button=>button.addEventListener('click',()=>{
  document.querySelectorAll('.filter').forEach(b=>{b.classList.remove('is-active');b.setAttribute('aria-pressed','false')});
  button.classList.add('is-active');button.setAttribute('aria-pressed','true');renderProducts(button.dataset.filter);
@@ -50,7 +58,7 @@ document.querySelectorAll('.filter').forEach(button=>button.addEventListener('cl
 document.querySelectorAll('[data-product]').forEach(b=>b.addEventListener('click',()=>{const p=products.find(p=>p.id===b.dataset.product);if(p)showProduct(p,b)}));
 $('#dialogClose').addEventListener('click',closeProduct);
 dialog.addEventListener('click',event=>{if(event.target===dialog)closeProduct()});
-$('#dialogContact').addEventListener('click',()=>{dialog.close()});
+$('#dialogContact').addEventListener('click',()=>{ if(typeof dialog.close==='function') dialog.close(); else dialog.removeAttribute('open'); });
 const slides=[{name:'Sütlü Çikolata',subtitle:'Her lokmada mutluluk',image:'sutlu.webp'},{name:'Bitter Çikolata',subtitle:'Yoğun kakao deneyimi',image:'bitter.webp'},{name:'Fındıklı Çikolata',subtitle:'Fındığın kendine özgü aroması',image:'findikli.webp'}];
 let slideIndex=0;
 function changeSlide(delta){slideIndex=(slideIndex+delta+slides.length)%slides.length;const item=slides[slideIndex];const image=$('#heroImage');image.src='assets/'+item.image;image.alt='KIVA '+item.name+' ambalajı';image.classList.remove('changing');void image.offsetWidth;image.classList.add('changing');$('#heroName').textContent=item.name;$('#heroSubtitle').textContent=item.subtitle;$('#heroCount').textContent=String(slideIndex+1).padStart(2,'0')+' / 03'}
